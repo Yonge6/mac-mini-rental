@@ -32,3 +32,8 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Do not use a credits, wallet balance or top-up concept anywhere. Describe direct payment, renewal payments and refunds in both Chinese and English.
 - All heading levels and FAQ question titles are bold. The hero stock count is also bold, without changing its size or position.
 - Use dark backgrounds throughout the page, header and checkout; no white page or navigation surface. Keep text readable with pale foregrounds and the blue active-section accent.
+
+## Selected redesign (2026-10-31)
+- User selected the second displayed Product Design mock: California Afterglow. Exact visual target: `../qa/style-proposals-2026-10-31/02-california-afterglow.png`.
+- This choice replaces the earlier blue/graphite visual direction: use deep espresso surfaces, ivory type, amber actions and warm sunset photography throughout the landing page and checkout. Preserve the existing CalDock logo.
+- Keep oversized bold left hero copy and right Mac/inventory composition. The hero reserve action scrolls to lower pricing; both plans and checkout preview keep their existing behavior and confirmed USD prices.

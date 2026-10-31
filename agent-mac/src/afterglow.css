@@ -1,0 +1,268 @@
+/* California Afterglow: selected Product Design direction, 2026-10-31. */
+:root,
+.site-home,
+.hm-page.dark {
+  --afterglow-bg: #120e0b;
+  --afterglow-surface: #201912;
+  --afterglow-ink: #f4eee1;
+  --afterglow-muted: #b8ac9b;
+  --afterglow-accent: #ffad47;
+  --background: #120e0b;
+  --foreground: #f4eee1;
+  --content-link: #ffad47;
+  --hm-bg: #120e0b;
+  --hm-accent: #ffad47;
+  --hm-rule: #b2936e38;
+  --hm-soft: #d0c3b2;
+  --hm-faint: #a69683;
+}
+
+html, body, .site-home, .hm-page { background: #120e0b; color: #f4eee1; }
+html { scroll-padding-top: 104px; }
+a:focus-visible, button:focus-visible, input:focus-visible { outline-color: #ffad47; }
+::selection { background: #ffad4755; color: #fff7e9; }
+.hm-page { margin-top: 0; border-radius: 0; }
+.hm-page .site-reveal-animated .site-reveal-item { opacity: 1; animation: none; transform: none; }
+.site-subpage-main { padding-top: 80px; }
+.caldock-header { background: #15110ef5; border-bottom: 1px solid #8f73503d; backdrop-filter: blur(18px); }
+.caldock-nav { height: 80px; max-width: 1600px; padding-inline: 4.4%; gap: 26px; }
+.caldock-brand, .checkout-brand { color: #f4eee1; font-weight: 700; }
+.caldock-brand { font-size: 26px; gap: 6px; }
+.caldock-brand img { width: 34px; height: 34px; }
+.caldock-page-links { gap: clamp(18px,2.5vw,36px); }
+.caldock-page-links a { color: #c9beaf; font-size: 16px; padding-block: 30px; }
+.caldock-page-links a:hover, .caldock-page-links a[aria-current] { color: #ffbd6e; }
+.caldock-page-links a[aria-current] { box-shadow: inset 0 -2px #ffad47; }
+.caldock-language-switch { font-size: 14px; color: #746555; gap: 12px; }
+.caldock-language-switch a { color: #b5a999; }
+.caldock-language-switch a[aria-current] { color: #fff4e1; }
+.caldock-language-switch a:hover { color: #ffbd6e; }
+
+.hm-hero.afterglow-hero {
+  display: block;
+  position: relative;
+  min-height: 0;
+  height: 76vw;
+  max-height: 1095px;
+  padding: 0;
+  background: #120e0b;
+  text-align: left;
+  isolation: isolate;
+  overflow: hidden;
+}
+.afterglow-hero-art, .afterglow-feature-art {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  inset: 0;
+  object-fit: cover;
+  pointer-events: none;
+  z-index: -1;
+}
+.afterglow-hero-art { top: 28px; }
+.afterglow-hero .hm-hero-copy { display: block; position: absolute; top: 18.2vw; left: 4.4%; width: 49%; max-width: 760px; }
+.afterglow-eyebrow { color: #ffb45e; font-family: var(--font-mono); font-size: clamp(11px,1.3vw,17px); letter-spacing: .2em; line-height: 1.6; font-weight: 500; }
+.afterglow-hero h1 { font-size: clamp(64px,12vw,172px); font-weight: 700; line-height: 1.12; letter-spacing: -.055em; margin-top: 16px; text-wrap: nowrap; color: #f8f2e6; }
+.afterglow-hero .hm-hero-subtitle { font-size: clamp(18px,2.5vw,34px); line-height: 1.55; color: #eee5d6; margin-top: 22px; max-width: none; text-wrap: initial; word-break: normal; }
+.afterglow-reserve { display: flex; align-items: center; gap: clamp(16px,2vw,28px); margin-top: 48px; }
+.hm-page .hm-cta, .rental-pay-button, .checkout-summary .rental-pay-button {
+  background: #ffad47;
+  color: #24170c;
+  border: 0;
+  box-shadow: none;
+  font-weight: 700;
+}
+.hm-page .hm-cta:hover, .rental-pay-button:hover, .checkout-summary .rental-pay-button:hover { background: #ffc277; color: #24170c; }
+.afterglow-hero .hm-cta { order: 0; margin-top: 0; display: inline-flex; align-items: center; gap: 14px; height: clamp(48px,5.3vw,72px); padding: 0 clamp(20px,3.6vw,50px); font-size: clamp(16px,2vw,26px); border-radius: 999px; flex: none; }
+.afterglow-hero .hm-cta img { width: 22px; height: 22px; transform: rotate(-90deg); }
+.afterglow-hero-price { border-left: 1px solid #9d80604d; padding-left: clamp(16px,2vw,28px); color: #f4eee1; font-size: clamp(16px,2vw,27px); white-space: nowrap; }
+.afterglow-hero-price strong { font-size: clamp(24px,3vw,40px); font-weight: 700; letter-spacing: -.04em; }
+.afterglow-hero-price s { font-size: clamp(13px,1.4vw,20px); color: #a4917a; margin-left: 20px; }
+.afterglow-hero .hm-hero-note { margin-top: 17px; color: #b5a590; font-size: clamp(12px,1.5vw,19px); }
+.afterglow-hero .hm-hero-visual { display: block; position: absolute; width: 49%; right: 4.4%; bottom: 7.8vw; }
+.afterglow-stock { border-top: 1px solid #b2936e38; padding-top: 18px; }
+.afterglow-stock-heading { display: flex; justify-content: space-between; align-items: center; gap: 20px; color: #f0e5d5; font-size: clamp(12px,1.4vw,18px); }
+.afterglow-stock-heading span:first-child { display: inline-flex; align-items: center; gap: 10px; }
+.afterglow-stock-heading span:first-child::before { content: ''; display: block; width: 8px; height: 8px; background: #ffad47; border-radius: 50%; }
+.afterglow-stock-heading span:last-child { color: #ac9b87; }
+.afterglow-stock-bottom { display: flex; align-items: center; gap: 28px; margin-top: 10px; }
+.afterglow-stock-bottom p { display: flex; align-items: baseline; gap: 7px; color: #e4d9c8; font-size: clamp(14px,1.7vw,22px); flex: none; }
+.afterglow-stock-count { color: #fff5e4; font-size: clamp(54px,6.5vw,92px); line-height: 1; font-weight: 700; letter-spacing: -.06em; }
+.afterglow-stock-marks { display: grid; grid-template-columns: repeat(25,minmax(0,1fr)); gap: 4px; width: 100%; }
+.afterglow-stock-marks i { display: block; height: clamp(9px,1.5vw,21px); background: #ffad47; border-radius: 1px; }
+.afterglow-stock-marks i[data-available] { background: #493b2d; }
+
+.hm-chapter.afterglow-feature { position: relative; height: 56.8vw; max-height: 820px; min-height: 560px; padding: 0; border-top: 1px solid #d38f42; isolation: isolate; background: #120e0b; }
+.afterglow-feature-copy { position: absolute; top: 9.4vw; left: 4.4%; width: 52%; max-width: 790px; }
+.afterglow-feature h2 { font-size: clamp(44px,6.6vw,95px); line-height: 1.2; letter-spacing: -.045em; text-wrap: nowrap; font-weight: 700; margin-top: 34px; color: #f8f0df; }
+.afterglow-feature-description { font-size: clamp(17px,2.25vw,30px); color: #d6c7b2; line-height: 1.65; margin-top: 42px; }
+.afterglow-hero:lang(en) h1 { font-size: clamp(68px,8.6vw,124px); text-wrap: balance; }
+.afterglow-hero:lang(en) .hm-hero-subtitle { font-size: clamp(18px,2vw,28px); }
+.afterglow-feature:lang(en) h2 { font-size: clamp(34px,4.5vw,65px); text-wrap: balance; }
+
+/* Continue the selected visual language through the product story. */
+.hm-chapter:not(.afterglow-feature), .hm-closing { padding-inline: 4.4%; }
+.hm-chapter-inner { max-width: 1310px; padding-block: clamp(54px,6vw,92px) clamp(80px,10vw,140px); border-top-color: #9e7d5038; }
+.hm-chapter-head { max-width: 850px; }
+.hm-index { font-family: var(--font-mono); font-size: 13px; letter-spacing: .14em; font-weight: 600; color: #ffb45e; margin-bottom: 28px; }
+.hm-chapter-head h2 { font-size: clamp(36px,4.6vw,66px); line-height: 1.17; letter-spacing: -.04em; color: #f4eee1; }
+.hm-chapter-head p { color: #c6b8a6; max-width: 640px; font-size: 17px; line-height: 1.8; }
+.hm-panel { background: #1b1510; box-shadow: inset 0 0 0 1px #aa845333; border-radius: 16px; }
+.hm-tools { column-gap: 64px; }
+.hm-tools li { min-height: 90px; border-color: #9e7d5038; }
+.hm-tool-icon, .hm-net-device, .hm-net-services li { background: #292017; box-shadow: inset 0 0 0 1px #b2936e26; }
+.hm-tool-tag, .hm-net-node small, .hm-net-link span, .hm-footnote { color: #ac9b87; }
+.hm-net-link--work { background: #c38b4f; box-shadow: none; }
+.hm-net-link--view { background: #78624d; }
+.hm-screen-window { background: #31271f; }
+.hm-screen-window--remote { background: #211912; border: 1px solid #e9ac59; box-shadow: 0 0 28px #d9902926; }
+.hm-screen-window--remote::before, .hm-screen-window--remote::after { display: none; }
+.hm-screen-bar { border-color: #b2936e24; }
+.hm-screen-lines b { background: #b39a7833; }
+.hm-screen-task em, .hm-screen-bar span { color: #baa78d; }
+.hm-trust, .hm-steps { gap: 36px; }
+.hm-trust li, .hm-steps li { border-color: #9e7d5038; }
+.hm-trust p, .hm-steps h3+p { color: #c6b8a6; }
+.hm-plan { background: #1b1510; border-radius: 18px; }
+.hm-plan-price { background: #ffffff03; border-color: #b2936e38; }
+.hm-plan-specs { padding: clamp(26px,4vw,56px); }
+.hm-plan-specs dt { color: #ad9b82; }
+.hm-plan-specs dd { color: #eee3d0; }
+.rental-plan { padding: 36px; color: #f4eee1; }
+.rental-plan-caption { color: #ffc075; }
+.rental-amount strong { color: #fff3df; font-weight: 700; }
+.rental-amount>span, .rental-amount s, .rental-equivalent, .rental-price-note { color: #af9e87; }
+.rental-option { background: #241c14; border-color: #a68b653b; border-radius: 12px; }
+.rental-option:hover { background: #35281c; }
+.rental-option.is-annual { background: #c3853210; border-color: #b68d554d; }
+.rental-option.is-selected { background: #ffad4717; border-color: #e9a553; }
+.rental-option:focus-within { outline-color: #ffad47; }
+.rental-option-name strong { font-weight: 700; }
+.rental-option-name small { color: #baaa94; }
+.rental-option-price em { background: #ffbc6a; color: #35220f; }
+.rental-radio { border-color: #a68b6559; }
+.is-selected .rental-radio { background: #ffb65e; border-color: #ffb65e; }
+.rental-terms { color: #baaa94; }
+.rental-terms img { filter: invert(74%) sepia(60%) saturate(650%) hue-rotate(338deg) brightness(103%); }
+.rental-pay-button { min-height: 50px; border-radius: 10px; }
+.hm-faq { max-width: 920px; }
+.hm-faq [data-slot=collapsible-content] { color: #c5b59f; }
+.hm-faq button { color: #f1e6d3; padding-block: 25px; }
+.hm-closing { padding-bottom: 0; position: relative; overflow: hidden; }
+.hm-closing-copy { max-width: 1310px; padding-bottom: 24px; }
+.hm-closing h2 { font-weight: 700; }
+.hm-closing-stock { display: none; }
+.hm-closing-farm { width: calc(100% + 10%); max-width: none; margin: 0 -5%; height: min(54vw,700px); overflow: hidden; }
+.hm-closing-farm img { width: 100%; height: 100%; object-fit: cover; }
+
+/* The same warm dark palette carries into the existing payment preview. */
+.checkout-page { background: #120e0b; color: #f4eee1; }
+.checkout-nav { border-bottom: 1px solid #9e7d5038; max-width: 1320px; }
+.checkout-nav>a:last-child, .checkout-change { color: #d5ad78; }
+.checkout-eyebrow { color: #ffb45e; font-family: var(--font-mono); }
+.checkout-details h1 { color: #f8f0df; font-size: clamp(34px,3.5vw,50px); }
+.checkout-lead, .checkout-product span, .checkout-service p, .checkout-policy, .checkout-cycle, .checkout-summary dt { color: #bbaa93; }
+.checkout-product, .checkout-summary dl, .checkout-total { border-color: #9e7d5038; }
+.checkout-summary { background: #201912; border-color: #b2936e38; box-shadow: none; border-radius: 18px; }
+.checkout-summary dd { color: #eddfc9; }
+.checkout-saving { background: #ffad471a; color: #ffc075; }
+.checkout-total>strong { color: #fff3df; }
+.checkout-total>span small, .checkout-total>strong small, .checkout-secure { color: #ae997a; }
+.checkout-notice { color: #f4d4a5; background: #3c2915; }
+
+@media (min-width:1440px) {
+  .afterglow-hero .hm-hero-copy { top: 262px; }
+  .afterglow-hero .hm-hero-visual { bottom: 112px; }
+  .afterglow-feature-copy { top: 135px; }
+}
+@media (max-width:1100px) {
+  .caldock-brand { font-size: 26px; }
+  .caldock-page-links { gap: 26px; }
+  .caldock-page-links a { font-size: 16px; }
+  .afterglow-reserve { margin-top: 44px; }
+  .afterglow-stock-bottom { gap: 24px; }
+  .rental-plan { padding: 28px; }
+}
+@media (max-width:850px) {
+  html { scroll-padding-top: 122px; }
+  .site-subpage-main { padding-top: 104px; }
+  .caldock-nav { height: 104px; padding-inline: 24px; gap: 0 12px; }
+  .caldock-brand { font-size: 20px; }
+  .caldock-brand img { width: 28px; height: 28px; }
+  .caldock-page-links { gap: 25px; }
+  .caldock-page-links a { padding-block: 13px; font-size: 12px; }
+  .hm-hero.afterglow-hero { height: 840px; max-height: none; }
+  .afterglow-hero .hm-hero-copy { top: 96px; width: 60%; }
+  .afterglow-hero h1 { font-size: clamp(68px,11vw,94px); }
+  .afterglow-hero .hm-hero-subtitle { font-size: 20px; }
+  .afterglow-hero-art { object-position: 65% center; }
+  .afterglow-hero .hm-hero-visual { bottom: 60px; width: 56%; }
+  .afterglow-feature h2 { font-size: 5.9vw; }
+  .afterglow-feature-description { font-size: 18px; margin-top: 30px; }
+  .afterglow-stock-marks { gap: 3px; }
+  .afterglow-stock-heading { font-size: 12px; }
+}
+@media (max-width:600px) {
+  .hm-hero.afterglow-hero { height: auto; min-height: 0; padding: 52px 24px 38px; display: flex; flex-direction: column; justify-content: flex-start; align-items: stretch; }
+  .afterglow-hero .hm-hero-copy { position: relative; width: 100%; top: auto; left: auto; order: 1; }
+  .afterglow-eyebrow { font-size: 10px; letter-spacing: .16em; }
+  .afterglow-hero h1 { font-size: clamp(56px,15.3vw,80px); margin-top: 16px; letter-spacing: -.055em; }
+  .afterglow-hero:lang(en) h1 { font-size: clamp(46px,13vw,64px); }
+  .afterglow-hero:lang(en) .hm-hero-subtitle { font-size: 16px; }
+  .afterglow-hero .hm-hero-subtitle { font-size: 16px; line-height: 1.8; margin-top: 20px; }
+  .afterglow-hero-art { position: relative; order: 2; width: calc(100% + 48px); max-width: none; flex-shrink: 0; height: 470px; inset: auto; margin: 28px -24px 0; object-fit: cover; object-position: 92% 48%; z-index: 0; }
+  .afterglow-reserve { flex-wrap: wrap; gap: 18px; margin-top: 28px; }
+  .afterglow-hero .hm-cta { padding-inline: 22px; height: 49px; gap: 10px; font-size: 15px; }
+  .afterglow-hero .hm-cta img { width: 17px; height: 17px; }
+  .afterglow-hero-price { padding-left: 18px; font-size: 14px; }
+  .afterglow-hero-price strong { font-size: 24px; }
+  .afterglow-hero-price s { font-size: 12px; margin-left: 10px; }
+  .afterglow-hero:lang(en) .afterglow-hero-price { border-left: 0; padding-left: 0; }
+  .afterglow-hero .hm-hero-note { font-size: 11px; margin-top: 14px; }
+  .afterglow-hero .hm-hero-visual { position: relative; order: 3; inset: auto; width: 100%; margin-top: 0; }
+  .afterglow-stock { padding-top: 18px; }
+  .afterglow-stock-heading { font-size: 11px; gap: 14px; }
+  .afterglow-stock-heading span:first-child { gap: 7px; }
+  .afterglow-stock-heading span:first-child::before { width: 6px; height: 6px; }
+  .afterglow-stock-bottom { gap: 22px; margin-top: 13px; }
+  .afterglow-stock-count { font-size: 56px; }
+  .afterglow-stock-bottom p { font-size: 12px; }
+  .afterglow-stock-marks { gap: 3px; grid-template-columns: repeat(25,minmax(0,1fr)); }
+  .afterglow-stock-marks i { height: 12px; }
+  .hm-chapter.afterglow-feature { height: 650px; min-height: 0; }
+  .afterglow-feature-copy { top: 58px; left: 24px; right: 24px; width: auto; }
+  .afterglow-feature h2 { font-size: clamp(33px,8.9vw,48px); margin-top: 25px; line-height: 1.25; }
+  .afterglow-feature:lang(en) h2 { font-size: clamp(30px,8vw,42px); }
+  .afterglow-feature-description { font-size: 14px; margin-top: 24px; }
+  .afterglow-feature-art { height: 420px; top: auto; bottom: 0; object-position: 83% center; }
+  .hm-chapter:not(.afterglow-feature), .hm-closing { padding-inline: 24px; }
+  .hm-chapter-inner { padding-block: 52px 72px; }
+  .hm-chapter-head h2 { font-size: 34px; line-height: 1.22; }
+  .hm-chapter-head p { font-size: 15px; line-height: 1.8; }
+  .hm-index { margin-bottom: 24px; font-size: 12px; }
+  .hm-tools { column-gap: 24px; }
+  .hm-tools li { min-height: 76px; font-size: 15px; }
+  .hm-tool-tag { font-size: 11px; }
+  .hm-trust, .hm-steps { gap: 28px; }
+  .hm-trust h3 { font-size: 18px; }
+  .hm-trust p { font-size: 14px; }
+  .rental-plan { padding: 25px 22px; }
+  .hm-plan-specs { padding: 22px; }
+  .hm-plan-specs dd { font-size: 13px; }
+  .hm-plan-specs dt { font-size: 12px; }
+  .rental-option { gap: 9px; padding: 13px 11px; }
+  .rental-option-name strong { font-size: 14px; }
+  .rental-option-price b { font-size: 12px; }
+  .rental-option-name small { font-size: 11px; }
+  .hm-faq button { font-size: 16px; padding-block: 22px; }
+  .hm-faq [data-slot=collapsible-content] { font-size: 14px; }
+  .hm-closing h2 { font-size: 38px; }
+  .hm-closing-farm { height: 330px; width: calc(100% + 48px); margin-inline: -24px; }
+  .hm-closing-farm img { object-position: 85% center; }
+}
+@media (max-width:360px) {
+  .afterglow-reserve { gap: 12px; }
+  .afterglow-hero-price { padding-left: 12px; }
+  .afterglow-hero .hm-cta { padding-inline: 16px; }
+  .afterglow-hero-price s { margin-left: 7px; }
+}
