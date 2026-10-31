@@ -34,7 +34,7 @@ function PlanPicker({ value, onChange, id }) {
     <a className="rental-pay-button" href={paymentLink(value)}>{t("继续付款","Continue to payment")} · {dollars(plan.total)}/{plan.unit}</a>
     <ul className="rental-terms">
       <li><img src="./assets/check.svg" alt="" />{t("计费周期从交付当天开始","Billing starts on delivery")}</li>
-      <li><img src="./assets/check.svg" alt="" />{t("3 个工作日内没交付，全额退回积分","Not delivered within 3 business days? Full credit refund")}</li>
+      <li><img src="./assets/check.svg" alt="" />{t("3 个工作日内没交付，全额退款","Not delivered within 3 business days? Full refund")}</li>
       <li><img src="./assets/check.svg" alt="" /><span data-testid="plan-term">{plan.term}</span></li>
       <li><img src="./assets/check.svg" alt="" />{t("每人限 1 台","One Mac per customer")}</li>
     </ul>
@@ -74,6 +74,12 @@ function useSourceInteractions(root) {
     node.querySelectorAll('.site-reveal-group').forEach(element => {
       element.classList.add('site-reveal-animated');observer.observe(element);
     });
+    let disposed = false;
+    document.fonts.ready.then(() => requestAnimationFrame(() => {
+      if (disposed || !location.hash) return;
+      const target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+      target?.scrollIntoView({ block:'start', behavior:'instant' });
+    }));
     const anchors = [...node.querySelectorAll('.caldock-page-links a')];
     const activeSections = new IntersectionObserver(entries => {
       for (const entry of entries) if (entry.isIntersecting) {
@@ -86,7 +92,7 @@ function useSourceInteractions(root) {
     anchors.forEach(anchor => { const section = node.querySelector(anchor.getAttribute('href')); if (section) activeSections.observe(section); });
     return () => {
       node.removeEventListener('click',click);document.removeEventListener('keydown',escape);document.removeEventListener('click',dismiss);
-      observer.disconnect();activeSections.disconnect();
+      disposed = true;observer.disconnect();activeSections.disconnect();
     };
   }, [root]);
 }

@@ -24,3 +24,5 @@ Node 20.19+ 或 22.12+，`npm install` 后运行 `npm run dev -- --port 4173`。
 ## GitHub Pages
 
 资源使用相对路径，付款页面使用查询参数路由，支持 GitHub Pages 的仓库子目录和直接刷新。根目录的 `.github/workflows/pages.yml` 在 main 更新时自动构建并发布 `agent-mac/dist/client`。
+
+页面使用直接付款与退款表述，不提供积分、充值或余额机制。页面、导航及付款页统一使用深色背景，所有标题与首屏余量数字加粗。

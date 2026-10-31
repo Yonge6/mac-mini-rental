@@ -28,3 +28,7 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Header language control displays exactly 中 / En as direct local-language links, with the active language emphasized.
 
 - Remove the entire boss-presentation promotion section (.hm-boss), including its illustration, presentation and PPT links. Pricing now flows directly into delivery.
+
+- Do not use a credits, wallet balance or top-up concept anywhere. Describe direct payment, renewal payments and refunds in both Chinese and English.
+- All heading levels and FAQ question titles are bold. The hero stock count is also bold, without changing its size or position.
+- Use dark backgrounds throughout the page, header and checkout; no white page or navigation surface. Keep text readable with pale foregrounds and the blue active-section accent.
