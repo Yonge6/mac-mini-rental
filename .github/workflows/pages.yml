@@ -32,7 +32,7 @@ jobs:
         run: npm run build
       - name: Verify hosting output
         working-directory: agent-mac
-        run: npm run test:sites && npm run test:commerce
+        run: npm run test:sites && npm run test:commerce && npm run test:studio
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v4
         with:
