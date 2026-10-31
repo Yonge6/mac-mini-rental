@@ -1,5 +1,6 @@
 import {createContext,useContext,useEffect,useState,useCallback} from 'react';
 import {makeAccountUrl,rememberReferral,accountBase} from './core.mjs';
+import {normalizeInterval} from './plans.mjs';
 import {demoRequest,demoSession} from './demo.mjs';
 export const query=new URLSearchParams(location.search);
 export const en=query.get('lang')==='en';
@@ -33,7 +34,7 @@ export function CommerceProvider({children}){
  const beginDemo=role=>location.assign(makeAccountUrl(location,role==='admin'?'admin':query.get('next')==='checkout'?'checkout':'account',{demo:'1',role}));
  const signInHref=provider=>{
   const url=new URL('/api/caldock/auth/'+provider+'/start',accountBase(location,false));
-  url.searchParams.set('next',query.get('next')==='checkout'?'checkout':query.get('next')==='affiliate'?'affiliate':'account');url.searchParams.set('lang',en?'en':'zh');url.searchParams.set('interval',query.get('interval')==='year'?'year':'month');if(referral)url.searchParams.set('ref',referral);return url.toString();
+  url.searchParams.set('next',query.get('next')==='checkout'?'checkout':query.get('next')==='affiliate'?'affiliate':'account');url.searchParams.set('lang',en?'en':'zh');url.searchParams.set('interval',normalizeInterval(query.get('interval')));if(referral)url.searchParams.set('ref',referral);return url.toString();
  };
  return <Context.Provider value={{...state,request,refresh,signOut,beginDemo,signInHref,demo:isDemo}}>{children}</Context.Provider>;
 }

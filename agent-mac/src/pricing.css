@@ -1,0 +1,25 @@
+/* Three billing cards from the supplied pricing reference. */
+#pricing .hm-plan { display: flex; flex-direction: column; background: transparent; border-radius: 0; box-shadow: none; overflow: visible; }
+#pricing .hm-plan-price { order: -1; border: 0; background: transparent; width: 100%; }
+#pricing .rental-plan { padding: 0; border: 0; box-shadow: none; background: transparent; }
+#pricing .rental-options { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 16px; }
+#pricing .rental-plan-card { display: flex; flex-direction: column; align-items: stretch; gap: 0; min-width: 0; min-height: 218px; margin: 0; padding: 22px 24px; background: #141b25; border: 1px solid #2b3443; border-radius: 14px; color: #eaf0fa; }
+#pricing .rental-plan-card:hover { background: #1a2330; border-color: #4a5d7a; }
+#pricing .rental-plan-card.is-annual { border-color: #5975aa; background: #161d2a; }
+#pricing .rental-plan-card.is-selected { background: #192230; border-color: #7b9fe8; box-shadow: inset 0 0 0 1px #7b9fe8; }
+#pricing .rental-plan-card:focus-within { outline-color: #91b2ff; }
+.rental-card-heading { display: flex; align-items: center; flex-wrap: wrap; gap: 9px; color: #97a6bd; font-size: 18px; line-height: 1.6; }
+.rental-card-heading em { border: 1px solid #79a2ff40; background: #79a2ff16; color: #79a2ff; border-radius: 10px; padding: 5px 11px; font-size: 15px; line-height: 1.4; font-style: normal; }
+.rental-card-price { display: flex; align-items: baseline; gap: 7px; margin-top: 0; white-space: nowrap; }
+.rental-card-price strong { color: #eaf0fa; font-family: ui-monospace,monospace; font-size: 36px; line-height: 1.25; font-weight: 600; letter-spacing: .01em; }
+.rental-card-price>span { color: #97a6bd; font-size: 18px; }
+.rental-card-total { color: #a6b4c9; font-size: 13px; line-height: 1.6; margin-top: 14px; }
+.rental-card-select { margin-top: 25px; padding-top: 16px; border-top: 1px solid #2b3443; display: flex; align-items: center; gap: 9px; color: #bdcbe2; font-size: 13px; }
+#pricing .rental-plan-card .rental-radio { width: 20px; height: 20px; background: transparent; border-color: #62718b; }
+#pricing .rental-plan-card.is-selected .rental-radio { background: #94b5ff; border-color: #94b5ff; }
+#pricing .rental-selection { color: #c3b6a3; margin: 24px 0 0; font-size: 14px; line-height: 1.7; }
+#pricing .rental-pay-button { max-width: 440px; margin-top: 18px; }
+#pricing .rental-terms { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); margin-top: 24px; max-width: 950px; gap: 12px 28px; }
+#pricing .hm-plan-specs { margin-top: 38px; padding: 30px 0 0; border-top: 1px solid #9e7d5038; display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 24px 36px; }
+@media(max-width:1000px) { #pricing .rental-plan-card { padding: 20px 18px; } .rental-card-heading { font-size: 16px; } .rental-card-heading em { font-size: 12px; padding: 5px 8px; } .rental-card-price strong { font-size: 32px; } .rental-card-price>span { font-size: 15px; } }
+@media(max-width:700px) { #pricing .rental-options { grid-template-columns: 1fr; gap: 12px; } #pricing .rental-plan-card { padding: 20px; min-height: 0; } .rental-card-heading { font-size: 18px; } .rental-card-price strong { font-size: 36px; } .rental-card-select { margin-top: 18px; } #pricing .rental-terms { grid-template-columns: 1fr; } #pricing .hm-plan-specs { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 22px 20px; } #pricing .rental-pay-button { max-width: none; } }

@@ -144,8 +144,8 @@ window.CalDockGrowthContent = {
         "en": "Offers and pricing"
       },
       "intro": {
-        "zh": "把租赁、实施、维护和第三方订阅四笔钱分清。现有对客租赁价为 $199/月或 $1,799/年预付；本工作台的 $199/$169/$129 是规划参数。下面新增服务均为待验证建议，不代表已上架或已经接通收款。",
-        "en": "Separate rental, implementation, maintenance and third-party subscriptions. Current customer-facing rental prices are $199/month or $1,799 prepaid annually; this studio’s $199/$169/$129 values are planning inputs. Additional services below are proposals to validate, not live offers or evidence of an active payment flow."
+        "zh": "把租赁、实施、维护和第三方订阅四笔钱分清。已批准并配置三档租赁：月付 $199；季付折合 $169/月，一次支付 $507；年付折合 $129/月，一次支付 $1,548。报价以实际结算页和合同为准。工作台可编辑测算不会自动改变销售套餐；新增实施服务仍是待验证建议，在线收款状态另核验。",
+        "en": "Separate rental, implementation, maintenance and third-party subscriptions. Three rental plans are approved and configured: $199 monthly; quarterly at $169/month, paid as $507 upfront; and annually at $129/month, paid as $1,548 upfront. Quote the actual checkout and contract terms. Editing this worksheet does not automatically change sales plans. Additional implementation services remain proposals, and payment availability is verified separately."
       },
       "blocks": [
         {
@@ -192,8 +192,8 @@ window.CalDockGrowthContent = {
                 "en": "Workspace provisioning, connection guidance and basic support within the published scope."
               },
               {
-                "zh": "$199/月或 $1,799/年；软件订阅不默认包含。",
-                "en": "$199/month or $1,799/year; software subscriptions are not automatically included."
+                "zh": "月付 $199；季付 $507（折合 $169/月）；年付 $1,548（折合 $129/月）。软件订阅不默认包含。",
+                "en": "$199 monthly; $507 quarterly upfront ($169/month equivalent); or $1,548 annually upfront ($129/month equivalent). Software subscriptions are not automatically included."
               }
             ],
             [
@@ -432,8 +432,8 @@ window.CalDockGrowthContent = {
           },
           "items": [
             {
-              "zh": "月付 $199 的示例佣金上限为 $59.70；年付 $1,799 按月确认，前三个月约 $44.98，不把全年预收都当当月佣金基数。",
-              "en": "At $199 monthly, the example maximum is $59.70. For $1,799 annually, monthly recognition gives about $44.98 across the first three months; do not treat all annual prepayment as current-month commissionable revenue."
+              "zh": "按前三个月确认租赁收入的 10% 举例：月付 $199 对应 $59.70；季付 $507 对应 $50.70；年付 $1,548 按 $129/月确认，对应 $38.70。均需先扣适用退款、税费等，不把全年预收都当当月佣金基数。",
+              "en": "At 10% of rental revenue recognized over the first three months, examples are $59.70 for the $199 monthly plan, $50.70 for the $507 quarterly plan, and $38.70 for the $1,548 annual plan recognized at $129/month. Deduct applicable refunds, taxes and other exclusions first. Do not treat annual prepayment as current-month commissionable revenue."
             },
             {
               "zh": "对应收入确认且退款窗口结束后结算。联合实施按真实工作量分实施费，避免同一笔收入重复付佣。每月有线索、订单、退款和结算对账。",
@@ -2060,8 +2060,8 @@ window.CalDockGrowthContent = {
       },
       "url": "https://craftos.app/api/caldock/capabilities",
       "note": {
-        "zh": "本次核验月租 $199、年租 $1,799，在线收款未启用；正式接单前完成收款、退款与交付验收。",
-        "en": "This check showed $199 monthly and $1,799 annually, with online payments disabled. Validate collection, refunds and delivery before paid orders."
+        "zh": "已批准并配置月付 $199、季付 $507、年付 $1,548；以当前结算页及合同为准。本次收款核验仍未启用，正式接单前完成收款、退款与交付验收。",
+        "en": "Approved configured prices are $199 monthly, $507 quarterly upfront and $1,548 annually upfront; use the current checkout and contract terms. Payments were not enabled at this check. Validate collection, refunds and delivery before paid orders."
       }
     }
   ]

@@ -12,3 +12,5 @@ Implementation:
 5. Publish GitHub Pages, update only the backend's frontend revision pin, deploy a tested main descendant without reverting concurrent changes, and read both public hosts back.
 
 Files outside Decision Studio and its docs/tests must not be changed by the frontend release. Preserve the existing public read/protected shared write model. No customer contacts or private supplier details belong in this public plan.
+
+Release integration: the parallel website task approved monthly $199, quarterly $507 and yearly $1,548 pricing in frontend commit `c10df2181056cb870985039fe3887c041d78e5c6` and backend commit `d8dc57283fad4c4401f1e979b5d62432523661a5`. Preserve these changes when resolving the shared deployment pin. Align sales copy and partner examples to the approved catalog without changing existing financial scenarios or historical orders.
