@@ -32,7 +32,7 @@ function studioHarness(savedState,storedValues){
   crypto:{randomUUID:()=>String(Math.random())},setTimeout:fn=>{fn();return 0;},clearTimeout(){},confirm:()=>true,addEventListener(){}});
  vm.runInContext('window=globalThis',context);
  for(const file of ['model.js','growth-content.js','growth-template.js','growth-playbook.js','studio.js'])vm.runInContext(readFileSync(new URL(file,root),'utf8'),context);
- return {app:context.CalDockStudio,values,context,async action(action,dataset={}){const button={dataset:{action,...dataset}};const event={target:{closest:selector=>selector==='button'?button:null}};for(const listener of listeners.click||[])await listener(event);}};
+ return {app:context.CalDockStudio,values,context,input(key,value){const el={type:'number',value:String(value),min:'0',max:'120',dataset:{path:JSON.stringify(['scenarios','pilot','values',key])},matches:selector=>selector==='[data-path]'};for(const listener of listeners.input||[])listener({target:el});return el.value;},async action(action,dataset={}){const button={dataset:{action,...dataset}};const event={target:{closest:selector=>selector==='button'?button:null}};for(const listener of listeners.click||[])await listener(event);}};
 }
 test('published guidance preserves existing saved bilingual drafts and financial assumptions',()=>{
  const fresh=studioHarness(),saved=JSON.parse(JSON.stringify(fresh.app.getWorkspace()));
@@ -120,4 +120,11 @@ test('old default commissions migrate once while custom commissions retain their
  const repeat=changes.find(h=>h.path[1]==='pilot'&&h.path.at(-1)==='monthlyRepeat');assert.equal(repeat.before,10);
  await loaded.action(undefined,{restore:repeat.id});
  assert.equal(studioHarness(undefined,loaded.values).app.getWorkspace().scenarios.pilot.values.monthlyRepeat,10);
+});
+
+test('monthly commission duration input normalizes fractional edits before persistence and sync',()=>{
+ const loaded=studioHarness();assert.equal(loaded.input('monthlyCommissionMonths',2.5),'3');
+ assert.equal(loaded.app.getWorkspace().scenarios.pilot.values.monthlyCommissionMonths,3);
+ assert.equal(loaded.app.getResult().c.monthlyCommissionMonths,3);
+ assert.equal(JSON.parse(loaded.values.get('caldock-v4-history'))[0].value,3);
 });
