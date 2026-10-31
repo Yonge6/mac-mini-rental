@@ -26,3 +26,5 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Latest pricing confirmed by the user: USD $199/month, crossed-out $249/month; annual $1,799 upfront, approximately $149.92/month, saving $589 versus 12 monthly payments. Describe the discount as approximate, never exact 25%.
 
 - Header language control displays exactly 中 / En as direct local-language links, with the active language emphasized.
+
+- Remove the entire boss-presentation promotion section (.hm-boss), including its illustration, presentation and PPT links. Pricing now flows directly into delivery.
