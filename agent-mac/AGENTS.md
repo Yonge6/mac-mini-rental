@@ -63,3 +63,7 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 ## Operator video (2026-11-01)
 - Place the user-selected official OneLaser video `tSroh4OUkX4` immediately below the office/team photo grid and above company details, in both languages. Use a responsive 16:9, lazy-loaded YouTube embed without autoplay, plus a YouTube fallback link.
 - Describe it accurately as OneLaser's expanded production facility, not a CalDock server room or Mac hosting facility. Preserve existing photos and animations.
+
+## Premium pricing refinement (2026-11-01)
+- The hero advertises the entry price: $129/month from the annual plan, with $1,548 billed annually clearly visible next to it. Localize as “$129/月起” / “From $129/month”.
+- Pricing cards should feel premium and restrained: warm obsidian surfaces, ivory typography, champagne-gold fine borders and generous spacing. Annual is the featured plan. This supersedes the earlier blue-gray card styling; all three amounts, totals and functionality stay the same.

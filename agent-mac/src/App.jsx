@@ -28,14 +28,16 @@ function PlanPicker({ value, onChange, id }) {
     <fieldset className="rental-options"><legend className="sr-only">{t("付款周期","Billing period")}</legend>
       {Object.entries(plans).map(([key,p]) => <label className={'rental-option rental-plan-card ' + (value === key ? 'is-selected ' : '') + (key === 'year' ? 'is-annual' : '')} key={key}>
         <input type="radio" name={'billing-'+id} value={key} checked={value === key} onChange={() => onChange(key)} />
+        <span className="rental-card-edition" aria-hidden="true">{key==='month'?'01 / MONTHLY':key==='quarter'?'02 / QUARTERLY':'03 / ANNUAL'}</span>
         <span className="rental-card-heading">{p.title}{key === 'year' && <em>{t('主推','Recommended')}</em>}</span>
         <span className="rental-card-price"><strong>{dollars(p.monthly)}</strong><span>{t('/月','/month')}</span></span>
         <span className="rental-card-total">{p.summary}</span>
+        <span className="rental-card-note">{key==='month'?t('按月续订，灵活安排','A flexible, month-to-month commitment'):key==='quarter'?t('比连续月付三个月省 $90','Save $90 versus 3 monthly payments'):t('比连续月付一年省 $840','Save $840 versus 12 monthly payments')}</span>
         <span className="rental-card-select"><span className="rental-radio" aria-hidden="true">{value === key && <img src="./assets/check.svg" alt="" />}</span>{value===key?t('已选方案','Selected plan'):t('选择'+p.name,'Choose '+p.name.toLowerCase())}</span>
       </label>)}
     </fieldset>
-    <p className="rental-selection" aria-live="polite">{plan.name} · {plan.summary}{value==='year'?t('，比连续月付一年省 $840',' · Save $840 versus 12 monthly payments'):value==='quarter'?t('，比连续月付三个月省 $90',' · Save $90 versus 3 monthly payments'):''}</p>
-    <a className="rental-pay-button" href={paymentLink(value)}>{t("继续付款","Continue to payment")} · {dollars(plan.total)}/{plan.unit}</a>
+    <div className="rental-action-bar"><p className="rental-selection" aria-live="polite"><span className="rental-selection-label">{t("已选方案","YOUR SELECTION")}</span>{plan.name} · {plan.summary}{value==='year'?t('，比连续月付一年省 $840',' · Save $840 versus 12 monthly payments'):value==='quarter'?t('，比连续月付三个月省 $90',' · Save $90 versus 3 monthly payments'):''}</p>
+    <a className="rental-pay-button" href={paymentLink(value)}>{t("继续付款","Continue to payment")} · {dollars(plan.total)}/{plan.unit}<img src="./assets/chevron.svg" alt="" /></a></div>
     <ul className="rental-terms">
       <li><img src="./assets/check.svg" alt="" />{t("计费周期从交付当天开始","Billing starts on delivery")}</li>
       <li><img src="./assets/check.svg" alt="" />{t("3 个工作日内没交付，全额退款","Not delivered within 3 business days? Full refund")}</li>
