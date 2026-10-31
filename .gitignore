@@ -1,0 +1,4 @@
+.DS_Store
+qa/
+agent-mac/design-qa.md
+agent-mac/scripts/import-source.py
