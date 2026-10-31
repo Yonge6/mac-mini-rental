@@ -23,7 +23,7 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Header: only CalDock brand, language switch and in-page anchors; no promotion strip, platform product navigation or start button. Language switching stays local (Chinese/English).
 - Remove the remote-screen app download row and the entire old footer directory/legal/cookie/compliance blocks, as requested in the annotations.
 
-- Latest pricing confirmed by the user: USD $199/month, crossed-out $249/month; annual $1,799 upfront, approximately $149.92/month, saving $589 versus 12 monthly payments. Describe the discount as approximate, never exact 25%.
+- Previous pricing (superseded by the 2026-11-01 three-plan decision below): USD $199/month, crossed-out $249/month; annual $1,799 upfront.
 
 - Header language control displays exactly 中 / En as direct local-language links, with the active language emphasized.
 
@@ -54,3 +54,8 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Preserve the reference's motion when restyling: moving network dashes (horizontal desktop / vertical phone), staggered section entrances, rotating remote-window glow, stock count/sweep/glints and the scrolling hint.
 - Do not replace animated gradient tracks with solid backgrounds, globally disable reveal animations for screenshot capture, or hide animated window borders. Keep the selected espresso/amber colors and photo composition.
 - Respect the visitor's reduced-motion preference; content and the final inventory count must remain readable without animation.
+
+## Three billing plans (2026-11-01)
+- Follow the supplied screenshot: 灵活月付 $199/月, 项目季付 $169/月, 长期年付 $129/月 with 主推 badge. Three adjacent charcoal/blue-gray price cards on desktop, stacked on phones; surrounding page keeps the current warm palette and motion.
+- Exact upfront charges are $199/month, $507/quarter (3 months), and $1,548/year (12 months). Annual saves $840 versus twelve monthly payments; quarter saves $90 versus three monthly payments. This supersedes all older two-plan/annual-price instructions.
+- Preserve the chosen interval through checkout, language switching, login callbacks and order/admin displays. The backend determines prices; never reprice existing order or commission snapshots.
