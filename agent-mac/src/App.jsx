@@ -2,6 +2,9 @@ import { forwardRef, memo, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import sourceZh from './source.html?raw';
 import sourceEn from './source.en.html?raw';
+import {CommerceProvider, appHref, isDemo, onMarketingHost} from './commerce/context.jsx';
+import {VIEWS} from './commerce/core.mjs';
+import {AccountEntry, CommercePages, CheckoutAction} from './commerce/pages.jsx';
 const english = new URLSearchParams(location.search).get('lang') === 'en';
 const language = english ? 'en' : 'zh';
 const t = (zh, en) => english ? en : zh;
@@ -14,7 +17,7 @@ const plans = {
   year: { name: t('年付','Yearly'), monthly: 149.92, total: 1799, unit: t('年','year'), summary: t('一次支付 $1,799，享用 12 个月','$1,799 paid upfront for 12 months'), term: t('年付一次付清，一年内不能取消或退款','Yearly is paid upfront and is non-refundable during the year') },
 };
 const dollars = n => '$' + n.toLocaleString('en-US');
-const paymentLink = interval => (interval === 'year' ? import.meta.env.VITE_CHECKOUT_YEAR_URL : import.meta.env.VITE_CHECKOUT_MONTH_URL) || './?view=checkout&lang='+language+'&interval='+interval;
+const paymentLink = interval => appHref('checkout',{interval});
 
 function PlanPicker({ value, onChange, id }) {
   const plan = plans[value];
@@ -99,10 +102,8 @@ function useSourceInteractions(root) {
 
 function Checkout({ value }) {
   const plan = plans[value];
-  const [notice,setNotice] = useState(false);
-  const paymentUrl = value === 'year' ? import.meta.env.VITE_CHECKOUT_YEAR_URL : import.meta.env.VITE_CHECKOUT_MONTH_URL;
   return <div className="checkout-page">
-    <header className="checkout-nav"><a className="checkout-brand" href={"./?lang="+language}><img src="./assets/caldock-logo.png" alt="" />CalDock</a><a href={'./?lang='+language+'&interval='+value+'#pricing'}>{t("返回选择方案","Back to plans")}</a></header>
+    <header className="checkout-nav"><a className="checkout-brand" href={appHref()}><img src="./assets/caldock-logo.png" alt="" />CalDock</a><a href={appHref(undefined,{interval:value})+'#pricing'}>{t("返回选择方案","Back to plans")}</a></header>
     <main className="checkout-main">
       <section className="checkout-details"><p className="checkout-eyebrow">{t("独享 MAC · 美国加州","DEDICATED MAC · CALIFORNIA")}</p><h1>{t("完成付款，","Your own Mac,")}<br />{t("开启你的独享 Mac。","one payment away.")}</h1>
         <p className="checkout-lead">{t("M6 Mac mini，24 小时为你和 Agent 在线。","M6 Mac mini. Always on for you and your agents.")}</p>
@@ -115,16 +116,15 @@ function Checkout({ value }) {
         <dl><div><dt>{t("托管位置","Location")}</dt><dd>{t("美国加州","California, USA")}</dd></div><div><dt>{t("数量","Quantity")}</dt><dd>{t("1 台","1 Mac")}</dd></div><div><dt>{t("计费周期","Billing period")}</dt><dd>{value === 'year' ? t('12 个月','12 months') : t('1 个月','1 month')}</dd></div></dl>
         <div className="checkout-total"><span>{t("本次应付","Total due today")} <small>USD</small></span><strong>{dollars(plan.total)}<small>.00</small></strong></div>
         <p className="checkout-policy">{plan.term}{t("。计费周期从交付当天开始。",". Billing starts on delivery.")}</p>
-        <button className="rental-pay-button" type="button" onClick={() => { if (paymentUrl) location.assign(paymentUrl); else setNotice(true); }}>{t("支付","Pay")} {dollars(plan.total)}</button>
-        {notice && <p className="checkout-notice" role="status">{t("付款通道暂未开放，请稍后再试。本次没有扣款。","Payments are not open yet. Please try again later. You have not been charged.")}</p>}
-        <p className="checkout-secure">{t("付款信息将通过安全付款页面处理","Payment details are processed on a secure checkout page")}</p>
-        <a className="checkout-change" href={'./?lang='+language+'&interval='+value+'#pricing'}>{t("更改付款方案","Change billing plan")}</a>
+        <CheckoutAction value={value}/>
+        <a className="cd-inline-link checkout-operator" href={appHref(undefined,{interval:value})+'#team'}>{t('由 OneLaser 团队运营 · 了解团队','Operated by OneLaser · Meet the team')}</a>
+        <a className="checkout-change" href={appHref(undefined,{interval:value})+'#pricing'}>{t("更改付款方案","Change billing plan")}</a>
       </section>
     </main>
   </div>;
 }
 
-export function App() {
+function RentalApp() {
   const root = useRef(null);
   const [value,setValue] = useState(() => {
     const query = new URLSearchParams(location.search).get('interval');
@@ -132,6 +132,7 @@ export function App() {
     return query === 'year' || (query !== 'month' && saved === 'year') ? 'year' : 'month';
   });
   const [slots,setSlots] = useState([]);
+  const [accountSlots,setAccountSlots] = useState([]);
   const checkout = location.pathname === '/checkout' || new URLSearchParams(location.search).get('view') === 'checkout';
   useSourceInteractions(root);
   useEffect(() => {
@@ -139,7 +140,9 @@ export function App() {
     if (!checkout) { const url = new URL(location.href); url.searchParams.set('interval', value); history.replaceState(null, '', url); }
     if (!checkout) {
       setSlots([...root.current.querySelectorAll('[data-plan-slot]')]);
-      root.current.querySelectorAll('[data-language]').forEach(a => { a.href='./?lang='+a.dataset.language+'&interval='+value; });
+      setAccountSlots([...root.current.querySelectorAll('[data-account-slot]')]);
+      root.current.querySelectorAll('[data-language]').forEach(a => { a.href=appHref(undefined,{lang:a.dataset.language,interval:value}); });
+      root.current.querySelector('.caldock-brand').href=appHref();
     }
   }, [value,checkout]);
   useEffect(() => { document.title = checkout ? t('付款 · CalDock','Checkout · CalDock') : t('独享 M6 Mac mini · 美国加州 | CalDock','Dedicated M6 Mac mini · California | CalDock'); document.documentElement.lang = english ? 'en' : 'zh-CN'; }, [checkout]);
@@ -147,5 +150,15 @@ export function App() {
   return <>
     <SourceMarkup ref={root} />
     {slots.map(slot => createPortal(<PlanPicker value={value} onChange={setValue} id={slot.dataset.planSlot} />,slot))}
+    {accountSlots.map(slot=>createPortal(<AccountEntry/>,slot))}
   </>;
+}
+
+function HostedAccountRedirect(){useEffect(()=>{const q=new URLSearchParams(location.search);location.replace(appHref(q.get('view'),{next:q.get('next')||undefined,tab:q.get('tab')||undefined,order:q.get('order')||undefined}));},[]);return <div className="cd-loading-page"><p>{t('正在打开安全账号中心…','Opening your account…')}</p></div>;}
+export function App(){
+  const view=new URLSearchParams(location.search).get('view');
+  useEffect(()=>{document.documentElement.lang=english?'en':'zh-CN';if(VIEWS.has(view))document.title=(view==='admin'?t('管理后台','Operations'):view==='login'?t('登录','Sign in'):t('客户中心','My account'))+' · CalDock';},[view]);
+  const accountView=VIEWS.has(view);
+  const needsAccountHost=onMarketingHost&&!isDemo&&(accountView||view==='checkout');
+  return <CommerceProvider>{needsAccountHost?<HostedAccountRedirect/>:accountView?<CommercePages view={view}/>:<RentalApp/>}</CommerceProvider>;
 }

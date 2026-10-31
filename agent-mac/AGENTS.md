@@ -37,3 +37,15 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - User selected the second displayed Product Design mock: California Afterglow. Exact visual target: `../qa/style-proposals-2026-10-31/02-california-afterglow.png`.
 - This choice replaces the earlier blue/graphite visual direction: use deep espresso surfaces, ivory type, amber actions and warm sunset photography throughout the landing page and checkout. Preserve the existing CalDock logo.
 - Keep oversized bold left hero copy and right Mac/inventory composition. The hero reserve action scrolls to lower pricing; both plans and checkout preview keep their existing behavior and confirmed USD prices.
+
+## Accounts, orders and referrals (2026-10-31)
+- User requests Google/Apple federated login, account system, customer orders, order admin and affiliate links.
+- Use the existing craftos.app backend at the user's explicit request. Its checkout is `/Volumes/DevSSD/Projects/Onelaser自动化项目/github-release/onelaser-workos-api` (Fastify/PostgreSQL). Do not introduce Supabase. Keep CalDock data/identities/cookies isolated from Work OS.
+- Affiliate default approved: personal links, source/order attribution, admin-set commission rate, no automatic payouts.
+- Demo must be explicit and fictional; real accounts must not accept demo login. Paid order state and commissions require verified backend payment events, not a client success flag.
+
+## Real company and team context (2026-10-31)
+- User explicitly confirmed: CalDock is operated by the OneLaser team.
+- Add a credible operator/team section before pricing, using the supplied OneLaser California office photo and the genuine team photo from OneLaser's official About Us page. Add an in-page team anchor and compact operator links at pricing/checkout.
+- Preserve the supplied photographs. Do not generate people, fabricate endorsements, transfer laser-product warranties to Mac rentals, or label the office photo as a server-room photo.
+- Verified public office address: 20472 Crescent Bay Dr, STE 104, Lake Forest, CA 92630, USA. Source: https://www.1laser.com/pages/contact-us and the site footer, read 2026-10-31.
