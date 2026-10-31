@@ -4,6 +4,7 @@ import sourceZh from './source.html?raw';
 import sourceEn from './source.en.html?raw';
 import {CommerceProvider, appHref, isDemo, onMarketingHost} from './commerce/context.jsx';
 import {VIEWS} from './commerce/core.mjs';
+import {BILLING_PLANS,normalizeInterval} from './commerce/plans.mjs';
 import {AccountEntry, CommercePages, CheckoutAction} from './commerce/pages.jsx';
 const english = new URLSearchParams(location.search).get('lang') === 'en';
 const language = english ? 'en' : 'zh';
@@ -13,27 +14,27 @@ const source = english ? sourceEn : sourceZh;
 const SourceMarkup = memo(forwardRef(function SourceMarkup(_, ref) { return <div ref={ref} dangerouslySetInnerHTML={{__html:source}} />; }));
 
 const plans = {
-  month: { name: t('月付','Monthly'), monthly: 199, total: 199, unit: t('月','month'), summary: t('每月支付 $199','$199 billed monthly'), term: t('随时取消续订，当期结束后停止','Cancel renewal anytime; service ends after the current period') },
-  year: { name: t('年付','Yearly'), monthly: 149.92, total: 1799, unit: t('年','year'), summary: t('一次支付 $1,799，享用 12 个月','$1,799 paid upfront for 12 months'), term: t('年付一次付清，一年内不能取消或退款','Yearly is paid upfront and is non-refundable during the year') },
+  month: { name: t('月付','Monthly'), title: t('灵活月付','Flexible monthly'), unit: t('月','month'), summary: t('每月支付 $199','$199 billed monthly'), term: t('随时取消续订，当期结束后停止','Cancel renewal anytime; service ends after the current period') },
+  quarter: { name: t('季付','Quarterly'), title: t('项目季付','Project quarterly'), unit: t('季','quarter'), summary: t('一次支付 $507，享用 3 个月','$507 paid upfront for 3 months'), term: t('每 3 个月续订，可随时关闭下期续订','Renews every 3 months; turn off next renewal anytime') },
+  year: { name: t('年付','Yearly'), title: t('长期年付','Long-term yearly'), unit: t('年','year'), summary: t('一次支付 $1,548，享用 12 个月','$1,548 paid upfront for 12 months'), term: t('年付一次付清，一年内不能取消或退款','Yearly is paid upfront and is non-refundable during the year') },
 };
+for(const [key,plan] of Object.entries(plans))Object.assign(plan,{...BILLING_PLANS[key],monthly:BILLING_PLANS[key].monthlyCents/100,total:BILLING_PLANS[key].amountCents/100});
 const dollars = n => '$' + n.toLocaleString('en-US');
 const paymentLink = interval => appHref('checkout',{interval});
 
 function PlanPicker({ value, onChange, id }) {
   const plan = plans[value];
   return <section className="rental-plan" aria-label={t("选择付款方案","Choose your billing plan")}>
-    <p className="rental-plan-caption">{t("第二批早鸟价","Batch 2 early-bird price")}</p>
-    {value === "year" && <p className="rental-equivalent">{t("年付折合约","Equivalent to approximately")}</p>}
-    <div className="rental-amount" aria-live="polite"><strong>{dollars(plan.monthly)}</strong><span>{t("/月","/month")}</span><s>$249</s></div>
-    <p className="rental-price-note">{value === 'year' ? t('年付一次 $1,799，比月付一年省 $589。','$1,799 paid yearly. Save $589 compared with monthly billing.') : t('第二批 100 台售完后，新订单为 $249/月；已下单用户保持早鸟价。','After batch 2 sells out, new orders are $249/month. Existing orders keep their early-bird price.')}</p>
     <fieldset className="rental-options"><legend className="sr-only">{t("付款周期","Billing period")}</legend>
-      {Object.entries(plans).map(([key,p]) => <label className={'rental-option ' + (value === key ? 'is-selected ' : '') + (key === 'year' ? 'is-annual' : '')} key={key}>
+      {Object.entries(plans).map(([key,p]) => <label className={'rental-option rental-plan-card ' + (value === key ? 'is-selected ' : '') + (key === 'year' ? 'is-annual' : '')} key={key}>
         <input type="radio" name={'billing-'+id} value={key} checked={value === key} onChange={() => onChange(key)} />
-        <span className="rental-radio" aria-hidden="true">{value === key && <img src="./assets/check.svg" alt="" />}</span>
-        <span className="rental-option-name"><strong>{p.name}</strong>{key === 'year' && <small>{t("一次付 $1,799","$1,799 paid upfront")}</small>}</span>
-        <span className="rental-option-price"><b>{key === "year" && t("约 ","≈ ")}{dollars(p.monthly)}{t("/月","/month")}</b>{key === 'year' && <em>{t("约7.5折","About 25% off")}</em>}</span>
+        <span className="rental-card-heading">{p.title}{key === 'year' && <em>{t('主推','Recommended')}</em>}</span>
+        <span className="rental-card-price"><strong>{dollars(p.monthly)}</strong><span>{t('/月','/month')}</span></span>
+        <span className="rental-card-total">{p.summary}</span>
+        <span className="rental-card-select"><span className="rental-radio" aria-hidden="true">{value === key && <img src="./assets/check.svg" alt="" />}</span>{value===key?t('已选方案','Selected plan'):t('选择'+p.name,'Choose '+p.name.toLowerCase())}</span>
       </label>)}
     </fieldset>
+    <p className="rental-selection" aria-live="polite">{plan.name} · {plan.summary}{value==='year'?t('，比连续月付一年省 $840',' · Save $840 versus 12 monthly payments'):value==='quarter'?t('，比连续月付三个月省 $90',' · Save $90 versus 3 monthly payments'):''}</p>
     <a className="rental-pay-button" href={paymentLink(value)}>{t("继续付款","Continue to payment")} · {dollars(plan.total)}/{plan.unit}</a>
     <ul className="rental-terms">
       <li><img src="./assets/check.svg" alt="" />{t("计费周期从交付当天开始","Billing starts on delivery")}</li>
@@ -112,8 +113,8 @@ function Checkout({ value }) {
       </section>
       <section className="checkout-summary" aria-labelledby="order-title"><h2 id="order-title">{t("订单摘要","Order summary")}</h2><div className="checkout-order-line"><span>{t("独享 Mac mini","Dedicated Mac mini")} · {plan.name}</span><strong>{dollars(plan.total)}</strong></div>
         <p className="checkout-cycle">{plan.summary}</p>
-        {value === 'year' && <p className="checkout-saving">{t("年付 约7.5折 · 每年省 $589","About 25% off yearly · Save $589 a year")}</p>}
-        <dl><div><dt>{t("托管位置","Location")}</dt><dd>{t("美国加州","California, USA")}</dd></div><div><dt>{t("数量","Quantity")}</dt><dd>{t("1 台","1 Mac")}</dd></div><div><dt>{t("计费周期","Billing period")}</dt><dd>{value === 'year' ? t('12 个月','12 months') : t('1 个月','1 month')}</dd></div></dl>
+        {value !== 'month' && <p className="checkout-saving">{value==='year'?t('年付 · 比连续月付一年省 $840','Yearly · Save $840 versus 12 monthly payments'):t('季付 · 比连续月付三个月省 $90','Quarterly · Save $90 versus 3 monthly payments')}</p>}
+        <dl><div><dt>{t("托管位置","Location")}</dt><dd>{t("美国加州","California, USA")}</dd></div><div><dt>{t("数量","Quantity")}</dt><dd>{t("1 台","1 Mac")}</dd></div><div><dt>{t("计费周期","Billing period")}</dt><dd>{plan.months}{t(' 个月',plan.months===1?' month':' months')}</dd></div></dl>
         <div className="checkout-total"><span>{t("本次应付","Total due today")} <small>USD</small></span><strong>{dollars(plan.total)}<small>.00</small></strong></div>
         <p className="checkout-policy">{plan.term}{t("。计费周期从交付当天开始。",". Billing starts on delivery.")}</p>
         <CheckoutAction value={value}/>
@@ -129,7 +130,7 @@ function RentalApp() {
   const [value,setValue] = useState(() => {
     const query = new URLSearchParams(location.search).get('interval');
     const saved = sessionStorage.getItem('rental-interval');
-    return query === 'year' || (query !== 'month' && saved === 'year') ? 'year' : 'month';
+    return normalizeInterval(query,normalizeInterval(saved));
   });
   const [slots,setSlots] = useState([]);
   const [accountSlots,setAccountSlots] = useState([]);

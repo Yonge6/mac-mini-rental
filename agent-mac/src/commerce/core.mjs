@@ -1,5 +1,6 @@
+import {BILLING_PLANS,normalizeInterval} from './plans.mjs';
 export const VIEWS = new Set(['login','account','orders','affiliate','admin']);
-export const PLAN_CENTS = Object.freeze({month:19900,year:179900});
+export const PLAN_CENTS = Object.freeze(Object.fromEntries(Object.entries(BILLING_PLANS).map(([key,plan])=>[key,plan.amountCents])));
 export function validReferral(value) {return typeof value==='string'&&/^[A-Z0-9]{12}$/.test(value)?value:null;}
 export function rememberReferral(search,storage,now=Date.now()) {
   const key='caldock-referral-v1';
@@ -21,7 +22,7 @@ export function makeAccountUrl(locationLike,view,extra={}) {
   const url=new URL(accountBase(locationLike,demo));
   if(view)url.searchParams.set('view',VIEWS.has(view)||view==='checkout'?view:'account');
   url.searchParams.set('lang',query.get('lang')==='en'?'en':'zh');
-  url.searchParams.set('interval',query.get('interval')==='year'?'year':'month');
+  url.searchParams.set('interval',normalizeInterval(query.get('interval')));
   if(demo){url.searchParams.set('demo','1');if(query.get('role')==='admin')url.searchParams.set('role','admin');}
   const ref=validReferral(query.get('ref'));if(ref)url.searchParams.set('ref',ref);
   for(const [key,value]of Object.entries(extra))if(value!==undefined&&value!==null)url.searchParams.set(key,String(value));
