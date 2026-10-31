@@ -9,8 +9,8 @@ window.CalDockGrowthContent = {
         "en": "Positioning and customers"
       },
       "intro": {
-        "zh": "从“卖给想用 Claude 的高净值人群”进一步聚焦到：有重复任务、时间成本高、愿意为交付付费的人。首月只把内容获客和武汉企业服务商作为两条核心渠道；达人、软件伙伴、转介绍和搜索内容作为小规模验证或后续扩展。",
-        "en": "Move beyond “wealthy people who want Claude” to people with recurring work, expensive time and a willingness to pay for delivery. Use content-led acquisition and the Wuhan enterprise partner as the two core channels in month one. Test creators, software partners, referrals and search content on a smaller scale or later."
+        "zh": "同时展开四个增长方向：账号/软件合作与组合服务、四平台内容营销、五城企业及腾讯 WorkBuddy 渠道合作、AI 辅助外联。客户明确包含高净值生产力用户、达人/大V/MCN、顾问、跨境团队和企业。首月执行资源优先验证内容与企业交付，但达人自用、联合推广和授权软件捆绑都有对应实验；五城共用预算、漏斗与设备容量。",
+        "en": "Develop four growth directions in parallel: account/software partnerships and bundled services, four-platform content, five-city enterprise and Tencent WorkBuddy partnerships, and AI-assisted outreach. Explicit audiences include high-value productivity buyers, creators/influencers/MCNs, consultants, cross-border teams and businesses. Prioritize content and enterprise delivery validation in month-one resource allocation while retaining concrete creator-use, joint-promotion and authorized-software-bundle tests. Share one budget, funnel and fleet across cities."
       },
       "blocks": [
         {
@@ -35,8 +35,8 @@ window.CalDockGrowthContent = {
         },
         {
           "title": {
-            "zh": "先服务四种人，不把达人当全部市场",
-            "en": "Four customer groups, beyond creators"
+            "zh": "客户类型、合作对象与成交入口",
+            "en": "Customers, partners and routes to a sale"
           },
           "columns": [
             {
@@ -53,6 +53,20 @@ window.CalDockGrowthContent = {
             }
           ],
           "rows": [
+            [
+              {
+                "zh": "高净值/高时间成本的先进生产力工具用户：愿为可靠交付与节省维护时间付费。",
+                "en": "High-value, time-constrained productivity-tool buyers: willing to pay for dependable delivery and less maintenance effort."
+              },
+              {
+                "zh": "先定一个高频任务及验收结果，再确认工具资格和独享/远程环境必要性；收入高不等于自动适合机租。",
+                "en": "Choose one recurring task and acceptance result, then confirm tool eligibility and need for a dedicated/remote environment. Income alone does not justify rental."
+              },
+              {
+                "zh": "四平台任务内容、授权软件伙伴组合服务、客户转介绍、经同意的AI辅助邀约。",
+                "en": "Task content across four platforms, authorized software-partner bundles, referrals and consented AI-assisted invitations."
+              }
+            ],
             [
               {
                 "zh": "独立顾问与专业服务负责人：提案、调研、客户交付反复占用本人时间。",
@@ -91,22 +105,86 @@ window.CalDockGrowthContent = {
                 "en": "One role, one workflow and two users. Identify a business owner, sanitized samples and acceptance criteria."
               },
               {
-                "zh": "武汉朋友的企业客户、联合试点。",
-                "en": "The Wuhan partner’s business customers and joint pilots."
+                "zh": "武汉、北京、上海、广州、深圳的企业服务商与 腾讯 WorkBuddy 渠道伙伴候选，共同做需求诊断和联合试点。",
+                "en": "Enterprise providers and prospective Tencent WorkBuddy reseller/implementation partners in Wuhan, Beijing, Shanghai, Guangzhou and Shenzhen, for discovery and joint pilots."
               }
             ],
             [
               {
-                "zh": "创作者与知识服务团队：持续产出、有编辑审核、已有商业化。",
-                "en": "Creators and knowledge-service teams: regular production, editorial review and an existing business."
+                "zh": "达人/大V/MCN：个人或团队自用，也可能成为推广渠道，分别判断需求和合作价值。",
+                "en": "Creators, influencers and MCNs: potential individual/team users and promotion partners; assess buying needs and channel value separately."
               },
               {
-                "zh": "访谈→选题→脚本→审核清单。问真实产量、编辑成本和是否愿意实际使用。",
-                "en": "Interview → topics → script → review checklist. Ask about real production volume, editing cost and willingness to use the workflow."
+                "zh": "自用演示：访谈→选题→脚本→编辑复核；渠道合作：真实使用后共创案例、独立归因，按每笔实收净机租20%计佣，含续费。",
+                "en": "Buyer demo: interview → topics → script → editorial review. Channel collaboration: co-create genuine-use cases, attribute independently and earn 20% of each collected net rental order, including renewals."
               },
               {
-                "zh": "小红书、抖音、垂直创作者合作。",
-                "en": "Xiaohongshu, Douyin and specialist creator partnerships."
+                "zh": "小红书、抖音、视频号、知乎内容；经同意的定向沟通、MCN/讲师伙伴介绍。",
+                "en": "Content on Xiaohongshu, Douyin, WeChat Channels and Zhihu; consented targeted contact and MCN/trainer introductions."
+              }
+            ]
+          ]
+        },
+        {
+          "title": {
+            "zh": "合作对象：账号软件、城市服务商与 WorkBuddy 渠道",
+            "en": "Partner targets: accounts/software, city providers and WorkBuddy channels"
+          },
+          "columns": [
+            {
+              "zh": "合作对象",
+              "en": "Partner target"
+            },
+            {
+              "zh": "提供的价值与成交形式",
+              "en": "Value and sales format"
+            },
+            {
+              "zh": "进入试点的条件",
+              "en": "Pilot entry criteria"
+            }
+          ],
+          "rows": [
+            [
+              {
+                "zh": "Claude 账号/软件服务合作方",
+                "en": "Claude account/software-service prospects"
+              },
+              {
+                "zh": "把获授权的软件订阅、独享环境、启航实施分别列价，面向高价值个人、达人和企业；授权不成立时保留环境/实施转介。",
+                "en": "Price authorized subscriptions, dedicated infrastructure and launch implementation separately for high-value individuals, creators and businesses; retain infrastructure/implementation referrals if resale is not authorized."
+              },
+              {
+                "zh": "核验供方授权链、客户资格、账号归属和续费责任；不以“稳定账号”口头承诺替代证据。",
+                "en": "Verify supplier rights, customer eligibility, account ownership and renewal responsibility; a verbal “stable account” claim is insufficient."
+              }
+            ],
+            [
+              {
+                "zh": "武汉、北京、上海、广州、深圳企业服务商",
+                "en": "Enterprise providers in Wuhan, Beijing, Shanghai, Guangzhou and Shenzhen"
+              },
+              {
+                "zh": "伙伴负责关系与业务诊断，CalDock负责约定环境和远程实施；一个流程试点后拓展团队。",
+                "en": "Partners own relationships and discovery; CalDock provides the scoped environment and remote implementation. Expand after a single-workflow pilot."
+              },
+              {
+                "zh": "有真实客户、预算人、验收人和授权样本；统一路由，不按城市重复计线索。",
+                "en": "Require real customers, budget and acceptance owners, and authorized samples. Use unified routing without duplicate city counts."
+              }
+            ],
+            [
+              {
+                "zh": "腾讯 WorkBuddy 现有渠道商/实施伙伴候选",
+                "en": "Prospective existing Tencent WorkBuddy resellers/implementation partners"
+              },
+              {
+                "zh": "研究现有渠道的客户与实施需求，寻找环境交付或联合实施机会；并非申请成为官方代理或已建立合作。",
+                "en": "Research existing channels’ customer and delivery needs for infrastructure or joint implementation opportunities; this is neither an agency application nor an existing partnership."
+              },
+              {
+                "zh": "逐家确认身份与服务范围，再用客户任务实测CalDock环境适配、权限和交接。",
+                "en": "Verify each party’s status and scope, then test CalDock environment fit, permissions and handover against the customer task."
               }
             ]
           ]
@@ -133,6 +211,84 @@ window.CalDockGrowthContent = {
               "zh": "前 10 次访谈记录原话、频率、替代办法和愿付费的交付；从重复出现的痛点选主场景，而不是先认定所有职业都需要同一套套餐。",
               "en": "For the first 10 interviews, record the customer’s words, frequency, alternatives and deliverables they would pay for. Choose a leading use case from repeated pain points, rather than assuming every profession needs the same package."
             }
+          ]
+        },
+        {
+          "title": {
+            "zh": "四个增长方向如何对应客户",
+            "en": "Map the four growth directions to customers"
+          },
+          "columns": [
+            {
+              "zh": "增长方向",
+              "en": "Growth direction"
+            },
+            {
+              "zh": "面向谁",
+              "en": "Audience"
+            },
+            {
+              "zh": "下一步",
+              "en": "Next step"
+            }
+          ],
+          "rows": [
+            [
+              {
+                "zh": "账号/软件合作与组合服务",
+                "en": "Account/software partnerships and bundles"
+              },
+              {
+                "zh": "高净值生产力用户、达人/大V、顾问及企业负责人。",
+                "en": "High-value productivity buyers, creators/influencers, consultants and business owners."
+              },
+              {
+                "zh": "授权供方核验→独立报价→任务诊断→适配演示。",
+                "en": "Supplier-rights check → itemized quote → diagnosis → fit demo."
+              }
+            ],
+            [
+              {
+                "zh": "小红书/抖音/视频号/知乎内容",
+                "en": "Xiaohongshu/Douyin/WeChat Channels/Zhihu content"
+              },
+              {
+                "zh": "以上各类客户，分别写职业任务内容。",
+                "en": "Each customer segment, using role-specific task content."
+              },
+              {
+                "zh": "一个真实任务→一个允许的咨询入口→统一CRM。",
+                "en": "One genuine task → one permitted inquiry route → one CRM."
+              }
+            ],
+            [
+              {
+                "zh": "五城企业及 WorkBuddy 渠道",
+                "en": "Five-city enterprise and WorkBuddy channels"
+              },
+              {
+                "zh": "企业预算负责人及已有客户关系的渠道商/实施团队。",
+                "en": "Business budget owners and resellers/implementers with existing customer relationships."
+              },
+              {
+                "zh": "伙伴资格→客户需求→环境测试→付费试点验收。",
+                "en": "Partner qualification → customer need → environment test → paid-pilot acceptance."
+              }
+            ],
+            [
+              {
+                "zh": "AI辅助外联与销售跟进",
+                "en": "AI-assisted outreach and follow-up"
+              },
+              {
+                "zh": "达人/大V、MCN、企业服务商、软件渠道及主动咨询者。",
+                "en": "Creators/influencers, MCNs, business providers, software channels and inbound prospects."
+              },
+              {
+                "zh": "合法来源研究/去重→个性化草稿→人工确认/允许方式联系→记录回应。",
+                "en": "Permitted-source research/deduplication → personalized draft → human review and permitted contact → response record."
+              }
+            ]
           ]
         }
       ]
@@ -283,8 +439,8 @@ window.CalDockGrowthContent = {
         "en": "Channel mix and partnerships"
       },
       "intro": {
-        "zh": "两条主线先跑通，再用事实决定扩展。首月的工作时间和预算优先给内容带来的主动咨询、武汉服务商带来的企业需求；其他路径只做低成本验证。曝光、签约代理数量与发送消息数都不能替代成交和交付质量。",
-        "en": "Make two core routes work before expanding. In month one, prioritize time and budget for inbound inquiries generated by content and enterprise opportunities introduced by the Wuhan provider. Validate other routes cheaply. Impressions, partner signups and messages sent do not substitute for sales and delivery quality."
+        "zh": "四个增长方向都有清晰任务：软件/账号合作验证组合服务，四平台内容带来主动咨询，五城企业与腾讯 WorkBuddy 渠道带来联合交付，AI辅助研究与跟进。达人/大V/MCN同时保留自用客户和渠道合作两种身份。首月按$540预算分配验证资源，城市和伙伴标签不复制漏斗或设备。",
+        "en": "Give each growth direction a defined job: account/software partners validate bundles, four-platform content generates inbound demand, five-city enterprise and Tencent WorkBuddy channels enable joint delivery, and AI supports research and follow-up. Creators, influencers and MCNs remain both buyers and channel prospects. Allocate validation resources within $540; city and partner tags do not duplicate the funnel or fleet."
       },
       "blocks": [
         {
@@ -323,44 +479,44 @@ window.CalDockGrowthContent = {
             ],
             [
               {
-                "zh": "核心 B：武汉企业服务商",
-                "en": "Core B: Wuhan enterprise provider"
+                "zh": "核心 B：五城企业与 腾讯 WorkBuddy 渠道渠道",
+                "en": "Core B: five-city enterprise and Tencent WorkBuddy reseller/implementation channels"
               },
               {
-                "zh": "从朋友熟悉的 5 家企业挑 2 家诊断，用一个流程提出付费试点。",
-                "en": "Choose two businesses for discovery from five the partner knows, and propose a paid pilot for one workflow."
+                "zh": "五城各研究 3 家渠道候选，共 15 家；通过核验的伙伴协助企业诊断。腾讯 WorkBuddy 候选包含在这 15 家内，不额外加总。",
+                "en": "Research three partner prospects per city, 15 total. Qualified partners assist discovery. Tencent WorkBuddy-related candidates are included within the 15, not added on top."
               },
               {
-                "zh": "有预算人、验收人和愿付费的具体场景。",
-                "en": "A budget owner, acceptance owner and a specific task worth paying for."
+                "zh": "共同目标为 10 条去重企业合格线索、首个付费试点；不要求每城各签一单。",
+                "en": "Share a target of ten deduplicated qualified business leads and the first paid pilot, not a separate deal target per city."
               }
             ],
             [
               {
-                "zh": "候选：软件/IT/自动化伙伴",
-                "en": "Candidate: software, IT and automation partners"
+                "zh": "核验层：软件/IT/自动化伙伴",
+                "en": "Diligence layer: software, IT and automation partners"
               },
               {
-                "zh": "列 15 家，做 6 次访谈，挑 2 家各带 2 个真实需求；账号授权另核验。",
-                "en": "List 15, hold six interviews and select two to introduce two real needs each; verify account authorization separately."
+                "zh": "核验企业服务商、咨询/培训/实施团队；涉及 腾讯 WorkBuddy 时先查实际工具、版本、授权和目标环境，不预设兼容或官方身份。",
+                "en": "Verify enterprise providers and consulting/training/implementation teams. For Tencent WorkBuddy-related work, establish the actual product, version, rights and target environment without assuming compatibility or official affiliation."
               },
               {
-                "zh": "真实引荐及交付能力，不只说拥有客户资源。",
-                "en": "Real introductions and delivery capability, not claimed access to customers."
+                "zh": "有可核验客户任务、独享/远程环境需求和付费意愿，再进入联合演示。",
+                "en": "Advance to a joint demo only with a verifiable customer task, a dedicated/remote environment need and willingness to pay."
               }
             ],
             [
               {
-                "zh": "候选：垂直创作者",
-                "en": "Candidate: specialist creators"
+                "zh": "达人/大V/MCN：自用与渠道合作",
+                "en": "Creators/influencers/MCNs: users and channel partners"
               },
               {
-                "zh": "找会实际使用且受众任务匹配的人，做一次完整案例合作。",
-                "en": "Find creators who will use the service and have a relevant audience; build one complete case together."
+                "zh": "一条线做实际自用诊断，另一条线做经授权的真实案例与联合推广；用客户价值和受众任务匹配筛选。",
+                "en": "Run one track for genuine-use diagnosis and another for permissioned case creation/joint promotion. Select on customer value and audience-task fit."
               },
               {
-                "zh": "有授权的真实体验、可归因合格线索。",
-                "en": "Authorized genuine experience and attributable qualified leads."
+                "zh": "真实使用、可归因客户与20%每笔净机租结算；佣金不计入$30制作预算，也不保证销量。",
+                "en": "Genuine use, attributable customers and 20% of each collected net rental order. Commission is outside the $30 production budget and does not guarantee sales."
               }
             ],
             [
@@ -427,21 +583,25 @@ window.CalDockGrowthContent = {
             "en": "Partner economics and settlement"
           },
           "body": {
-            "zh": "转介绍、联合交付、授权转售分别约定。初期不设区域独家、不收代理入门费、不按拉代理人数返利。可测试按客户前 3 个月确认净租赁收入的 10% 计提转介绍费，剔除退款、税费与第三方订阅，并受贡献毛利约束。这是谈判建议，未生效且未自动同步到财务模型现有佣金参数；采纳后需分别调整对应周期的计提与支付口径。",
-            "en": "Contract referrals, joint delivery and authorized resale separately. Initially avoid territory exclusivity, partner entry fees or recruitment rewards. One proposal is 10% of the first three months of recognized net rental revenue, excluding refunds, taxes and third-party subscriptions, subject to contribution limits. This proposal is not active and does not automatically update existing financial-model commission inputs. If adopted, adjust the applicable accrual and payment bases separately."
+            "zh": "渠道佣金标准已确认：对可归因的每笔实收净机租按20%计提，首单和续费均适用，不设前三个月上限。计佣基数扣除退款机租，不包含税费、第三方订阅和实施费。转介绍、联合实施和授权转售分别约定，避免重复付佣。新默认财务按每笔20%设置；已保存的自定义方案不覆盖，使用前核对其佣金参数。",
+            "en": "The approved channel commission is 20% of attributable net rental actually collected on every order, including first orders and renewals, without a first-three-month cap. Deduct refunded rental and exclude taxes, third-party subscriptions and implementation fees. Contract referral, joint implementation and authorized resale separately to avoid duplicate commissions. New financial defaults use 20% per collection; saved custom scenarios are preserved and their commission settings should be checked."
           },
           "items": [
             {
-              "zh": "按前三个月确认租赁收入的 10% 举例：月付 $199 对应 $59.70；季付 $507 对应 $50.70；年付 $1,548 按 $129/月确认，对应 $38.70。均需先扣适用退款、税费等，不把全年预收都当当月佣金基数。",
-              "en": "At 10% of rental revenue recognized over the first three months, examples are $59.70 for the $199 monthly plan, $50.70 for the $507 quarterly plan, and $38.70 for the $1,548 annual plan recognized at $129/month. Deduct applicable refunds, taxes and other exclusions first. Do not treat annual prepayment as current-month commissionable revenue."
+              "zh": "每笔示例：月付$199×20%=$39.80；季付$507×20%=$101.40；年付$1,548×20%=$309.60，按实际收取的机租订单计佣。相同金额续费再次按20%计佣；发生部分退款时按剩余净机租重算，不能先按年费计佣又按月重复计。",
+              "en": "Per-order examples: $199 monthly × 20% = $39.80; $507 quarterly × 20% = $101.40; $1,548 annually × 20% = $309.60, based on the rental order actually collected. A renewal at the same amount earns the same 20% commission again. Recalculate against remaining net rental after a partial refund; do not charge commission on annual collection and then again each month."
             },
             {
-              "zh": "对应收入确认且退款窗口结束后结算。联合实施按真实工作量分实施费，避免同一笔收入重复付佣。每月有线索、订单、退款和结算对账。",
-              "en": "Settle after the relevant revenue is recognized and the refund window closes. Split implementation fees by work performed and avoid double-paying commission on the same revenue. Reconcile leads, orders, refunds and settlements monthly."
+              "zh": "结算流程建议：核对有效渠道归因、真实收款和退款情况后，在约定退款窗口结束按月对账结算；退款后的佣金冲回/抵扣写入合同。此处确认的是20%标准，结算周期和争议处理仍需合同落地，工作台未执行任何实际付款。实施费按书面工作量另分，不进入20%机租基数。",
+              "en": "Proposed settlement process: verify attribution, real collections and refunds, then reconcile monthly after the agreed refund window; document commission clawbacks/offsets for later refunds. The 20% rate is approved, while settlement timing and disputes still need contract terms. The studio has made no actual payouts. Split implementation fees separately by written scope; they are outside the 20% rental base."
             },
             {
               "zh": "伙伴专属 source/partner_id；首次、成交、协助来源都保留。建议 30 天线索保护，需要有效且经同意的介绍记录；冲突按记录和贡献处理，不只看最后点击。",
               "en": "Use source/partner_id identifiers and preserve first, closing and assisted sources. A proposed 30-day lead-protection window requires a valid, consented introduction record. Resolve conflicts using records and contribution, not last click alone."
+            },
+            {
+              "zh": "五城、达人/大V/MCN及腾讯 WorkBuddy渠道采用同一每笔实收净机租20%标准；同一客户跨城只计一次新客、同一订单不叠加多份20%。多方协作先书面分配这笔渠道佣金，实施收入另按工作范围分配。",
+              "en": "Use the same 20%-of-collected-net-rental standard for the five cities, creators/influencers/MCNs and Tencent WorkBuddy channels. Count a cross-city customer once and do not stack multiple 20% commissions on one order. Agree the split of that channel commission among collaborators in writing, with implementation revenue allocated separately by scope."
             }
           ]
         },
@@ -722,16 +882,16 @@ window.CalDockGrowthContent = {
             ],
             [
               {
-                "zh": "12 服务商怎样把 AI 实施加到现有客户服务里？",
-                "en": "How can a provider add AI implementation to existing services?"
+                "zh": "12 五城企业/腾讯 WorkBuddy 渠道渠道如何联合交付？",
+                "en": "12 How can five-city enterprise and Tencent WorkBuddy reseller/implementation channels deliver together?"
               },
               {
-                "zh": "双方职责、试点书、费用拆分和验收条件。",
-                "en": "Responsibilities, pilot brief, fee split and acceptance criteria."
+                "zh": "以明确标注的方案演示展示环境适配、双方分工、报价与验收；未签约不称合作案例。",
+                "en": "Use a clearly labeled planning demo to show environment fit, responsibilities, pricing and acceptance; do not call an unsigned prospect a partner case."
               },
               {
-                "zh": "预约伙伴业务匹配会。",
-                "en": "Book a partner-fit discussion."
+                "zh": "预约所在城市的伙伴匹配会，共用一套线索路由。",
+                "en": "Book a partner-fit meeting for the relevant city using one lead-routing process."
               }
             ]
           ]
@@ -1010,12 +1170,12 @@ window.CalDockGrowthContent = {
     {
       "id": "enterprise",
       "title": {
-        "zh": "武汉 B2B 试点与分工",
-        "en": "Wuhan B2B pilots and ownership"
+        "zh": "五城 B2B 与腾讯 WorkBuddy 渠道",
+        "en": "Five-city B2B and Tencent WorkBuddy channels"
       },
       "intro": {
-        "zh": "把朋友的企业关系转成一个小而可验收的联合项目。先从 5 家熟悉客户筛 2 家做诊断，围绕一个部门、一条流程和两名使用者；不要一开始向企业卖抽象的“全面 AI 转型”。",
-        "en": "Turn the Wuhan friend’s business relationships into a small, measurable joint project. Select two businesses for discovery from five familiar customers, then focus on one department, one workflow and two users. Avoid starting with an abstract promise of company-wide AI transformation."
+        "zh": "企业拓展覆盖武汉、北京、上海、广州、深圳，并研究腾讯 WorkBuddy 现有渠道商/实施伙伴的合作机会。武汉从已有朋友关系开始，其余城市建立候选和需求验证。CalDock尚未确认与这些候选的合作或集成。各城共用一个客户池，选最适合的流程、两名使用者和明确验收人，完成首个付费试点后复制。",
+        "en": "Cover Wuhan, Beijing, Shanghai, Guangzhou and Shenzhen, and investigate collaboration with existing Tencent WorkBuddy resellers/implementation partners. Start Wuhan discovery through the existing friend relationship and validate prospects elsewhere. CalDock has not confirmed partnerships or integrations with these candidates. Use one customer pool to select a suitable workflow, two users and an acceptance owner, then replicate after the first paid pilot."
       },
       "blocks": [
         {
@@ -1044,16 +1204,16 @@ window.CalDockGrowthContent = {
           "rows": [
             [
               {
-                "zh": "武汉服务商/朋友",
-                "en": "Wuhan provider/friend"
+                "zh": "五城本地企业服务商/渠道伙伴",
+                "en": "Local enterprise/channel provider in any of the five cities"
               },
               {
-                "zh": "客户引荐、业务背景、现场关系、本地沟通、协助验收。",
-                "en": "Introductions, business context, on-site relationship, local communication and acceptance support."
+                "zh": "经同意的客户引荐、现场业务诊断、本地协调和验收支持；可跨城服务时记录实际覆盖范围。",
+                "en": "Consented introductions, on-site business diagnosis, local coordination and acceptance support; record actual coverage if serving multiple cities."
               },
               {
-                "zh": "引荐是否经客户同意，真实负责人是否到场。",
-                "en": "Whether the introduction is consented and the actual owner attends."
+                "zh": "主体、客户关系、覆盖城市、报价权限与责任明确；腾讯 WorkBuddy 身份需另核验。",
+                "en": "Clarify entity, relationship, city coverage, quote authority and responsibility; verify any Tencent WorkBuddy status separately."
               }
             ],
             [
@@ -1062,8 +1222,8 @@ window.CalDockGrowthContent = {
                 "en": "CalDock"
               },
               {
-                "zh": "环境、可行性演示、远程实施、交付文档、技术边界与支持。",
-                "en": "Infrastructure, feasibility demo, remote implementation, documentation, technical boundaries and support."
+                "zh": "独享设备、基础环境、环境适配测试、约定工作范围内的远程实施、文档与技术支持。",
+                "en": "Dedicated hardware, base environment, environment-fit testing, remote implementation within the written scope, documentation and technical support."
               },
               {
                 "zh": "实际可交付范围、容量、故障责任与费用。",
@@ -1084,6 +1244,208 @@ window.CalDockGrowthContent = {
                 "en": "Procurement, payment, data processing and tool-eligibility requirements."
               }
             ]
+          ]
+        },
+        {
+          "title": {
+            "zh": "五城首月实验：先验证渠道，不平均分设备",
+            "en": "First-month city tests: validate channels, do not split the fleet equally"
+          },
+          "body": {
+            "zh": "城市与行业匹配是待验证的访谈假设，不是市场占有率判断。每城先研究 3 家渠道候选，并以 2 条去重合格客户线索作初始分配，共 15 家候选、10 条企业线索；周复盘可按真实需求重分配。城市不单设成交配额，所有付费订单合用最多 8 台可售设备。",
+            "en": "City/use-case pairings are discovery hypotheses, not market-share claims. Initially research three partner prospects and target two deduplicated qualified customer leads per city: 15 prospects and ten business leads total. Reallocate weekly based on real demand. Do not set separate city sales quotas; all paid orders share at most eight sellable machines."
+          },
+          "columns": [
+            {
+              "zh": "城市与候选入口",
+              "en": "City and prospect route"
+            },
+            {
+              "zh": "优先测试的任务",
+              "en": "Task hypothesis"
+            },
+            {
+              "zh": "首月分配与动作",
+              "en": "Initial allocation and action"
+            }
+          ],
+          "rows": [
+            [
+              {
+                "zh": "武汉：现有朋友关系及其企业服务网络",
+                "en": "Wuhan: existing friend relationship and business-service network"
+              },
+              {
+                "zh": "从朋友客户的重复资料、销售或运营任务挑一个，不假定已有客户成交。",
+                "en": "Select a recurring document, sales or operations task among the friend’s customers; do not assume existing sales."
+              },
+              {
+                "zh": "3 家渠道候选、2 条合格线索；优先做一次共同需求诊断。",
+                "en": "Three partner prospects, two qualified leads; prioritize one joint discovery session."
+              }
+            ],
+            [
+              {
+                "zh": "北京：咨询、知识服务、企业 IT 实施团队候选",
+                "en": "Beijing: prospective consulting, knowledge-service and enterprise IT teams"
+              },
+              {
+                "zh": "提案、研究资料整理、销售知识流程；先验证长期环境需求。",
+                "en": "Proposals, research synthesis and sales knowledge workflows; establish persistent-environment need first."
+              },
+              {
+                "zh": "3 家候选、2 条合格线索；找有客户与业务负责人的团队。",
+                "en": "Three prospects, two qualified leads; seek teams with customers and business owners."
+              }
+            ],
+            [
+              {
+                "zh": "上海：专业服务、品牌/营销实施伙伴候选",
+                "en": "Shanghai: prospective professional-service and brand/marketing implementers"
+              },
+              {
+                "zh": "客户简报、品牌资料汇总和内容审批；先确认样本权限。",
+                "en": "Client briefs, brand-material synthesis and content review; confirm sample permission first."
+              },
+              {
+                "zh": "3 家候选、2 条合格线索；以一页联合方案测试付费意愿。",
+                "en": "Three prospects, two qualified leads; test willingness to pay with a one-page joint offer."
+              }
+            ],
+            [
+              {
+                "zh": "广州：商贸、电商和内容服务团队候选",
+                "en": "Guangzhou: prospective trade, commerce and content-service teams"
+              },
+              {
+                "zh": "商品资料、渠道素材与多语言销售包；记录人工复核成本。",
+                "en": "Product material, channel assets and multilingual sales packs; measure human-review cost."
+              },
+              {
+                "zh": "3 家候选、2 条合格线索；邀请一个脱敏任务演示。",
+                "en": "Three prospects, two qualified leads; invite one sanitized-task demo."
+              }
+            ],
+            [
+              {
+                "zh": "深圳：跨境业务、硬件团队及自动化顾问候选",
+                "en": "Shenzhen: prospective cross-border, hardware-business and automation advisers"
+              },
+              {
+                "zh": "产品资料转销售交付、持续任务环境；不假定特定软件兼容。",
+                "en": "Product-to-sales handover and persistent task environments; do not assume software compatibility."
+              },
+              {
+                "zh": "3 家候选、2 条合格线索；先做环境适配与任务价值评估。",
+                "en": "Three prospects, two qualified leads; assess environment fit and task value first."
+              }
+            ]
+          ]
+        },
+        {
+          "title": {
+            "zh": "腾讯 WorkBuddy 渠道：与现有渠道商/实施伙伴对接",
+            "en": "Tencent WorkBuddy channels: approach existing resellers and implementers"
+          },
+          "body": {
+            "zh": "腾讯官方已有伙伴授权规则，可据此研究现有渠道商/实施伙伴，纳入五城15家候选池。目标是合作获客与联合交付，不是替CalDock申请官方代理或承诺相关费用。逐家核验身份、真实客户任务与实施范围；已有工具并不自动需要远程Mac，客户现有环境够用时只讨论实施。",
+            "en": "Tencent publishes partner-authorization rules that can inform research into existing resellers/implementation partners within the five-city pool of 15. The goal is cooperative acquisition and delivery, not applying for agency status or committing related fees for CalDock. Verify identity, real customer tasks and scope. Using the tool does not automatically justify a remote Mac; discuss implementation alone when the current environment suffices."
+          },
+          "columns": [
+            {
+              "zh": "资格关卡",
+              "en": "Qualification gate"
+            },
+            {
+              "zh": "要取得的证据",
+              "en": "Required evidence"
+            },
+            {
+              "zh": "通过后动作",
+              "en": "After passing"
+            }
+          ],
+          "rows": [
+            [
+              {
+                "zh": "伙伴与客户需求",
+                "en": "Partner and customer need"
+              },
+              {
+                "zh": "主体与实际服务范围、可核验的客户任务、引荐意愿、预算人；若声称官方身份则查原始证明。",
+                "en": "Entity, actual service scope, verifiable customer task, willingness to introduce and budget owner; verify original evidence for any claimed official status."
+              },
+              {
+                "zh": "入伙伴池并标记城市/腾讯 WorkBuddy 渠道，未签约仍叫候选。",
+                "en": "Tag the prospect by city and Tencent WorkBuddy scenario; it remains a prospect until agreed."
+              }
+            ],
+            [
+              {
+                "zh": "工具与运行环境",
+                "en": "Tool and runtime fit"
+              },
+              {
+                "zh": "具体产品/版本、账户与授权要求、目标系统、设备资源、远程使用边界；实际测试而非口头兼容。",
+                "en": "Exact product/version, account and license requirements, target OS, resources and remote-use boundaries; test rather than relying on verbal compatibility."
+              },
+              {
+                "zh": "记录通过、需改造或不适合；不适合时改工具/环境或退出。",
+                "en": "Record pass, adaptation needed or no-fit; change tools/environment or exit if unsuitable."
+              }
+            ],
+            [
+              {
+                "zh": "付费试点验收",
+                "en": "Paid-pilot acceptance"
+              },
+              {
+                "zh": "授权脱敏样本、至少 5 个代表任务、预先约定的质量/复核时间、权限隔离、失败接管和独立重复。",
+                "en": "Authorized sanitized samples, at least five representative tasks, agreed quality/review time, access separation, failure handover and independent repeatability."
+              },
+              {
+                "zh": "合格后按同一月租与书面实施范围报价；付款后计 1 个新客。",
+                "en": "Quote the same monthly rental and written implementation scope after qualification; count one new customer on payment."
+              }
+            ]
+          ],
+          "items": [
+            {
+              "zh": "腾讯 WorkBuddy 是场景/伙伴类型标签，不是独立增加的线索来源：来自同一伙伴的同一企业只计一次；跨城演示也不重复计入总漏斗。",
+              "en": "Tencent WorkBuddy is a scenario/partner-type tag, not extra lead volume. Count the same business from the same partner once, including cross-city demos."
+            },
+            {
+              "zh": "伙伴核验共用 $20 软件核验预算，企业诊断共用 $160 企业渠道预算；远程优先。差旅或新增实施成本先单列，不暗含在 $540 内。",
+              "en": "Share the $20 software-diligence and $160 enterprise-channel budgets and prioritize remote work. Itemize travel or additional implementation costs separately rather than hiding them within $540."
+            },
+            {
+              "zh": "官方安装指南列出macOS 12及以上、ARM64/x64安装选项；这只是产品安装条件，不等于已在CalDock验证。试点仍检查客户账户资格、实际版本、运行任务、权限/数据边界和退出交接。",
+              "en": "The official installation guide lists macOS 12+ and ARM64/x64 options. These are installation requirements, not evidence of testing on CalDock. A pilot must still verify account eligibility, actual version, tasks, permission/data boundaries and exit handover."
+            }
+          ]
+        },
+        {
+          "title": {
+            "zh": "五城线索路由、冲突与伙伴结算",
+            "en": "Five-city lead routing, conflicts and partner settlement"
+          },
+          "body": {
+            "zh": "统一入口记录 lead_id、企业主体、客户所在城市、引荐伙伴、腾讯 WorkBuddy 渠道标签、任务、预算人、联系意愿、下一步和日期。销售运营先按主体与联系方式去重，再分配一个负责销售；本地伙伴负责关系与现场协调，CalDock 统一排远程验证和设备。客户偏好优先，城市标签不形成区域独家。",
+            "en": "Use one intake record with lead_id, business entity, customer city, referring partner, Tencent WorkBuddy-scenario tag, task, budget owner, contact preference and next step/date. Sales operations deduplicates by business and contact before assigning one sales owner. Local partners handle relationships and coordination; CalDock schedules remote validation and machines centrally. Customer preference takes priority, and city tags do not create exclusive territories."
+          },
+          "items": [
+            {
+              "zh": "内部服务目标：1 个工作日确认负责人，2 个工作日给下一步；不是已签 SLA。跨城线索由一位主责协调，不让客户重复解释或被多方反复触达。",
+              "en": "Internal service targets: assign an owner within one working day and provide a next step within two; these are not signed SLAs. One owner coordinates cross-city leads to avoid repeated discovery or contact."
+            },
+            {
+              "zh": "同一客户由多方介绍时保留首次、成交与协助来源，按有效记录与书面分工处理归因。30 天线索保护是待议条件，不把转发名片当独占权。",
+              "en": "For multiple introductions, preserve first, closing and assisted sources and resolve attribution using valid records and written responsibilities. A 30-day lead-protection window is a proposed term, not exclusivity from forwarding a contact."
+            },
+            {
+              "zh": "渠道佣金为每笔实收净机租20%，包括首单与续费，无前三月上限；退款机租、税费、第三方订阅及实施费不计入。五城与腾讯 WorkBuddy标签不叠加佣金；实施费另按范围分配。续费/扩席订单可产生佣金，但不再次计新增客户；建议按合同退款窗口和对账周期结算，当前未实际付佣。",
+              "en": "Commission is 20% of each net rental order actually collected, including first orders and renewals, with no first-three-month cap. Exclude refunded rental, taxes, third-party subscriptions and implementation. City and Tencent WorkBuddy tags do not stack commissions; split implementation fees separately. Renewal/seat-expansion orders can earn commission but are not new customers. Settle against contract refund windows and reconciliation periods; no actual commissions have been paid here."
+            }
           ]
         },
         {
@@ -1198,8 +1560,8 @@ window.CalDockGrowthContent = {
             "en": "Acceptance, procurement and follow-on orders"
           },
           "body": {
-            "zh": "验收看样本完成、预定质量、含复核的总人工时间、失败接管和独立重复。改善目标提前约定，不先宣传“省 80%”。14 天是月租内交付验收期，不自动产生半月租或默认退款。明确签约、收款开票、退款与客户采购要求；若武汉伙伴也做实施，单独写入工作范围及费用分配，不能模糊双方责任。",
-            "en": "Review sample completion, agreed quality, total human time including review, failure handover and independent repeatability. Agree targets before claiming savings. Fourteen days is a delivery-acceptance period within monthly rental, not a half-month plan or automatic refund. Specify contracting, collection/invoicing, refunds and procurement. If the Wuhan partner also implements work, document its scope and fee split separately rather than leaving ownership ambiguous."
+            "zh": "验收看样本完成、预定质量、含复核的总人工时间、失败接管和独立重复。改善目标提前约定，14 天是月租内交付验收期，不自动产生半月租或退款。五城执行同一标准；任何渠道实际承担实施时，单独写清范围与费用。腾讯 WorkBuddy 渠道先通过工具资格、实际环境、权限/数据边界与任务测试，未通过时不承诺可用，不收该集成的实施费。",
+            "en": "Review sample completion, agreed quality, total human time including review, failure handover and independent repeatability. Agree improvement targets in advance. Fourteen days is acceptance within monthly rental, not an automatic half-month plan or refund. Apply one standard across five cities and separately scope and price any implementation performed by a partner. Tencent WorkBuddy-related scenarios must first pass tool-eligibility, actual-environment, permission/data-boundary and task checks. Do not promise availability or charge for that integration before those checks pass."
           },
           "items": [
             {
@@ -1207,8 +1569,8 @@ window.CalDockGrowthContent = {
               "en": "Sales path: 15-minute qualification → 45-minute discovery → one-page paid-pilot brief → 14-day acceptance → three-month service order → expansion driven by real needs."
             },
             {
-              "zh": "首月行动目标：5 家引荐、3 次需求会、2 份试点书、1 个付费试点。它们是执行目标，不是收入预测。",
-              "en": "Month-one activity goals: five introductions, three discovery meetings, two pilot briefs and one paid pilot. These are execution goals, not revenue forecasts."
+              "zh": "五城合计行动目标：15 家伙伴候选→6 次伙伴资格沟通→2 家完成核验；共同产生 10 条企业合格客户线索，进入总计 40 条线索池。企业深度阶段先争取 3 次需求会、2 份试点书、1 个付费试点，不在每个城市重复计算。",
+              "en": "Shared five-city activity goals: 15 partner prospects → six partner qualification discussions → two verified candidates; jointly generate ten qualified business customer leads within the overall pool of 40. Initially aim for three business discovery meetings, two pilot briefs and one paid pilot across the whole network, not per city."
             },
             {
               "zh": "若 5 次合格需求会后仍无人愿为试点付费，先改变场景、范围或报价，暂停扩大代理招募；试点不得无限延期占用设备。",
@@ -1410,16 +1772,16 @@ window.CalDockGrowthContent = {
             ],
             [
               {
-                "zh": "武汉企业 $160｜10 条线索",
-                "en": "Wuhan enterprise $160 | 10 leads"
+                "zh": "五城企业渠道 $160｜10 条线索",
+                "en": "Five-city enterprise channels $160 | 10 leads"
               },
               {
-                "zh": "客户诊断、联合演示与试点资料。",
-                "en": "Discovery, joint demos and pilot materials."
+                "zh": "武汉、北京、上海、广州、深圳共用诊断与联合演示；腾讯 WorkBuddy 候选包含其中。",
+                "en": "Shared discovery and joint demos across Wuhan, Beijing, Shanghai, Guangzhou and Shenzhen, including Tencent WorkBuddy-related prospects."
               },
               {
-                "zh": "真实需求、有预算人与验收人。",
-                "en": "Real needs with budget and acceptance owners."
+                "zh": "每城先分配 2 条，可按证据重分配；总数不增加，有预算人与验收人。",
+                "en": "Start at two leads per city and reallocate with evidence without raising the total; require budget and acceptance owners."
               }
             ],
             [
@@ -1470,8 +1832,8 @@ window.CalDockGrowthContent = {
                 "en": "Supplier diligence $20 | 0 leads"
               },
               {
-                "zh": "核验主体、授权和责任，暂不预计销售结果。",
-                "en": "Verify identity, authorization and responsibility without forecasting sales yet."
+                "zh": "核验软件/腾讯 WorkBuddy 渠道候选的主体、授权、运行环境与责任，暂不预计额外销售结果。",
+                "en": "Verify software/Tencent WorkBuddy reseller/implementation prospects’ identity, rights, runtime fit and responsibilities without forecasting extra sales."
               },
               {
                 "zh": "授权未确认，不推出账号捆绑。",
@@ -1569,16 +1931,20 @@ window.CalDockGrowthContent = {
           },
           "items": [
             {
-              "zh": "计划中 $90 是预算现金÷目标新客户，尚非实际 CAC。实付获客 CAC=归属同批新客的已付推广、渠道及已结算佣金÷该批真实新增付费客户，另披露未结佣金与观察期。全成本再加未结获客佣金、人工和试点机会成本；分母不是设备台数。",
-              "en": "The planned $90 is budget cash per target customer, not actual CAC. Cash-paid CAC uses promotion, channel spend and settled acquisition commissions attributed to the same new-customer cohort, divided by that cohort’s actual new paying customers. Disclose unsettled commissions and the observation window. Fully loaded CAC adds unpaid acquisition commissions, labor and pilot opportunity costs. The denominator is customers, not devices."
+              "zh": "计划中$90仅为$540预算÷6位目标新客，不含20%首单佣金，不是实际CAC。实付获客CAC=同批新客已付推广/渠道活动及已结算首单佣金÷该批真实新付费客户；全成本再加未结首单佣金、获客人工和试点机会成本。续费佣金列持续渠道成本，不重复进新客CAC；分母不是设备台数。",
+              "en": "The planned $90 is only $540 divided by six target new customers, excluding 20% first-order commission; it is not actual CAC. Cash-paid CAC equals paid promotion/channel activity plus settled first-order commissions for the same cohort, divided by its verified new paying customers. Fully loaded CAC adds unpaid first-order commissions, acquisition labor and pilot opportunity costs. Renewal commissions are ongoing channel costs, not repeated new-customer CAC; the denominator is customers, not machines."
             },
             {
-              "zh": "回收测算先算获客前月贡献：月确认收入−支付/供应商/直接支持/设备服务分摊等持续成本。已计入 CAC 的获客佣金不再扣一次。可测试以 3 个月贡献作为获客上限：若获客前贡献假设 $70/月，则上限示例 $210；这不是当前实绩，也不代表客户必然留存 3 个月。",
-              "en": "For payback, first calculate monthly contribution before acquisition: recognized revenue less ongoing payment, supplier, direct support and device-service allocations. Do not subtract acquisition commissions again if they are already in CAC. Test a three-month contribution ceiling: an assumed $70 monthly contribution gives an illustrative $210 ceiling. These are not actual results or proof that customers will stay three months."
+              "zh": "回收测算：月确认收入减持续支付/供应商/支持/设备成本，以及该期适用续费佣金；首单佣金已进CAC，不再扣一次。按订单实收时点列佣金现金流，再按对应服务期分析贡献，年费佣金不按月重复计。若扣适用持续成本后贡献假设$70/月，3个月回收上限示例$210；不是当前实绩或3个月留存保证。",
+              "en": "For payback, subtract ongoing payment, supplier, support and device costs plus applicable renewal commissions from recognized monthly revenue. First-order commission is already in CAC and must not be deducted again. Show commission cash flow at order collection and analyze contribution over the corresponding service term; do not charge annual commission again monthly. If contribution after applicable ongoing costs were $70/month, a three-month ceiling would be $210; this is neither actual performance nor a three-month retention guarantee."
             },
             {
               "zh": "合格线索有任务与资格；演示以实际到场计；试点有书面验收；付款有真实确认；激活以独立完成任务计；留存同时看付费和实际使用。年付未退款不等于活跃。",
               "en": "A qualified lead has a task and eligibility; demos require attendance; pilots have written acceptance; payment needs verification; activation means independent task completion; retention considers both payment and use. An unrefunded annual plan is not proof of activity."
+            },
+            {
+              "zh": "仅作全渠道月付示例：5位个人各1台+1家企业2台，共6客户7台；首单机租7×$199=$1,393，首单佣金$278.60。若另花$540推广，同批首单含佣金现金获客支出$818.60，即$136.43/新客，尚未含人工。相同7台续费的$278.60列持续渠道成本；实际非渠道订单不硬套佣金。",
+              "en": "Illustrative all-channel monthly cohort: five individuals with one machine each plus one business with two machines means six customers and seven machines. First-order rental is 7×$199=$1,393 and commission is $278.60. With $540 promotion, acquisition cash including first-order commission is $818.60, or $136.43 per new customer before labor. Commission of $278.60 on a later seven-machine renewal is ongoing channel cost. Do not apply channel commission to unattributed direct orders."
             }
           ]
         },
@@ -1588,8 +1954,8 @@ window.CalDockGrowthContent = {
             "en": "Minimum attribution and CRM fields"
           },
           "body": {
-            "zh": "记录 lead_id、首次来源/成交来源/协助来源、content_id/partner_id、联系依据与退出标记、任务频率、预算与决策人、时机、评分、阶段、负责人、下一步及日期、演示/试点、报价版本、实收、确认收入、佣金、交付工时、退款、激活及 30/60/90 天留存、流失原因。每条渠道同时看线索到激活，不靠最后点击独占功劳。",
-            "en": "Record lead_id, first/closing/assisted source, content_id/partner_id, contact basis and opt-out, task frequency, budget and decision owner, timing, score, stage, owner, next step/date, demo/pilot, quote version, cash collected, recognized revenue, commission, delivery time, refunds, activation, 30/60/90-day retention and loss reason. Follow each channel through activation rather than giving all credit to last click."
+            "zh": "记录 lead_id、首次来源/成交来源/协助来源、content_id/partner_id、客户城市/伙伴覆盖城市/腾讯 WorkBuddy 渠道标签、联系依据与退出标记、任务频率、预算与决策人、时机、评分、阶段、负责人、下一步及日期、演示/试点、报价版本、实收、确认收入、佣金、交付工时、退款、激活及 30/60/90 天留存、流失原因。每条渠道同时看线索到激活，不靠最后点击独占功劳。",
+            "en": "Record lead_id, first/closing/assisted source, content_id/partner_id, customer city/partner city coverage/Tencent WorkBuddy-scenario tag, contact basis and opt-out, task frequency, budget and decision owner, timing, score, stage, owner, next step/date, demo/pilot, quote version, cash collected, recognized revenue, commission, delivery time, refunds, activation, 30/60/90-day retention and loss reason. Follow each channel through activation rather than giving all credit to last click."
           },
           "items": [
             {
@@ -1655,8 +2021,8 @@ window.CalDockGrowthContent = {
                 "en": "D4–7 | Founder"
               },
               {
-                "zh": "10 次需求访谈、2 个完整演示、武汉伙伴会、15 家渠道候选。",
-                "en": "Ten discovery interviews, two complete demos, a Wuhan partner meeting and 15 candidate partners."
+                "zh": "10 次需求访谈、2 个完整演示；五城各列 3 家伙伴候选，共 15 家，标记 腾讯 WorkBuddy 渠道候选。",
+                "en": "Ten discovery interviews, two full demos and three partner prospects in each of five cities, 15 total; tag Tencent WorkBuddy-related prospects."
               },
               {
                 "zh": "从重复痛点选主场景，无需求则改定位。",
@@ -1669,12 +2035,12 @@ window.CalDockGrowthContent = {
                 "en": "D8–14 | Content + sales + delivery"
               },
               {
-                "zh": "4 个内容版本、5 次实际演示、首份企业试点书、2 家伙伴核验。",
-                "en": "Four content adaptations, five attended demos, the first enterprise pilot brief and verification of two partners."
+                "zh": "4 个内容版本、5 次实际演示；共 6 次伙伴资格沟通、2 家完成核验，形成首份企业试点书。",
+                "en": "Four content adaptations, five attended demos, six partner qualification discussions and two verified prospects in total; prepare the first enterprise pilot brief."
               },
               {
-                "zh": "分别记录咨询、到场、报价；不把曝光算线索。",
-                "en": "Track inquiries, attendance and quotes separately; impressions are not leads."
+                "zh": "统一去重与主责分配，先测 腾讯 WorkBuddy 相关环境适配；不按每城复制指标。",
+                "en": "Deduplicate and assign a single owner; test Tencent WorkBuddy-related environment fit first. Do not replicate targets per city."
               }
             ],
             [
@@ -1697,8 +2063,8 @@ window.CalDockGrowthContent = {
                 "en": "D22–30 | Founder"
               },
               {
-                "zh": "渠道损益复盘、企业验收、授权案例；基础实验目标 6 位付费客户，按各单需求分配席位。",
-                "en": "Channel economics review, enterprise acceptance and an authorized case; target six paying customers, allocating seats by order requirements."
+                "zh": "五城/伙伴类型统一复盘，10 条企业线索包含在 40 条总目标内；目标 6 位付费客户，设备按单分配。",
+                "en": "Review cities and partner types together. Ten business leads are within the overall target of 40; target six paying customers and allocate machines per order."
               },
               {
                 "zh": "设备最多 8 台可售，选最有证据的两条渠道。",
@@ -1711,12 +2077,12 @@ window.CalDockGrowthContent = {
                 "en": "D31–60 | Channels/content/customer success"
               },
               {
-                "zh": "保持每周 2 份任务内容，第二场工作坊，转介绍机制，2 家有效伙伴。",
-                "en": "Maintain two task cases weekly, run a second workshop, launch referrals and develop two effective partners."
+                "zh": "维持每周 2 份任务内容；跨城复用第二场工作坊与转介绍。五城中选 2 家有效伙伴，不要求每城各 2 家。",
+                "en": "Maintain two task cases a week; reuse the second workshop and referral program across cities. Select two effective partners across the five cities, not two per city."
               },
               {
-                "zh": "有效伙伴要有真实合格线索和交付；按可售容量接单。",
-                "en": "An effective partner generates qualified demand and delivery, not just a signed agreement. Sell within capacity."
+                "zh": "以真实引荐、任务适配、试点验收和净贡献评估，优先复制有证据的城市/伙伴。",
+                "en": "Evaluate real introductions, task fit, pilot acceptance and net contribution; prioritize cities/partners with evidence."
               }
             ],
             [
@@ -1725,8 +2091,8 @@ window.CalDockGrowthContent = {
                 "en": "D61–90 | Founder + delivery"
               },
               {
-                "zh": "把有效场景标准化，复制伙伴培训，复盘续费、支持工时与贡献。",
-                "en": "Standardize the working use case, replicate partner training and review renewal, support hours and contribution."
+                "zh": "复制已通过验收的场景到另一城市或伙伴；腾讯 WorkBuddy 路径仅复制已实测适配的版本，复盘续费、工时与贡献。",
+                "en": "Replicate an accepted workflow with another city or partner. For Tencent WorkBuddy-related work, replicate only the tested setup; review renewals, labor and contribution."
               },
               {
                 "zh": "满足扩容门槛才增加设备，保留备用与服务能力。",
@@ -1750,8 +2116,8 @@ window.CalDockGrowthContent = {
               "en": "Content reports what inquiries resulted, not just how many posts were published. Sales reports stage progress. Delivery reports whether customers can complete work independently."
             },
             {
-              "zh": "每周保留一个停止项和一个继续项，写明证据。若人手只能支持一套内容和一个伙伴，就缩小实验，而不是同时铺满八个渠道。",
-              "en": "Keep one stop decision and one continue decision each week with evidence. If capacity supports only one content cycle and one partner, narrow the experiment rather than launching all eight routes."
+              "zh": "每周保留一个停止项和一个继续项，按城市、伙伴类型和任务看证据。五城共同争取同一套目标；人手不足就优先已验证的伙伴和远程交付，不同时开展五场线下活动。",
+              "en": "Keep one stop and one continue decision weekly, reviewing evidence by city, partner type and task. All five cities share one target set. When capacity is limited, prioritize proven partners and remote delivery instead of running five in-person events."
             }
           ]
         },
@@ -1891,12 +2257,12 @@ window.CalDockGrowthContent = {
           },
           "items": [
             {
-              "zh": "转介绍奖励可测试双方各一次 30 分钟流程优化，或经核算的固定租赁折扣，二选一不叠加；规则正式确认前只作为方案。",
-              "en": "Test either one 30-minute workflow improvement for each party or a costed fixed rental discount, not both. Treat these as proposals until rules are formally adopted."
+              "zh": "参加渠道转介绍计划的客户，按同一每笔实收净机租20%标准计佣（含续费），遵循相同归因与退款扣减。新客折扣或额外辅导若另设，需单独核算并书面确认，不自动与佣金叠加。",
+              "en": "Customers participating in the channel referral program use the same 20% of each collected net rental order, including renewals, with the same attribution and refund deductions. Any additional buyer discount or coaching must be separately costed and agreed, not automatically stacked with commission."
             },
             {
-              "zh": "真实付款且退款窗口结束后兑现；拒绝联系和退款状态同步更新。转介绍同时记录首个来源，避免把原本由内容促成的客户全部算给最后点击。",
-              "en": "Deliver rewards after verified payment and the refund window. Keep opt-out and refund status updated. Preserve the original source rather than attributing all content-assisted demand to the final referral click."
+              "zh": "建议真实收款且约定退款窗口结束后对账结算，退款佣金按合同冲回或抵扣；拒绝联系状态同步更新。转介绍保留首次与协助来源，同一订单只有一份渠道佣金池，避免重复支付。",
+              "en": "Propose reconciliation after verified collection and the agreed refund window, with refund-related commission clawbacks or offsets under contract. Update opt-out status. Retain first and assisted referral sources and use one commission pool per order to avoid duplicate payments."
             },
             {
               "zh": "流失原因分为任务不匹配、不会用、体验故障、价格、工具资格变化、业务暂停。每类对应修正，不把所有流失都解释成销售跟进不够。",
@@ -2062,6 +2428,28 @@ window.CalDockGrowthContent = {
       "note": {
         "zh": "已批准并配置月付 $199、季付 $507、年付 $1,548；以当前结算页及合同为准。本次收款核验仍未启用，正式接单前完成收款、退款与交付验收。",
         "en": "Approved configured prices are $199 monthly, $507 quarterly upfront and $1,548 annually upfront; use the current checkout and contract terms. Payments were not enabled at this check. Validate collection, refunds and delivery before paid orders."
+      }
+    },
+    {
+      "title": {
+        "zh": "腾讯 WorkBuddy 伙伴授权官方规则",
+        "en": "Official Tencent WorkBuddy partner-authorization rules"
+      },
+      "url": "https://cloud.tencent.com/document/product/563/137252",
+      "note": {
+        "zh": "用于核验现有渠道商/实施伙伴资格；不代表CalDock已获授权或建立合作。",
+        "en": "Use to verify prospective existing resellers/implementation partners; this does not establish CalDock authorization or partnership."
+      }
+    },
+    {
+      "title": {
+        "zh": "腾讯 WorkBuddy 官方安装指南",
+        "en": "Official Tencent WorkBuddy installation guide"
+      },
+      "url": "https://cloud.tencent.com/document/product/1831/134387",
+      "note": {
+        "zh": "列出macOS 12+与ARM64/x64选项；实际CalDock运行、权限和任务适配仍需试点测试。",
+        "en": "Lists macOS 12+ and ARM64/x64 options; actual CalDock runtime, permissions and task fit still require pilot testing."
       }
     }
   ]
