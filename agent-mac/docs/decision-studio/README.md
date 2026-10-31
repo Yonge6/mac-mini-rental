@@ -2,6 +2,7 @@
 
 - Public local calculator: https://yonge6.github.io/mac-mini-rental/decision-studio/
 - Public shared document: https://craftos.app/decision-studio/
+- Growth playbook: https://yonge6.github.io/mac-mini-rental/decision-studio/?tab=marketing
 
 The supplied V4 HTML is separated into an entry, CSS, deterministic financial engine and UI. It is independent from the landing page and commerce prices. All example financial values are assumptions, not actual sales, inventory, costs or returns.
 
@@ -14,3 +15,11 @@ Team editing setup: configure the existing CalDock Google/Apple provider in priv
 Run `npm run test:studio`, `npm run test:commerce`, `npm run test:sites`, and `npm run build` from `agent-mac/`. Backend coverage lives in `Yonge6/onelaser-workos-api/test/caldock-studio.test.ts` and runs both embedded and PostgreSQL adapters in CI. Local browser QA uses fictional accounts in an uncommitted, local-only harness, not production login credentials.
 
 The supplied Markdown referenced a Python service, `INTEGRATION_CONTRACT.md` and tests that were not attached. The implementation therefore adapts the observable V4 UI protocol and independently tests transactions and authorization; it does not claim to have run the missing test suite.
+
+## Multi-channel growth playbook
+
+The marketing page contains a versioned bilingual 90-day playbook and a separate saved execution draft. `growth-content.js` holds the guidance and dated official sources, `growth-playbook.js` renders and exports it, and `growth-template.js` provides schema-4-compatible editable assumptions. New local plans use the template. Existing browser plans and shared database state are never silently migrated or overwritten. “Apply recommended plan” explicitly replaces only marketing through the existing patch/history/conflict path and requires editing access in shared mode.
+
+The plan prioritizes task-based content and Wuhan enterprise partners, with additional software partnerships, referrals, practitioners, workshops and search. The $540 launch budget and 40 → 24 → 12 → 6 customer funnel are experiments, not measured results. Acquisition metrics count customers; device capacity and enterprise seats are separate. The financial model’s commissions remain separate from proposed partner terms. Website sales prices ($199 monthly / $1,799 annual upfront) are distinguished from the financial worksheet’s $199/$169/$129 assumptions.
+
+The workbench does not connect to Grok, scrape leads, send messages, provide accounts or launch campaigns. Customer contacts belong in a private CRM; this public workspace contains strategy and aggregate assumptions only. Third-party service availability and authorization must be verified for each actual offer and customer.
