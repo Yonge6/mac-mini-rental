@@ -12,6 +12,17 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Preserve the Agent.Space reference page's design, content structure and original assets.
 - Hosting region is 美国加州 only. Remove Europe and random location allocation everywhere, including hidden FAQ and accessible labels.
 - Product is M6 Mac mini. Apple official specifications verified: 12-core CPU, 12-core GPU; keep 16GB unified memory and 256GB SSD.
-- Show both monthly ($160/month) and annual ($1,440 upfront, $120/month) on the same page, following the user-provided pricing screenshot. Select inline, then go directly to the payment page. Do not route through the reference site's billing page.
+- Show both monthly ($199/month) and annual ($1,799 upfront, $149.92/month) on the same page, following the user-provided pricing screenshot. Select inline, then go directly to the payment page. Do not route through the reference site's billing page.
 - Real collection is not configured yet. Never claim payment succeeded when no payment provider was used.
 - The user requested a GitHub-hosted URL. Publish this preview through GitHub Pages. Keep relative asset URLs and query-based checkout routing so repository subpaths and direct refresh work.
+
+## Hero correction (2026-10-31)
+- Restore the first screen to the original Agent.Space hero: large 独享 Mac title on the left, original Mac illustration and stock board on the right. Keep 美国加州 and M6 copy.
+- Keep monthly/annual payment selection only in the lower pricing section. Hero/navigation reserve buttons scroll to #pricing; returning from payment also goes to #pricing. Do not put a payment selector in the hero.
+- Brand is now CalDock (California + Dock). Replace every old Agent.Space logo/name in the page, hero badge, software list, checkout, title and favicon with the generated CalDock mark.
+- Header: only CalDock brand, language switch and in-page anchors; no promotion strip, platform product navigation or start button. Language switching stays local (Chinese/English).
+- Remove the remote-screen app download row and the entire old footer directory/legal/cookie/compliance blocks, as requested in the annotations.
+
+- Latest pricing confirmed by the user: USD $199/month, crossed-out $249/month; annual $1,799 upfront, approximately $149.92/month, saving $589 versus 12 monthly payments. Describe the discount as approximate, never exact 25%.
+
+- Header language control displays exactly 中 / En as direct local-language links, with the active language emphasized.
