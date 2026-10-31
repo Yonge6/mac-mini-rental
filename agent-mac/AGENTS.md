@@ -59,3 +59,7 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Follow the supplied screenshot: 灵活月付 $199/月, 项目季付 $169/月, 长期年付 $129/月 with 主推 badge. Three adjacent charcoal/blue-gray price cards on desktop, stacked on phones; surrounding page keeps the current warm palette and motion.
 - Exact upfront charges are $199/month, $507/quarter (3 months), and $1,548/year (12 months). Annual saves $840 versus twelve monthly payments; quarter saves $90 versus three monthly payments. This supersedes all older two-plan/annual-price instructions.
 - Preserve the chosen interval through checkout, language switching, login callbacks and order/admin displays. The backend determines prices; never reprice existing order or commission snapshots.
+
+## Operator video (2026-11-01)
+- Place the user-selected official OneLaser video `tSroh4OUkX4` immediately below the office/team photo grid and above company details, in both languages. Use a responsive 16:9, lazy-loaded YouTube embed without autoplay, plus a YouTube fallback link.
+- Describe it accurately as OneLaser's expanded production facility, not a CalDock server room or Mac hosting facility. Preserve existing photos and animations.

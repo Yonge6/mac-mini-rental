@@ -307,3 +307,15 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline-color: #ffa
 @media(max-width:360px){.afterglow-team-card{padding:18px;gap:16px}.afterglow-team-card>img{width:42%}.afterglow-team-card h3{font-size:16px}.afterglow-team-card p{font-size:11px}}
 /* The fixed header already has scroll padding; avoid a second anchor offset. */
 .hm-page .hm-chapter[id]{scroll-margin-top:0}
+
+/* Official OneLaser facility video follows the office and team photos. */
+.afterglow-team-video{margin:32px 0 0;min-width:0}
+.afterglow-team-video figcaption{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin-bottom:20px}
+.afterglow-team-video h3{font-size:24px;font-weight:700;line-height:1.4;letter-spacing:-.025em}
+.afterglow-team-video p{color:#baa58a;font-size:14px;line-height:1.8;margin-top:8px}
+.afterglow-team-video a{color:#e4b478;font-size:12px;white-space:nowrap;text-decoration:none;padding:8px 0}
+.afterglow-team-video a:hover{text-decoration:underline}
+.afterglow-team-video a:focus-visible{outline:2px solid #ffb45e;outline-offset:5px;border-radius:2px}
+.afterglow-video-frame{aspect-ratio:16/9;overflow:hidden;border-radius:12px;border:1px solid #a58a6533;background:#100d0a}
+.afterglow-video-frame iframe{display:block;width:100%;height:100%;border:0}
+@media(max-width:700px){.afterglow-team-video{margin-top:28px}.afterglow-team-video figcaption{align-items:flex-start;flex-direction:column;gap:8px;margin-bottom:16px}.afterglow-team-video h3{font-size:22px}.afterglow-team-video p{font-size:13px}.afterglow-team-video a{padding:4px 0}.afterglow-video-frame{border-radius:8px}}
