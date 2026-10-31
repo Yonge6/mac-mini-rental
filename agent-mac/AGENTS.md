@@ -49,3 +49,8 @@ Build app UI in `src/`. Keep `.openai/hosting.json`, `worker/index.js`, `scripts
 - Add a credible operator/team section before pricing, using the supplied OneLaser California office photo and the genuine team photo from OneLaser's official About Us page. Add an in-page team anchor and compact operator links at pricing/checkout.
 - Preserve the supplied photographs. Do not generate people, fabricate endorsements, transfer laser-product warranties to Mac rentals, or label the office photo as a server-room photo.
 - Verified public office address: 20472 Crescent Bay Dr, STE 104, Lake Forest, CA 92630, USA. Source: https://www.1laser.com/pages/contact-us and the site footer, read 2026-10-31.
+
+## Motion preservation (2026-11-01)
+- Preserve the reference's motion when restyling: moving network dashes (horizontal desktop / vertical phone), staggered section entrances, rotating remote-window glow, stock count/sweep/glints and the scrolling hint.
+- Do not replace animated gradient tracks with solid backgrounds, globally disable reveal animations for screenshot capture, or hide animated window borders. Keep the selected espresso/amber colors and photo composition.
+- Respect the visitor's reduced-motion preference; content and the final inventory count must remain readable without animation.
