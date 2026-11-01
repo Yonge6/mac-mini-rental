@@ -2,6 +2,8 @@
 
 CalDock 前端预览。按用户选中的第 2 套「加州暮色」设计，使用深棕黑背景、暖琥珀色按钮及日落硬件摄影；保留介绍结构，下方价格区使用用户提供的三档深色方案卡。通过 GitHub Pages 发布页面和付款流程预览。
 
+共同开发入口：[开发指南](../docs/DEVELOPMENT.md) · [Claude 使用说明](../docs/CLAUDE_WORKFLOW.md)。品牌改名已暂停，当前仍用 CalDock。
+
 设计与生成素材记录：[California Afterglow](docs/design/california-afterglow.md)。
 
 - 月付：$199，每月支付。
@@ -13,14 +15,13 @@ CalDock 前端预览。按用户选中的第 2 套「加州暮色」设计，使
 - 顶部只保留 CalDock、页内定位和中英切换；原站下载栏、目录页脚及合规徽章已删除。“写给老板的演示”推广区及其链接也已删除。价格由用户确认；库存、交付及服务条款仍是页面预览内容。
 - 全部资源与字体位于 `public/assets`；未引入原站统计、第三方桥接脚本或账号系统。
 
-## 验证的芯片规格
+## 当前页面的硬件文案
 
-Apple M6：12 核 CPU、12 核 GPU；保留 16GB 统一内存、256GB SSD 基础配置。
-来源：[Apple Mac mini Technical Specifications](https://www.apple.com/mac-mini/specs/)，2026-10-31 查看。
+当前页面使用 M6、12 核 CPU、12 核 GPU、16GB 统一内存、256GB SSD 的产品文案。若要调整硬件或正式对外确认可售配置，按用户确认和官方来源核实，不把旧记录当作重新验证。
 
 ## 本地运行
 
-Node 20.19+ 或 22.12+，`npm install` 后运行 `npm run dev -- --port 4173`。
+推荐 Node.js 22；在本目录运行 `npm ci`，然后 `npm run dev -- --port 4173`。
 
 `npm run build` 输出 `dist/client` 静态文件与保留的 Sites Worker。`npm run test:sites` 检查部署运行时契约。
 
