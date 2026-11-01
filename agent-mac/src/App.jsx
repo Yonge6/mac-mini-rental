@@ -14,9 +14,9 @@ const source = english ? sourceEn : sourceZh;
 const SourceMarkup = memo(forwardRef(function SourceMarkup(_, ref) { return <div ref={ref} dangerouslySetInnerHTML={{__html:source}} />; }));
 
 const plans = {
-  month: { name: t('月付','Monthly'), title: t('灵活月付','Flexible monthly'), unit: t('月','month'), summary: t('每月支付 $199','$199 billed monthly'), term: t('随时取消续订，当期结束后停止','Cancel renewal anytime; service ends after the current period') },
-  quarter: { name: t('季付','Quarterly'), title: t('项目季付','Project quarterly'), unit: t('季','quarter'), summary: t('一次支付 $507，享用 3 个月','$507 paid upfront for 3 months'), term: t('每 3 个月续订，可随时关闭下期续订','Renews every 3 months; turn off next renewal anytime') },
-  year: { name: t('年付','Yearly'), title: t('长期年付','Long-term yearly'), unit: t('年','year'), summary: t('一次支付 $1,548，享用 12 个月','$1,548 paid upfront for 12 months'), term: t('年付一次付清，一年内不能取消或退款','Yearly is paid upfront and is non-refundable during the year') },
+  month: { name: t('月付','Monthly'), title: t('月付','Monthly'), unit: t('月','month'), summary: t('每月支付 $199','$199 billed monthly'), term: t('随时取消续订，当期结束后停止','Cancel renewal anytime; service ends after the current period') },
+  quarter: { name: t('季付','Quarterly'), title: t('季付','Quarterly'), unit: t('季','quarter'), summary: t('一次支付 $507，享用 3 个月','$507 paid upfront for 3 months'), term: t('每 3 个月续订，可随时关闭下期续订','Renews every 3 months; turn off next renewal anytime') },
+  year: { name: t('年付','Yearly'), title: t('年付','Yearly'), unit: t('年','year'), summary: t('一次支付 $1,548，享用 12 个月','$1,548 paid upfront for 12 months'), term: t('年付一次付清，一年内不能取消或退款','Yearly is paid upfront and is non-refundable during the year') },
 };
 for(const [key,plan] of Object.entries(plans))Object.assign(plan,{...BILLING_PLANS[key],monthly:BILLING_PLANS[key].monthlyCents/100,total:BILLING_PLANS[key].amountCents/100});
 const dollars = n => '$' + n.toLocaleString('en-US');
@@ -32,7 +32,7 @@ function PlanPicker({ value, onChange, id }) {
         <span className="rental-card-heading">{p.title}{key === 'year' && <em>{t('主推','Recommended')}</em>}</span>
         <span className="rental-card-price"><strong>{dollars(p.monthly)}</strong><span>{t('/月','/month')}</span></span>
         <span className="rental-card-total">{p.summary}</span>
-        <span className="rental-card-note">{key==='month'?t('按月续订，灵活安排','A flexible, month-to-month commitment'):key==='quarter'?t('比连续月付三个月省 $90','Save $90 versus 3 monthly payments'):t('比连续月付一年省 $840','Save $840 versus 12 monthly payments')}</span>
+        <span className="rental-card-note">{key==='month'?t('按月续订，随时可停','Month to month. Cancel renewal anytime.'):key==='quarter'?t('比连续月付三个月省 $90','Save $90 versus 3 monthly payments'):t('比连续月付一年省 $840','Save $840 versus 12 monthly payments')}</span>
         <span className="rental-card-select"><span className="rental-radio" aria-hidden="true">{value === key && <img src="./assets/check.svg" alt="" />}</span>{value===key?t('已选方案','Selected plan'):t('选择'+p.name,'Choose '+p.name.toLowerCase())}</span>
       </label>)}
     </fieldset>

@@ -319,3 +319,11 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline-color: #ffa
 .afterglow-video-frame{aspect-ratio:16/9;overflow:hidden;border-radius:12px;border:1px solid #a58a6533;background:#100d0a}
 .afterglow-video-frame iframe{display:block;width:100%;height:100%;border:0}
 @media(max-width:700px){.afterglow-team-video{margin-top:28px}.afterglow-team-video figcaption{align-items:flex-start;flex-direction:column;gap:8px;margin-bottom:16px}.afterglow-team-video h3{font-size:22px}.afterglow-team-video p{font-size:13px}.afterglow-team-video a{padding:4px 0}.afterglow-video-frame{border-radius:8px}}
+
+/* Copy polish (2026-11): balanced headings, readable fine print, scannable FAQ terms. */
+.hm-chapter h2, .hm-closing h2, .afterglow-hero h1 { text-wrap: balance; }
+.hm-chapter p, .hm-closing p, [data-slot="collapsible-content"] { text-wrap: pretty; }
+[data-slot="collapsible-content"] b { color: #f4eee1; font-weight: 600; }
+.hm-footnote { color: #b8a690; }
+.afterglow-office figcaption { font-size: 12px; color: #b5a085; }
+@media(max-width:700px){ .afterglow-office figcaption { font-size: 11px; } .afterglow-hero .hm-hero-note { font-size: 12px; } }
