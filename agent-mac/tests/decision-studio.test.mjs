@@ -128,3 +128,105 @@ test('monthly commission duration input normalizes fractional edits before persi
  assert.equal(loaded.app.getResult().c.monthlyCommissionMonths,3);
  assert.equal(JSON.parse(loaded.values.get('caldock-v4-history'))[0].value,3);
 });
+
+// Exercise the actual buildless UI with asynchronous HTTP and controllable
+// timers. The fake backend is a protocol fixture, not an authorization substitute.
+async function teamStudioHarness({user=null,hostname='craftos.app',lang='zh',localState,sessionValues=new Map(),loginEnabled=true}={}){
+ const copy=value=>JSON.parse(JSON.stringify(value));
+ const initial=localState||copy(studioHarness().app.getWorkspace());
+ const values=new Map([['caldock-v4-state',JSON.stringify(initial)],['caldock-used-purchase-v1','1'],['caldock-order-commission-v1','1']]);
+ const elements=new Map(),listeners={},calls=[],timers=new Map(),streams=[];
+ let clock=0,timerId=0,id=0;
+ const backend={user,revision:2,state:copy(studioHarness().app.getWorkspace()),writeStatus:200,members:user?[copy(user)]:[]};
+ const storage=map=>({getItem:key=>map.get(key)??null,setItem:(key,value)=>map.set(key,String(value)),removeItem:key=>map.delete(key)});
+ const response=(status,data)=>({ok:status>=200&&status<300,status,json:async()=>copy(data)});
+ const location={hostname,protocol:'https:',search:`?tab=team&lang=${lang}`,href:`https://${hostname}/decision-studio/?tab=team&lang=${lang}`};
+ const context=vm.createContext({URL,URLSearchParams,Intl,console,location,localStorage:storage(values),sessionStorage:storage(sessionValues),
+  document:{documentElement:{},activeElement:null,addEventListener:(name,fn)=>(listeners[name]??=[]).push(fn),querySelectorAll:()=>[],querySelector:selector=>{if(!elements.has(selector))elements.set(selector,{innerHTML:'',textContent:'',hidden:true,addEventListener(){}});return elements.get(selector);}},
+  history:{replaceState(_state,_title,url){location.href=String(url);location.search=new URL(url).search;}},
+  crypto:{randomUUID:()=>`00000000-0000-4000-8000-${String(++id).padStart(12,'0')}`},
+  setTimeout:(fn,delay=0)=>{const key=++timerId;timers.set(key,{at:clock+delay,fn});return key;},clearTimeout:key=>timers.delete(key),confirm:()=>true,addEventListener(){},
+  EventSource:class {constructor(url){this.url=url;streams.push(this);}close(){this.closed=true;}},
+  fetch:async(url,options={})=>{
+   const method=options.method||'GET',body=options.body===undefined?undefined:JSON.parse(options.body);calls.push({url,method,body,headers:options.headers,credentials:options.credentials});
+   if(url==='/api/caldock/studio/health')return response(200,{app:'caldock-decision-studio',version:4,publicView:true,auth:{provider:'dingtalk',loginEnabled,loginUrl:'/api/auth/dingtalk/start?destination=caldock-studio'}});
+   if(url==='/api/caldock/studio/me')return backend.user?response(200,{user:backend.user}):response(403,{error:'STUDIO_MEMBERSHIP_REQUIRED'});
+   if(url==='/api/caldock/studio/state'&&method==='GET')return response(200,{state:backend.state,revision:backend.revision});
+   if(url==='/api/caldock/studio/history')return response(200,{history:[]});
+   if(url==='/api/caldock/studio/members')return backend.user?response(200,{members:backend.members}):response(403,{error:'STUDIO_MEMBERSHIP_REQUIRED'});
+   if(url==='/api/caldock/studio/state'&&method==='PATCH'){
+    if(backend.writeStatus!==200)return response(backend.writeStatus,{error:'STUDIO_READ_ONLY'});
+    let object=backend.state;for(const key of body.path.slice(0,-1))object=object[key];object[body.path.at(-1)]=body.value;
+    return response(200,{state:backend.state,revision:++backend.revision});
+   }
+   if(['/api/auth/session','/api/caldock/session'].includes(url)&&method==='DELETE'){backend.user=null;return response(200,{ok:true});}
+   throw new Error(`Unexpected request ${method} ${url}`);
+  }});
+ vm.runInContext('window=globalThis',context);
+ for(const file of ['model.js','growth-content.js','growth-template.js','growth-playbook.js','studio.js'])vm.runInContext(readFileSync(new URL(file,root),'utf8'),context);
+ const settle=async()=>{await new Promise(setImmediate);await new Promise(setImmediate);};
+ const tick=async(ms=500)=>{const end=clock+ms;for(let n=0;n<100;n++){const entry=[...timers].sort((a,b)=>a[1].at-b[1].at).find(([,timer])=>timer.at<=end);if(!entry)break;const [key,timer]=entry;timers.delete(key);clock=timer.at;await timer.fn();await settle();}clock=end;await settle();};
+ const action=async(action,dataset={})=>{const button={dataset:{action,...dataset}};for(const fn of listeners.click||[])await fn({target:{closest:selector=>selector==='button'?button:null}});await settle();};
+ const input=(key,value)=>{const el={type:'number',value:String(value),min:'0',max:'1000000',dataset:{path:JSON.stringify(['scenarios','pilot','values',key])},matches:selector=>selector==='[data-path]'};for(const fn of listeners.input||[])fn({target:el});};
+ await settle();return {app:context.CalDockStudio,backend,values,sessionValues,calls,streams,context,settle,tick,action,input,html:()=>elements.get('#app').innerHTML};
+}
+const dingMember=(role='editor')=>({id:'8d620391-c6cb-407e-91d4-9a19b833b092',name:'Team Member',username:'member-id',role,csrf:'test-csrf-token',provider:'dingtalk'});
+
+test('GitHub local plans offer language-aware DingTalk login without uploading local drafts',async()=>{
+ const local=JSON.parse(JSON.stringify(studioHarness().app.getWorkspace()));local.marketing.strategy.zh='Private local working draft';
+ const h=await teamStudioHarness({hostname:'yonge6.github.io',localState:local});
+ assert.match(h.html(),/href="https:\/\/craftos\.app\/api\/auth\/dingtalk\/start\?destination=caldock-studio&lang=zh"/);
+ assert.equal(h.calls.length,0);assert.equal(h.app.getWorkspace().marketing.strategy.zh,'Private local working draft');
+ h.app.setLang('en');assert.match(h.html(),/destination=caldock-studio&lang=en/);
+ await h.tick();assert.equal(JSON.parse(h.values.get('caldock-v4-state')).marketing.strategy.zh,'Private local working draft');
+});
+test('public shared team page uses DingTalk and remains read-only before authentication',async()=>{
+ const h=await teamStudioHarness();assert.equal(h.app.status().available,true);
+ assert.match(h.html(),/href="\/api\/auth\/dingtalk\/start\?destination=caldock-studio&lang=zh"/);
+ assert.doesNotMatch(h.html(),/Google|Apple|id="member-form"/);
+ h.input('monthly',250);await h.tick();assert.equal(h.app.getWorkspace().scenarios.pilot.values.monthly,199);
+ assert.equal(h.calls.filter(call=>call.method==='PATCH').length,0);
+ const unavailable=await teamStudioHarness({loginEnabled:false});assert.match(unavailable.html(),/aria-disabled="true"/);assert.doesNotMatch(unavailable.html(),/href="\/api\/auth\/dingtalk/);
+});
+test('DingTalk owner loads shared data without replacing local plans and can select known members',async()=>{
+ const local=JSON.parse(JSON.stringify(studioHarness().app.getWorkspace()));local.scenarios.pilot.values.monthly=321;local.marketing.strategy.en='Local only';
+ const owner={...dingMember('owner'),name:'<script>alert(1)</script>'};const h=await teamStudioHarness({user:owner,localState:local});await h.tick();
+ assert.equal(h.app.status().role,'owner');assert.equal(h.app.getWorkspace().scenarios.pilot.values.monthly,199);
+ assert.equal(h.values.get('caldock-v4-state'),JSON.stringify(local));assert.match(h.html(),/id="member-form"/);
+ assert.match(h.html(),/id="studio-member-ids"/);assert.ok(h.html().includes(`value="${owner.id}"`));
+ assert.doesNotMatch(h.html(),/<script>alert/);assert.match(h.html(),/&lt;script&gt;alert/);
+});
+test('read-only DingTalk member gains edit controls only after refreshed server permission',async()=>{
+ const h=await teamStudioHarness({user:dingMember('viewer')});assert.doesNotMatch(h.html(),/id="member-form"/);
+ h.input('monthly',220);await h.tick();assert.equal(h.app.getWorkspace().scenarios.pilot.values.monthly,199);
+ h.backend.user=dingMember('editor');await h.action('refresh-access');assert.equal(h.app.status().role,'editor');
+ h.input('monthly',220);await h.tick();assert.equal(h.backend.state.scenarios.pilot.values.monthly,220);
+ const write=h.calls.find(call=>call.method==='PATCH');assert.equal(write.headers['X-CSRF-Token'],'test-csrf-token');assert.equal(write.credentials,'same-origin');
+});
+test('sign-out targets the identity provider session and returns to the public plan',async()=>{
+ for(const provider of ['dingtalk','caldock']){
+  const h=await teamStudioHarness({user:{...dingMember(),provider}});await h.action('logout');
+  const deletes=h.calls.filter(call=>call.method==='DELETE');assert.equal(deletes.length,1);
+  assert.equal(deletes[0].url,provider==='dingtalk'?'/api/auth/session':'/api/caldock/session');assert.equal(deletes[0].headers['X-CSRF-Token'],'test-csrf-token');
+  assert.equal(h.app.status().user,undefined);assert.equal(h.app.status().pending,0);assert.equal(h.app.status().available,true);assert.match(h.html(),/dingtalk\/start/);
+ }
+});
+test('expired editing access retains pending drafts and blocks more changes until reauthentication',async()=>{
+ const h=await teamStudioHarness({user:dingMember()});h.backend.writeStatus=403;
+ h.input('monthly',222);await h.tick();assert.equal(h.app.status().authRequired,true);assert.equal(h.app.status().pending,1);
+ const key='caldock-studio-draft:'+dingMember().id,queued=JSON.parse(h.sessionValues.get(key));
+ assert.equal(queued[0][1].before,199);assert.equal(queued[0][1].value,222);assert.equal(h.backend.state.scenarios.pilot.values.monthly,199);
+ h.input('monthly',240);await h.tick();assert.equal(h.app.getWorkspace().scenarios.pilot.values.monthly,222);assert.equal(h.calls.filter(call=>call.method==='PATCH').length,1);
+ assert.match(h.html(),/data-action="refresh-access"/);assert.match(h.html(),/dingtalk\/start/);
+ h.backend.writeStatus=200;await h.action('refresh-access');await h.tick();
+ assert.equal(h.app.status().authRequired,false);assert.equal(h.app.status().pending,0);assert.equal(h.backend.state.scenarios.pilot.values.monthly,222);assert.equal(h.sessionValues.has(key),false);
+});
+test('pending drafts survive reload for the same identity but are never submitted as another member',async()=>{
+ const first=await teamStudioHarness({user:dingMember()});first.backend.writeStatus=403;first.input('monthly',229);await first.tick();
+ const reloaded=await teamStudioHarness({user:dingMember(),sessionValues:first.sessionValues});
+ assert.equal(reloaded.app.status().pending,1);assert.equal(reloaded.app.getWorkspace().scenarios.pilot.values.monthly,229);
+ const another={...dingMember(),id:'c5d01684-2d8c-4c3a-b986-604794df2f82',username:'another-member'};
+ reloaded.backend.user=another;await reloaded.action('refresh-access');await reloaded.tick();
+ assert.equal(reloaded.app.status().user,'another-member');assert.equal(reloaded.app.status().pending,0);assert.equal(reloaded.app.getWorkspace().scenarios.pilot.values.monthly,199);
+ assert.equal(reloaded.calls.filter(call=>call.method==='PATCH').length,0);assert.equal(first.sessionValues.has('caldock-studio-draft:'+dingMember().id),true);
+});
