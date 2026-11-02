@@ -90,6 +90,8 @@ UI 改动还要在浏览器检查桌面/手机、中文/英文、选套餐到付
 
 品牌仍为 CalDock；用户已暂停 GRIDRUN 改名。没有新确认前，不启用 GRIDRUN、PACE 或其他候选名，也不合并本地暂停的改名分支。
 
-2026-11-01 读到的生产 `capabilities`：Google/Apple 为 false、payments 为 false、自动打款为 false。后续以 <https://craftos.app/api/caldock/capabilities> 和实际供应商流程复核为准；页面存在不代表供应商已配置。
+2026-11-01 读到的生产 `capabilities`：Google/Apple 为 false、payments 为 false、自动打款为 false。
+
+2026-11-02 起前后端已接入 Stripe Checkout 订阅（先用测试模式）：后端在 Render 配好 `CALDOCK_STRIPE_SECRET_KEY`、`CALDOCK_STRIPE_WEBHOOK_SECRET` 后，capabilities 返回 `payments:true,paymentMode:"test"`，付款页按钮会跳到 Stripe 托管付款页（前端只允许跳转 `checkout.stripe.com`）。正式收款还需另设 `CALDOCK_STRIPE_ALLOW_LIVE=true` 并换正式密钥。配置步骤见后端 `docs/caldock/SETUP.md` 的 Stripe 一节。后续以 <https://craftos.app/api/caldock/capabilities> 和实际供应商流程复核为准；页面存在不代表供应商已配置。
 
 修改必须保持：美国加州定位、现有暖黑/金色风格、原有动效、真实 OneLaser 团队素材、两种语言、首期从交付开始计费，以及公开查看/授权编辑工作台的边界。工作台财务模型是独立测算，不能改写实际报价或默默覆盖团队已保存内容。
