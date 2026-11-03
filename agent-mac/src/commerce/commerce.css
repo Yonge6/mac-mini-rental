@@ -16,7 +16,7 @@
 .cd-lead{font-size:16px;line-height:1.85;color:#bbaa93;margin-top:23px;max-width:400px;text-wrap:balance}
 .cd-login-providers{display:grid;gap:12px;margin-top:40px}
 .cd-provider{display:flex;align-items:center;gap:14px;min-height:57px;padding:14px 19px;background:#241b13;border:1px solid #a58a6566;color:#f4eee1;border-radius:9px;font-size:15px;font-weight:600;text-align:left}
-.cd-provider svg:last-child{margin-left:auto;color:#bca98e}.cd-provider:hover:not(:disabled){background:#332518;border-color:#ffad47}.cd-provider:disabled{cursor:not-allowed;color:#b6a48b;background:#1d1711}
+.cd-provider svg:last-child{margin-left:auto;color:#bca98e}.cd-provider:hover:not(:disabled){background:#332518;border-color:#ffad47}.cd-provider:disabled{cursor:not-allowed;color:#b6a48b;background:#1d1711}.cd-provider-soon{margin-left:auto;flex:none;padding:3px 9px;border:1px solid #d9b77a66;border-radius:999px;color:#d9b77a;font-size:12px;font-weight:600;line-height:1.4}
 .cd-login-help{font-size:12px;color:#9e8b71;margin-top:16px;line-height:1.7}
 .cd-demo-entry{border-top:1px solid #a58a6533;margin-top:28px;padding-top:24px}.cd-demo-entry>span{font-family:var(--font-mono);font-size:10px;color:#9e8b71;letter-spacing:.1em}.cd-demo-entry>div{display:flex;flex-wrap:wrap;gap:14px;margin-top:14px}.cd-demo-entry button{color:#f0c48a;font-size:13px;display:flex;align-items:center;gap:8px;padding-block:6px;background:none;border:0}
 .cd-back{display:inline-flex;gap:9px;align-items:center;font-size:12px;color:#ac9b82;text-decoration:none;margin-top:26px}
