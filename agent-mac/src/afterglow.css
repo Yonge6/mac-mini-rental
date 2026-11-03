@@ -327,3 +327,6 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline-color: #ffa
 .hm-footnote { color: #b8a690; }
 .afterglow-office figcaption { font-size: 12px; color: #b5a085; }
 @media(max-width:700px){ .afterglow-office figcaption { font-size: 11px; } .afterglow-hero .hm-hero-note { font-size: 12px; } }
+.afterglow-legal-links{display:flex;gap:16px;margin:12px 0 0;font-size:12px}
+.afterglow-legal-links a,.checkout-legal a{color:#b5a085;text-underline-offset:3px}
+.checkout-legal{margin:10px 0 0;font-size:12px;line-height:1.6;color:#a99479;text-align:center}
