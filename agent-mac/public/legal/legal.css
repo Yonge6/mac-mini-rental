@@ -1,0 +1,32 @@
+@font-face{font-family:"Geist";font-style:normal;font-display:swap;font-weight:100 900;src:url(../assets/geist-latin-wght-normal-BgDaEnEv.woff2) format("woff2-variations")}
+@font-face{font-family:"Geist Mono";font-style:normal;font-display:swap;font-weight:100 900;src:url(../assets/geist-mono-latin-wght-normal-XN7g48iV.woff2) format("woff2-variations")}
+:root{color-scheme:dark;--bg:#110d0a;--panel:#1a1511;--line:#3a2f24;--text:#efe6d6;--muted:#b5a590;--gold:#e1c48f;--amber:#ffb45e}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.75 "Geist",-apple-system,BlinkMacSystemFont,"PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;-webkit-font-smoothing:antialiased}
+a{color:var(--gold);text-underline-offset:3px}
+a:focus-visible{outline:2px solid var(--amber);outline-offset:3px;border-radius:2px}
+.legal-nav{position:sticky;top:0;z-index:2;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px clamp(20px,4.4%,64px);background:#110d0ae6;backdrop-filter:blur(12px);border-bottom:1px solid #2a221b}
+.legal-brand{display:flex;align-items:center;gap:10px;color:var(--text);font-weight:700;font-size:18px;text-decoration:none}
+.legal-brand img{width:26px;height:26px}
+.legal-lang{display:flex;gap:10px;font-size:14px;color:var(--muted)}
+.legal-lang a{color:var(--muted);text-decoration:none}
+.legal-lang a[aria-current="true"]{color:var(--text);font-weight:700}
+main{max-width:780px;margin:0 auto;padding:clamp(40px,8vw,88px) clamp(20px,5vw,32px) 96px}
+.legal-eyebrow{font:500 12px/1.4 "Geist Mono",ui-monospace,monospace;letter-spacing:.16em;color:var(--amber);text-transform:uppercase;margin:0 0 18px}
+h1{font-size:clamp(34px,6vw,54px);line-height:1.1;letter-spacing:-.02em;margin:0 0 18px;font-weight:700;text-wrap:balance}
+.legal-meta{color:var(--muted);font-size:14px;margin:0 0 36px}
+.legal-summary{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px 24px;margin:0 0 40px}
+.legal-summary h2{margin-top:0;font-size:17px}
+.legal-summary ul{margin:0;padding-left:20px}
+h2{font-size:21px;line-height:1.35;margin:44px 0 12px;font-weight:700}
+p,li{color:#ddd2c1;text-wrap:pretty}
+ul{padding-left:22px}
+li{margin:6px 0}
+strong{color:var(--text)}
+address{font-style:normal}
+.legal-contact{border-top:1px solid var(--line);margin-top:56px;padding-top:28px;color:var(--muted);font-size:15px}
+footer.legal-foot{max-width:780px;margin:0 auto;padding:0 clamp(20px,5vw,32px) 48px;color:var(--muted);font-size:13px;display:flex;gap:18px;flex-wrap:wrap}
+footer.legal-foot a{color:var(--muted)}
+[hidden]{display:none!important}
+@media (max-width:600px){body{font-size:15px}h2{font-size:19px}.legal-summary{padding:18px}}
