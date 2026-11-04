@@ -8,8 +8,8 @@ These instructions apply to `agent-mac/`; also follow the repository-root `AGENT
 - Start the local preview yourself for UI work. Check rendered desktop/phone views, primary interactions and console errors; a build alone is not visual acceptance.
 
 ## Current brand and design
-- Brand is MacUSA (renamed from CalDock on 2026-11-03). The site is at `/macusa/` and `/caldock/` redirects there. Keep technical `caldock` identifiers (`/api/caldock`, CSS classes, error codes, storage keys) unchanged.
-- Preserve California Afterglow: espresso surfaces, ivory type, amber actions, warm sunset photos and the premium champagne/gold pricing cards. Keep existing MacUSA logo, layout, genuine assets and responsive behavior unless the task targets them.
+- Brand is wodeMac (renamed from CalDock on 2026-11-03). The site stays at `craftos.app/caldock/` until the move to `wodemac.com`. Keep technical `caldock` identifiers (`/caldock/`, `/api/caldock`, CSS classes, error codes, storage keys) unchanged.
+- Preserve California Afterglow: espresso surfaces, ivory type, amber actions, warm sunset photos and the premium champagne/gold pricing cards. Keep existing wodeMac logo, layout, genuine assets and responsive behavior unless the task targets them.
 - Keep original motion: moving network dashes (horizontal desktop / vertical phone), staggered entrances, remote-window glow, stock count/sweep/glints and scroll hint. Respect reduced-motion preferences; never disable motion globally for screenshots.
 - Keep all headings, FAQ question titles and hero stock number bold. Header remains logo, in-page anchors, login and `中 / En`; no old platform directory/footer, download row or boss-presentation section.
 
@@ -24,10 +24,10 @@ These instructions apply to `agent-mac/`; also follow the repository-root `AGENT
 - Reuse the existing craftos.app Fastify/PostgreSQL backend (`Yonge6/onelaser-workos-api`), not Supabase. Keep its CalDock namespace, identity, cookies, admin checks and audits independent from Work OS.
 - Real sign-in depends on configured providers. Demo mode is explicitly fictional and browser-local; never let it stand in for a real provider login, account, payment or shared write.
 - Paid order states/commissions require verified backend payment events. Affiliate links retain first-touch attribution and administrator-configured rules. No automatic payouts.
-- GitHub marketing routes real accounts/checkout to same-origin `https://craftos.app/macusa/`; keep repository-subpath assets and query-based route refresh working.
+- GitHub marketing routes real accounts/checkout to same-origin `https://craftos.app/caldock/`; keep repository-subpath assets and query-based route refresh working.
 
 ## Operator trust content
-- MacUSA is operated by the OneLaser team. Preserve the real California office photo, official team photo and public company links; do not fabricate people or endorsements.
+- wodeMac is operated by the OneLaser team. Preserve the real California office photo, official team photo and public company links; do not fabricate people or endorsements.
 - User-selected official video `tSroh4OUkX4` follows the office/team grid, above company details, in both languages. Responsive 16:9, lazy YouTube embed, no autoplay, YouTube fallback link.
-- The video shows OneLaser's production facility, not a MacUSA server room or proof of Mac hosting infrastructure.
+- The video shows OneLaser's production facility, not a wodeMac server room or proof of Mac hosting infrastructure.
 - Editing `public/decision-studio/` also requires that directory's own instructions. Preserve public viewing, local calculations and permissioned shared writes; don't overwrite saved drafts with new defaults.

@@ -19,8 +19,8 @@ window.CalDockGrowthContent = {
             "en": "The value proposition"
           },
           "body": {
-            "zh": "MacUSA 提供独享远程 Mac 工作环境与有人协助的流程落地，让专业人士把 AI 从偶尔聊天变成可重复的工作流程。演示真实输入、过程、输出和人工复核，销售的是客户能完成的任务。不要用“高净值”代替需求诊断，也不要仅凭客户关注 AI 就判断他会购买。",
-            "en": "MacUSA provides a dedicated remote Mac workspace and hands-on workflow implementation so professionals can turn occasional AI use into repeatable work. Show real inputs, process, output and human review. Sell a task the customer can complete. Wealth is not a substitute for diagnosis, and interest in AI does not prove purchase intent."
+            "zh": "wodeMac 提供独享远程 Mac 工作环境与有人协助的流程落地，让专业人士把 AI 从偶尔聊天变成可重复的工作流程。演示真实输入、过程、输出和人工复核，销售的是客户能完成的任务。不要用“高净值”代替需求诊断，也不要仅凭客户关注 AI 就判断他会购买。",
+            "en": "wodeMac provides a dedicated remote Mac workspace and hands-on workflow implementation so professionals can turn occasional AI use into repeatable work. Show real inputs, process, output and human review. Sell a task the customer can complete. Wealth is not a substitute for diagnosis, and interest in AI does not prove purchase intent."
           },
           "items": [
             {
@@ -165,8 +165,8 @@ window.CalDockGrowthContent = {
                 "en": "Enterprise providers in Wuhan, Beijing, Shanghai, Guangzhou and Shenzhen"
               },
               {
-                "zh": "伙伴负责关系与业务诊断，MacUSA负责约定环境和远程实施；一个流程试点后拓展团队。",
-                "en": "Partners own relationships and discovery; MacUSA provides the scoped environment and remote implementation. Expand after a single-workflow pilot."
+                "zh": "伙伴负责关系与业务诊断，wodeMac负责约定环境和远程实施；一个流程试点后拓展团队。",
+                "en": "Partners own relationships and discovery; wodeMac provides the scoped environment and remote implementation. Expand after a single-workflow pilot."
               },
               {
                 "zh": "有真实客户、预算人、验收人和授权样本；统一路由，不按城市重复计线索。",
@@ -183,8 +183,8 @@ window.CalDockGrowthContent = {
                 "en": "Research existing channels’ customer and delivery needs for infrastructure or joint implementation opportunities; this is neither an agency application nor an existing partnership."
               },
               {
-                "zh": "逐家确认身份与服务范围，再用客户任务实测MacUSA环境适配、权限和交接。",
-                "en": "Verify each party’s status and scope, then test MacUSA environment fit, permissions and handover against the customer task."
+                "zh": "逐家确认身份与服务范围，再用客户任务实测wodeMac环境适配、权限和交接。",
+                "en": "Verify each party’s status and scope, then test wodeMac environment fit, permissions and handover against the customer task."
               }
             ]
           ]
@@ -539,8 +539,8 @@ window.CalDockGrowthContent = {
                 "en": "Candidate: joint workshops"
               },
               {
-                "zh": "6—10 人、45 分钟、一个场景；合作方邀请，MacUSA 做演示。",
-                "en": "Six to ten attendees, 45 minutes and one use case. The partner recruits; MacUSA demonstrates."
+                "zh": "6—10 人、45 分钟、一个场景；合作方邀请，wodeMac 做演示。",
+                "en": "Six to ten attendees, 45 minutes and one use case. The partner recruits; wodeMac demonstrates."
               },
               {
                 "zh": "两场合计至少 3 次后续演示作为实验门槛。",
@@ -1174,8 +1174,8 @@ window.CalDockGrowthContent = {
         "en": "Five-city B2B and Tencent WorkBuddy channels"
       },
       "intro": {
-        "zh": "企业拓展覆盖武汉、北京、上海、广州、深圳，并研究腾讯 WorkBuddy 现有渠道商/实施伙伴的合作机会。武汉从已有朋友关系开始，其余城市建立候选和需求验证。MacUSA尚未确认与这些候选的合作或集成。各城共用一个客户池，选最适合的流程、两名使用者和明确验收人，完成首个付费试点后复制。",
-        "en": "Cover Wuhan, Beijing, Shanghai, Guangzhou and Shenzhen, and investigate collaboration with existing Tencent WorkBuddy resellers/implementation partners. Start Wuhan discovery through the existing friend relationship and validate prospects elsewhere. MacUSA has not confirmed partnerships or integrations with these candidates. Use one customer pool to select a suitable workflow, two users and an acceptance owner, then replicate after the first paid pilot."
+        "zh": "企业拓展覆盖武汉、北京、上海、广州、深圳，并研究腾讯 WorkBuddy 现有渠道商/实施伙伴的合作机会。武汉从已有朋友关系开始，其余城市建立候选和需求验证。wodeMac尚未确认与这些候选的合作或集成。各城共用一个客户池，选最适合的流程、两名使用者和明确验收人，完成首个付费试点后复制。",
+        "en": "Cover Wuhan, Beijing, Shanghai, Guangzhou and Shenzhen, and investigate collaboration with existing Tencent WorkBuddy resellers/implementation partners. Start Wuhan discovery through the existing friend relationship and validate prospects elsewhere. wodeMac has not confirmed partnerships or integrations with these candidates. Use one customer pool to select a suitable workflow, two users and an acceptance owner, then replicate after the first paid pilot."
       },
       "blocks": [
         {
@@ -1218,8 +1218,8 @@ window.CalDockGrowthContent = {
             ],
             [
               {
-                "zh": "MacUSA",
-                "en": "MacUSA"
+                "zh": "wodeMac",
+                "en": "wodeMac"
               },
               {
                 "zh": "独享设备、基础环境、环境适配测试、约定工作范围内的远程实施、文档与技术支持。",
@@ -1348,8 +1348,8 @@ window.CalDockGrowthContent = {
             "en": "Tencent WorkBuddy channels: approach existing resellers and implementers"
           },
           "body": {
-            "zh": "腾讯官方已有伙伴授权规则，可据此研究现有渠道商/实施伙伴，纳入五城15家候选池。目标是合作获客与联合交付，不是替MacUSA申请官方代理或承诺相关费用。逐家核验身份、真实客户任务与实施范围；已有工具并不自动需要远程Mac，客户现有环境够用时只讨论实施。",
-            "en": "Tencent publishes partner-authorization rules that can inform research into existing resellers/implementation partners within the five-city pool of 15. The goal is cooperative acquisition and delivery, not applying for agency status or committing related fees for MacUSA. Verify identity, real customer tasks and scope. Using the tool does not automatically justify a remote Mac; discuss implementation alone when the current environment suffices."
+            "zh": "腾讯官方已有伙伴授权规则，可据此研究现有渠道商/实施伙伴，纳入五城15家候选池。目标是合作获客与联合交付，不是替wodeMac申请官方代理或承诺相关费用。逐家核验身份、真实客户任务与实施范围；已有工具并不自动需要远程Mac，客户现有环境够用时只讨论实施。",
+            "en": "Tencent publishes partner-authorization rules that can inform research into existing resellers/implementation partners within the five-city pool of 15. The goal is cooperative acquisition and delivery, not applying for agency status or committing related fees for wodeMac. Verify identity, real customer tasks and scope. Using the tool does not automatically justify a remote Mac; discuss implementation alone when the current environment suffices."
           },
           "columns": [
             {
@@ -1419,8 +1419,8 @@ window.CalDockGrowthContent = {
               "en": "Share the $20 software-diligence and $160 enterprise-channel budgets and prioritize remote work. Itemize travel or additional implementation costs separately rather than hiding them within $540."
             },
             {
-              "zh": "官方安装指南列出macOS 12及以上、ARM64/x64安装选项；这只是产品安装条件，不等于已在MacUSA验证。试点仍检查客户账户资格、实际版本、运行任务、权限/数据边界和退出交接。",
-              "en": "The official installation guide lists macOS 12+ and ARM64/x64 options. These are installation requirements, not evidence of testing on MacUSA. A pilot must still verify account eligibility, actual version, tasks, permission/data boundaries and exit handover."
+              "zh": "官方安装指南列出macOS 12及以上、ARM64/x64安装选项；这只是产品安装条件，不等于已在wodeMac验证。试点仍检查客户账户资格、实际版本、运行任务、权限/数据边界和退出交接。",
+              "en": "The official installation guide lists macOS 12+ and ARM64/x64 options. These are installation requirements, not evidence of testing on wodeMac. A pilot must still verify account eligibility, actual version, tasks, permission/data boundaries and exit handover."
             }
           ]
         },
@@ -1430,8 +1430,8 @@ window.CalDockGrowthContent = {
             "en": "Five-city lead routing, conflicts and partner settlement"
           },
           "body": {
-            "zh": "统一入口记录 lead_id、企业主体、客户所在城市、引荐伙伴、腾讯 WorkBuddy 渠道标签、任务、预算人、联系意愿、下一步和日期。销售运营先按主体与联系方式去重，再分配一个负责销售；本地伙伴负责关系与现场协调，MacUSA 统一排远程验证和设备。客户偏好优先，城市标签不形成区域独家。",
-            "en": "Use one intake record with lead_id, business entity, customer city, referring partner, Tencent WorkBuddy-scenario tag, task, budget owner, contact preference and next step/date. Sales operations deduplicates by business and contact before assigning one sales owner. Local partners handle relationships and coordination; MacUSA schedules remote validation and machines centrally. Customer preference takes priority, and city tags do not create exclusive territories."
+            "zh": "统一入口记录 lead_id、企业主体、客户所在城市、引荐伙伴、腾讯 WorkBuddy 渠道标签、任务、预算人、联系意愿、下一步和日期。销售运营先按主体与联系方式去重，再分配一个负责销售；本地伙伴负责关系与现场协调，wodeMac 统一排远程验证和设备。客户偏好优先，城市标签不形成区域独家。",
+            "en": "Use one intake record with lead_id, business entity, customer city, referring partner, Tencent WorkBuddy-scenario tag, task, budget owner, contact preference and next step/date. Sales operations deduplicates by business and contact before assigning one sales owner. Local partners handle relationships and coordination; wodeMac schedules remote validation and machines centrally. Customer preference takes priority, and city tags do not create exclusive territories."
           },
           "items": [
             {
@@ -2421,8 +2421,8 @@ window.CalDockGrowthContent = {
     },
     {
       "title": {
-        "zh": "MacUSA 当前公开服务状态",
-        "en": "MacUSA public service status"
+        "zh": "wodeMac 当前公开服务状态",
+        "en": "wodeMac public service status"
       },
       "url": "https://craftos.app/api/caldock/capabilities",
       "note": {
@@ -2437,8 +2437,8 @@ window.CalDockGrowthContent = {
       },
       "url": "https://cloud.tencent.com/document/product/563/137252",
       "note": {
-        "zh": "用于核验现有渠道商/实施伙伴资格；不代表MacUSA已获授权或建立合作。",
-        "en": "Use to verify prospective existing resellers/implementation partners; this does not establish MacUSA authorization or partnership."
+        "zh": "用于核验现有渠道商/实施伙伴资格；不代表wodeMac已获授权或建立合作。",
+        "en": "Use to verify prospective existing resellers/implementation partners; this does not establish wodeMac authorization or partnership."
       }
     },
     {
@@ -2448,8 +2448,8 @@ window.CalDockGrowthContent = {
       },
       "url": "https://cloud.tencent.com/document/product/1831/134387",
       "note": {
-        "zh": "列出macOS 12+与ARM64/x64选项；实际MacUSA运行、权限和任务适配仍需试点测试。",
-        "en": "Lists macOS 12+ and ARM64/x64 options; actual MacUSA runtime, permissions and task fit still require pilot testing."
+        "zh": "列出macOS 12+与ARM64/x64选项；实际wodeMac运行、权限和任务适配仍需试点测试。",
+        "en": "Lists macOS 12+ and ARM64/x64 options; actual wodeMac runtime, permissions and task fit still require pilot testing."
       }
     }
   ]

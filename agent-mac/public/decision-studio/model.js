@@ -1,4 +1,4 @@
-/* MacUSA Decision Studio — deterministic planning, USD, no verified hardware quotes. */
+/* wodeMac Decision Studio — deterministic planning, USD, no verified hardware quotes. */
 (function(root){
 'use strict';
 const procurement=Object.freeze({name:"Mini M6",referenceNewBudget:899,usedPercent:80,estimatedPurchase:719.2});

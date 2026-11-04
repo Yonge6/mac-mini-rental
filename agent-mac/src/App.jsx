@@ -106,7 +106,7 @@ function useSourceInteractions(root) {
 function Checkout({ value }) {
   const plan = plans[value];
   return <div className="checkout-page">
-    <header className="checkout-nav"><a className="checkout-brand" href={appHref()}><img src="./assets/macusa-logo.svg" alt="" />MacUSA</a><a href={appHref(undefined,{interval:value})+'#pricing'}>{t("返回选择方案","Back to plans")}</a></header>
+    <header className="checkout-nav"><a className="checkout-brand" href={appHref()}><img src="./assets/wodemac-logo.svg" alt="" />wodeMac</a><a href={appHref(undefined,{interval:value})+'#pricing'}>{t("返回选择方案","Back to plans")}</a></header>
     <main className="checkout-main">
       <section className="checkout-details"><p className="checkout-eyebrow">{t("独享 MAC · 美国加州","DEDICATED MAC · CALIFORNIA")}</p><h1>{t("完成付款，","Your own Mac,")}<br />{t("开启你的独享 Mac。","one payment away.")}</h1>
         <p className="checkout-lead">{t("M6 Mac mini，24 小时为你和 Agent 在线。","M6 Mac mini. Always on for you and your agents.")}</p>
@@ -149,7 +149,7 @@ function RentalApp() {
       root.current.querySelector('.caldock-brand').href=appHref();
     }
   }, [value,checkout]);
-  useEffect(() => { document.title = checkout ? t('付款 · MacUSA','Checkout · MacUSA') : t('独享 M6 Mac mini · 美国加州 | MacUSA','Dedicated M6 Mac mini · California | MacUSA'); document.documentElement.lang = english ? 'en' : 'zh-CN'; }, [checkout]);
+  useEffect(() => { document.title = checkout ? t('付款 · wodeMac','Checkout · wodeMac') : t('独享 M6 Mac mini · 美国加州 | wodeMac','Dedicated M6 Mac mini · California | wodeMac'); document.documentElement.lang = english ? 'en' : 'zh-CN'; }, [checkout]);
   if (checkout) return <Checkout value={value} />;
   return <>
     <SourceMarkup ref={root} />
@@ -161,7 +161,7 @@ function RentalApp() {
 function HostedAccountRedirect(){useEffect(()=>{const q=new URLSearchParams(location.search);location.replace(appHref(q.get('view'),{next:q.get('next')||undefined,tab:q.get('tab')||undefined,order:q.get('order')||undefined}));},[]);return <div className="cd-loading-page"><p>{t('正在打开安全账号中心…','Opening your account…')}</p></div>;}
 export function App(){
   const view=new URLSearchParams(location.search).get('view');
-  useEffect(()=>{document.documentElement.lang=english?'en':'zh-CN';if(VIEWS.has(view))document.title=(view==='admin'?t('管理后台','Operations'):view==='login'?t('登录','Sign in'):t('客户中心','My account'))+' · MacUSA';},[view]);
+  useEffect(()=>{document.documentElement.lang=english?'en':'zh-CN';if(VIEWS.has(view))document.title=(view==='admin'?t('管理后台','Operations'):view==='login'?t('登录','Sign in'):t('客户中心','My account'))+' · wodeMac';},[view]);
   const accountView=VIEWS.has(view);
   const needsAccountHost=onMarketingHost&&!isDemo&&(accountView||view==='checkout');
   return <CommerceProvider>{needsAccountHost?<HostedAccountRedirect/>:accountView?<CommercePages view={view}/>:<RentalApp/>}</CommerceProvider>;
