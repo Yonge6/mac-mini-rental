@@ -15,9 +15,10 @@ These instructions apply to `agent-mac/`; also follow the repository-root `AGENT
 
 ## Product copy and pricing
 - Location is United States / California only; no Europe or random allocation. Page product copy currently says M6 Mac mini. Hardware changes require confirmed product information, not invented specifications.
-- Monthly: USD 199 for 1 month. Quarterly: USD 507 for 3 months (169/month). Yearly: USD 1548 for 12 months (129/month), featured.
-- Hero shows $129/month starting price with $1548 billed annually. The plan selector stays in the lower pricing section; reserve buttons scroll there. Preserve the interval through checkout, language switch, auth callback and customer/admin displays.
-- Quarter saves USD 90 vs three monthly payments; year saves USD 840 vs twelve monthly payments. Previous USD 1799 annual and two-plan layouts are obsolete.
+- Weekly: USD 69 for 7 days. Monthly: USD 199 for 1 month. Quarterly: USD 537 for 3 months (179/month). Half-yearly: USD 954 for 6 months (159/month). Yearly: USD 1668 for 12 months (139/month), featured.
+- Hero shows $139/month starting price with $1668 billed annually. The plan selector stays in the lower pricing section; reserve buttons scroll there. Preserve the interval through checkout, language switch, auth callback and customer/admin displays.
+- Quarter saves USD 60 vs three monthly payments; half-year saves USD 240; year saves USD 720 vs twelve monthly payments. Previous USD 1799 annual and two-plan layouts are obsolete.
+- Daily offer: 3 first-period seats at 20% off (not weekly), reset at midnight Beijing time. Seats and the reset time always come from the backend; never show a countdown or seat count the server has not reported.
 - Prices live in `src/commerce/plans.mjs`; backend independently validates prices. Changes affect new orders, never existing order/commission snapshots. No credits, wallet or top-up wording.
 
 ## Accounts, payments and referrals

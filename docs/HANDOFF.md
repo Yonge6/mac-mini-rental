@@ -79,7 +79,7 @@ Render 的环境变量页面里是 Work OS 的全部生产配置。**编辑时�
 - 正式 webhook：`caldock-craftos-live` → `https://craftos.app/api/caldock/stripe/webhook`
 - 测试 webhook：`caldock-craftos`（Sandbox，同一个地址），留着以后测试用。
 - 两个 webhook 都是 API 版本 2025-01-27.acacia，Snapshot 格式，7 个事件：`checkout.session.completed`、`checkout.session.async_payment_succeeded`、`invoice.paid`、`invoice.payment_failed`、`customer.subscription.updated`、`customer.subscription.deleted`、`charge.refunded`。
-- 不需要在 Stripe 建产品或价格：金额由服务器按订单生成（月付 19900、季付 50700 每 3 个月、年付 154800 每年，单位美分）。
+- 不需要在 Stripe 建产品或价格：金额由服务器按订单生成（周付 6900、月付 19900、季付 53700、半年付 95400 每 3 个月、年付 166800 每年，单位美分）。
 
 **Google Cloud**（项目 `caldock-513602`）：
 - OAuth 客户端 “CalDock craftos.app”（Web 类型），回调地址 `https://craftos.app/api/caldock/auth/google/callback`。
@@ -89,7 +89,7 @@ Render 的环境变量页面里是 Work OS 的全部生产配置。**编辑时�
 ## 6. 产品规则（未经用户确认不要改）
 
 - 品牌 **wodeMac**（2026-11-03 由 CalDock 改名，由负责人决定）。计划域名 `wodemac.com`，切换前网站仍在 `craftos.app/caldock/`；接口和代码里的 `caldock` 标识不变。
-- 价格：月付 $199；季付 $507（折合 $169/月）；年付 $1,548（折合 $129/月）。首屏写“$129/月起”并注明年付总额。
+- 价格：周付 $69；月付 $199；季付 $537（折合 $179/月）；半年付 $954（折合 $159/月）；年付 $1,668（折合 $139/月）。首屏写“$139/月起”并注明年付总额。
 - 计费从**交付当天**开始。管理员在后台标记“已交付”时，后端会把 Stripe 的下一次扣款推到交付后满一期（`trial_end`）。
 - 3 个工作日内没交付，全额退款。月付和季付可随时关闭续订；年付一年内不能取消或退款。续费失败保留 7 天。服务结束 3 天后抹除数据。
 - 每人限 1 台。不出现积分、钱包、充值之类的说法。
