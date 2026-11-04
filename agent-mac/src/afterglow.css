@@ -402,3 +402,60 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline-color: #ffa
 .wm-footer nav a:hover { color: #ffbd6e; }
 .caldock-language-switch a { display: inline-grid; place-items: center; min-width: 32px; min-height: 32px; }
 @media (max-width:850px) { .caldock-page-links { -webkit-mask-image: linear-gradient(90deg, #000 88%, transparent); mask-image: linear-gradient(90deg, #000 88%, transparent); } }
+
+/* Design pass: one typeface, a floating nav and the tagline reveal. */
+:root { --font-ui-sans: "Geist Variable", -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; --font-ui-heading: var(--font-ui-sans); --font-ui-mono: "Geist Mono Variable", ui-monospace, monospace; --wm-ease: cubic-bezier(.22,1,.36,1); }
+body, .site-home { font-family: var(--font-ui-sans); }
+.afterglow-hero h1 { width: fit-content; background: linear-gradient(90deg, #fff8ec, #bfb09a); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.site-subpage-main { padding-top: 0; }
+.afterglow-hero-art { top: 0; }
+html { scroll-padding-top: 96px; }
+.caldock-header { top: 12px; left: 50%; right: auto; width: min(1280px, calc(100% - 32px)); transform: translateX(-50%); border: 1px solid #b2936e38; border-radius: 16px; background: #15110eb8; -webkit-backdrop-filter: blur(16px); backdrop-filter: blur(16px); }
+.caldock-nav { height: 64px; padding-inline: 20px; gap: 24px; }
+.caldock-page-links a { padding-block: 22px; font-size: 14px; transition: color .3s var(--wm-ease); }
+.caldock-page-links a[aria-current] { box-shadow: none; color: #ffbd6e; }
+.wm-menu-slot { display: none; }
+.wm-menu-toggle { position: relative; width: 40px; height: 40px; padding: 0; border: 1px solid #b2936e55; border-radius: 12px; background: transparent; cursor: pointer; }
+.wm-menu-toggle i { position: absolute; left: 11px; width: 16px; height: 2px; border-radius: 2px; background: #f4eee1; transition: transform .5s var(--wm-ease); }
+.wm-menu-toggle i:first-child { top: 15px; } .wm-menu-toggle i:last-child { top: 22px; }
+.wm-menu-toggle.is-open i:first-child { transform: translateY(3.5px) rotate(45deg); }
+.wm-menu-toggle.is-open i:last-child { transform: translateY(-3.5px) rotate(-45deg); }
+.wm-menu-panel { position: fixed; inset: 0; z-index: 45; display: flex; flex-direction: column; gap: 8px; padding: 104px 24px 32px; background: #0f0c09f0; -webkit-backdrop-filter: blur(24px); backdrop-filter: blur(24px); opacity: 0; visibility: hidden; transition: opacity .3s var(--wm-ease), visibility 0s .3s; }
+.wm-menu-panel.is-open { opacity: 1; visibility: visible; transition: opacity .3s var(--wm-ease); }
+.wm-menu-panel a { padding-block: 12px; color: #f4eee1; font-size: 24px; line-height: 32px; font-weight: 600; text-decoration: none; opacity: 0; transform: translateY(24px); }
+.wm-menu-panel.is-open a { opacity: 1; transform: none; transition: transform .5s var(--wm-ease) calc(var(--i) * 45ms), opacity .5s var(--wm-ease) calc(var(--i) * 45ms); }
+.wm-menu-open { overflow: hidden; }
+.wm-tagline { display: grid; place-items: center; padding: 96px 4.4%; }
+.wm-tagline-text { display: grid; gap: 8px; max-width: 980px; font-size: clamp(30px,5vw,60px); line-height: 1.2; font-weight: 600; letter-spacing: -.03em; text-wrap: balance; text-align: center; color: #f8f2e6; }
+.wm-word { color: #f8f2e659; transition: color .6s var(--wm-ease); }
+.wm-word.is-lit { color: #f8f2e6; }
+.hm-page .hm-cta:active, .rental-pay-button:active, .afterglow-partner-cta:active { transform: scale(.98); }
+.hm-page .hm-cta, .rental-pay-button, .afterglow-partner-cta { transition: transform .3s var(--wm-ease), background-color .3s var(--wm-ease), box-shadow .3s var(--wm-ease); }
+@media (max-width:850px) {
+  .caldock-header { top: 8px; width: calc(100% - 16px); }
+  .caldock-nav { display: flex; height: 56px; padding-inline: 12px; gap: 8px; }
+  .caldock-brand { margin-right: auto; }
+  .caldock-page-links { display: none; }
+  .wm-menu-slot { display: block; order: 9; }
+  .caldock-language-switch { gap: 2px; }
+  .hm-hero.afterglow-hero { padding-top: 96px; }
+  html { scroll-padding-top: 80px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wm-word { color: #f8f2e6; }
+  .wm-menu-toggle i, .wm-menu-panel, .wm-menu-panel a, .wm-menu-panel.is-open a { transition: opacity .2s linear; transform: none; }
+  .wm-menu-toggle.is-open i:first-child { transform: translateY(3.5px) rotate(45deg); } .wm-menu-toggle.is-open i:last-child { transform: translateY(-3.5px) rotate(-45deg); }
+}
+@media (max-width:850px) {
+  .site-home .caldock-nav { display: flex; height: 56px; padding-inline: 12px; gap: 8px; }
+  .site-home .caldock-brand img.brand-wordmark { height: 18px; }
+  .wm-menu-close { position: absolute; top: 16px; right: 20px; }
+}
+@media (max-width:600px) {
+  .afterglow-hero-art { margin-top: -84px; }
+  .hm-hero.afterglow-hero { padding-top: 88px; }
+}
+@media (max-width:850px) {
+  .site-home .caldock-nav { min-height: 0; padding-block: 0; align-items: center; }
+}
+:root:root { --font-ui-sans: "Geist Variable", -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; --font-ui-heading: var(--font-ui-sans); --font-ui-mono: "Geist Mono Variable", ui-monospace, monospace; }
