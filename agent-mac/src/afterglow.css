@@ -459,3 +459,34 @@ html { scroll-padding-top: 96px; }
   .site-home .caldock-nav { min-height: 0; padding-block: 0; align-items: center; }
 }
 :root:root { --font-ui-sans: "Geist Variable", -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; --font-ui-heading: var(--font-ui-sans); --font-ui-mono: "Geist Mono Variable", ui-monospace, monospace; }
+
+/* Design pass 2: section rhythm, hover states and small-screen details. */
+.hm-index, .afterglow-eyebrow { font-size: 14px; line-height: 20px; letter-spacing: .14em; }
+.hm-chapter h2 { text-wrap: balance; }
+.hm-chapter p { text-wrap: pretty; }
+.site-reveal-item { transition-timing-function: var(--wm-ease); animation-timing-function: var(--wm-ease); }
+.hm-tools > *, .hm-security-grid > *, .hm-steps > *, .afterglow-partner-card, .afterglow-team-card { transition: transform .5s var(--wm-ease), border-color .3s var(--wm-ease), background-color .3s var(--wm-ease); }
+.afterglow-partner-card:hover, .afterglow-team-card:hover { transform: translateY(-4px); border-color: #cfb78a66; }
+.afterglow-partner-cta:hover { transform: translateY(-1px); }
+.afterglow-partner-cta:focus-visible, .wm-footer a:focus-visible, .wm-menu-panel a:focus-visible, .wm-menu-toggle:focus-visible { outline: 2px solid #ffad47; outline-offset: 2px; }
+.hm-faq [data-slot="collapsible-trigger"] { transition: color .3s var(--wm-ease); }
+.hm-faq [data-slot="collapsible-trigger"]:hover { color: #ffbd6e; }
+.hm-faq [data-slot="collapsible-trigger"] svg { transition: transform .5s var(--wm-ease); }
+.hm-faq [data-slot="collapsible-trigger"][aria-expanded="true"] svg { transform: rotate(180deg); }
+.afterglow-office a, .afterglow-team-card a, .afterglow-company-details a { display: inline-block; padding-block: 4px; }
+.afterglow-office img, .afterglow-team-card > img { transition: transform .5s var(--wm-ease); }
+.afterglow-office:hover img { transform: scale(1.01); }
+@media (min-width:1000px) {
+  #faq .hm-chapter-inner { display: grid; grid-template-columns: minmax(0,5fr) minmax(0,7fr); gap: 64px; align-items: start; }
+  #faq .hm-chapter-head { position: sticky; top: 112px; margin: 0; }
+  #faq .hm-visual { margin-top: 0; min-width: 0; }
+  #faq .hm-faq { max-width: none; width: 100%; }
+}
+@media (max-width:600px) {
+  .wm-tagline { padding: 64px 24px; }
+  .hm-faq [data-slot="collapsible-trigger"] { min-height: 48px; }
+  .wm-footer { padding: 32px 24px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .afterglow-partner-card:hover, .afterglow-team-card:hover, .afterglow-office:hover img, .afterglow-partner-cta:hover { transform: none; }
+}
