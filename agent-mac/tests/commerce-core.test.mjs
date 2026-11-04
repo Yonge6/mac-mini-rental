@@ -6,8 +6,8 @@ const loc=value=>{const url=new URL(value);return {href:url.href,hostname:url.ho
 function storage(){const values=new Map();return {getItem:k=>values.get(k)||null,setItem:(k,v)=>values.set(k,v),removeItem:k=>values.delete(k)};}
 test('GitHub account routes move to the same-origin backend app; explicit demos remain isolated',()=>{
  const location=loc('https://yonge6.github.io/mac-mini-rental/?lang=en&interval=year');
- assert.equal(accountBase(location),'https://craftos.app/caldock/');
- const url=new URL(makeAccountUrl(location,'checkout'));assert.equal(url.origin,'https://craftos.app');assert.equal(url.pathname,'/caldock/');assert.equal(url.searchParams.get('interval'),'year');assert.equal(url.searchParams.get('lang'),'en');
+ assert.equal(accountBase(location),'https://wodemac.com/');
+ const url=new URL(makeAccountUrl(location,'checkout'));assert.equal(url.origin,'https://wodemac.com');assert.equal(url.pathname,'/');assert.equal(url.searchParams.get('interval'),'year');assert.equal(url.searchParams.get('lang'),'en');
  const demo=new URL(makeAccountUrl(loc(location.href+'&demo=1&role=admin'),'admin'));assert.equal(demo.hostname,'yonge6.github.io');assert.equal(demo.searchParams.get('demo'),'1');
 });
 test('same-origin local and hosted subpaths survive refresh and unknown view values cannot become redirects',()=>{

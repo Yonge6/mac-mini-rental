@@ -74,13 +74,13 @@ UI 改动还要在浏览器检查桌面/手机、中文/英文、选套餐到付
 
 ### craftos.app
 
-正式站、登录、客户中心和付款页在 <https://craftos.app/caldock/>。后端的 `deploy/caldock-revision.txt` 固定本仓库的 **40 位提交 SHA**，Docker 在构建时取该提交并构建前端。
+正式站、登录、客户中心和付款页在 <https://wodemac.com/>，`craftos.app/caldock/` 跳转过去。后端的 `deploy/caldock-revision.txt` 固定本仓库的 **40 位提交 SHA**，Docker 在构建时取该提交并构建前端。
 
 要把已验证前端同步到正式站：
 1. 前端提交先存在 GitHub，且相关检查通过。
 2. 在后端独立 PR 中把 `deploy/caldock-revision.txt` 更新为该提交的完整 SHA；保留 Work OS、Wiki 的其他版本 pin 和配置。
 3. 后端 CI 通过并合并后，Render 服务 `onelaser-workos-migration` **不会自动部署**：它部署的是分支 `codex/company-migration-live-20261102`，且由人手动触发。把该分支快进（普通 push，不 force）到新的 `main`，再在 Render 点 Manual Deploy → Deploy latest commit。细节和注意事项见 `docs/HANDOFF.md` 第 4 节。不要擅自修改自动发布设置。
-4. 回读 `https://craftos.app/caldock/build-info.json` 的 `caldockCommit`，并在浏览器验证相应页面。不能仅凭 GitHub Pages 更新就说正式站也已更新。
+4. 回读 `https://wodemac.com/build-info.json` 的 `caldockCommit`，并在浏览器验证相应页面。不能仅凭 GitHub Pages 更新就说正式站也已更新。
 
 仅修改本仓库文档，不需要改后端 pin 或重新部署正式服务。
 

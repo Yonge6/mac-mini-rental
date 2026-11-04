@@ -8,14 +8,21 @@
 
 ## 1. 一句话现状
 
-CalDock（美国加州独享 M6 Mac mini 租用）已在 **https://craftos.app/caldock/** 正式上线：
+wodeMac（原 CalDock，美国加州独享 M6 Mac mini 租用）已在 **https://wodemac.com/** 正式上线，`craftos.app/caldock/` 跳转过去：
 
 - 客户可以用 **Google 登录**，用 **Stripe 正式收款**（`paymentMode: live`），月付、季付、年付都按订阅自动续费。
 - 宣传页同时发布在 GitHub Pages：https://yonge6.github.io/mac-mini-rental/ 。
 - 隐私政策和服务条款（中英双语）已上线，见第 6 节。
 
-随时可以用这个地址核对线上状态：https://craftos.app/api/caldock/capabilities
+随时可以用这个地址核对线上状态：https://wodemac.com/api/caldock/capabilities
 （2026-11-03 读到：`google:true`、`apple:false`、`payments:true`、`paymentMode:"live"`）
+
+**2026-11-04 更新，以此为准：**
+
+- 后端和 Wiki 仓库已转给项目负责人，前端仍在 `Yonge6/mac-mini-rental`。Render 部署后端 `main`，检查通过后自动部署，也可在 Render 手动触发。后文旧的部署分支流程已不适用。
+- `wodemac.com` 的 DNS 在 GoDaddy，由负责人管理，改记录要邮箱验证码。
+- 套餐：周 $69、月 $199、季 $537、半年 $954、年 $1,668。每天 3 个首期 8 折席位，周付不参加，北京时间 0 点重置，由后端计数。
+- 大字是按 365 天折算的每天价格；首屏库存文案（首发 10 台、已租出 7 台）是写死的，需要手动更新。
 
 ## 2. 账号与权限
 
