@@ -27,7 +27,7 @@ export default defineConfig({
     configureServer(server) {
       // Match the production account path, including OAuth return URLs.
       server.middlewares.use((request, _response, next) => {
-        if (request.url?.startsWith("/macusa/")) request.url = request.url.slice("/macusa".length);
+        if (request.url?.startsWith("/caldock/")) request.url = request.url.slice("/caldock".length);
         next();
       });
     },

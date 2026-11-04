@@ -1,4 +1,4 @@
-# MacUSA（原 CalDock）交接说明（2026-11-03）
+# wodeMac（原 CalDock）交接说明（2026-11-03）
 
 写给接手开发的 Claude Code（项目所有者 Mac 上的本地会话）和人工开发者。开始任何任务前先读本文，再读根目录 `AGENTS.md`、`docs/DEVELOPMENT.md` 和要修改目录里的规则文件。
 
@@ -8,7 +8,7 @@
 
 ## 1. 一句话现状
 
-CalDock（美国加州独享 M6 Mac mini 租用）已在 **https://craftos.app/macusa/** 正式上线：
+CalDock（美国加州独享 M6 Mac mini 租用）已在 **https://craftos.app/caldock/** 正式上线：
 
 - 客户可以用 **Google 登录**，用 **Stripe 正式收款**（`paymentMode: live`），月付、季付、年付都按订阅自动续费。
 - 宣传页同时发布在 GitHub Pages：https://yonge6.github.io/mac-mini-rental/ 。
@@ -58,7 +58,7 @@ CalDock（美国加州独享 M6 Mac mini 租用）已在 **https://craftos.app/m
    ```
    这是普通推送，不加 `--force`。先确认部署分支没有 `main` 以外的提交（`gh api repos/Yonge6/onelaser-workos-api/compare/main...codex/company-migration-live-20261102`，应为 ahead=0）。如果有分叉，先停下来问 Codex 或用户。
 4. **在 Render 手动部署**：服务页右上角 **Manual Deploy → Deploy latest commit**。Docker 构建约 8 到 10 分钟。这个服务每次都是手动部署（Codex 那边用 cxw2020@gmail.com 触发）。
-5. **回读确认**：`https://craftos.app/macusa/build-info.json` 的 `caldockCommit` 应为新 SHA，再在浏览器检查页面。
+5. **回读确认**：`https://craftos.app/caldock/build-info.json` 的 `caldockCommit` 应为新 SHA，再在浏览器检查页面。
 
 注意：Codex 经常往后端 `main` 和部署分支推送 Work OS 改动。2026-11-03 部署分支落后 `main` 3 个提交（Codex 的 Work OS 改动，还没部署）。你一部署，这些改动会一起上线。
 
@@ -84,11 +84,11 @@ Render 的环境变量页面里是 Work OS 的全部生产配置。**编辑时�
 **Google Cloud**（项目 `caldock-513602`）：
 - OAuth 客户端 “CalDock craftos.app”（Web 类型），回调地址 `https://craftos.app/api/caldock/auth/google/callback`。
 - 应用状态 **In production**，用户类型 External，只申请基本信息，不需要 Google 审核。
-- 品牌页链接：首页 `https://craftos.app/macusa/`，隐私政策 `…/caldock/legal/privacy.en.html`，服务条款 `…/caldock/legal/terms.en.html`，授权域名 `craftos.app`。
+- 品牌页链接：首页 `https://craftos.app/caldock/`，隐私政策 `…/caldock/legal/privacy.en.html`，服务条款 `…/caldock/legal/terms.en.html`，授权域名 `craftos.app`。
 
 ## 6. 产品规则（未经用户确认不要改）
 
-- 品牌 **MacUSA**（2026-11-03 由 CalDock 改名，由负责人决定）。网址改为 `/macusa/`，旧链接跳转；接口和代码里的 `caldock` 标识不变。
+- 品牌 **wodeMac**（2026-11-03 由 CalDock 改名，由负责人决定）。计划域名 `wodemac.com`，切换前网站仍在 `craftos.app/caldock/`；接口和代码里的 `caldock` 标识不变。
 - 价格：月付 $199；季付 $507（折合 $169/月）；年付 $1,548（折合 $129/月）。首屏写“$129/月起”并注明年付总额。
 - 计费从**交付当天**开始。管理员在后台标记“已交付”时，后端会把 Stripe 的下一次扣款推到交付后满一期（`trial_end`）。
 - 3 个工作日内没交付，全额退款。月付和季付可随时关闭续订；年付一年内不能取消或退款。续费失败保留 7 天。服务结束 3 天后抹除数据。

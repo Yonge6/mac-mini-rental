@@ -67,7 +67,7 @@
     const canEdit = options.canEdit !== false;
     return `<section class="growth-playbook" aria-labelledby="growth-title">
       <header class="growth-hero">
-        <div class="growth-hero-top"><span class="growth-eyebrow">MACUSA / GROWTH PLAYBOOK</span><span class="growth-version">${escapeHTML(plan.version || '90D')}</span></div>
+        <div class="growth-hero-top"><span class="growth-eyebrow">WODEMAC / GROWTH PLAYBOOK</span><span class="growth-version">${escapeHTML(plan.version || '90D')}</span></div>
         <div class="growth-hero-body">
           <div class="growth-hero-copy"><h2 id="growth-title">${choose(lang, '从第一位客户，<br>走到持续增长。', 'From the first customer<br>to repeatable growth.')}</h2><p>${choose(lang, '把合作、内容、企业销售和 AI 辅助拓展，连成一套能执行、能成交、能复盘的增长方案。', 'Connect partnerships, content, enterprise sales and AI-assisted outreach with a sales process you can execute and improve.')}</p></div>
           <div class="growth-priorities" aria-label="${choose(lang, '执行原则', 'Operating priorities')}">
@@ -106,7 +106,7 @@
     const sources = Array.isArray(plan.sources) ? plan.sources : [];
     const cell = value => localize(value, lang).replace(/\|/g, '\\|').replace(/\r?\n/g, '<br>');
     const output = [
-      choose(lang, '# MacUSA · 90 天销售增长方案', '# MacUSA · 90-day Sales Growth Playbook'),
+      choose(lang, '# wodeMac · 90 天销售增长方案', '# wodeMac · 90-day Sales Growth Playbook'),
       '',
       choose(lang, `版本：${plan.version || '90D'}`, `Version: ${plan.version || '90D'}`),
       '',
