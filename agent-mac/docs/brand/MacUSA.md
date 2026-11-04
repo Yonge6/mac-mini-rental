@@ -6,4 +6,4 @@ Symbol: `public/assets/macusa-logo.svg`, the owner-selected "online terminal" ma
 
 Placement: page header, software row, checkout brand, legal pages, favicon. Third-party agent marks (Claude, Codex, OpenCode) remain their own product marks.
 
-Technical names stay `caldock`: URLs, CSS classes, error codes, storage keys and window globals.
+The site is at `/macusa/`; `/caldock/` redirects. Technical names stay `caldock`: `/api/caldock`, CSS classes, error codes, storage keys and window globals.

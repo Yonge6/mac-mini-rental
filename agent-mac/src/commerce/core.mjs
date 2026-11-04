@@ -14,7 +14,7 @@ export function rememberReferral(search,storage,now=Date.now()) {
   return null;
 }
 export function accountBase(locationLike,demo=false) {
-  if(locationLike.hostname==='yonge6.github.io'&&!demo)return 'https://craftos.app/caldock/';
+  if(locationLike.hostname==='yonge6.github.io'&&!demo)return 'https://craftos.app/macusa/';
   return new URL('./',locationLike.href).toString().split('?')[0];
 }
 export function makeAccountUrl(locationLike,view,extra={}) {
