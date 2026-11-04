@@ -63,3 +63,13 @@
 #pricing .rental-plan-card{transition:transform .5s var(--wm-ease),border-color .3s var(--wm-ease),box-shadow .3s var(--wm-ease),background-color .3s var(--wm-ease)}
 #pricing .rental-plan-card:active{transform:scale(.99)}
 .rental-card-saving b,.rental-offer-title{letter-spacing:-.02em}
+
+.coffee-note{display:inline-flex;align-items:center;gap:6px;font-style:normal;font-weight:500;letter-spacing:.01em;color:#e6cb90;white-space:nowrap}
+.coffee-note svg{flex:none}
+.coffee-note-hero{margin-left:12px;padding:4px 11px 4px 9px;border:1px solid #e6cb9080;border-radius:999px;background:#17100ae0;color:#f6e2b5;font-size:13px;line-height:1.4;letter-spacing:.02em;text-shadow:none;vertical-align:.3em}
+.rental-card-coffee{display:block;min-height:20px;margin-top:10px;line-height:20px}
+.coffee-note-card{font-size:13px}
+.rental-card-coffee+.rental-card-total{margin-top:12px}
+@media(max-width:1280px){.coffee-note-hero{display:flex;width:max-content;margin:8px 0 0}}
+@media(min-width:701px) and (max-width:1280px){.afterglow-hero .afterglow-reserve{margin-top:20px}.afterglow-hero-price{gap:4px}.coffee-note-hero{margin-top:4px}}
+@media(min-width:901px) and (max-width:1180px){.afterglow-hero .hm-hero-copy{margin-top:-20px}}
