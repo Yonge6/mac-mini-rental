@@ -8,3 +8,6 @@ export function billingEndsAt(start,interval){
   const day=date.getUTCDate();date.setUTCDate(1);date.setUTCMonth(date.getUTCMonth()+plan.months);
   const last=new Date(Date.UTC(date.getUTCFullYear(),date.getUTCMonth()+1,0)).getUTCDate();date.setUTCDate(Math.min(day,last));return date.toISOString();
 }
+// Display only, on a 365-day year and rounded up so the shown daily rate never understates the charge.
+export const periodDays = interval => { const plan=BILLING_PLANS[normalizeInterval(interval)]; return plan.days ?? plan.months*365/12; };
+export const dailyCents = (cents,interval) => Math.ceil(cents/periodDays(interval)-1e-9);

@@ -4,7 +4,7 @@ import sourceZh from './source.html?raw';
 import sourceEn from './source.en.html?raw';
 import {CommerceProvider, appHref, isDemo, onMarketingHost} from './commerce/context.jsx';
 import {VIEWS} from './commerce/core.mjs';
-import {BILLING_PLANS,normalizeInterval} from './commerce/plans.mjs';
+import {BILLING_PLANS,normalizeInterval,dailyCents} from './commerce/plans.mjs';
 import {AccountEntry, CommercePages, CheckoutAction} from './commerce/pages.jsx';
 const english = new URLSearchParams(location.search).get('lang') === 'en';
 const language = english ? 'en' : 'zh';
@@ -59,9 +59,10 @@ function OfferBar({ offer, value }) {
 // The lowest price anyone can pay right now: yearly, 20% off the first year while a seat is left.
 function HeroPrice() {
   const offer = useDailyOffer();
-  const year = BILLING_PLANS.year;
-  if (!offerApplies(offer, 'year')) return <><span>{t('','From ')}<strong>{dollars(year.monthlyCents / 100)}</strong>{t('/月起','/month')}</span><small>{t('按年付费，一次 ' + dollars(year.amountCents / 100), dollars(year.amountCents / 100) + ' billed annually')}</small></>;
-  return <><span>{t('','From ')}<s>{dollars(year.monthlyCents / 100)}</s> <strong><Amount cents={discounted(offer, year.monthlyCents)}/></strong>{t('/月起','/month')}</span><small>{t('年付首期 8 折，一次 ' + money(offerCents(offer, 'year')) + '，之后每年 ' + dollars(year.amountCents / 100), '20% off the first year: ' + money(offerCents(offer, 'year')) + ' billed once, then ' + dollars(year.amountCents / 100) + ' per year')}</small></>;
+  const total = BILLING_PLANS.year.amountCents, list = dailyCents(total, 'year');
+  if (!offerApplies(offer, 'year')) return <><span>{t('','From ')}<strong><Amount cents={list}/></strong>{t('/天起','/day')}</span><small>{t('按年付费，一次 ' + money(total), money(total) + ' billed annually')}</small></>;
+  const first = offerCents(offer, 'year');
+  return <><span>{t('','From ')}<s><Amount cents={list}/></s> <strong><Amount cents={dailyCents(first, 'year')}/></strong>{t('/天起','/day')}</span><small>{t('年付首期 8 折，一次 ' + money(first) + '，之后每年 ' + money(total), '20% off the first year: ' + money(first) + ' billed once, then ' + money(total) + ' per year')}</small></>;
 }
 
 function HeroOffer() {
@@ -86,8 +87,8 @@ function PlanPicker({ value, onChange, id }) {
         <input type="radio" name={'billing-'+id} value={key} checked={value === key} onChange={() => onChange(key)} />
         <span className="rental-card-edition" aria-hidden="true">{key==='week'?'01 / WEEKLY':key==='month'?'02 / MONTHLY':key==='quarter'?'03 / QUARTERLY':key==='half'?'04 / HALF-YEARLY':'05 / ANNUAL'}</span>
         <span className="rental-card-heading">{p.title}{key === 'year' && <em>{t('推荐','Recommended')}</em>}</span>
-        <span className="rental-card-was">{offerApplies(offer,key)&&<><s>{dollars(p.display)}</s><em>{t('首期 8 折','First period 20% off')}</em></>}</span>
-        <span className="rental-card-price"><strong><Amount cents={offerApplies(offer,key)?discounted(offer,p.display*100):p.display*100}/></strong><span>{key==='week'?t('/周','/week'):t('/月','/month')}</span></span>
+        <span className="rental-card-was">{offerApplies(offer,key)&&<><s><Amount cents={dailyCents(BILLING_PLANS[key].amountCents,key)}/></s><em>{t('首期 8 折','First period 20% off')}</em></>}</span>
+        <span className="rental-card-price"><strong><Amount cents={dailyCents(offerApplies(offer,key)?offerCents(offer,key):BILLING_PLANS[key].amountCents,key)}/></strong><span>{t('/天','/day')}</span></span>
         <span className="rental-card-total">{offerApplies(offer,key)?<>{t('首期支付 ','First period ')}{money(discounted(offer,BILLING_PLANS[key].amountCents))}<small>{p.renews}</small></>:p.summary}</span>
         {savings[key]?<span className="rental-card-note rental-card-saving"><span>{t('比连续月付'+savings[key].zh+'省','Save versus '+savings[key].en)}</span><b>${savings[key].amount}</b></span>:<span className="rental-card-note">{key==='week'?t('按周续订，随时可停','Week to week. Cancel renewal anytime.'):t('按月续订，随时可停','Month to month. Cancel renewal anytime.')}</span>}
         <span className="rental-card-select"><span className="rental-radio" aria-hidden="true">{value === key && <img src="./assets/check.svg" alt="" />}</span>{value===key?t('已选方案','Selected plan'):t('选择'+p.name,'Choose '+p.name.toLowerCase())}</span>
@@ -97,6 +98,7 @@ function PlanPicker({ value, onChange, id }) {
     <a className="rental-pay-button" href={paymentLink(value)}>{t("继续付款","Continue to payment")} · {offerApplies(offer,value)?<>{t('首期 ','first period ')}{money(offerCents(offer,value))}</>:<>{dollars(plan.total)}/{plan.unit}</>}<img src="./assets/chevron.svg" alt="" /></a></div>
     <ul className="rental-terms">
       <li><img src="./assets/check.svg" alt="" />{t("计费周期从交付当天开始","Billing starts on delivery")}</li>
+      <li><img src="./assets/check.svg" alt="" />{t("每天价格按一年 365 天折算，实际按所选周期一次付款","Daily prices assume a 365-day year; you pay once per billing period")}</li>
       <li><img src="./assets/check.svg" alt="" />{t("3 个工作日内没交付，全额退款","Not delivered within 3 business days? Full refund")}</li>
       <li><img src="./assets/check.svg" alt="" /><span data-testid="plan-term">{plan.term}</span></li>
       <li><img src="./assets/check.svg" alt="" />{t("每人限 1 台","One Mac per customer")}</li>
