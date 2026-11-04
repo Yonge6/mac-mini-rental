@@ -45,3 +45,10 @@
 @media(max-width:700px){.rental-offer{grid-template-columns:1fr}.rental-offer-timer{justify-content:flex-start}.rental-offer-clock{font-size:22px}}
 .rental-card-saving{display:flex;flex-direction:column;gap:2px;margin-top:10px;padding:9px 12px;border:1px solid #ffb34766;border-radius:8px;background:#ffb3471a;color:#f0d9b0!important;font-size:12px;line-height:1.35}
 .rental-card-saving b{color:#ffb347;font-size:24px;font-weight:700;letter-spacing:-.02em;line-height:1.1}
+.rental-card-was{display:flex;flex-wrap:wrap;align-items:center;gap:4px 8px;min-height:24px;margin-top:18px;font-size:13px;line-height:1.3}
+.rental-card-was s{color:#a7977e;font-size:18px}.rental-card-was em{padding:2px 7px;border-radius:5px;background:#ffb34726;color:#ffb347;font-size:11px;font-style:normal;font-weight:600;white-space:nowrap}
+.rental-card-was+.rental-card-price{margin-top:6px}
+.rental-card-price strong small{font-size:.48em;letter-spacing:-.02em;vertical-align:.62em}
+.rental-card-total small{display:block;margin-top:2px;color:#a7977e;font-size:12px}
+.checkout-total strong s{margin-right:10px;color:#a7977e;font-size:.6em;font-weight:400}
+@media(min-width:1201px){#pricing .rental-card-price strong{font-size:clamp(44px,3.7vw,60px)}}
