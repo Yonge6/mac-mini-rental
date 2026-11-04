@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {accountBase,makeAccountUrl,rememberReferral,displayMoney} from '../src/commerce/core.mjs';
-import {BILLING_PLANS,billingEndsAt,billingLabel} from '../src/commerce/plans.mjs';
+import {BILLING_PLANS,billingEndsAt,billingLabel,dailyCents} from '../src/commerce/plans.mjs';
 const loc=value=>{const url=new URL(value);return {href:url.href,hostname:url.hostname,search:url.search};};
 function storage(){const values=new Map();return {getItem:k=>values.get(k)||null,setItem:(k,v)=>values.set(k,v),removeItem:k=>values.delete(k)};}
 test('GitHub account routes move to the same-origin backend app; explicit demos remain isolated',()=>{
@@ -21,6 +21,10 @@ test('referral storage keeps first touch, expires at 30 days and rejects malform
  assert.equal(rememberReferral('?ref=OTHERCODE123',store,now+31*86400000),'OTHERCODE123');
  assert.equal(rememberReferral('?ref=<script>',storage(),now),null);
  assert.equal(rememberReferral('?ref=FIRSTCODE123',{getItem(){throw Error('blocked');}},now),'FIRSTCODE123');
+});
+test('daily prices use a 365-day year and round up',()=>{
+ assert.deepEqual(Object.entries(BILLING_PLANS).map(([key,p])=>dailyCents(p.amountCents,key)),[986,655,589,523,457]);
+ assert.equal(dailyCents(133440,'year'),366);assert.equal(dailyCents(15920,'month'),524);
 });
 test('five plans charge the full term, and quarterly routing survives first-party login',()=>{
  assert.deepEqual(Object.values(BILLING_PLANS).map(p=>[p.days,p.monthlyCents,p.months,p.amountCents]),[[7,undefined,undefined,6900],[undefined,19900,1,19900],[undefined,17900,3,53700],[undefined,15900,6,95400],[undefined,13900,12,166800]]);
