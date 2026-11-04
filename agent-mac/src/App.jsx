@@ -50,9 +50,9 @@ function OfferBar({ offer, value }) {
   if (!offer) return null;
   const full = offer.seatsLeft === 0;
   return <div className={'rental-offer' + (full ? ' is-full' : '')}>
-    <strong className="rental-offer-title">{t('每日 ' + offer.seatsTotal + ' 席 · 限时 8 折', offer.seatsTotal + ' seats a day · limited-time 20% off')}</strong>
-    <div className="rental-offer-timer"><span>{full ? t('今日名额已满，下一轮开放倒计时','Today\'s seats are gone. Next seats open in') : offer.seatsLeft === null ? t('距今日名额重置还有','Seats reset in') : t('今日还剩 ' + offer.seatsLeft + ' 席，距重置还有', offer.seatsLeft + (offer.seatsLeft === 1 ? ' seat' : ' seats') + ' left today. Resets in')}</span><time className="rental-offer-clock" dateTime={offer.resetsAt}>{clock(offer.remaining)}</time></div>
-    <p>{value === 'week' ? t('周付不参加此优惠。','Weekly is not included. ') : ''}{t('限月付、季付、半年付、年付，续费恢复原价。每天北京时间 0 点重置，打开付款页时占用席位，30 分钟内未付款自动释放。','For monthly, quarterly, half-yearly and yearly plans. Renewals are at the regular price. Resets at midnight Beijing time. Opening the payment page holds a seat, released after about 30 minutes if unpaid.')}</p>
+    <strong className="rental-offer-title">{t('每日 ' + offer.seatsTotal + ' 台 · 限时 8 折', offer.seatsTotal + ' seats a day · limited-time 20% off')}</strong>
+    <div className="rental-offer-timer"><span>{full ? t('今日名额已满，下一轮开放倒计时','Today\'s seats are gone. Next seats open in') : t('距今日名额重置还有','Seats reset in')}</span><time className="rental-offer-clock" dateTime={offer.resetsAt}>{clock(offer.remaining)}</time></div>
+    <p>{value === 'week' ? t('周付不参加此优惠。','Weekly is not included. ') : ''}{t('限月付、季付、半年付、年付，续费恢复原价。每天北京时间 0 点重置，打开付款页时占用 1 台，30 分钟内未付款自动释放。','For monthly, quarterly, half-yearly and yearly plans. Renewals are at the regular price. Resets at midnight Beijing time. Opening the payment page holds a seat, released after about 30 minutes if unpaid.')}</p>
   </div>;
 }
 
@@ -134,16 +134,16 @@ function HeroPrice() {
 function HeroOffer() {
   const offer = useDailyOffer();
   if (!offer) return null;
-  const seats = offer.seatsLeft === null ? t('北京时间 0 点重置','Resets at midnight Beijing time') : offer.seatsLeft === 0 ? t('今日已满','Sold out today') : t('今日还剩 ' + offer.seatsLeft + ' 席', offer.seatsLeft + (offer.seatsLeft === 1 ? ' seat' : ' seats') + ' left today');
+  const seats = offer.seatsLeft === 0 ? t('今日已满','Sold out today') : t('北京时间 0 点重置','Resets at midnight Beijing time');
   return <a className="afterglow-offer" href="#pricing">
-    <div className="afterglow-stock-heading"><span>{t('每日 3 席 · 限时 8 折','3 seats a day · limited-time 20% off')}</span><span>{seats}</span></div>
+    <div className="afterglow-stock-heading"><span>{t('每日 3 台 · 限时 8 折','3 seats a day · limited-time 20% off')}</span><span>{seats}</span></div>
     <div className="afterglow-stock-bottom"><p><span>{t('距重置','Resets in')}</span><time className="afterglow-offer-clock" dateTime={offer.resetsAt}>{clock(offer.remaining)}</time></p></div>
   </a>;
 }
 
 function CheckoutOffer({ offer, value }) {
   if (!offerApplies(offer, value)) return null;
-  return <p className="checkout-saving">{offer.seatsLeft === null ? t('每日 3 席限时 8 折，仅限首期。','3 seats a day get a limited-time 20% off, first period only. ') : t('今日还剩 ' + offer.seatsLeft + ' 席限时 8 折，仅限首期。','Seats left today: ' + offer.seatsLeft + ' at a limited-time 20% off, first period only. ')}{plans[value].renews}{t('。席位用完时按原价，以付款页金额为准。','. If seats run out the regular price applies; the payment page shows the final amount.')}</p>;
+  return <p className="checkout-saving">{t('每日 3 台限时 8 折，仅限首期。','3 seats a day get a limited-time 20% off, first period only. ')}{plans[value].renews}{t('。当天 3 台用完时按原价，以付款页金额为准。','. If seats run out the regular price applies; the payment page shows the final amount.')}</p>;
 }
 
 function PlanPicker({ value, onChange, id }) {
