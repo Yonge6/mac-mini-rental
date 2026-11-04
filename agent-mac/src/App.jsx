@@ -106,7 +106,7 @@ function useSourceInteractions(root) {
 function Checkout({ value }) {
   const plan = plans[value];
   return <div className="checkout-page">
-    <header className="checkout-nav"><a className="checkout-brand" href={appHref()}><img src="./assets/wodemac-logo.svg" alt="" />wodeMac</a><a href={appHref(undefined,{interval:value})+'#pricing'}>{t("返回选择方案","Back to plans")}</a></header>
+    <header className="checkout-nav"><a className="checkout-brand" href={appHref()}><img className="brand-wordmark" src="./assets/wodemac-logo.png" alt="wodeMac" /></a><a href={appHref(undefined,{interval:value})+'#pricing'}>{t("返回选择方案","Back to plans")}</a></header>
     <main className="checkout-main">
       <section className="checkout-details"><p className="checkout-eyebrow">{t("独享 MAC · 美国加州","DEDICATED MAC · CALIFORNIA")}</p><h1>{t("完成付款，","Your own Mac,")}<br />{t("开启你的独享 Mac。","one payment away.")}</h1>
         <p className="checkout-lead">{t("M6 Mac mini，24 小时为你和 Agent 在线。","M6 Mac mini. Always on for you and your agents.")}</p>
