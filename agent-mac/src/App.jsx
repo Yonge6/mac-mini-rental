@@ -1,4 +1,4 @@
-import { forwardRef, memo, useEffect, useRef, useState } from 'react';
+import { forwardRef, memo, useCallback, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import sourceZh from './source.html?raw';
 import sourceEn from './source.en.html?raw';
@@ -24,21 +24,54 @@ for(const [key,plan] of Object.entries(plans))Object.assign(plan,{...BILLING_PLA
 const dollars = n => '$' + n.toLocaleString('en-US');
 const paymentLink = interval => appHref('checkout',{interval});
 
+const money = cents => '$' + (cents / 100).toLocaleString('en-US', { minimumFractionDigits: cents % 100 ? 2 : 0 });
+const clock = ms => { const s = Math.max(0, Math.ceil(ms / 1000)); return [s / 3600, s / 60 % 60, s % 60].map(n => String(Math.floor(n)).padStart(2, '0')).join(':'); };
+// Seats and the reset time come from the server. Where it is unreachable the offer is not shown at all.
+function useDailyOffer() {
+  const [offer, setOffer] = useState(null);
+  const [now, setNow] = useState(() => Date.now());
+  const load = useCallback(() => fetch('/api/caldock/capabilities', { credentials: 'same-origin' }).then(r => r.ok ? r.json() : null).then(data => setOffer(data?.offer || null)).catch(() => setOffer(null)), []);
+  useEffect(() => { load(); const timer = setInterval(() => setNow(Date.now()), 1000), refresh = setInterval(load, 60000); return () => { clearInterval(timer); clearInterval(refresh); }; }, [load]);
+  const expired = offer && Date.parse(offer.resetsAt) <= now;
+  useEffect(() => { if (expired) load(); }, [expired, load]);
+  return offer && { ...offer, remaining: Date.parse(offer.resetsAt) - now };
+}
+const offerApplies = (offer, interval) => !!offer && offer.seatsLeft > 0 && !offer.excludedIntervals.includes(interval);
+const offerCents = (offer, interval) => Math.round(BILLING_PLANS[interval].amountCents * (100 - offer.percentOff) / 100);
+function OfferBar({ offer, value }) {
+  if (!offer) return null;
+  const full = offer.seatsLeft <= 0;
+  return <div className={'rental-offer' + (full ? ' is-full' : '')}>
+    <div className="rental-offer-copy"><strong>{t('每日 ' + offer.seatsTotal + ' 席 · 首期 8 折', offer.seatsTotal + ' seats a day · 20% off your first period')}</strong>
+      <span>{full ? t('今日名额已满，下一轮开放倒计时','Today\'s seats are gone. Next seats open in') : t('今日还剩 ' + offer.seatsLeft + ' 席，距重置还有', offer.seatsLeft + (offer.seatsLeft === 1 ? ' seat' : ' seats') + ' left today. Resets in')}</span></div>
+    <time className="rental-offer-clock" dateTime={offer.resetsAt}>{clock(offer.remaining)}</time>
+    <p>{value === 'week' ? t('周付不参加此优惠。','Weekly is not included. ') : ''}{t('限月付、季付、半年付、年付，续费恢复原价。每天北京时间 0 点重置，打开付款页时占用席位，30 分钟内未付款自动释放。','For monthly, quarterly, half-yearly and yearly plans. Renewals are at the regular price. Resets at midnight Beijing time. Opening the payment page holds a seat, released after about 30 minutes if unpaid.')}</p>
+  </div>;
+}
+
+function CheckoutOffer({ value }) {
+  const offer = useDailyOffer();
+  if (!offerApplies(offer, value)) return null;
+  return <p className="checkout-saving">{t('今日还剩 ' + offer.seatsLeft + ' 席首期 8 折，有席位时付款页金额为 ','Seats left today: ' + offer.seatsLeft + '. With a seat, the payment page charges ')}{money(offerCents(offer, value))}{t('，续费按原价。',' for the first period; renewals are at the regular price.')}</p>;
+}
+
 function PlanPicker({ value, onChange, id }) {
   const plan = plans[value];
+  const offer = useDailyOffer();
   return <section className="rental-plan" aria-label={t("选择付款方案","Choose your billing plan")}>
+    <OfferBar offer={offer} value={value} />
     <fieldset className="rental-options"><legend className="sr-only">{t("付款周期","Billing period")}</legend>
       {Object.entries(plans).map(([key,p]) => <label className={'rental-option rental-plan-card ' + (value === key ? 'is-selected ' : '') + (key === 'year' ? 'is-annual' : '')} key={key}>
         <input type="radio" name={'billing-'+id} value={key} checked={value === key} onChange={() => onChange(key)} />
         <span className="rental-card-edition" aria-hidden="true">{key==='week'?'01 / WEEKLY':key==='month'?'02 / MONTHLY':key==='quarter'?'03 / QUARTERLY':key==='half'?'04 / HALF-YEARLY':'05 / ANNUAL'}</span>
-        <span className="rental-card-heading">{p.title}{key === 'year' && <em>{t('主推','Recommended')}</em>}</span>
+        <span className="rental-card-heading">{p.title}{key === 'year' && <em>{t('推荐','Recommended')}</em>}</span>
         <span className="rental-card-price"><strong>{dollars(p.display)}</strong><span>{key==='week'?t('/周','/week'):t('/月','/month')}</span></span>
         <span className="rental-card-total">{p.summary}</span>
         <span className="rental-card-note">{key==='week'?t('按周续订，随时可停','Week to week. Cancel renewal anytime.'):key==='month'?t('按月续订，随时可停','Month to month. Cancel renewal anytime.'):key==='quarter'?t('比连续月付三个月省 $60','Save $60 versus 3 monthly payments'):key==='half'?t('比连续月付半年省 $240','Save $240 versus 6 monthly payments'):t('比连续月付一年省 $720','Save $720 versus 12 monthly payments')}</span>
         <span className="rental-card-select"><span className="rental-radio" aria-hidden="true">{value === key && <img src="./assets/check.svg" alt="" />}</span>{value===key?t('已选方案','Selected plan'):t('选择'+p.name,'Choose '+p.name.toLowerCase())}</span>
       </label>)}
     </fieldset>
-    <div className="rental-action-bar"><p className="rental-selection" aria-live="polite"><span className="rental-selection-label">{t("已选方案","YOUR SELECTION")}</span>{plan.name} · {plan.summary}{value==='year'?t('，比连续月付一年省 $720',' · Save $720 versus 12 monthly payments'):value==='half'?t('，比连续月付半年省 $240',' · Save $240 versus 6 monthly payments'):value==='quarter'?t('，比连续月付三个月省 $60',' · Save $60 versus 3 monthly payments'):''}</p>
+    <div className="rental-action-bar"><p className="rental-selection" aria-live="polite"><span className="rental-selection-label">{t("已选方案","YOUR SELECTION")}</span>{plan.name} · {plan.summary}{value==='year'?t('，比连续月付一年省 $720',' · Save $720 versus 12 monthly payments'):value==='half'?t('，比连续月付半年省 $240',' · Save $240 versus 6 monthly payments'):value==='quarter'?t('，比连续月付三个月省 $60',' · Save $60 versus 3 monthly payments'):''}{offerApplies(offer,value)&&<em className="rental-offer-price">{t('有席位时首期 ','First period with a seat: ')}{money(offerCents(offer,value))}</em>}</p>
     <a className="rental-pay-button" href={paymentLink(value)}>{t("继续付款","Continue to payment")} · {dollars(plan.total)}/{plan.unit}<img src="./assets/chevron.svg" alt="" /></a></div>
     <ul className="rental-terms">
       <li><img src="./assets/check.svg" alt="" />{t("计费周期从交付当天开始","Billing starts on delivery")}</li>
@@ -117,6 +150,7 @@ function Checkout({ value }) {
       </section>
       <section className="checkout-summary" aria-labelledby="order-title"><h2 id="order-title">{t("订单摘要","Order summary")}</h2><div className="checkout-order-line"><span>{t("独享 Mac mini","Dedicated Mac mini")} · {plan.name}</span><strong>{dollars(plan.total)}</strong></div>
         <p className="checkout-cycle">{plan.summary}</p>
+        <CheckoutOffer value={value} />
         {(value === 'quarter' || value === 'half' || value === 'year') && <p className="checkout-saving">{value==='year'?t('年付 · 比连续月付一年省 $720','Yearly · Save $720 versus 12 monthly payments'):value==='half'?t('半年付 · 比连续月付半年省 $240','Half-yearly · Save $240 versus 6 monthly payments'):t('季付 · 比连续月付三个月省 $60','Quarterly · Save $60 versus 3 monthly payments')}</p>}
         <dl><div><dt>{t("托管位置","Location")}</dt><dd>{t("美国加州","California, USA")}</dd></div><div><dt>{t("数量","Quantity")}</dt><dd>{t("1 台","1 Mac")}</dd></div><div><dt>{t("计费周期","Billing period")}</dt><dd>{plan.days?t('7 天','7 days'):<>{plan.months}{t(' 个月',plan.months===1?' month':' months')}</>}</dd></div></dl>
         <div className="checkout-total"><span>{t("本次应付","Total due today")} <small>USD</small></span><strong>{dollars(plan.total)}<small>.00</small></strong></div>
