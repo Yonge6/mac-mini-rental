@@ -212,6 +212,7 @@ function RentalApp() {
       setAccountSlots([...root.current.querySelectorAll('[data-account-slot]')]);
       setOfferSlots([...root.current.querySelectorAll('[data-offer-slot]')]);
       setPriceSlots([...root.current.querySelectorAll('[data-hero-price-slot]')]);
+      root.current.querySelectorAll('[data-affiliate-link]').forEach(a => { a.href=appHref('affiliate'); });
       root.current.querySelectorAll('[data-language]').forEach(a => { a.href=appHref(undefined,{lang:a.dataset.language,interval:value}); });
       root.current.querySelector('.caldock-brand').href=appHref();
     }

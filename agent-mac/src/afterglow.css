@@ -380,3 +380,14 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline-color: #ffa
   .hm-closing { isolation: isolate; }
 }
 @media (max-width:600px) { .hm-closing h2 { font-size: clamp(28px,9vw,36px); } }
+.afterglow-partner-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 22px; margin-top: 44px; }
+.afterglow-partner-card { display: flex; flex-direction: column; align-items: flex-start; padding: clamp(24px,3vw,40px); border: 1px solid #a58a6533; border-radius: 14px; background: linear-gradient(150deg,#241c13,#15100b 75%); }
+.afterglow-partner-tag { color: #ffb45e; font-family: var(--font-mono); font-size: 12px; letter-spacing: .08em; }
+.afterglow-partner-card h3 { margin-top: 14px; color: #f8f2e6; font-size: clamp(22px,2.2vw,30px); font-weight: 700; line-height: 1.25; }
+.afterglow-partner-card ul { flex: 1; margin: 20px 0 28px; padding: 0; list-style: none; color: #d4bfa0; font-size: 15px; line-height: 1.6; }
+.afterglow-partner-card li { position: relative; padding-left: 18px; margin-top: 8px; }
+.afterglow-partner-card li::before { content: ''; position: absolute; left: 0; top: .62em; width: 6px; height: 6px; border-radius: 50%; background: #ffad47; }
+.afterglow-partner-cta { display: inline-flex; align-items: center; height: 46px; padding: 0 24px; border-radius: 999px; background: #ffad47; color: #24170c; font-size: 15px; font-weight: 700; text-decoration: none; transition: background .2s ease, transform .2s ease; }
+.afterglow-partner-cta:hover { background: #ffc277; transform: translateY(-1px); }
+.afterglow-partner-mail { margin-top: 12px; color: #a69683; font-size: 13px; }
+@media (max-width:760px) { .afterglow-partner-grid { grid-template-columns: minmax(0,1fr); margin-top: 28px; } }
