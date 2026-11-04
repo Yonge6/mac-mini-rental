@@ -22,8 +22,9 @@ test('referral storage keeps first touch, expires at 30 days and rejects malform
  assert.equal(rememberReferral('?ref=<script>',storage(),now),null);
  assert.equal(rememberReferral('?ref=FIRSTCODE123',{getItem(){throw Error('blocked');}},now),'FIRSTCODE123');
 });
-test('three plans charge the full term, and quarterly routing survives first-party login',()=>{
- assert.deepEqual(Object.values(BILLING_PLANS).map(p=>[p.monthlyCents,p.months,p.amountCents]),[[19900,1,19900],[16900,3,50700],[12900,12,154800]]);
+test('four plans charge the full term, and quarterly routing survives first-party login',()=>{
+ assert.deepEqual(Object.values(BILLING_PLANS).map(p=>[p.days,p.monthlyCents,p.months,p.amountCents]),[[7,undefined,undefined,6900],[undefined,19900,1,19900],[undefined,15900,3,47700],[undefined,12900,12,154800]]);
+ assert.equal(billingEndsAt('2026-11-04T00:00:00.000Z','week'),'2026-11-11T00:00:00.000Z');
  const route=new URL(makeAccountUrl(loc('https://yonge6.github.io/mac-mini-rental/?lang=en&interval=quarter'),'login',{next:'checkout'}));assert.equal(route.searchParams.get('interval'),'quarter');assert.equal(route.searchParams.get('next'),'checkout');assert.equal(billingLabel('quarter',true),'Quarterly');
 });
 test('billing terms clamp month ends like the server instead of spilling into the next month',()=>{
