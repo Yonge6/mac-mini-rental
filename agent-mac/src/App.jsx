@@ -56,6 +56,14 @@ function OfferBar({ offer, value }) {
   </div>;
 }
 
+// The lowest price anyone can pay right now: yearly, 20% off the first year while a seat is left.
+function HeroPrice() {
+  const offer = useDailyOffer();
+  const year = BILLING_PLANS.year;
+  if (!offerApplies(offer, 'year')) return <><span>{t('','From ')}<strong>{dollars(year.monthlyCents / 100)}</strong>{t('/月起','/month')}</span><small>{t('按年付费，一次 ' + dollars(year.amountCents / 100), dollars(year.amountCents / 100) + ' billed annually')}</small></>;
+  return <><span>{t('','From ')}<s>{dollars(year.monthlyCents / 100)}</s> <strong><Amount cents={discounted(offer, year.monthlyCents)}/></strong>{t('/月起','/month')}</span><small>{t('年付首期 8 折，一次 ' + money(offerCents(offer, 'year')) + '，之后每年 ' + dollars(year.amountCents / 100), '20% off the first year: ' + money(offerCents(offer, 'year')) + ' billed once, then ' + dollars(year.amountCents / 100) + ' per year')}</small></>;
+}
+
 function HeroOffer() {
   const offer = useDailyOffer();
   if (!offer) return null;
@@ -188,7 +196,7 @@ function RentalApp() {
     return normalizeInterval(query,normalizeInterval(saved));
   });
   const [slots,setSlots] = useState([]);
-  const [accountSlots,setAccountSlots] = useState([]); const [offerSlots,setOfferSlots] = useState([]);
+  const [accountSlots,setAccountSlots] = useState([]); const [offerSlots,setOfferSlots] = useState([]); const [priceSlots,setPriceSlots] = useState([]);
   const checkout = location.pathname === '/checkout' || new URLSearchParams(location.search).get('view') === 'checkout';
   useSourceInteractions(root);
   useEffect(() => {
@@ -198,6 +206,7 @@ function RentalApp() {
       setSlots([...root.current.querySelectorAll('[data-plan-slot]')]);
       setAccountSlots([...root.current.querySelectorAll('[data-account-slot]')]);
       setOfferSlots([...root.current.querySelectorAll('[data-offer-slot]')]);
+      setPriceSlots([...root.current.querySelectorAll('[data-hero-price-slot]')]);
       root.current.querySelectorAll('[data-language]').forEach(a => { a.href=appHref(undefined,{lang:a.dataset.language,interval:value}); });
       root.current.querySelector('.caldock-brand').href=appHref();
     }
@@ -209,6 +218,7 @@ function RentalApp() {
     {slots.map(slot => createPortal(<PlanPicker value={value} onChange={setValue} id={slot.dataset.planSlot} />,slot))}
     {accountSlots.map(slot=>createPortal(<AccountEntry/>,slot))}
     {offerSlots.map((slot,index)=>createPortal(<HeroOffer/>,slot,'offer-'+index))}
+    {priceSlots.map((slot,index)=>createPortal(<HeroPrice/>,slot,'price-'+index))}
   </>;
 }
 

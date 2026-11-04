@@ -338,3 +338,5 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline-color: #ffa
 .afterglow-hero-offer em { margin-left: 10px; color: #d4bfa0; font-style: normal; }
 .afterglow-hero-offer time { color: #ffb347; font-family: var(--font-mono); font-size: clamp(16px,1.7vw,22px); font-weight: 600; font-variant-numeric: tabular-nums; }
 @media (max-width: 480px) { .afterglow-hero-offer { display: flex; justify-content: space-between; } .afterglow-hero-offer em { display: block; margin-left: 0; } }
+.afterglow-hero-price s { margin: 0 4px 0 0; color: #a4917a; font-size: .72em; }
+.afterglow-hero-price strong small { font-size: .55em; }
