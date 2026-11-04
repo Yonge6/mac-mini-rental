@@ -123,12 +123,18 @@ function useTaglineReveal(root, enabled) {
   }, [root, enabled]);
 }
 
+// Only plans whose daily rate is really about one coffee get the comparison, so weekly ($9.86/day) is left out.
+const COFFEE_MAX_DAILY_CENTS = 700;
+function CoffeeNote({ className, zh, en }) {
+  return <em className={'coffee-note ' + className}><svg aria-hidden="true" viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round"><path d="M2.5 6.5h9v4a3 3 0 0 1-3 3h-3a3 3 0 0 1-3-3z"/><path d="M11.5 7.5h1a1.75 1.75 0 0 1 0 3.5h-1.1"/><path d="M5.5 1.5v2.5M8.5 1.5v2.5"/></svg>{t(zh, en)}</em>;
+}
+
 function HeroPrice() {
   const offer = useDailyOffer();
   const total = BILLING_PLANS.year.amountCents, list = dailyCents(total, 'year');
-  if (!offerApplies(offer, 'year')) return <><span>{t('','From ')}<strong><Amount cents={list}/></strong>{t('/天起','/day')}</span><small>{t('按年付费，一次 ' + money(total), money(total) + ' billed annually')}</small></>;
+  if (!offerApplies(offer, 'year')) return <><span>{t('','From ')}<strong><Amount cents={list}/></strong>{t('/天起','/day')}<CoffeeNote className="coffee-note-hero" zh="每天一杯咖啡钱" en="About a coffee a day"/></span><small>{t('按年付费，一次 ' + money(total), money(total) + ' billed annually')}</small></>;
   const first = offerCents(offer, 'year');
-  return <><span>{t('','From ')}<s><Amount cents={list}/></s> <strong><Amount cents={dailyCents(first, 'year')}/></strong>{t('/天起','/day')}</span><small>{t('年付限时 8 折，首期一次 ' + money(first) + '，之后每年 ' + money(total), 'Limited-time 20% off: first year ' + money(first) + ' billed once, then ' + money(total) + ' per year')}</small></>;
+  return <><span>{t('','From ')}<s><Amount cents={list}/></s> <strong><Amount cents={dailyCents(first, 'year')}/></strong>{t('/天起','/day')}<CoffeeNote className="coffee-note-hero" zh="每天一杯咖啡钱" en="About a coffee a day"/></span><small>{t('年付限时 8 折，首期一次 ' + money(first) + '，之后每年 ' + money(total), 'Limited-time 20% off: first year ' + money(first) + ' billed once, then ' + money(total) + ' per year')}</small></>;
 }
 
 function HeroOffer() {
@@ -158,6 +164,7 @@ function PlanPicker({ value, onChange, id }) {
         <span className="rental-card-heading">{p.title}{key === 'year' && <em>{t('推荐','Recommended')}</em>}</span>
         <span className="rental-card-was">{offerApplies(offer,key)&&<><s><Amount cents={dailyCents(BILLING_PLANS[key].amountCents,key)}/></s><em>{t('限时 8 折','Limited-time 20% off')}</em></>}</span>
         <span className="rental-card-price"><strong><Amount cents={dailyCents(offerApplies(offer,key)?offerCents(offer,key):BILLING_PLANS[key].amountCents,key)}/></strong><span>{t('/天','/day')}</span></span>
+        <span className="rental-card-coffee">{dailyCents(offerApplies(offer,key)?offerCents(offer,key):BILLING_PLANS[key].amountCents,key)<=COFFEE_MAX_DAILY_CENTS&&<CoffeeNote className="coffee-note-card" zh="每天一杯咖啡钱" en="About a coffee a day"/>}</span>
         <span className="rental-card-total">{offerApplies(offer,key)?<>{t('首期支付 ','First period ')}{money(discounted(offer,BILLING_PLANS[key].amountCents))}<small>{p.renews}</small></>:p.summary}</span>
         {savings[key]?<span className="rental-card-note rental-card-saving"><span>{t('比连续月付'+savings[key].zh+'省','Save versus '+savings[key].en)}</span><b>${savings[key].amount}</b></span>:<span className="rental-card-note">{key==='week'?t('按周续订，随时可停','Week to week. Cancel renewal anytime.'):t('按月续订，随时可停','Month to month. Cancel renewal anytime.')}</span>}
         <span className="rental-card-select"><span className="rental-radio" aria-hidden="true">{value === key && <img src="./assets/check.svg" alt="" />}</span>{value===key?t('已选方案','Selected plan'):t('选择'+p.name,'Choose '+p.name.toLowerCase())}</span>
