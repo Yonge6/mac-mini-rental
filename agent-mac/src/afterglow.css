@@ -333,3 +333,8 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline-color: #ffa
 
 .caldock-brand img.brand-wordmark, .checkout-brand img.brand-wordmark { width: auto; height: 24px; object-fit: contain; }
 @media (max-width: 480px) { .caldock-brand img.brand-wordmark, .checkout-brand img.brand-wordmark { height: 20px; } }
+
+.afterglow-hero-offer { display: inline-flex; align-items: center; gap: 14px; margin-top: 16px; padding: 9px 14px; border: 1px solid #ffad4766; border-radius: 10px; background: #120e0bb3; color: #f4eee1; font-size: clamp(12px,1.2vw,15px); text-decoration: none; }
+.afterglow-hero-offer em { margin-left: 10px; color: #d4bfa0; font-style: normal; }
+.afterglow-hero-offer time { color: #ffb347; font-family: var(--font-mono); font-size: clamp(16px,1.7vw,22px); font-weight: 600; font-variant-numeric: tabular-nums; }
+@media (max-width: 480px) { .afterglow-hero-offer { display: flex; justify-content: space-between; } .afterglow-hero-offer em { display: block; margin-left: 0; } }

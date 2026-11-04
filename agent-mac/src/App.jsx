@@ -22,37 +22,50 @@ const plans = {
 };
 for(const [key,plan] of Object.entries(plans))Object.assign(plan,{...BILLING_PLANS[key],display:(BILLING_PLANS[key].monthlyCents??BILLING_PLANS[key].amountCents)/100,total:BILLING_PLANS[key].amountCents/100});
 const dollars = n => '$' + n.toLocaleString('en-US');
+const savings = { quarter: { zh: '三个月', en: '3 monthly payments', amount: 60 }, half: { zh: '半年', en: '6 monthly payments', amount: 240 }, year: { zh: '一年', en: '12 monthly payments', amount: 720 } };
 const paymentLink = interval => appHref('checkout',{interval});
 
 const money = cents => '$' + (cents / 100).toLocaleString('en-US', { minimumFractionDigits: cents % 100 ? 2 : 0 });
 const clock = ms => { const s = Math.max(0, Math.ceil(ms / 1000)); return [s / 3600, s / 60 % 60, s % 60].map(n => String(Math.floor(n)).padStart(2, '0')).join(':'); };
-// Seats and the reset time come from the server. Where it is unreachable the offer is not shown at all.
+// The reset time is fixed: midnight Beijing time. Seats left only ever come from the server; without it they stay unknown.
+const BEIJING_OFFSET = 8 * 3600000;
+const nextBeijingMidnight = now => new Date(Math.floor((now + BEIJING_OFFSET) / 86400000 + 1) * 86400000 - BEIJING_OFFSET).toISOString();
 function useDailyOffer() {
-  const [offer, setOffer] = useState(null);
+  const [server, setServer] = useState(undefined);
   const [now, setNow] = useState(() => Date.now());
-  const load = useCallback(() => fetch('/api/caldock/capabilities', { credentials: 'same-origin' }).then(r => r.ok ? r.json() : null).then(data => setOffer(data?.offer || null)).catch(() => setOffer(null)), []);
+  const load = useCallback(() => fetch('/api/caldock/capabilities', { credentials: 'same-origin' }).then(r => r.ok ? r.json() : undefined).then(data => setServer(data && (data.offer || null))).catch(() => setServer(undefined)), []);
   useEffect(() => { load(); const timer = setInterval(() => setNow(Date.now()), 1000), refresh = setInterval(load, 60000); return () => { clearInterval(timer); clearInterval(refresh); }; }, [load]);
-  const expired = offer && Date.parse(offer.resetsAt) <= now;
+  const expired = server && Date.parse(server.resetsAt) <= now;
   useEffect(() => { if (expired) load(); }, [expired, load]);
-  return offer && { ...offer, remaining: Date.parse(offer.resetsAt) - now };
+  // null: the backend answered and the offer is switched off.
+  if (server === null) return null;
+  const offer = server && !expired ? server : { percentOff: 20, seatsTotal: 3, seatsLeft: null, resetsAt: nextBeijingMidnight(now), excludedIntervals: ['week'] };
+  return { ...offer, remaining: Date.parse(offer.resetsAt) - now };
 }
-const offerApplies = (offer, interval) => !!offer && offer.seatsLeft > 0 && !offer.excludedIntervals.includes(interval);
+const offerApplies = (offer, interval) => !!offer && offer.seatsLeft !== 0 && !offer.excludedIntervals.includes(interval);
 const offerCents = (offer, interval) => Math.round(BILLING_PLANS[interval].amountCents * (100 - offer.percentOff) / 100);
 function OfferBar({ offer, value }) {
   if (!offer) return null;
-  const full = offer.seatsLeft <= 0;
+  const full = offer.seatsLeft === 0;
   return <div className={'rental-offer' + (full ? ' is-full' : '')}>
     <div className="rental-offer-copy"><strong>{t('每日 ' + offer.seatsTotal + ' 席 · 首期 8 折', offer.seatsTotal + ' seats a day · 20% off your first period')}</strong>
-      <span>{full ? t('今日名额已满，下一轮开放倒计时','Today\'s seats are gone. Next seats open in') : t('今日还剩 ' + offer.seatsLeft + ' 席，距重置还有', offer.seatsLeft + (offer.seatsLeft === 1 ? ' seat' : ' seats') + ' left today. Resets in')}</span></div>
+      <span>{full ? t('今日名额已满，下一轮开放倒计时','Today\'s seats are gone. Next seats open in') : offer.seatsLeft === null ? t('距今日名额重置还有','Seats reset in') : t('今日还剩 ' + offer.seatsLeft + ' 席，距重置还有', offer.seatsLeft + (offer.seatsLeft === 1 ? ' seat' : ' seats') + ' left today. Resets in')}</span></div>
     <time className="rental-offer-clock" dateTime={offer.resetsAt}>{clock(offer.remaining)}</time>
     <p>{value === 'week' ? t('周付不参加此优惠。','Weekly is not included. ') : ''}{t('限月付、季付、半年付、年付，续费恢复原价。每天北京时间 0 点重置，打开付款页时占用席位，30 分钟内未付款自动释放。','For monthly, quarterly, half-yearly and yearly plans. Renewals are at the regular price. Resets at midnight Beijing time. Opening the payment page holds a seat, released after about 30 minutes if unpaid.')}</p>
   </div>;
 }
 
+function HeroOffer() {
+  const offer = useDailyOffer();
+  if (!offer) return null;
+  const seats = offer.seatsLeft === null ? null : offer.seatsLeft === 0 ? t('今日已满','Sold out today') : t('今日还剩 ' + offer.seatsLeft + ' 席', offer.seatsLeft + ' left today');
+  return <a className="afterglow-hero-offer" href="#pricing"><span>{t('每日 3 席 · 首期 8 折','3 seats a day · 20% off first period')}{seats && <em>{seats}</em>}</span><time dateTime={offer.resetsAt}>{clock(offer.remaining)}</time></a>;
+}
+
 function CheckoutOffer({ value }) {
   const offer = useDailyOffer();
   if (!offerApplies(offer, value)) return null;
-  return <p className="checkout-saving">{t('今日还剩 ' + offer.seatsLeft + ' 席首期 8 折，有席位时付款页金额为 ','Seats left today: ' + offer.seatsLeft + '. With a seat, the payment page charges ')}{money(offerCents(offer, value))}{t('，续费按原价。',' for the first period; renewals are at the regular price.')}</p>;
+  return <p className="checkout-saving">{offer.seatsLeft === null ? t('每日 3 席首期 8 折，有席位时付款页金额为 ','3 seats a day get 20% off. With a seat, the payment page charges ') : t('今日还剩 ' + offer.seatsLeft + ' 席首期 8 折，有席位时付款页金额为 ','Seats left today: ' + offer.seatsLeft + '. With a seat, the payment page charges ')}{money(offerCents(offer, value))}{t('，续费按原价。',' for the first period; renewals are at the regular price.')}</p>;
 }
 
 function PlanPicker({ value, onChange, id }) {
@@ -67,7 +80,7 @@ function PlanPicker({ value, onChange, id }) {
         <span className="rental-card-heading">{p.title}{key === 'year' && <em>{t('推荐','Recommended')}</em>}</span>
         <span className="rental-card-price"><strong>{dollars(p.display)}</strong><span>{key==='week'?t('/周','/week'):t('/月','/month')}</span></span>
         <span className="rental-card-total">{p.summary}</span>
-        <span className="rental-card-note">{key==='week'?t('按周续订，随时可停','Week to week. Cancel renewal anytime.'):key==='month'?t('按月续订，随时可停','Month to month. Cancel renewal anytime.'):key==='quarter'?t('比连续月付三个月省 $60','Save $60 versus 3 monthly payments'):key==='half'?t('比连续月付半年省 $240','Save $240 versus 6 monthly payments'):t('比连续月付一年省 $720','Save $720 versus 12 monthly payments')}</span>
+        {savings[key]?<span className="rental-card-note rental-card-saving"><span>{t('比连续月付'+savings[key].zh+'省','Save versus '+savings[key].en)}</span><b>${savings[key].amount}</b></span>:<span className="rental-card-note">{key==='week'?t('按周续订，随时可停','Week to week. Cancel renewal anytime.'):t('按月续订，随时可停','Month to month. Cancel renewal anytime.')}</span>}
         <span className="rental-card-select"><span className="rental-radio" aria-hidden="true">{value === key && <img src="./assets/check.svg" alt="" />}</span>{value===key?t('已选方案','Selected plan'):t('选择'+p.name,'Choose '+p.name.toLowerCase())}</span>
       </label>)}
     </fieldset>
@@ -172,7 +185,7 @@ function RentalApp() {
     return normalizeInterval(query,normalizeInterval(saved));
   });
   const [slots,setSlots] = useState([]);
-  const [accountSlots,setAccountSlots] = useState([]);
+  const [accountSlots,setAccountSlots] = useState([]); const [offerSlots,setOfferSlots] = useState([]);
   const checkout = location.pathname === '/checkout' || new URLSearchParams(location.search).get('view') === 'checkout';
   useSourceInteractions(root);
   useEffect(() => {
@@ -181,6 +194,7 @@ function RentalApp() {
     if (!checkout) {
       setSlots([...root.current.querySelectorAll('[data-plan-slot]')]);
       setAccountSlots([...root.current.querySelectorAll('[data-account-slot]')]);
+      setOfferSlots([...root.current.querySelectorAll('[data-offer-slot]')]);
       root.current.querySelectorAll('[data-language]').forEach(a => { a.href=appHref(undefined,{lang:a.dataset.language,interval:value}); });
       root.current.querySelector('.caldock-brand').href=appHref();
     }
@@ -191,6 +205,7 @@ function RentalApp() {
     <SourceMarkup ref={root} />
     {slots.map(slot => createPortal(<PlanPicker value={value} onChange={setValue} id={slot.dataset.planSlot} />,slot))}
     {accountSlots.map(slot=>createPortal(<AccountEntry/>,slot))}
+    {offerSlots.map((slot,index)=>createPortal(<HeroOffer/>,slot,'offer-'+index))}
   </>;
 }
 
