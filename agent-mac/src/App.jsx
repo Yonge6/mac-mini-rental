@@ -57,6 +57,46 @@ function OfferBar({ offer, value }) {
 }
 
 // The lowest price anyone can pay right now: yearly, 20% off the first year while a seat is left.
+function MobileMenu() {
+  const [open, setOpen] = useState(false);
+  const [links, setLinks] = useState([]);
+  useEffect(() => { setLinks([...document.querySelectorAll('.caldock-page-links a')].map(link => ({ href: link.getAttribute('href'), label: link.textContent }))); }, []);
+  useEffect(() => {
+    document.documentElement.classList.toggle('wm-menu-open', open);
+    if (!open) return;
+    const close = event => { if (event.key === 'Escape') setOpen(false); };
+    window.addEventListener('keydown', close);
+    return () => { window.removeEventListener('keydown', close); document.documentElement.classList.remove('wm-menu-open'); };
+  }, [open]);
+  return <>
+    <button type="button" className={'wm-menu-toggle' + (open ? ' is-open' : '')} aria-expanded={open} aria-controls="wm-menu-panel" aria-label={open ? t('关闭菜单','Close menu') : t('打开菜单','Open menu')} onClick={() => setOpen(value => !value)}><i /><i /></button>
+    {createPortal(<nav id="wm-menu-panel" className={'wm-menu-panel' + (open ? ' is-open' : '')} aria-label={t('页面导航','Page navigation')} inert={!open}>
+      <button type="button" className="wm-menu-toggle wm-menu-close is-open" aria-label={t('关闭菜单','Close menu')} onClick={() => setOpen(false)}><i /><i /></button>
+      {links.map((link, index) => <a key={link.href} href={link.href} style={{ '--i': index }} onClick={() => setOpen(false)}>{link.label}</a>)}
+    </nav>, document.body)}
+  </>;
+}
+
+// Reveals the tagline one word at a time as it crosses a line in the viewport.
+function useTaglineReveal(root, enabled) {
+  useEffect(() => {
+    const line = root.current?.querySelector('[data-tagline]');
+    if (!enabled || !line || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!line.dataset.split) {
+      line.dataset.split = '1';
+      const segment = typeof Intl.Segmenter === 'function' ? new Intl.Segmenter(document.documentElement.lang || undefined, { granularity: 'word' }) : null;
+      line.querySelectorAll(':scope > span').forEach(row => {
+        const text = row.textContent, parts = segment ? [...segment.segment(text)].map(item => item.segment) : text.split(/(\s+)/);
+        row.setAttribute('aria-label', text); row.textContent = '';
+        parts.forEach(part => { const word = document.createElement('span'); word.textContent = part; word.className = 'wm-word'; word.setAttribute('aria-hidden', 'true'); row.append(word); });
+      });
+    }
+    const observer = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('is-lit'); observer.unobserve(entry.target); } }), { rootMargin: '0px 0px -38% 0px' });
+    line.querySelectorAll('.wm-word:not(.is-lit)').forEach(word => observer.observe(word));
+    return () => observer.disconnect();
+  }, [root, enabled]);
+}
+
 function HeroPrice() {
   const offer = useDailyOffer();
   const total = BILLING_PLANS.year.amountCents, list = dailyCents(total, 'year');
@@ -201,8 +241,9 @@ function RentalApp() {
     return normalizeInterval(query,normalizeInterval(saved));
   });
   const [slots,setSlots] = useState([]);
-  const [accountSlots,setAccountSlots] = useState([]); const [offerSlots,setOfferSlots] = useState([]); const [priceSlots,setPriceSlots] = useState([]);
+  const [accountSlots,setAccountSlots] = useState([]); const [offerSlots,setOfferSlots] = useState([]); const [priceSlots,setPriceSlots] = useState([]); const [menuSlots,setMenuSlots] = useState([]);
   const checkout = location.pathname === '/checkout' || new URLSearchParams(location.search).get('view') === 'checkout';
+  useTaglineReveal(root, !checkout);
   useSourceInteractions(root);
   useEffect(() => {
     sessionStorage.setItem('rental-interval',value);
@@ -212,6 +253,7 @@ function RentalApp() {
       setAccountSlots([...root.current.querySelectorAll('[data-account-slot]')]);
       setOfferSlots([...root.current.querySelectorAll('[data-offer-slot]')]);
       setPriceSlots([...root.current.querySelectorAll('[data-hero-price-slot]')]);
+      setMenuSlots([...root.current.querySelectorAll('[data-menu-slot]')]);
       root.current.querySelectorAll('[data-affiliate-link]').forEach(a => { a.href=appHref('affiliate'); });
       root.current.querySelectorAll('[data-language]').forEach(a => { a.href=appHref(undefined,{lang:a.dataset.language,interval:value}); });
       root.current.querySelector('.caldock-brand').href=appHref();
@@ -225,6 +267,7 @@ function RentalApp() {
     {accountSlots.map(slot=>createPortal(<AccountEntry/>,slot))}
     {offerSlots.map((slot,index)=>createPortal(<HeroOffer/>,slot,'offer-'+index))}
     {priceSlots.map((slot,index)=>createPortal(<HeroPrice/>,slot,'price-'+index))}
+    {menuSlots.map((slot,index)=>createPortal(<MobileMenu/>,slot,'menu-'+index))}
   </>;
 }
 

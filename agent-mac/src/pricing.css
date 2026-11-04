@@ -59,3 +59,7 @@
 .rental-offer-clock{font-size:clamp(40px,4.4vw,60px);font-weight:700;letter-spacing:-.04em;line-height:1.05}
 @media(max-width:700px){.rental-offer{grid-template-columns:1fr;gap:10px;padding:18px}.rental-offer-title,.rental-offer p,.rental-offer-timer{grid-column:1;grid-row:auto}.rental-offer-timer{align-items:flex-start}.rental-offer-clock{font-size:44px}}
 .rental-selection .rental-offer-price{display:inline;margin:0;color:#ffb347;font-weight:700}
+#pricing .rental-card-price strong{font-family:var(--font-ui-sans);font-weight:600;letter-spacing:-.05em}
+#pricing .rental-plan-card{transition:transform .5s var(--wm-ease),border-color .3s var(--wm-ease),box-shadow .3s var(--wm-ease),background-color .3s var(--wm-ease)}
+#pricing .rental-plan-card:active{transform:scale(.99)}
+.rental-card-saving b,.rental-offer-title{letter-spacing:-.02em}
