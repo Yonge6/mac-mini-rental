@@ -102,7 +102,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline-color: #ffa
 .afterglow-feature-copy { position: absolute; top: 9.4vw; left: 4.4%; width: 52%; max-width: 790px; }
 .afterglow-feature h2 { font-size: clamp(44px,6.6vw,95px); line-height: 1.2; letter-spacing: -.045em; text-wrap: nowrap; font-weight: 700; margin-top: 34px; color: #f8f0df; }
 .afterglow-feature-description { font-size: clamp(17px,2.25vw,30px); color: #d6c7b2; line-height: 1.65; margin-top: 42px; }
-.afterglow-hero:lang(en) h1 { font-size: clamp(68px,8.6vw,124px); text-wrap: balance; }
+.afterglow-hero:lang(en) h1 { font-size: clamp(68px,8.6vw,124px); }
 .afterglow-hero:lang(en) .hm-hero-subtitle { font-size: clamp(18px,2vw,28px); }
 .afterglow-feature:lang(en) h2 { font-size: clamp(34px,4.5vw,65px); text-wrap: balance; }
 
@@ -188,7 +188,8 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline-color: #ffa
   .caldock-brand { font-size: 26px; }
   .caldock-page-links { gap: 26px; }
   .caldock-page-links a { font-size: 16px; }
-  .afterglow-reserve { margin-top: 44px; }
+  .afterglow-reserve { margin-top: 24px; }
+  .hm-hero.afterglow-hero { min-height: 800px; }
   .afterglow-stock-bottom { gap: 24px; }
   .rental-plan { padding: 28px; }
 }
@@ -326,6 +327,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline-color: #ffa
 
 /* Copy polish (2026-11): balanced headings, readable fine print, scannable FAQ terms. */
 .hm-chapter h2, .hm-closing h2, .afterglow-hero h1 { text-wrap: balance; }
+.afterglow-hero:lang(en) h1 { text-wrap: nowrap; }
 .hm-chapter p, .hm-closing p, [data-slot="collapsible-content"] { text-wrap: pretty; }
 [data-slot="collapsible-content"] b { color: #f4eee1; font-weight: 600; }
 .hm-footnote { color: #b8a690; }
@@ -431,6 +433,12 @@ html { scroll-padding-top: 96px; }
 .wm-word.is-lit { color: #f8f2e6; }
 .hm-page .hm-cta:active, .rental-pay-button:active, .afterglow-partner-cta:active { transform: scale(.98); }
 .hm-page .hm-cta, .rental-pay-button, .afterglow-partner-cta { transition: transform .3s var(--wm-ease), background-color .3s var(--wm-ease), box-shadow .3s var(--wm-ease); }
+@media (max-width:1100px) {
+  .caldock-nav { display: flex; }
+  .caldock-brand { margin-right: auto; }
+  .caldock-page-links { display: none; }
+  .wm-menu-slot { display: block; order: 9; }
+}
 @media (max-width:850px) {
   .caldock-header { top: 8px; width: calc(100% - 16px); }
   .caldock-nav { display: flex; height: 56px; padding-inline: 12px; gap: 8px; }
