@@ -50,7 +50,7 @@ function OfferBar({ offer, value }) {
   if (!offer) return null;
   const full = offer.seatsLeft === 0;
   return <div className={'rental-offer' + (full ? ' is-full' : '')}>
-    <strong className="rental-offer-title">{t('每日 ' + offer.seatsTotal + ' 席 · 首期 8 折', offer.seatsTotal + ' seats a day · 20% off your first period')}</strong>
+    <strong className="rental-offer-title">{t('每日 ' + offer.seatsTotal + ' 席 · 限时 8 折', offer.seatsTotal + ' seats a day · limited-time 20% off')}</strong>
     <div className="rental-offer-timer"><span>{full ? t('今日名额已满，下一轮开放倒计时','Today\'s seats are gone. Next seats open in') : offer.seatsLeft === null ? t('距今日名额重置还有','Seats reset in') : t('今日还剩 ' + offer.seatsLeft + ' 席，距重置还有', offer.seatsLeft + (offer.seatsLeft === 1 ? ' seat' : ' seats') + ' left today. Resets in')}</span><time className="rental-offer-clock" dateTime={offer.resetsAt}>{clock(offer.remaining)}</time></div>
     <p>{value === 'week' ? t('周付不参加此优惠。','Weekly is not included. ') : ''}{t('限月付、季付、半年付、年付，续费恢复原价。每天北京时间 0 点重置，打开付款页时占用席位，30 分钟内未付款自动释放。','For monthly, quarterly, half-yearly and yearly plans. Renewals are at the regular price. Resets at midnight Beijing time. Opening the payment page holds a seat, released after about 30 minutes if unpaid.')}</p>
   </div>;
@@ -78,6 +78,32 @@ function MobileMenu() {
 }
 
 // Reveals the tagline one word at a time as it crosses a line in the viewport.
+// The stock in the page source is only the fallback; the server counts paid orders.
+function paintStock(page, { total, rented, left }) {
+  const label = left ? t('首发 ' + total + ' 台已租出 ' + rented + ' 台，仅剩 ' + left + ' 台', rented + ' of ' + total + ' launch Macs rented, ' + left + ' available') : t('首发 ' + total + ' 台已全部租出', 'All ' + total + ' launch Macs are rented');
+  page.querySelectorAll('.afterglow-stock, .hm-closing-stock').forEach(meter => { meter.setAttribute('aria-label', label); meter.setAttribute('aria-valuenow', rented); });
+  const hero = page.querySelector('.afterglow-stock');
+  if (hero) {
+    hero.style.setProperty('--hm-board-left', left); hero.style.setProperty('--hm-board-taken', rented);
+    hero.querySelector('.afterglow-stock-heading span:last-child').textContent = left ? t('已租出 ' + rented + ' 台', rented + ' already rented') : t('已全部租出', 'All rented');
+    if (!left) hero.querySelector('.afterglow-stock-bottom p span').textContent = t('剩余', '');
+    hero.querySelectorAll('.afterglow-stock-marks i').forEach((mark, index) => mark.toggleAttribute('data-available', index >= rented));
+  }
+  const copy = page.querySelector('[data-stock-copy]');
+  if (copy) copy.textContent = left ? t('首发 ' + total + ' 台已租出 ' + rented + ' 台，仅剩 ' + left + ' 台。', rented + ' of the first ' + total + ' are rented. Only ' + left + ' remain' + (left === 1 ? 's' : '') + '. ') : t('首发 ' + total + ' 台已全部租出。', 'All ' + total + ' launch Macs are rented. ');
+  const figure = page.querySelector('.hm-closing-stock .hm-stock-figures strong');
+  if (figure) figure.textContent = left ? t('仅剩 ' + left + ' 台', 'Only ' + left + ' left') : t('已全部租出', 'All rented');
+  const bar = page.querySelector('.hm-closing-stock .hm-stock-bar i');
+  if (bar) bar.style.width = rented / total * 100 + '%';
+}
+function useLiveStock(root, enabled) {
+  useEffect(() => {
+    if (!enabled) return;
+    let live = true;
+    fetch('/api/caldock/capabilities', { credentials: 'same-origin' }).then(r => r.ok ? r.json() : null).then(data => { if (live && data?.stock && root.current) paintStock(root.current, data.stock); }).catch(() => {});
+    return () => { live = false; };
+  }, [root, enabled]);
+}
 function useTaglineReveal(root, enabled) {
   useEffect(() => {
     const line = root.current?.querySelector('[data-tagline]');
@@ -102,7 +128,7 @@ function HeroPrice() {
   const total = BILLING_PLANS.year.amountCents, list = dailyCents(total, 'year');
   if (!offerApplies(offer, 'year')) return <><span>{t('','From ')}<strong><Amount cents={list}/></strong>{t('/天起','/day')}</span><small>{t('按年付费，一次 ' + money(total), money(total) + ' billed annually')}</small></>;
   const first = offerCents(offer, 'year');
-  return <><span>{t('','From ')}<s><Amount cents={list}/></s> <strong><Amount cents={dailyCents(first, 'year')}/></strong>{t('/天起','/day')}</span><small>{t('年付首期 8 折，一次 ' + money(first) + '，之后每年 ' + money(total), '20% off the first year: ' + money(first) + ' billed once, then ' + money(total) + ' per year')}</small></>;
+  return <><span>{t('','From ')}<s><Amount cents={list}/></s> <strong><Amount cents={dailyCents(first, 'year')}/></strong>{t('/天起','/day')}</span><small>{t('年付限时 8 折，首期一次 ' + money(first) + '，之后每年 ' + money(total), 'Limited-time 20% off: first year ' + money(first) + ' billed once, then ' + money(total) + ' per year')}</small></>;
 }
 
 function HeroOffer() {
@@ -110,14 +136,14 @@ function HeroOffer() {
   if (!offer) return null;
   const seats = offer.seatsLeft === null ? t('北京时间 0 点重置','Resets at midnight Beijing time') : offer.seatsLeft === 0 ? t('今日已满','Sold out today') : t('今日还剩 ' + offer.seatsLeft + ' 席', offer.seatsLeft + (offer.seatsLeft === 1 ? ' seat' : ' seats') + ' left today');
   return <a className="afterglow-offer" href="#pricing">
-    <div className="afterglow-stock-heading"><span>{t('每日 3 席 · 首期 8 折','3 seats a day · 20% off first period')}</span><span>{seats}</span></div>
+    <div className="afterglow-stock-heading"><span>{t('每日 3 席 · 限时 8 折','3 seats a day · limited-time 20% off')}</span><span>{seats}</span></div>
     <div className="afterglow-stock-bottom"><p><span>{t('距重置','Resets in')}</span><time className="afterglow-offer-clock" dateTime={offer.resetsAt}>{clock(offer.remaining)}</time></p></div>
   </a>;
 }
 
 function CheckoutOffer({ offer, value }) {
   if (!offerApplies(offer, value)) return null;
-  return <p className="checkout-saving">{offer.seatsLeft === null ? t('每日 3 席首期 8 折。','3 seats a day get 20% off the first period. ') : t('今日还剩 ' + offer.seatsLeft + ' 席首期 8 折。','Seats left today: ' + offer.seatsLeft + ' at 20% off the first period. ')}{plans[value].renews}{t('。席位用完时按原价，以付款页金额为准。','. If seats run out the regular price applies; the payment page shows the final amount.')}</p>;
+  return <p className="checkout-saving">{offer.seatsLeft === null ? t('每日 3 席限时 8 折，仅限首期。','3 seats a day get a limited-time 20% off, first period only. ') : t('今日还剩 ' + offer.seatsLeft + ' 席限时 8 折，仅限首期。','Seats left today: ' + offer.seatsLeft + ' at a limited-time 20% off, first period only. ')}{plans[value].renews}{t('。席位用完时按原价，以付款页金额为准。','. If seats run out the regular price applies; the payment page shows the final amount.')}</p>;
 }
 
 function PlanPicker({ value, onChange, id }) {
@@ -130,14 +156,14 @@ function PlanPicker({ value, onChange, id }) {
         <input type="radio" name={'billing-'+id} value={key} checked={value === key} onChange={() => onChange(key)} />
         <span className="rental-card-edition" aria-hidden="true">{key==='week'?'01 / WEEKLY':key==='month'?'02 / MONTHLY':key==='quarter'?'03 / QUARTERLY':key==='half'?'04 / HALF-YEARLY':'05 / ANNUAL'}</span>
         <span className="rental-card-heading">{p.title}{key === 'year' && <em>{t('推荐','Recommended')}</em>}</span>
-        <span className="rental-card-was">{offerApplies(offer,key)&&<><s><Amount cents={dailyCents(BILLING_PLANS[key].amountCents,key)}/></s><em>{t('首期 8 折','First period 20% off')}</em></>}</span>
+        <span className="rental-card-was">{offerApplies(offer,key)&&<><s><Amount cents={dailyCents(BILLING_PLANS[key].amountCents,key)}/></s><em>{t('限时 8 折','Limited-time 20% off')}</em></>}</span>
         <span className="rental-card-price"><strong><Amount cents={dailyCents(offerApplies(offer,key)?offerCents(offer,key):BILLING_PLANS[key].amountCents,key)}/></strong><span>{t('/天','/day')}</span></span>
         <span className="rental-card-total">{offerApplies(offer,key)?<>{t('首期支付 ','First period ')}{money(discounted(offer,BILLING_PLANS[key].amountCents))}<small>{p.renews}</small></>:p.summary}</span>
         {savings[key]?<span className="rental-card-note rental-card-saving"><span>{t('比连续月付'+savings[key].zh+'省','Save versus '+savings[key].en)}</span><b>${savings[key].amount}</b></span>:<span className="rental-card-note">{key==='week'?t('按周续订，随时可停','Week to week. Cancel renewal anytime.'):t('按月续订，随时可停','Month to month. Cancel renewal anytime.')}</span>}
         <span className="rental-card-select"><span className="rental-radio" aria-hidden="true">{value === key && <img src="./assets/check.svg" alt="" />}</span>{value===key?t('已选方案','Selected plan'):t('选择'+p.name,'Choose '+p.name.toLowerCase())}</span>
       </label>)}
     </fieldset>
-    <div className="rental-action-bar"><p className="rental-selection" aria-live="polite"><span className="rental-selection-label">{t("已选方案","YOUR SELECTION")}</span>{offerApplies(offer,value)?<>{plan.name} · {t('首期 8 折，一次支付 ','First period 20% off: ')}<b className="rental-offer-price">{money(offerCents(offer,value))}</b>{t('，',' · ')}{plan.renews}</>:<>{plan.name} · {plan.summary}{savings[value]?t('，比连续月付'+savings[value].zh+'省 $'+savings[value].amount,' · Save $'+savings[value].amount+' versus '+savings[value].en):''}</>}</p>
+    <div className="rental-action-bar"><p className="rental-selection" aria-live="polite"><span className="rental-selection-label">{t("已选方案","YOUR SELECTION")}</span>{offerApplies(offer,value)?<>{plan.name} · {t('限时 8 折，首期支付 ','Limited-time 20% off, first period: ')}<b className="rental-offer-price">{money(offerCents(offer,value))}</b>{t('，',' · ')}{plan.renews}</>:<>{plan.name} · {plan.summary}{savings[value]?t('，比连续月付'+savings[value].zh+'省 $'+savings[value].amount,' · Save $'+savings[value].amount+' versus '+savings[value].en):''}</>}</p>
     <a className="rental-pay-button" href={paymentLink(value)}>{t("继续付款","Continue to payment")} · {offerApplies(offer,value)?<>{t('首期 ','first period ')}{money(offerCents(offer,value))}</>:<>{dollars(plan.total)}/{plan.unit}</>}<img src="./assets/chevron.svg" alt="" /></a></div>
     <ul className="rental-terms">
       <li><img src="./assets/check.svg" alt="" />{t("计费周期从交付当天开始","Billing starts on delivery")}</li>
@@ -244,6 +270,7 @@ function RentalApp() {
   const [accountSlots,setAccountSlots] = useState([]); const [offerSlots,setOfferSlots] = useState([]); const [priceSlots,setPriceSlots] = useState([]); const [menuSlots,setMenuSlots] = useState([]);
   const checkout = location.pathname === '/checkout' || new URLSearchParams(location.search).get('view') === 'checkout';
   useTaglineReveal(root, !checkout);
+  useLiveStock(root, !checkout);
   useSourceInteractions(root);
   useEffect(() => {
     sessionStorage.setItem('rental-interval',value);
