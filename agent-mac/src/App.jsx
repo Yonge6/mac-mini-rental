@@ -68,8 +68,11 @@ function HeroPrice() {
 function HeroOffer() {
   const offer = useDailyOffer();
   if (!offer) return null;
-  const seats = offer.seatsLeft === null ? null : offer.seatsLeft === 0 ? t('今日已满','Sold out today') : t('今日还剩 ' + offer.seatsLeft + ' 席', offer.seatsLeft + ' left today');
-  return <a className="afterglow-hero-offer" href="#pricing"><span>{t('每日 3 席 · 首期 8 折','3 seats a day · 20% off first period')}{seats && <em>{seats}</em>}</span><time dateTime={offer.resetsAt}>{clock(offer.remaining)}</time></a>;
+  const seats = offer.seatsLeft === null ? t('北京时间 0 点重置','Resets at midnight Beijing time') : offer.seatsLeft === 0 ? t('今日已满','Sold out today') : t('今日还剩 ' + offer.seatsLeft + ' 席', offer.seatsLeft + (offer.seatsLeft === 1 ? ' seat' : ' seats') + ' left today');
+  return <a className="afterglow-offer" href="#pricing">
+    <div className="afterglow-stock-heading"><span>{t('每日 3 席 · 首期 8 折','3 seats a day · 20% off first period')}</span><span>{seats}</span></div>
+    <div className="afterglow-stock-bottom"><p><span>{t('距重置','Resets in')}</span><time className="afterglow-offer-clock" dateTime={offer.resetsAt}>{clock(offer.remaining)}</time></p></div>
+  </a>;
 }
 
 function CheckoutOffer({ offer, value }) {
