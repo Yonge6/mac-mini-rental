@@ -24,6 +24,7 @@ These instructions apply to `agent-mac/`; also follow the repository-root `AGENT
 ## Accounts, payments and referrals
 - Reuse the existing craftos.app Fastify/PostgreSQL backend (`Yonge6/onelaser-workos-api`), not Supabase. Keep its CalDock namespace, identity, cookies, admin checks and audits independent from Work OS.
 - Real sign-in depends on configured providers. Demo mode is explicitly fictional and browser-local; never let it stand in for a real provider login, account, payment or shared write.
+- The landing page recruits referral partners and resellers. Do not publish a commission rate unless the owner sets one; it lives in admin settings. Renewals of a commission-earning order also earn.
 - Paid order states/commissions require verified backend payment events. Affiliate links retain first-touch attribution and administrator-configured rules. No automatic payouts.
 - GitHub marketing routes real accounts/checkout to same-origin `https://wodemac.com/`; keep repository-subpath assets and query-based route refresh working.
 
