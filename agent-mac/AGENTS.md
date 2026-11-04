@@ -29,7 +29,5 @@ These instructions apply to `agent-mac/`; also follow the repository-root `AGENT
 - GitHub marketing routes real accounts/checkout to same-origin `https://wodemac.com/`; keep repository-subpath assets and query-based route refresh working.
 
 ## Operator trust content
-- wodeMac is operated by the OneLaser team. Preserve the real California office photo, official team photo and public company links; do not fabricate people or endorsements.
-- User-selected official video `tSroh4OUkX4` follows the office/team grid, above company details, in both languages. Responsive 16:9, lazy YouTube embed, no autoplay, YouTube fallback link.
-- The video shows OneLaser's production facility, not a wodeMac server room or proof of Mac hosting infrastructure.
+- Do not mention OneLaser on the site. Contact email: hustyy986@gmail.com. Legal pages name the contracting entity, Kraft Engineering Corp, and its address.
 - Editing `public/decision-studio/` also requires that directory's own instructions. Preserve public viewing, local calculations and permissioned shared writes; don't overwrite saved drafts with new defaults.

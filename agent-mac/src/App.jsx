@@ -252,7 +252,6 @@ function Checkout({ value }) {
         <p className="checkout-policy">{plan.term}{t("。计费周期从交付当天开始。",". Billing starts on delivery.")}</p>
         <p className="checkout-legal">{t("付款即表示你同意","By paying, you agree to the ")}<a href={t("./legal/terms.html","./legal/terms.en.html")}>{t("服务条款","Terms of Service")}</a>{t("和"," and ")}<a href={t("./legal/privacy.html","./legal/privacy.en.html")}>{t("隐私政策","Privacy Policy")}</a>{t("。",".")}</p>
         <CheckoutAction value={value}/>
-        <a className="cd-inline-link checkout-operator" href={appHref(undefined,{interval:value})+'#team'}>{t('由 OneLaser 团队运营 · 了解团队','Operated by OneLaser · Meet the team')}</a>
         <a className="checkout-change" href={appHref(undefined,{interval:value})+'#pricing'}>{t("更改付款方案","Change billing plan")}</a>
       </section>
     </main>
