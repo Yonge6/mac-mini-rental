@@ -30,3 +30,4 @@ footer.legal-foot{max-width:780px;margin:0 auto;padding:0 clamp(20px,5vw,32px) 4
 footer.legal-foot a{color:var(--muted)}
 [hidden]{display:none!important}
 @media (max-width:600px){body{font-size:15px}h2{font-size:19px}.legal-summary{padding:18px}}
+.legal-brand img.brand-wordmark{width:auto;height:22px}
