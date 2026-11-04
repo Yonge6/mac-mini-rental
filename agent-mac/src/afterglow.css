@@ -365,3 +365,18 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline-color: #ffa
   .afterglow-hero-price span, .afterglow-hero-price small { text-shadow: 0 1px 8px #0f0c09, 0 0 2px #0f0c09; }
   .afterglow-hero-price small { color: #f0e5d5; }
 }
+/* Closing: the copy sits on the photo's dark left side. */
+@media (min-width:601px) {
+  .hm-closing { display: flex; align-items: center; min-height: clamp(520px,54vw,780px); padding-block: clamp(48px,6vw,88px); }
+  .hm-closing-farm { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; z-index: 0; }
+  .hm-closing-farm img { object-position: right center; }
+  .hm-closing-farm::after { content: ''; position: absolute; inset: 0; pointer-events: none; background: linear-gradient(90deg, #0f0c09 0%, #0f0c09cc 34%, #0f0c0900 58%); }
+  .hm-closing-copy { width: min(50%,640px); max-width: none; margin-inline: 0; padding: 0; border-top: 0; z-index: 1; }
+  .hm-closing h2 { font-size: clamp(34px,4.3vw,64px); line-height: 1.12; }
+}
+@media (max-width:600px) {
+  .hm-closing-copy { padding-bottom: 0; }
+  .hm-closing-farm { position: relative; z-index: -1; margin: -56px -24px 0; -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 30%); mask-image: linear-gradient(180deg, transparent 0, #000 30%); }
+  .hm-closing { isolation: isolate; }
+}
+@media (max-width:600px) { .hm-closing h2 { font-size: clamp(28px,9vw,36px); } }
