@@ -96,7 +96,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline-color: #ffa
 .afterglow-stock-marks i[data-available]::after { background: linear-gradient(105deg, transparent 35%, #ffe6c3e6 50%, transparent 65%) 150% 0 / 300% 100% no-repeat; animation: 4.5s ease-in-out calc(1.5s + var(--i) * 30ms) infinite hm-board-glint; }
 .afterglow-hero .hm-scroll { color: #cfa875; bottom: 18px; }
 
-.hm-chapter.afterglow-feature { position: relative; height: 56.8vw; max-height: 820px; min-height: 560px; padding: 0; border-top: 1px solid #d38f42; isolation: isolate; background: #120e0b; }
+.hm-chapter.afterglow-feature { position: relative; height: 56.8vw; max-height: 820px; min-height: 560px; padding: 0; isolation: isolate; background: #120e0b; }
 .afterglow-feature-copy { position: absolute; top: 9.4vw; left: 4.4%; width: 52%; max-width: 790px; }
 .afterglow-feature h2 { font-size: clamp(44px,6.6vw,95px); line-height: 1.2; letter-spacing: -.045em; text-wrap: nowrap; font-weight: 700; margin-top: 34px; color: #f8f0df; }
 .afterglow-feature-description { font-size: clamp(17px,2.25vw,30px); color: #d6c7b2; line-height: 1.65; margin-top: 42px; }
