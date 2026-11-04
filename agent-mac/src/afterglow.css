@@ -32,7 +32,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline-color: #ffa
 .caldock-page-links a { color: #c9beaf; font-size: 16px; padding-block: 30px; }
 .caldock-page-links a:hover, .caldock-page-links a[aria-current] { color: #ffbd6e; }
 .caldock-page-links a[aria-current] { box-shadow: inset 0 -2px #ffad47; }
-.caldock-language-switch { font-size: 14px; color: #746555; gap: 12px; }
+.caldock-language-switch { font-size: 14px; color: #746555; gap: 0; }
 .caldock-language-switch a { color: #b5a999; }
 .caldock-language-switch a[aria-current] { color: #fff4e1; }
 .caldock-language-switch a:hover { color: #ffbd6e; }
@@ -402,7 +402,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline-color: #ffa
 .wm-footer nav { display: flex; flex-wrap: wrap; gap: 8px 24px; }
 .wm-footer nav a { padding-block: 8px; color: #d4bfa0; font-size: 14px; line-height: 20px; text-decoration: none; }
 .wm-footer nav a:hover { color: #ffbd6e; }
-.caldock-language-switch a { display: inline-grid; place-items: center; min-width: 32px; min-height: 32px; }
+.caldock-language-switch a { display: inline-grid; place-items: center; min-width: 18px; min-height: 32px; }
 @media (max-width:850px) { .caldock-page-links { -webkit-mask-image: linear-gradient(90deg, #000 88%, transparent); mask-image: linear-gradient(90deg, #000 88%, transparent); } }
 
 /* Design pass: one typeface, a floating nav and the tagline reveal. */
@@ -445,7 +445,7 @@ html { scroll-padding-top: 96px; }
   .caldock-brand { margin-right: auto; }
   .caldock-page-links { display: none; }
   .wm-menu-slot { display: block; order: 9; }
-  .caldock-language-switch { gap: 2px; }
+  .caldock-language-switch a { min-width: 26px; }
   .hm-hero.afterglow-hero { padding-top: 96px; }
   html { scroll-padding-top: 80px; }
 }
