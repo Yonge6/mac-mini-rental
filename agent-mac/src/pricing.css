@@ -58,3 +58,4 @@
 .rental-offer-timer{grid-column:2;grid-row:1/3;flex-direction:column;align-items:flex-end;justify-content:center;gap:4px;font-size:14px}
 .rental-offer-clock{font-size:clamp(40px,4.4vw,60px);font-weight:700;letter-spacing:-.04em;line-height:1.05}
 @media(max-width:700px){.rental-offer{grid-template-columns:1fr;gap:10px;padding:18px}.rental-offer-title,.rental-offer p,.rental-offer-timer{grid-column:1;grid-row:auto}.rental-offer-timer{align-items:flex-start}.rental-offer-clock{font-size:44px}}
+.rental-selection .rental-offer-price{display:inline;margin:0;color:#ffb347;font-weight:700}
