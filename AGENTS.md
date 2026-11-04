@@ -13,7 +13,7 @@ Applies to Claude, Codex and human contributors. Read the nearest nested instruc
 
 ## Current product decisions
 
-- Brand remains CalDock. The GRIDRUN rebrand was paused; PACE and other names are proposals, not approved replacements. Do not restore unpublished rename work without a new instruction.
+- Brand is MacUSA (renamed from CalDock on 2026-11-03 by owner decision). Technical names stay `caldock`: the `/caldock/` and `/api/caldock` URLs, CSS classes, error codes, storage keys and window globals, so existing links, sessions and saved drafts keep working. Do not rename them without a new decision. The GRIDRUN and PACE proposals are dropped.
 - Preserve the existing California Afterglow page, premium warm-black/gold pricing, genuine OneLaser photos/video, responsive layout and motion. Respect reduced-motion preferences.
 - Current page product copy uses California-only M6 Mac mini positioning. Changes to hardware specifications need an explicit product decision and verified source; do not invent availability or specifications.
 - Prices: USD 199 monthly, 507 quarterly (169/month), 1548 yearly (129/month). Hero states the annual-equivalent starting price and the annual upfront charge clearly.
