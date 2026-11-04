@@ -16,8 +16,9 @@ const SourceMarkup = memo(forwardRef(function SourceMarkup(_, ref) { return <div
 const plans = {
   week: { name: t('周付','Weekly'), title: t('周付','Weekly'), unit: t('周','week'), summary: t('每周支付 $69','$69 billed weekly'), term: t('随时取消续订，当期结束后停止','Cancel renewal anytime; service ends after the current period') },
   month: { name: t('月付','Monthly'), title: t('月付','Monthly'), unit: t('月','month'), summary: t('每月支付 $199','$199 billed monthly'), term: t('随时取消续订，当期结束后停止','Cancel renewal anytime; service ends after the current period') },
-  quarter: { name: t('季付','Quarterly'), title: t('季付','Quarterly'), unit: t('季','quarter'), summary: t('一次支付 $477，享用 3 个月','$477 paid upfront for 3 months'), term: t('每 3 个月续订，可随时关闭下期续订','Renews every 3 months; turn off next renewal anytime') },
-  year: { name: t('年付','Yearly'), title: t('年付','Yearly'), unit: t('年','year'), summary: t('一次支付 $1,548，享用 12 个月','$1,548 paid upfront for 12 months'), term: t('年付一次付清，一年内不能取消或退款','Yearly is paid upfront and is non-refundable during the year') },
+  quarter: { name: t('季付','Quarterly'), title: t('季付','Quarterly'), unit: t('季','quarter'), summary: t('一次支付 $537，享用 3 个月','$537 paid upfront for 3 months'), term: t('每 3 个月续订，可随时关闭下期续订','Renews every 3 months; turn off next renewal anytime') },
+  half: { name: t('半年付','Half-yearly'), title: t('半年付','Half-yearly'), unit: t('半年','half-year'), summary: t('一次支付 $954，享用 6 个月','$954 paid upfront for 6 months'), term: t('每 6 个月续订，可随时关闭下期续订','Renews every 6 months; turn off next renewal anytime') },
+  year: { name: t('年付','Yearly'), title: t('年付','Yearly'), unit: t('年','year'), summary: t('一次支付 $1,668，享用 12 个月','$1,668 paid upfront for 12 months'), term: t('年付一次付清，一年内不能取消或退款','Yearly is paid upfront and is non-refundable during the year') },
 };
 for(const [key,plan] of Object.entries(plans))Object.assign(plan,{...BILLING_PLANS[key],display:(BILLING_PLANS[key].monthlyCents??BILLING_PLANS[key].amountCents)/100,total:BILLING_PLANS[key].amountCents/100});
 const dollars = n => '$' + n.toLocaleString('en-US');
@@ -29,15 +30,15 @@ function PlanPicker({ value, onChange, id }) {
     <fieldset className="rental-options"><legend className="sr-only">{t("付款周期","Billing period")}</legend>
       {Object.entries(plans).map(([key,p]) => <label className={'rental-option rental-plan-card ' + (value === key ? 'is-selected ' : '') + (key === 'year' ? 'is-annual' : '')} key={key}>
         <input type="radio" name={'billing-'+id} value={key} checked={value === key} onChange={() => onChange(key)} />
-        <span className="rental-card-edition" aria-hidden="true">{key==='week'?'01 / WEEKLY':key==='month'?'02 / MONTHLY':key==='quarter'?'03 / QUARTERLY':'04 / ANNUAL'}</span>
+        <span className="rental-card-edition" aria-hidden="true">{key==='week'?'01 / WEEKLY':key==='month'?'02 / MONTHLY':key==='quarter'?'03 / QUARTERLY':key==='half'?'04 / HALF-YEARLY':'05 / ANNUAL'}</span>
         <span className="rental-card-heading">{p.title}{key === 'year' && <em>{t('主推','Recommended')}</em>}</span>
         <span className="rental-card-price"><strong>{dollars(p.display)}</strong><span>{key==='week'?t('/周','/week'):t('/月','/month')}</span></span>
         <span className="rental-card-total">{p.summary}</span>
-        <span className="rental-card-note">{key==='week'?t('按周续订，随时可停','Week to week. Cancel renewal anytime.'):key==='month'?t('按月续订，随时可停','Month to month. Cancel renewal anytime.'):key==='quarter'?t('比连续月付三个月省 $120','Save $120 versus 3 monthly payments'):t('比连续月付一年省 $840','Save $840 versus 12 monthly payments')}</span>
+        <span className="rental-card-note">{key==='week'?t('按周续订，随时可停','Week to week. Cancel renewal anytime.'):key==='month'?t('按月续订，随时可停','Month to month. Cancel renewal anytime.'):key==='quarter'?t('比连续月付三个月省 $60','Save $60 versus 3 monthly payments'):key==='half'?t('比连续月付半年省 $240','Save $240 versus 6 monthly payments'):t('比连续月付一年省 $720','Save $720 versus 12 monthly payments')}</span>
         <span className="rental-card-select"><span className="rental-radio" aria-hidden="true">{value === key && <img src="./assets/check.svg" alt="" />}</span>{value===key?t('已选方案','Selected plan'):t('选择'+p.name,'Choose '+p.name.toLowerCase())}</span>
       </label>)}
     </fieldset>
-    <div className="rental-action-bar"><p className="rental-selection" aria-live="polite"><span className="rental-selection-label">{t("已选方案","YOUR SELECTION")}</span>{plan.name} · {plan.summary}{value==='year'?t('，比连续月付一年省 $840',' · Save $840 versus 12 monthly payments'):value==='quarter'?t('，比连续月付三个月省 $120',' · Save $120 versus 3 monthly payments'):''}</p>
+    <div className="rental-action-bar"><p className="rental-selection" aria-live="polite"><span className="rental-selection-label">{t("已选方案","YOUR SELECTION")}</span>{plan.name} · {plan.summary}{value==='year'?t('，比连续月付一年省 $720',' · Save $720 versus 12 monthly payments'):value==='half'?t('，比连续月付半年省 $240',' · Save $240 versus 6 monthly payments'):value==='quarter'?t('，比连续月付三个月省 $60',' · Save $60 versus 3 monthly payments'):''}</p>
     <a className="rental-pay-button" href={paymentLink(value)}>{t("继续付款","Continue to payment")} · {dollars(plan.total)}/{plan.unit}<img src="./assets/chevron.svg" alt="" /></a></div>
     <ul className="rental-terms">
       <li><img src="./assets/check.svg" alt="" />{t("计费周期从交付当天开始","Billing starts on delivery")}</li>
@@ -116,7 +117,7 @@ function Checkout({ value }) {
       </section>
       <section className="checkout-summary" aria-labelledby="order-title"><h2 id="order-title">{t("订单摘要","Order summary")}</h2><div className="checkout-order-line"><span>{t("独享 Mac mini","Dedicated Mac mini")} · {plan.name}</span><strong>{dollars(plan.total)}</strong></div>
         <p className="checkout-cycle">{plan.summary}</p>
-        {(value === 'quarter' || value === 'year') && <p className="checkout-saving">{value==='year'?t('年付 · 比连续月付一年省 $840','Yearly · Save $840 versus 12 monthly payments'):t('季付 · 比连续月付三个月省 $120','Quarterly · Save $120 versus 3 monthly payments')}</p>}
+        {(value === 'quarter' || value === 'half' || value === 'year') && <p className="checkout-saving">{value==='year'?t('年付 · 比连续月付一年省 $720','Yearly · Save $720 versus 12 monthly payments'):value==='half'?t('半年付 · 比连续月付半年省 $240','Half-yearly · Save $240 versus 6 monthly payments'):t('季付 · 比连续月付三个月省 $60','Quarterly · Save $60 versus 3 monthly payments')}</p>}
         <dl><div><dt>{t("托管位置","Location")}</dt><dd>{t("美国加州","California, USA")}</dd></div><div><dt>{t("数量","Quantity")}</dt><dd>{t("1 台","1 Mac")}</dd></div><div><dt>{t("计费周期","Billing period")}</dt><dd>{plan.days?t('7 天','7 days'):<>{plan.months}{t(' 个月',plan.months===1?' month':' months')}</>}</dd></div></dl>
         <div className="checkout-total"><span>{t("本次应付","Total due today")} <small>USD</small></span><strong>{dollars(plan.total)}<small>.00</small></strong></div>
         <p className="checkout-policy">{plan.term}{t("。计费周期从交付当天开始。",". Billing starts on delivery.")}</p>
