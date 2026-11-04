@@ -48,9 +48,8 @@ function OfferBar({ offer, value }) {
   if (!offer) return null;
   const full = offer.seatsLeft === 0;
   return <div className={'rental-offer' + (full ? ' is-full' : '')}>
-    <div className="rental-offer-copy"><strong>{t('每日 ' + offer.seatsTotal + ' 席 · 首期 8 折', offer.seatsTotal + ' seats a day · 20% off your first period')}</strong>
-      <span>{full ? t('今日名额已满，下一轮开放倒计时','Today\'s seats are gone. Next seats open in') : offer.seatsLeft === null ? t('距今日名额重置还有','Seats reset in') : t('今日还剩 ' + offer.seatsLeft + ' 席，距重置还有', offer.seatsLeft + (offer.seatsLeft === 1 ? ' seat' : ' seats') + ' left today. Resets in')}</span></div>
-    <time className="rental-offer-clock" dateTime={offer.resetsAt}>{clock(offer.remaining)}</time>
+    <strong className="rental-offer-title">{t('每日 ' + offer.seatsTotal + ' 席 · 首期 8 折', offer.seatsTotal + ' seats a day · 20% off your first period')}</strong>
+    <div className="rental-offer-timer"><span>{full ? t('今日名额已满，下一轮开放倒计时','Today\'s seats are gone. Next seats open in') : offer.seatsLeft === null ? t('距今日名额重置还有','Seats reset in') : t('今日还剩 ' + offer.seatsLeft + ' 席，距重置还有', offer.seatsLeft + (offer.seatsLeft === 1 ? ' seat' : ' seats') + ' left today. Resets in')}</span><time className="rental-offer-clock" dateTime={offer.resetsAt}>{clock(offer.remaining)}</time></div>
     <p>{value === 'week' ? t('周付不参加此优惠。','Weekly is not included. ') : ''}{t('限月付、季付、半年付、年付，续费恢复原价。每天北京时间 0 点重置，打开付款页时占用席位，30 分钟内未付款自动释放。','For monthly, quarterly, half-yearly and yearly plans. Renewals are at the regular price. Resets at midnight Beijing time. Opening the payment page holds a seat, released after about 30 minutes if unpaid.')}</p>
   </div>;
 }
