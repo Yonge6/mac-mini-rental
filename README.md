@@ -1,4 +1,4 @@
-# CalDock · 美国加州独享 Mac
+# MacUSA · 美国加州独享 Mac
 
 展示页、付款流程、客户/订单/分销界面，以及团队使用的 Decision Studio。正式收款和真实登录供应商是否可用，以服务器配置为准。
 
@@ -9,7 +9,7 @@
 - **页面与功能说明**：[agent-mac/README.md](agent-mac/README.md)
 - **决策工作台**：[Decision Studio](agent-mac/docs/decision-studio/README.md)
 
-当前品牌暂用 **CalDock**。GRIDRUN 改名已暂停；PACE 等名字仍为候选，没有确认的新名字不要替换上线。
+品牌为 **MacUSA**（2026-11-03 由 CalDock 改名）。网址改为 `/macusa/`，旧的 `/caldock/` 链接自动跳转；接口 `/api/caldock` 和代码里的 `caldock` 标识不变。
 
 ## 在线入口与仓库
 
