@@ -14,7 +14,7 @@ Applies to Claude, Codex and human contributors. Read the nearest nested instruc
 ## Current product decisions
 
 - Brand is wodeMac (renamed from CalDock on 2026-11-03 by owner decision, domain `wodemac.com`). The site is at `https://wodemac.com/`; `craftos.app/caldock/` redirects there. Technical names stay `caldock`: the `/api/caldock` paths, CSS classes, error codes, storage keys and window globals, so sign-in, sessions and saved drafts keep working. Do not rename them without a new decision. The GRIDRUN and PACE proposals are dropped.
-- Preserve the existing California Afterglow page, premium warm-black/gold pricing, genuine OneLaser photos/video, responsive layout and motion. Respect reduced-motion preferences.
+- Preserve the existing California Afterglow page, premium warm-black/gold pricing, responsive layout and motion. Respect reduced-motion preferences.
 - Current page product copy uses California-only M6 Mac mini positioning. Changes to hardware specifications need an explicit product decision and verified source; do not invent availability or specifications.
 - Prices: USD 69 weekly, 199 monthly, 537 quarterly (179/month), 954 half-yearly (159/month), 1668 yearly (139/month). Hero states the annual-equivalent starting price and the annual upfront charge clearly.
 - Preserve both languages, interval selection across checkout/login, existing URLs and customer state. No credits, wallet or top-up terminology.

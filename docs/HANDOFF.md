@@ -32,7 +32,7 @@ wodeMac（原 CalDock，美国加州独享 M6 Mac mini 租用）已在 **https:/
 | Render | **OneLaser** workspace → “My project” → 服务 **`onelaser-workos-migration`**（Docker），数据库 `onelaser-workos-db` | 公司正式环境，Work OS 和 CalDock 共用。另有个人空 workspace “Elian's workspace”，与正式站无关。 |
 | Stripe | 账号 **Kraft Engineering Corp**（老板 KC / Kris Chen 提供，由 Mercury 管理），用户登录邮箱 elian.yuan@1laser.com | 正式模式已激活。 |
 | Google Cloud | 账号 **hwu900566@gmail.com**，项目 **CalDock**（ID `caldock-513602`） | 只用于 Google 登录（OAuth），未绑定付款方式。 |
-| 运营主体 / 对外联系 | Kraft Engineering Corp（以 OneLaser 品牌经营），20472 Crescent Bay Dr, STE 104, Lake Forest, CA 92630；联系邮箱 elian.yuan@1laser.com | 写在隐私政策和服务条款里。 |
+| 运营主体 / 对外联系 | Kraft Engineering Corp，20472 Crescent Bay Dr, STE 104, Lake Forest, CA 92630；联系邮箱 hustyy986@gmail.com | 写在隐私政策和服务条款里。 |
 
 ## 3. 代码在哪里
 
@@ -100,7 +100,7 @@ Render 的环境变量页面里是 Work OS 的全部生产配置。**编辑时�
 - 计费从**交付当天**开始。管理员在后台标记“已交付”时，后端会把 Stripe 的下一次扣款推到交付后满一期（`trial_end`）。
 - 3 个工作日内没交付，全额退款。月付和季付可随时关闭续订；年付一年内不能取消或退款。续费失败保留 7 天。服务结束 3 天后抹除数据。
 - 每人限 1 台。不出现积分、钱包、充值之类的说法。
-- 保留暖黑配香槟金的风格、原有动效、真实的 OneLaser 照片和视频、中英双语、手机适配。
+- 保留暖黑配香槟金的风格、原有动效、中英双语、手机适配。
 
 ## 7. 待办和已知问题
 
