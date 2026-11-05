@@ -49,3 +49,13 @@
 @media(max-width:420px){.cd-login-copy{padding:48px 24px}.cd-login-copy h1{font-size:47px}.cd-login-header{padding-inline:24px}.cd-login-copy .cd-lead{font-size:14px}.cd-page-heading{flex-wrap:wrap;gap:20px}.cd-page-heading h1{font-size:28px}.cd-eyebrow{font-size:9px}.cd-demo-banner svg{display:none}.cd-panel-heading{gap:12px}.cd-panel-heading a{font-size:11px}.cd-stat{padding-block:24px}.cd-stat small{font-size:9px}.cd-stat strong{font-size:29px}.cd-detail-product{gap:15px}.cd-detail-product>img{width:85px}.cd-detail-product h3{font-size:15px}.cd-detail-product p{font-size:10px}.cd-order-detail{padding:22px}.cd-dialog>header{padding:20px 22px}.cd-form{gap:20px}.cd-empty{padding:44px 22px}.cd-table td,.cd-table th{padding:16px}.cd-console-header>span{max-width:160px}.cd-console-main{padding-inline:20px}.cd-console-footer{padding-inline:20px}.cd-demo-banner{padding-inline:20px}.cd-workspace-callout{gap:14px}.cd-workspace-callout h2{font-size:14px}}
 .cd-user-menu{position:relative}.cd-user-menu summary{display:flex;align-items:center;gap:10px;cursor:pointer;list-style:none}.cd-user-menu summary::-webkit-details-marker{display:none}.cd-user-menu>div{position:absolute;right:0;top:43px;min-width:180px;padding:7px;background:#251b10;border:1px solid #a58a6555;border-radius:9px;box-shadow:0 15px 35px #0005;z-index:35;display:grid;gap:3px}.cd-user-menu>div>a,.cd-user-menu>div>button{padding:10px 12px;background:none;border:0;text-align:left;color:#d5b58b;font:inherit;font-size:12px;text-decoration:none;border-radius:5px}.cd-user-menu>div>a:hover,.cd-user-menu>div>button:hover{background:#d4a05514}
 .cd-brand img.brand-wordmark{width:auto;height:24px;object-fit:contain}
+
+.cd-wechat{display:flex;align-items:center;gap:22px;margin-top:26px;padding:22px 24px;border:1px solid var(--cd-rule);border-radius:12px;background:#21170e}
+.cd-wechat.is-paid{margin-bottom:34px;border-color:#ffb34780;background:linear-gradient(120deg,#2c2214,#1a140e 70%);box-shadow:0 18px 44px -24px #ffb34766}
+.cd-wechat img{flex:none;display:block;width:128px;height:128px;padding:7px;border-radius:10px;background:#fff}
+.cd-wechat h2{margin:0;color:#f4eee1;font-size:18px;font-weight:700}
+.cd-wechat p{margin:8px 0 0;color:#cdb18c;font-size:14px;line-height:1.7}
+.cd-order-detail .cd-wechat{margin-top:18px;padding:16px}
+.cd-order-detail .cd-wechat img{width:104px;height:104px}
+.cd-order-detail .cd-wechat h2{font-size:15px}
+@media(max-width:560px){.cd-wechat{flex-direction:column;align-items:flex-start}.cd-wechat img{width:168px;height:168px}}
