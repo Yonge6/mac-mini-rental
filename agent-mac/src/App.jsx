@@ -144,7 +144,7 @@ function PlanPicker({ value, onChange, id }) {
     <a className="rental-pay-button" href={paymentLink(value)}><span>{t("继续付款","Continue to payment")}</span><i aria-hidden="true"><img src="./assets/chevron.svg" alt="" /></i></a></div>
     <ul className="rental-terms">
       <li><img src="./assets/check.svg" alt="" />{t("每天价格按一年 365 天折算，实际按所选周期一次付款","Daily prices assume a 365-day year; you pay once per billing period")}</li>
-      <li><img src="./assets/check.svg" alt="" />{t("3 个工作日内没交付，全额退款","Not delivered within 3 business days? Full refund")}</li>
+      <li><img src="./assets/check.svg" alt="" />{t("通常 24 小时内交付，最迟 3 个工作日，否则全额退款","Usually delivered within 24 hours; full refund if it takes over 3 business days")}</li>
       <li><img src="./assets/check.svg" alt="" /><span data-testid="plan-term">{plan.term}</span></li>
       <li><img src="./assets/check.svg" alt="" />{t("可一次买多台；年付一次买 5 台及以上，首年再减 2.5%","Buy as many as you need. Yearly orders of 5 or more get a further 2.5% off the first year")}</li>
     </ul>
@@ -217,7 +217,7 @@ function Checkout({ value }) {
       <section className="checkout-details"><p className="checkout-eyebrow">{t("独享 MAC · 美国加州","DEDICATED MAC · CALIFORNIA")}</p><h1>{t("完成付款，","Your own Mac,")}<br />{t("开启你的独享 Mac。","one payment away.")}</h1>
         <p className="checkout-lead">{t("M6 Mac mini，24 小时为你和 Agent 在线。","M6 Mac mini. Always on for you and your agents.")}</p>
         <div className="checkout-product"><img src="./assets/mac-portrait.svg" alt="M6 Mac mini" /><div><strong>{t("独享 Mac mini","Dedicated Mac mini")}</strong><span>{t("Apple M6 · 12 核 CPU · 12 核 GPU","Apple M6 · 12-core CPU · 12-core GPU")}</span><span>{t("16GB 统一内存 · 512GB SSD","16GB unified memory · 512GB SSD")}</span><span>{t("美国加州 · 整台独占","California, USA · Exclusively yours")}</span></div></div>
-        <div className="checkout-service"><h2>{t("付款后会发生什么","What happens after payment")}</h2><p>{t("付款后我们立刻开始准备和配置，最迟 3 个工作日内交付。计费从付款当天开始。","We start preparing your Mac as soon as you pay and deliver within 3 business days at the latest. Billing starts on payment.")}</p><p>{t("你可以在账单页查看交付进度与登录信息。","Track delivery and sign-in details on your billing page.")}</p></div>
+        <div className="checkout-service"><h2>{t("付款后会发生什么","What happens after payment")}</h2><p>{t("通常 24 小时内交付，最迟 3 个工作日，否则全额退款。计费从付款当天开始。","Usually delivered within 24 hours, and within 3 business days at the latest or you get a full refund. Billing starts on payment.")}</p><p>{t("你可以在账单页查看交付进度与登录信息。","Track delivery and sign-in details on your billing page.")}</p></div>
       </section>
       <section className="checkout-summary" aria-labelledby="order-title"><h2 id="order-title">{t("订单摘要","Order summary")}</h2><div className="checkout-order-line"><span>{t("独享 Mac mini","Dedicated Mac mini")} · {plan.name}{quantity > 1 ? ' × ' + quantity : ''}</span><strong>{money(amounts.subtotal)}</strong></div>
         <p className="checkout-cycle">{plan.summary}</p>
@@ -261,7 +261,7 @@ function RentalApp() {
       root.current.querySelector('.caldock-brand').href=appHref();
     }
   }, [value,checkout]);
-  useEffect(() => { document.title = checkout ? t('付款 · wodeMac','Checkout · wodeMac') : t('独享 M6 Mac mini · 美国加州 | wodeMac','Dedicated M6 Mac mini · California | wodeMac'); document.documentElement.lang = english ? 'en' : 'zh-CN'; }, [checkout]);
+  useEffect(() => { document.title = checkout ? t('付款 · wodeMac','Checkout · wodeMac') : t('你的 Mac，在美国加州 | wodeMac','Your own Mac, in California, USA | wodeMac'); document.documentElement.lang = english ? 'en' : 'zh-CN'; }, [checkout]);
   if (checkout) return <Checkout value={value} />;
   return <>
     <SourceMarkup ref={root} />
