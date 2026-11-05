@@ -261,7 +261,7 @@ function RentalApp() {
       root.current.querySelector('.caldock-brand').href=appHref();
     }
   }, [value,checkout]);
-  useEffect(() => { document.title = checkout ? t('付款 · wodeMac','Checkout · wodeMac') : t('你的 Mac，在美国加州 | wodeMac','Your own Mac, in California, USA | wodeMac'); document.documentElement.lang = english ? 'en' : 'zh-CN'; }, [checkout]);
+  useEffect(() => { document.title = checkout ? t('付款 · wodeMac','Checkout · wodeMac') : t('我的 Mac，在美国加州 | wodeMac','Your own Mac, in California, USA | wodeMac'); document.documentElement.lang = english ? 'en' : 'zh-CN'; }, [checkout]);
   if (checkout) return <Checkout value={value} />;
   return <>
     <SourceMarkup ref={root} />

@@ -20,7 +20,7 @@ These instructions apply to `agent-mac/`; also follow the repository-root `AGENT
 - Versus monthly payments, quarter saves USD 25.35, half-year USD 101.40, year USD 304.20. Previous USD 1799 annual and two-plan layouts are obsolete.
 - Stock totals are set on the admin stock page and come from the backend; the numbers in the landing markup are only the first paint.
 - The only discounts are the fixed plan discounts above; there is no time-limited offer or seat countdown.
-- Brand line: "你的 Mac，在美国加州。" / "Your own Mac, in California, USA." Main audience is mainland China teams shipping products overseas. Delivery copy: usually within 24 hours, 3 business days at the latest. Never present a California Mac as a way to reach region-restricted AI services.
+- Brand line: "我的 Mac，在美国加州。" / "Your own Mac, in California, USA." Main audience is mainland China teams shipping products overseas. Delivery copy: usually within 24 hours, 3 business days at the latest. Never present a California Mac as a way to reach region-restricted AI services.
 - Prices live in `src/commerce/plans.mjs`; backend independently validates prices. Changes affect new orders, never existing order/commission snapshots. No credits, wallet or top-up wording.
 
 ## Accounts, payments and referrals

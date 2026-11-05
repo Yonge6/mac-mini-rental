@@ -108,7 +108,7 @@ Render 的环境变量页面里是 Work OS 的全部生产配置。**编辑时�
 2. **测试订单**：2026-11-02 用测试模式付过一笔，系统里显示“待开通”，但没有真实付款，**不要交付**。
 3. **法律文件审阅**：隐私政策和服务条款是 Claude 按网站规则起草的，不是律师意见。请 KC 审阅，重点看责任上限（最多赔 3 个月租金）和 Orange County 管辖条款。
 4. **续费佣金**：续费成功会延长服务期，但推广佣金还不会自动计入续费订单，需要用户决定规则。
-5. **Apple 登录**：代码已有，没配置（`apple:false`），登录页按钮禁用并显示“敬请期待”，配置好后会自动恢复。用户已决定暂缓，先用 Google 登录；放在个人还是公司 Apple 团队还没定（Apple 的用户 ID 按团队区分，以后换团队不好迁移）。
+5. **Apple 登录**：2026-11-05 配好。Apple 开发者账号是个人身份（YONG YUAN，Team ID `L855ZVM679`，hustyy986@gmail.com），Service ID `com.wodemac.web.signin`，Key ID `NQ7AQK4AU8`；私钥只存在 Render 的 `CALDOCK_APPLE_PRIVATE_KEY` 和用户自己的备份里。Apple 登录界面可能显示个人开发者名字，不是 Kraft；要换成公司名得升级为组织账号。隐藏邮箱的客户要收到邮件，需在 Apple 后台登记发信域名。Apple 开发者协议须在 2026-11-13 前由账号本人接受。
 6. **PR #7**（`codex/caldock-dingtalk-team`）还没合并，所以需要发布分支（见 4.2）。建议 Codex 合并后取消发布分支。
 7. `docs/DEVELOPMENT.md` 第 4 节已按本文更新。
 
