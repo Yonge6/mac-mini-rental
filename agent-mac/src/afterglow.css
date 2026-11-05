@@ -81,7 +81,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline-color: #ffa
 .afterglow-hero .hm-hero-visual { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); column-gap: 3.2vw; align-items: stretch; position: absolute; left: 4.4%; right: 4.4%; bottom: 7.8vw; }
 .afterglow-hero .hm-hero-visual .afterglow-stock { grid-column: 2; }
 .afterglow-hero .hm-hero-visual [data-offer-slot] { grid-column: 1; min-width: 0; }
-.afterglow-stock { --hm-board-size: 10; --hm-board-left: 3; --hm-board-taken: 7; --hm-sweep-start: .45s; --hm-sweep-step: 150ms; border-top: 1px solid #b2936e38; padding-top: 18px; }
+.afterglow-stock { --hm-board-size: 100; --hm-board-left: 32; --hm-board-taken: 7; --hm-sweep-start: .45s; --hm-sweep-step: 150ms; border-top: 1px solid #b2936e38; padding-top: 18px; }
 .afterglow-stock-heading { display: flex; justify-content: space-between; align-items: center; gap: 20px; color: #f0e5d5; font-size: clamp(12px,1.4vw,18px); }
 .afterglow-stock-heading span:first-child { display: inline-flex; align-items: center; gap: 10px; }
 .afterglow-stock-heading span:first-child::before { content: ''; display: block; width: 8px; height: 8px; background: #ffad47; border-radius: 50%; animation: 2s ease-out infinite hm-ping; }
@@ -465,4 +465,33 @@ html { scroll-padding-top: 96px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .afterglow-partner-card:hover, .afterglow-team-card:hover, .afterglow-office:hover img, .afterglow-partner-cta:hover { transform: none; }
+}
+
+/* Hero: one stock strip across the bottom, and a headline that clears the Mac */
+@media (min-width: 761px) {
+  .afterglow-hero .hm-hero-visual { grid-template-columns: minmax(0,1fr); left: 4.4%; right: 4.4%; width: auto; bottom: 76px; }
+  .afterglow-hero .hm-hero-visual .afterglow-stock { grid-column: 1; display: flex; align-items: center; gap: clamp(20px,3vw,48px); padding-top: clamp(14px,1.5vw,22px); }
+  .afterglow-stock-heading, .afterglow-stock-bottom { display: contents; }
+  .afterglow-stock-heading span:first-child { order: 1; flex: none; font-size: clamp(13px,1.15vw,17px); }
+  .afterglow-stock-bottom p { order: 2; font-size: clamp(14px,1.2vw,18px); }
+  .afterglow-stock-count { font-size: clamp(44px,4.6vw,68px); }
+  .afterglow-stock-marks { order: 3; flex: 1; min-width: 0; width: auto; }
+  .afterglow-stock-marks i { height: clamp(10px,.9vw,14px); }
+  .afterglow-stock-heading span:last-child { order: 4; flex: none; font-size: clamp(13px,1.15vw,17px); }
+  .afterglow-hero .hm-scroll { bottom: 20px; }
+  .afterglow-hero h1 { font-size: clamp(64px,10.4vw,150px); }
+  .afterglow-hero .hm-hero-subtitle { font-size: clamp(18px,2.1vw,30px); margin-top: 16px; }
+  .afterglow-reserve { margin-top: clamp(24px,2.8vw,40px); }
+  .afterglow-hero-price strong { font-size: clamp(30px,3.4vw,46px); }
+  .afterglow-hero-price small { font-size: 13px; color: #e3d3bb; }
+}
+/* Keep the stock strip inside the first screen */
+@media (min-width: 901px) {
+  .hm-hero.afterglow-hero { max-height: max(720px, 100svh); }
+}
+@media (min-width: 901px) {
+  /* Sit the copy on the stock strip, so short screens can't make them collide. */
+  .afterglow-hero .hm-hero-copy { top: auto; bottom: clamp(190px,14vw,215px); margin-top: 0; }
+  .afterglow-hero h1 { font-size: clamp(64px,min(10.4vw,17svh),172px); }
+  .afterglow-hero:lang(en) h1 { font-size: clamp(60px,min(7.6vw,13svh),124px); }
 }

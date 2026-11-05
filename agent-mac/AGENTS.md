@@ -15,16 +15,17 @@ These instructions apply to `agent-mac/`; also follow the repository-root `AGENT
 
 ## Product copy and pricing
 - Location is United States / California only; no Europe or random allocation. Page product copy currently says M6 Mac mini. Hardware changes require confirmed product information, not invented specifications.
-- Weekly: USD 69 for 7 days. Monthly: USD 199 for 1 month. Quarterly: USD 537 for 3 months (179/month). Half-yearly: USD 954 for 6 months (159/month). Yearly: USD 1668 for 12 months (139/month), featured.
-- The largest price on the hero and plan cards is a daily rate on a 365-day year, rounded up (`dailyCents`). While seats remain it is the discounted first-period rate with the regular rate struck through. Always show the actual first charge and renewal price beside it. The plan selector stays in the lower pricing section; reserve buttons scroll there. Preserve the interval through checkout, language switch, auth callback and customer/admin displays.
-- Quarter saves USD 60 vs three monthly payments; half-year saves USD 240; year saves USD 720 vs twelve monthly payments. Previous USD 1799 annual and two-plan layouts are obsolete.
-- Daily offer: 3 first-period seats at 20% off (not weekly), reset at midnight Beijing time. Seats and the reset time always come from the backend; never show a countdown or seat count the server has not reported.
+- Four plans are on sale. Monthly: USD 169 standard. Quarterly: USD 481.65 for 3 months (5% off). Half-yearly: USD 912.60 for 6 months (10% off). Yearly: USD 1723.80 for 12 months (15% off), featured. Prices are per Mac and an order can hold several. Yearly orders of 5 or more get a further 2.5% off the first year; renewals are at the yearly price.
+- The largest price on the hero and plan cards is a daily rate on a 365-day year, rounded up (`dailyCents`). Always show the actual charge beside it. The plan selector stays in the lower pricing section; reserve buttons scroll there. Preserve the interval through checkout, language switch, auth callback and customer/admin displays.
+- Versus monthly payments, quarter saves USD 25.35, half-year USD 101.40, year USD 304.20. Previous USD 1799 annual and two-plan layouts are obsolete.
+- Stock totals are set on the admin stock page and come from the backend; the numbers in the landing markup are only the first paint.
+- The only discounts are the fixed plan discounts above; there is no time-limited offer or seat countdown.
 - Prices live in `src/commerce/plans.mjs`; backend independently validates prices. Changes affect new orders, never existing order/commission snapshots. No credits, wallet or top-up wording.
 
 ## Accounts, payments and referrals
 - Reuse the existing craftos.app Fastify/PostgreSQL backend (`Yonge6/onelaser-workos-api`), not Supabase. Keep its CalDock namespace, identity, cookies, admin checks and audits independent from Work OS.
 - Real sign-in depends on configured providers. Demo mode is explicitly fictional and browser-local; never let it stand in for a real provider login, account, payment or shared write.
-- The landing page recruits referral partners and resellers. The page states the owner's 20% commission; if the admin rate changes, update the copy too. Renewals of a commission-earning order also earn.
+- The landing page recruits referral partners and resellers. The page states the owner's commission: on a customer's first order, 15% yearly, 10% half-yearly, 7.5% quarterly, 5% monthly; one tier only, nothing on renewals. If the admin rates change, update the page and terms too.
 - Paid order states/commissions require verified backend payment events. Affiliate links retain first-touch attribution and administrator-configured rules. No automatic payouts.
 - GitHub marketing routes real accounts/checkout to same-origin `https://wodemac.com/`; keep repository-subpath assets and query-based route refresh working.
 
