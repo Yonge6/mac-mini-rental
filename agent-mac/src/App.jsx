@@ -175,7 +175,12 @@ function useSourceInteractions(root) {
     };
     const click = e => {
       const sceneTab = e.target.closest('[data-scene-tab]');
-      if (sceneTab) showScene(sceneTab.dataset.sceneTab);
+      if (sceneTab) {
+        showScene(sceneTab.dataset.sceneTab);
+        // Tabs stay pinned while reading; switching from further down starts the new scene at its top.
+        const box = node.querySelector('.wm-scenes');
+        if (box && box.getBoundingClientRect().top < 0) box.scrollIntoView({ block:'start', behavior:'instant' });
+      }
       const sceneLink = e.target.closest('a[href^="#scene-"]');
       if (sceneLink && showScene(sceneLink.getAttribute('href').slice(7))) {
         e.preventDefault();

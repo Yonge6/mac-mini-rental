@@ -62,7 +62,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline-color: #ffa
 .afterglow-hero .hm-hero-copy { display: block; position: absolute; top: 18.2vw; left: 4.4%; width: 49%; max-width: 760px; }
 .afterglow-eyebrow { color: #ffb45e; font-family: var(--font-mono); font-size: clamp(11px,1.3vw,17px); letter-spacing: .2em; line-height: 1.6; font-weight: 500; }
 .afterglow-hero h1 { font-size: clamp(64px,12vw,172px); font-weight: 700; line-height: 1.12; letter-spacing: -.055em; margin-top: 16px; text-wrap: nowrap; color: #f8f2e6; }
-.afterglow-hero .hm-hero-subtitle { font-size: clamp(18px,2.5vw,34px); line-height: 1.55; color: #eee5d6; margin-top: 22px; max-width: none; text-wrap: initial; word-break: normal; }
+.afterglow-hero .hm-hero-subtitle { font-size: clamp(17px,2.2vw,30px); line-height: 1.55; color: #eee5d6; margin-top: 22px; max-width: none; text-wrap: initial; word-break: normal; }
 .afterglow-reserve { display: flex; align-items: center; gap: clamp(16px,2vw,28px); margin-top: 48px; }
 .hm-page .hm-cta, .rental-pay-button, .checkout-summary .rental-pay-button {
   background: #ffad47;
@@ -204,7 +204,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline-color: #ffa
   .hm-hero.afterglow-hero { height: 840px; max-height: none; }
   .afterglow-hero .hm-hero-copy { top: 96px; width: 60%; }
   .afterglow-hero h1 { font-size: clamp(68px,11vw,94px); }
-  .afterglow-hero .hm-hero-subtitle { font-size: 20px; }
+  .afterglow-hero .hm-hero-subtitle { font-size: 18px; }
   .afterglow-hero-art { object-position: 65% center; }
   .afterglow-hero .hm-hero-visual { bottom: 60px; width: 56%; }
   .afterglow-feature h2 { font-size: 5.9vw; }
@@ -480,7 +480,7 @@ html { scroll-padding-top: 96px; }
   .afterglow-stock-heading span:last-child { order: 4; flex: none; font-size: clamp(13px,1.15vw,17px); }
   .afterglow-hero .hm-scroll { bottom: 20px; }
   .afterglow-hero h1 { font-size: clamp(64px,10.4vw,150px); }
-  .afterglow-hero .hm-hero-subtitle { font-size: clamp(18px,2.1vw,30px); margin-top: 16px; }
+  .afterglow-hero .hm-hero-subtitle { font-size: clamp(17px,1.9vw,27px); margin-top: 16px; }
   .afterglow-reserve { margin-top: clamp(24px,2.8vw,40px); }
   .afterglow-hero-price strong { font-size: clamp(30px,3.4vw,46px); }
   .afterglow-hero-price small { font-size: 13px; color: #e3d3bb; }
