@@ -81,12 +81,14 @@
 .wm-belief h2 { margin-top: 18px; font-size: clamp(44px,7vw,96px); font-weight: 800; line-height: 1.1; letter-spacing: -.04em; background: linear-gradient(180deg,#fff8ec 30%,#ffc277); -webkit-background-clip: text; background-clip: text; color: transparent; text-wrap: balance; }
 .wm-belief-lead { max-width: 800px; margin: 28px auto 0; color: #c6b8a6; font-size: clamp(16px,1.5vw,19px); line-height: 1.85; text-wrap: balance; }
 .wm-belief-punch { display: grid; gap: 6px; margin-top: 36px; color: #f4eee1; font-size: clamp(22px,2.6vw,34px); font-weight: 700; line-height: 1.4; letter-spacing: -.01em; text-wrap: balance; }
-.wm-belief-punch span:last-child { color: #ffc277; }
+.wm-belief-punch > span:last-child { color: #ffc277; }
+/* Keep each clause whole so lines break only after punctuation. */
+.wm-nb { display: inline-block; }
 
 /* Per-scene line: what the saved time goes to. */
 .wm-scene-value { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 12px; margin-top: 18px; padding: 14px 16px; border-left: 2px solid #ffb347; border-radius: 0 10px 10px 0; background: linear-gradient(90deg,#ffb3471a,transparent); color: #f4eee1; font-size: 15px; font-weight: 600; line-height: 1.6; }
 .wm-scene-value span { color: #ffb45e; font-family: var(--font-mono); font-size: 12px; font-weight: 600; letter-spacing: .06em; }
-@media (max-width: 760px) { .wm-belief { padding: 72px 24px; } .wm-belief-punch { margin-top: 28px; } .wm-scene-value { font-size: 14px; } }
+@media (max-width: 760px) { .wm-belief { padding: 72px 24px; } .wm-belief h2 { font-size: 40px; } .wm-belief-punch { margin-top: 28px; } .wm-scene-value { font-size: 14px; } }
 
 /* Pain points, each followed by how we answer it. */
 .wm-pains { display: grid; gap: 10px; margin: 12px 0 0; padding: 0; list-style: none; }
@@ -108,3 +110,22 @@
 .wm-scene-proof { margin-top: 16px; color: #c6b8a6; font-size: 14px; line-height: 1.7; }
 .wm-scene-proof span { display: block; margin-bottom: 2px; color: #f4eee1; font-weight: 700; }
 @media (max-width: 760px) { .wm-uses li { grid-template-columns: minmax(0,1fr); gap: 2px; } .wm-uses span { font-size: 14px; } }
+
+/* Sticky scene tabs. overflow:clip clips like hidden but, unlike hidden, lets sticky children stick to the page scroll. */
+.hm-page { overflow: clip; }
+.wm-scenes { scroll-margin-top: 86px; }
+.wm-scene-tabs { position: sticky; top: 88px; z-index: 20; background: #15100beb; box-shadow: 0 14px 36px -18px #000; backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+@media (min-width: 901px) { .wm-scene-visual { top: 160px; } }
+@media (max-width: 760px) { .wm-scenes { scroll-margin-top: 76px; } .wm-scene-tabs { top: 78px; } }
+
+/* Tab labels: full names on wide screens; numbered short names in a compact bar on phones. */
+.wm-tab-no, .wm-tab-short { display: none; }
+@media (max-width: 760px) {
+  .wm-scene-tabs { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 4px; margin-inline: -8px; padding: 5px; border-radius: 16px; }
+  .wm-scene-tab { display: grid; place-items: center; align-content: center; gap: 1px; height: 48px; padding: 0 4px; border-radius: 12px; font-size: 13px; line-height: 1.2; }
+  .wm-tab-full { display: none; }
+  .wm-tab-no, .wm-tab-short { display: block; }
+  .wm-tab-no { color: #a69683; font-family: var(--font-mono); font-size: 10px; letter-spacing: .08em; }
+  .wm-tab-short { white-space: nowrap; }
+  .wm-scene-tab[aria-selected="true"] .wm-tab-no { color: #24170c99; }
+}
