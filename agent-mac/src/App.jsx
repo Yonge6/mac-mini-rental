@@ -48,12 +48,14 @@ function MobileMenu() {
 // The stock in the page source is only the fallback; the server counts paid orders.
 function paintStock(page, { total, rented, left }) {
   const label = left ? t('首发 ' + total + ' 台已租出 ' + rented + ' 台，仅剩 ' + left + ' 台', rented + ' of ' + total + ' launch Macs rented, ' + left + ' available') : t('首发 ' + total + ' 台已全部租出', 'All ' + total + ' launch Macs are rented');
-  page.querySelectorAll('.afterglow-stock, .hm-closing-stock').forEach(meter => { meter.setAttribute('aria-label', label); meter.setAttribute('aria-valuemax', total); meter.setAttribute('aria-valuenow', rented); });
+  page.querySelectorAll('.afterglow-stock, .hm-closing-stock').forEach(meter => { meter.removeAttribute('data-stock-pending'); meter.setAttribute('role','meter'); meter.setAttribute('aria-label', label); meter.setAttribute('aria-valuemin',0); meter.setAttribute('aria-valuemax', total); meter.setAttribute('aria-valuenow', rented); });
   const hero = page.querySelector('.afterglow-stock');
   if (hero) {
     // The ten marks show the share rented, so they never read as full while a Mac is left.
     const filled = left ? Math.min(9, Math.round(rented / total * 10)) : 10;
     hero.style.setProperty('--hm-board-size', total); hero.style.setProperty('--hm-board-left', left); hero.style.setProperty('--hm-board-taken', filled);
+    hero.querySelector('.afterglow-stock-count').textContent = '';
+    hero.querySelector('.afterglow-stock-heading span:first-child').textContent = t('首发 · 共 ' + total + ' 台', 'Launch · ' + total + ' Macs');
     hero.querySelector('.afterglow-stock-heading span:last-child').textContent = left ? t('已租出 ' + rented + ' 台', rented + ' already rented') : t('已全部租出', 'All rented');
     if (!left) hero.querySelector('.afterglow-stock-bottom p span').textContent = t('剩余', '');
     hero.querySelectorAll('.afterglow-stock-marks i').forEach((mark, index) => mark.toggleAttribute('data-available', index >= filled));
@@ -294,7 +296,7 @@ function RentalApp() {
       root.current.querySelector('.caldock-brand').href=appHref();
     }
   }, [value,checkout]);
-  useEffect(() => { document.title = checkout ? t('付款 · wodeMac','Checkout · wodeMac') : t('我的 Mac，在美国加州 | wodeMac','Your own Mac, in California, USA | wodeMac'); document.documentElement.lang = english ? 'en' : 'zh-CN'; }, [checkout]);
+  useEffect(() => { document.title = checkout ? t('付款 · wodeMac','Checkout · wodeMac') : t('美国加州 Mac mini 租赁与远程开发环境 | wodeMac','California Mac mini Rental for Remote Development | wodeMac'); document.documentElement.lang = english ? 'en' : 'zh-CN'; }, [checkout]);
   if (checkout) return <Checkout value={value} />;
   return <>
     <SourceMarkup ref={root} />

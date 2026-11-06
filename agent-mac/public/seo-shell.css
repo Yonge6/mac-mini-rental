@@ -1,0 +1,4 @@
+/* Prevent public landing content flashing before an account view takes over. */
+html[data-app-route] #root[data-prerendered]{visibility:hidden}
+.seo-static-plans .rental-plan-card{text-decoration:none;color:inherit}
+.seo-static-plans>p{font-size:12px;line-height:1.8;margin-top:18px;color:#bcb0a2}

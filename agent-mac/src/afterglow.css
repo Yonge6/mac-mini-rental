@@ -81,7 +81,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline-color: #ffa
 .afterglow-hero .hm-hero-visual { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); column-gap: 3.2vw; align-items: stretch; position: absolute; left: 4.4%; right: 4.4%; bottom: 7.8vw; }
 .afterglow-hero .hm-hero-visual .afterglow-stock { grid-column: 2; }
 .afterglow-hero .hm-hero-visual [data-offer-slot] { grid-column: 1; min-width: 0; }
-.afterglow-stock { --hm-board-size: 100; --hm-board-left: 32; --hm-board-taken: 7; --hm-sweep-start: .45s; --hm-sweep-step: 150ms; border-top: 1px solid #b2936e38; padding-top: 18px; }
+.afterglow-stock { --hm-board-size: 1; --hm-board-left: 0; --hm-board-taken: 0; --hm-sweep-start: .45s; --hm-sweep-step: 150ms; border-top: 1px solid #b2936e38; padding-top: 18px; }
 .afterglow-stock-heading { display: flex; justify-content: space-between; align-items: center; gap: 20px; color: #f0e5d5; font-size: clamp(12px,1.4vw,18px); }
 .afterglow-stock-heading span:first-child { display: inline-flex; align-items: center; gap: 10px; }
 .afterglow-stock-heading span:first-child::before { content: ''; display: block; width: 8px; height: 8px; background: #ffad47; border-radius: 50%; animation: 2s ease-out infinite hm-ping; }
@@ -500,3 +500,7 @@ html { scroll-padding-top: 96px; }
   .afterglow-hero h1 { font-size: clamp(56px,min(8.2vw,14svh),136px); line-height: 1.08; }
   .afterglow-hero:lang(en) h1 { font-size: clamp(48px,min(5.8vw,11svh),100px); }
 }
+
+/* Availability is unknown until the existing stock API has answered. */
+.afterglow-stock[data-stock-pending] .afterglow-stock-count::before{content:none}
+.afterglow-stock[data-stock-pending] .afterglow-stock-marks,.hm-closing-stock[data-stock-pending] .hm-stock-bar{visibility:hidden}
