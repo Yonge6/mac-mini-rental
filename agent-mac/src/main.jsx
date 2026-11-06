@@ -4,6 +4,7 @@ import { App } from "./App.jsx";
 import "./styles.css";
 import "./afterglow.css";
 import "./pricing.css";
+import "./scenes.css";
 import "./commerce/commerce.css";
 
 createRoot(document.getElementById("root")).render(
