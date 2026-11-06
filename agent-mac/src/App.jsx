@@ -156,7 +156,32 @@ function useSourceInteractions(root) {
     const node = root.current;
     if (!node) return;
     const picker = node.querySelector('.site-language-picker');
+    // Use-case tabs: one panel visible; hero shortcuts and #scene-<id> links open their panel.
+    const showScene = (id, focus) => {
+      const tabs = [...node.querySelectorAll('[data-scene-tab]')];
+      if (!tabs.some(tab => tab.dataset.sceneTab === id)) return false;
+      tabs.forEach(tab => { const on = tab.dataset.sceneTab === id; tab.setAttribute('aria-selected', String(on)); tab.tabIndex = on ? 0 : -1; if (on && focus) tab.focus(); });
+      node.querySelectorAll('[data-scene]').forEach(panel => { panel.hidden = panel.dataset.scene !== id; });
+      return true;
+    };
+    const sceneKeys = e => {
+      const tab = e.target.closest('[data-scene-tab]');
+      if (!tab || !['ArrowLeft','ArrowRight','Home','End'].includes(e.key)) return;
+      const tabs = [...node.querySelectorAll('[data-scene-tab]')];
+      const index = tabs.indexOf(tab);
+      const next = e.key === 'Home' ? 0 : e.key === 'End' ? tabs.length - 1 : (index + (e.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+      e.preventDefault();
+      showScene(tabs[next].dataset.sceneTab, true);
+    };
     const click = e => {
+      const sceneTab = e.target.closest('[data-scene-tab]');
+      if (sceneTab) showScene(sceneTab.dataset.sceneTab);
+      const sceneLink = e.target.closest('a[href^="#scene-"]');
+      if (sceneLink && showScene(sceneLink.getAttribute('href').slice(7))) {
+        e.preventDefault();
+        history.replaceState(null, '', sceneLink.getAttribute('href'));
+        node.querySelector('#scenes')?.scrollIntoView({ block:'start', behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' });
+      }
       const button = e.target.closest('[data-slot="collapsible-trigger"]');
       if (button) {
         const open = button.getAttribute('aria-expanded') !== 'true';
@@ -176,6 +201,7 @@ function useSourceInteractions(root) {
     const escape = e => { if (e.key === 'Escape') picker?.removeAttribute('open'); };
     const dismiss = e => { if (!e.target.closest('.site-language-picker')) picker?.removeAttribute('open'); };
     node.addEventListener('click', click);
+    node.addEventListener('keydown', sceneKeys);
     document.addEventListener('keydown', escape);
     document.addEventListener('click', dismiss);
     const observer = new IntersectionObserver(entries => {
@@ -187,7 +213,9 @@ function useSourceInteractions(root) {
     let disposed = false;
     document.fonts.ready.then(() => requestAnimationFrame(() => {
       if (disposed || !location.hash) return;
-      const target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+      const hash = decodeURIComponent(location.hash.slice(1));
+      if (hash.startsWith('scene-') && showScene(hash.slice(6))) { node.querySelector('#scenes')?.scrollIntoView({ block:'start', behavior:'instant' }); return; }
+      const target = document.getElementById(hash);
       target?.scrollIntoView({ block:'start', behavior:'instant' });
     }));
     const anchors = [...node.querySelectorAll('.caldock-page-links a')];
@@ -201,7 +229,7 @@ function useSourceInteractions(root) {
     }, { rootMargin:'-15% 0px -65% 0px', threshold:0 });
     anchors.forEach(anchor => { const section = node.querySelector(anchor.getAttribute('href')); if (section) activeSections.observe(section); });
     return () => {
-      node.removeEventListener('click',click);document.removeEventListener('keydown',escape);document.removeEventListener('click',dismiss);
+      node.removeEventListener('click',click);node.removeEventListener('keydown',sceneKeys);document.removeEventListener('keydown',escape);document.removeEventListener('click',dismiss);
       disposed = true;observer.disconnect();activeSections.disconnect();
     };
   }, [root]);
