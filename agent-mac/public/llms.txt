@@ -1,0 +1,17 @@
+# wodeMac
+
+wodeMac provides dedicated Mac mini rentals in California for software development and testing. Third-party AI accounts and model subscriptions are separate and must meet their providers' eligibility rules.
+
+This file is a maintained document directory, not a promise of search indexing or AI citations.
+
+## Official information
+- [Chinese homepage](https://wodemac.com/): Configuration, current plans, delivery and support.
+- [English homepage](https://wodemac.com/en.html): English product information.
+- [美国加州 Mac mini 租赁：费用、用途与选型](https://wodemac.com/guides/mac-mini-rental.html): 了解 wodeMac 美国加州独享 Mac mini 的租赁范围、四种付款周期、模型费用边界、远程开发与测试用途，以及下单前要确认的配置和交付事项。
+- [用远程 Mac 运行 Claude Code：准备与验收指南](https://wodemac.com/guides/claude-code-remote-mac.html): 在租用远程 Mac 前，确认 Claude Code 账号与地区资格、项目权限、开发依赖、远程连接、构建测试及验收方式。机器与模型订阅分别核算。
+- [出海开发团队与 AI 编程老师怎样选择远程 Mac](https://wodemac.com/guides/teams-and-educators.html): 按出海开发团队、成年 AI 编程老师和实施服务商的真实项目，确认独享远程 Mac 的任务、权限、交付物、验收及支持边界。
+- [Mac mini 租赁渠道合作：推广、经销与常见问题](https://wodemac.com/guides/partners.html): 了解 wodeMac 推广伙伴与经销商的区别、客户首单佣金、归属与结算核对、交付分工、合作内容披露和联系入口。
+- [Terms](https://wodemac.com/legal/terms.html): Contract, billing, use and referral rules.
+- [Privacy](https://wodemac.com/legal/privacy.html): Data and privacy information.
+
+Verified: 2026-11-07. Current configuration, stock and terms take precedence over this directory.
