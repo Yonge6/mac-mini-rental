@@ -97,3 +97,14 @@
 .wm-fix::before { content: ""; position: absolute; left: 2px; top: .5em; width: 14px; height: 8px; border-left: 2px solid #ffb347; border-bottom: 2px solid #ffb347; transform: rotate(-45deg); }
 @media (max-width: 760px) { .wm-pains li { padding: 12px 14px; } .wm-fix { font-size: 14px; } }
 @media (min-width: 901px) { .wm-scene { align-items: start; } .wm-scene-visual { position: sticky; top: 110px; } }
+
+/* Plan-aligned scene copy: concrete uses and how value is proven. */
+.wm-scene-copy .wm-scene-value { margin-top: 18px; font-size: 16px; }
+.wm-scene-copy .wm-scene-listh + .wm-scene-lead { margin-top: 8px; font-size: 15px; }
+.wm-uses { display: grid; gap: 8px; margin: 10px 0 0; padding: 0; list-style: none; }
+.wm-uses li { display: grid; grid-template-columns: 72px minmax(0,1fr); gap: 12px; align-items: baseline; padding: 12px 14px; border: 1px solid #a58a6526; border-radius: 12px; background: #1a130dcc; }
+.wm-uses strong { color: #ffb45e; font-size: 14px; font-weight: 700; }
+.wm-uses span { color: #f4eee1; font-size: 15px; line-height: 1.6; }
+.wm-scene-proof { margin-top: 16px; color: #c6b8a6; font-size: 14px; line-height: 1.7; }
+.wm-scene-proof span { display: block; margin-bottom: 2px; color: #f4eee1; font-weight: 700; }
+@media (max-width: 760px) { .wm-uses li { grid-template-columns: minmax(0,1fr); gap: 2px; } .wm-uses span { font-size: 14px; } }
