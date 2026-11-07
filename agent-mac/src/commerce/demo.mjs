@@ -22,15 +22,13 @@ export async function demoRequest(path,{method='GET',body}={},role='customer'){
  if(p==='/me')return demoSession(role);
  if(p==='/session')return {signedOut:true};
  if(p==='/capabilities')return {providers:{google:false,apple:false},payments:false,referrals:{attributionDays:30,automaticPayouts:false}};
- if(p==='/profile'){const user=data.users.find(u=>u.id===who);user.display_name=body.displayName;result=user;}
+ if(p==='/profile/answers'){const user=data.users.find(u=>u.id===who);user.profile_answers={appleId:null,email:null,card:null,source:null,sourceDetail:null,sourceNote:'',uses:[],teamSize:null,wechat:'',...body};user.profile_updated_at=now();result=user;}
+ else if(p==='/profile'){const user=data.users.find(u=>u.id===who);user.display_name=body.displayName;result=user;}
  else if(p==='/orders'&&method==='GET')return {items:data.orders.filter(o=>o.customer_id===who)};
  else if(p==='/orders'&&method==='POST'){
   const prior=data.orders.find(o=>o.customer_id===who&&o.request_key===body.requestKey);if(prior)return prior;
   if(data.orders.some(o=>o.customer_id===who&&o.status==='pending_payment'))throw fakeError('ACTIVE_ORDER_EXISTS','An open order already exists');
   result={id:crypto.randomUUID(),customer_id:who,request_key:body.requestKey,interval:body.interval,quantity:body.quantity??1,amount_cents:orderAmounts(body.interval,body.quantity??1).total,currency:'USD',status:'pending_payment',version:1,created_at:now(),renewal_enabled:true,commission_bps:0,commission_mode:'first_order',delivery_note:''};data.orders.unshift(result);
- }
- else if(/^\/(admin\/)?orders\/[^/]+\/setup$/.test(p)){
-  const parts=p.split('/'),admin=parts[1]==='admin',row=data.orders.find(o=>o.id===parts[admin?3:2]&&(admin||o.customer_id===who));if(!row)throw fakeError('NOT_FOUND','Order not found');if(['cancelled','refunded'].includes(row.status))throw fakeError('INVALID_ORDER_STATE','This order cannot be changed');row.setup_answers={appleId:body.appleId??null,email:body.email??null,card:body.card??null};row.setup_updated_at=now();result=row;
  }
  else if(/^\/orders\/[^/]+$/.test(p)){
   const row=data.orders.find(o=>o.id===p.split('/')[2]&&o.customer_id===who);if(!row)throw fakeError('NOT_FOUND','Order not found');
@@ -43,7 +41,7 @@ export async function demoRequest(path,{method='GET',body}={},role='customer'){
  }
  else if(p==='/admin/summary')return {total_orders:data.orders.length,awaiting_delivery:data.orders.filter(o=>['paid','provisioning'].includes(o.status)).length,active_macs:data.orders.filter(o=>o.status==='active').length,paid_cents:data.orders.filter(o=>['paid','provisioning','active'].includes(o.status)).reduce((s,o)=>s+o.amount_cents,0),customers:data.users.length,pending_commission_cents:data.commissions.filter(c=>['pending','approved'].includes(c.status)).reduce((s,c)=>s+c.amount_cents,0)};
  else if(p==='/admin/orders'){
-  let items=data.orders.map(o=>({...o,...Object.fromEntries(['display_name','email'].map(k=>[k,data.users.find(u=>u.id===o.customer_id)?.[k]])),referral_code:data.affiliates.find(a=>a.user_id===o.affiliate_id)?.code}));
+  let items=data.orders.map(o=>({...o,...Object.fromEntries(['display_name','email'].map(k=>[k,data.users.find(u=>u.id===o.customer_id)?.[k]])),customer_answers:data.users.find(u=>u.id===o.customer_id)?.profile_answers,customer_answers_at:data.users.find(u=>u.id===o.customer_id)?.profile_updated_at,referral_code:data.affiliates.find(a=>a.user_id===o.affiliate_id)?.code}));
   const search=(url.searchParams.get('search')||'').toLowerCase(),filter=url.searchParams.get('status');if(filter)items=items.filter(o=>o.status===filter);if(search)items=items.filter(o=>[o.id,o.email,o.display_name].join(' ').toLowerCase().includes(search));const page=Number(url.searchParams.get('page')||0);return {items:items.slice(page*50,page*50+50),total:items.length};
  }
  else if(/^\/admin\/orders\//.test(p)){
