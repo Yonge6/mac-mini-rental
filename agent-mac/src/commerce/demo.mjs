@@ -29,6 +29,9 @@ export async function demoRequest(path,{method='GET',body}={},role='customer'){
   if(data.orders.some(o=>o.customer_id===who&&o.status==='pending_payment'))throw fakeError('ACTIVE_ORDER_EXISTS','An open order already exists');
   result={id:crypto.randomUUID(),customer_id:who,request_key:body.requestKey,interval:body.interval,quantity:body.quantity??1,amount_cents:orderAmounts(body.interval,body.quantity??1).total,currency:'USD',status:'pending_payment',version:1,created_at:now(),renewal_enabled:true,commission_bps:0,commission_mode:'first_order',delivery_note:''};data.orders.unshift(result);
  }
+ else if(/^\/(admin\/)?orders\/[^/]+\/setup$/.test(p)){
+  const parts=p.split('/'),admin=parts[1]==='admin',row=data.orders.find(o=>o.id===parts[admin?3:2]&&(admin||o.customer_id===who));if(!row)throw fakeError('NOT_FOUND','Order not found');if(['cancelled','refunded'].includes(row.status))throw fakeError('INVALID_ORDER_STATE','This order cannot be changed');row.setup_answers={appleOrGoogle:body.appleOrGoogle??null,claude:body.claude??null,card:body.card??null};row.setup_updated_at=now();result=row;
+ }
  else if(/^\/orders\/[^/]+$/.test(p)){
   const row=data.orders.find(o=>o.id===p.split('/')[2]&&o.customer_id===who);if(!row)throw fakeError('NOT_FOUND','Order not found');
   if(method==='PATCH'){if(row.version!==body.expectedVersion)throw fakeError('VERSION_CONFLICT','Reload before continuing');if(body.action==='cancel_pending'&&row.status!=='pending_payment')throw fakeError('INVALID_ORDER_STATE','Order cannot be cancelled');if(body.action==='cancel_pending')row.status='cancelled';row.renewal_enabled=false;row.version++;}result=row;
