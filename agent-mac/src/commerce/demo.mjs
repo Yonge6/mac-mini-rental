@@ -30,7 +30,7 @@ export async function demoRequest(path,{method='GET',body}={},role='customer'){
   result={id:crypto.randomUUID(),customer_id:who,request_key:body.requestKey,interval:body.interval,quantity:body.quantity??1,amount_cents:orderAmounts(body.interval,body.quantity??1).total,currency:'USD',status:'pending_payment',version:1,created_at:now(),renewal_enabled:true,commission_bps:0,commission_mode:'first_order',delivery_note:''};data.orders.unshift(result);
  }
  else if(/^\/(admin\/)?orders\/[^/]+\/setup$/.test(p)){
-  const parts=p.split('/'),admin=parts[1]==='admin',row=data.orders.find(o=>o.id===parts[admin?3:2]&&(admin||o.customer_id===who));if(!row)throw fakeError('NOT_FOUND','Order not found');if(['cancelled','refunded'].includes(row.status))throw fakeError('INVALID_ORDER_STATE','This order cannot be changed');row.setup_answers={appleOrGoogle:body.appleOrGoogle??null,claude:body.claude??null,card:body.card??null};row.setup_updated_at=now();result=row;
+  const parts=p.split('/'),admin=parts[1]==='admin',row=data.orders.find(o=>o.id===parts[admin?3:2]&&(admin||o.customer_id===who));if(!row)throw fakeError('NOT_FOUND','Order not found');if(['cancelled','refunded'].includes(row.status))throw fakeError('INVALID_ORDER_STATE','This order cannot be changed');row.setup_answers={appleId:body.appleId??null,email:body.email??null,card:body.card??null};row.setup_updated_at=now();result=row;
  }
  else if(/^\/orders\/[^/]+$/.test(p)){
   const row=data.orders.find(o=>o.id===p.split('/')[2]&&o.customer_id===who);if(!row)throw fakeError('NOT_FOUND','Order not found');
