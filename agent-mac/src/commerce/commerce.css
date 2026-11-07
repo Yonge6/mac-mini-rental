@@ -88,3 +88,4 @@
 @keyframes cd-cta-pulse{0%{box-shadow:0 0 0 0 #ffc27788}60%,100%{box-shadow:0 0 0 12px #ffc27700}}
 @keyframes cd-badge-shine{0%,40%{background-position:100% 0}80%,100%{background-position:-120% 0}}
 @keyframes cd-dot-pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.6);opacity:.55}}
+.cd-customer-name{font-size:18px;font-weight:700}.cd-detail-list dd small{display:block;font-size:11px;color:#9b825f;margin-top:2px}.cd-answers dd .cd-status{margin-left:8px}
