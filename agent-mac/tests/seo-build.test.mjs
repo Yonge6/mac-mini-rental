@@ -4,13 +4,14 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import vm from 'node:vm';
 import test from 'node:test';
+import { guides } from '../scripts/seo-content.mjs';
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const build=path.join(root,'dist/client');
 const read=relative=>readFileSync(path.join(build,relative),'utf8');
 const text=html=>html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/g,'').replace(/<[^>]*>/g,'').replace(/&amp;/g,'&').replace(/\s+/g,' ').trim();
 const graphs=html=>[...html.matchAll(/<script type="application\/ld\+json"[^>]*>([\s\S]*?)<\/script>/g)].flatMap(match=>JSON.parse(match[1])['@graph']??[]);
-const guideFiles=['index.html','mac-mini-rental.html','claude-code-remote-mac.html','teams-and-educators.html','partners.html'];
+const guideFiles=['index.html','en.html',...guides.map(guide=>guide.slug+'.html')];
 
 test('both built homepages contain the real landing content before JavaScript',()=>{
   for(const [file,lang,heading,canonical] of [
@@ -25,7 +26,7 @@ test('both built homepages contain the real landing content before JavaScript',(
     assert.ok(html.includes(`rel="canonical" href="${canonical}"`));
     assert.ok(html.includes('hreflang="zh-CN"'));
     assert.ok(html.includes('hreflang="en"'));
-    assert.ok(html.includes('href="./guides/"'));
+    assert.ok(html.includes(file==='en.html'?'href="./guides/en.html"':'href="./guides/"'));
     assert.ok(html.includes('data-prerendered='));
     assert.ok(html.includes('type="module"'));
     assert.ok(html.includes('data-stock-pending'));
@@ -59,20 +60,22 @@ test('pre-rendered payment links preserve period and language and show real upfr
   }
 });
 
-test('Chinese guides are static, internally reachable, and their FAQ data matches visible answers',()=>{
+test('guides are static, internally reachable, and their FAQ data matches visible answers',()=>{
   for(const file of guideFiles){
     const html=read('guides/'+file);
+    const english=file==='en.html'||guides.find(guide=>guide.slug+'.html'===file)?.lang==='en';
     assert.equal([...html.matchAll(/<h1[\s>]/g)].length,1);
-    assert.ok(html.includes('<html lang="zh-CN">'));
+    assert.ok(html.includes(english?'<html lang="en">':'<html lang="zh-CN">'));
     assert.ok(html.includes('name="description"'));
     assert.ok(html.includes('https://wodemac.com/guides/'+(file==='index.html'?'':file)));
+    if(/claude|codex|ios/.test(file))assert.ok(/Claude Code|Codex/.test(html));
     assert.ok(!html.includes('{{PRICE_TABLE}}'));
     assert.ok(!html.includes('fonts.googleapis.com'));
     const visible=text(html);
     const graph=graphs(html);
     assert.ok(graph.some(item=>item['@type']==='Organization'&&item.name==='wodeMac'));
     const faq=graph.find(item=>item['@type']==='FAQPage');
-    if(file!=='index.html')assert.ok(faq?.mainEntity.length>=3);
+    if(file!=='index.html'&&file!=='en.html')assert.ok(faq?.mainEntity.length>=3);
     for(const item of faq?.mainEntity??[]){
       assert.ok(visible.includes(item.name));
       assert.ok(visible.includes(item.acceptedAnswer.text));
@@ -126,5 +129,8 @@ test('sitemap describes only published content paths and robots exposes it',()=>
     assert.ok(existsSync(path.join(build,url.pathname.endsWith('/')?url.pathname+'index.html':url.pathname)),url.pathname);
   }
   assert.ok(read('robots.txt').includes('Sitemap: https://wodemac.com/sitemap.xml'));
-  for(const file of guideFiles.filter(file=>file!=='index.html'))assert.ok(read('llms.txt').includes('/guides/'+file));
+  for(const file of guideFiles.filter(file=>file!=='index.html'&&file!=='en.html'))assert.ok(read('llms.txt').includes('/guides/'+file));
+  const full=read('llms-full.txt');
+  for(const guide of guides)assert.ok(full.includes(guide.answer),guide.slug);
+  assert.ok(!full.includes('{{PRICE_TABLE}}'));
 });

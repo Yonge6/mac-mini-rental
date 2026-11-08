@@ -11,8 +11,8 @@ const strip = html => html.replace(/<[^>]*>/g,'').replace(/&amp;/g,'&').replace(
 const money = cents => '$' + (cents/100).toLocaleString('en-US',{minimumFractionDigits:cents%100?2:0});
 const amount = cents => '$'+Math.floor(cents/100).toLocaleString('en-US')+(cents%100?'<small>.'+String(cents%100).padStart(2,'0')+'</small>':'');
 const meta = {
-  zh:{ title:'美国加州 Mac mini 租赁与远程开发环境 | wodeMac', description:'wodeMac 提供美国加州独享 Mac mini 租赁，用于软件开发、构建与测试，按需配合 Claude Code 等 AI 编程工作流。查看租赁方案、交付说明、使用条件与渠道合作。',url:siteUrl+'/',lang:'zh-CN'},
-  en:{ title:'California Mac mini Rental for Remote Development | wodeMac', description:'Dedicated Mac mini rentals in California for software development, builds and testing. Explore billing plans, delivery, AI coding workflow preparation and partnerships.',url:siteUrl+'/en.html',lang:'en'},
+  zh:{ title:'美国加州 Mac mini 租赁：预装 Claude Code 与 Codex | wodeMac', description:'wodeMac 提供美国加州独享 Mac mini 租赁，7×24 在线，预装 Claude Code 和 Codex，管理员权限归你，用于软件开发、构建与测试。月付 $169 起，查看方案、交付说明与渠道合作。',url:siteUrl+'/',lang:'zh-CN'},
+  en:{ title:'Mac mini Rental for Claude Code & Codex, in California | wodeMac', description:'Dedicated Mac mini rentals in California for software development, builds and testing, online 24/7 with Claude Code and Codex preinstalled. From $169 a month.',url:siteUrl+'/en.html',lang:'en'},
 };
 
 for (const language of ['zh','en']) {
