@@ -69,6 +69,128 @@ export const guides = [
       ['如何联系 wodeMac 讨论合作？', '可通过官网合作区的微信或公开联系邮箱说明客户类型和真实项目；推广伙伴的专属链接从官网账户入口生成。'],
     ],
   },
+  {
+    slug: 'codex-remote-mac',
+    title: '用远程 Mac 运行 OpenAI Codex：预装环境、账号与验收',
+    description: '在美国加州独享 Mac mini 上使用 OpenAI Codex CLI 或 Codex 应用：机器已预装 Codex，客户用自己的 ChatGPT 或 API 账号登录。了解账号条件、项目准备、持续运行和验收方法。',
+    answer: 'wodeMac 的独享 Mac mini 交付时已预装 OpenAI Codex 和 Claude Code，管理员权限归客户。Codex 使用客户本人或企业的 ChatGPT 账号或 OpenAI API 登录，wodeMac 不另收模型费用，也不提供或共享 OpenAI 账号；客户需自行符合 OpenAI 当前的地区与使用规则。',
+    sources: 'openai',
+    sections: [
+      ['Codex 在这台 Mac 上怎样工作？', '<p>Codex 是 OpenAI 的编程 Agent，可以在终端里读写代码、运行命令和测试。机器交付时已经装好 Codex，你通过远程桌面打开终端，进入项目目录即可启动。它运行在这台加州 Mac 上，代码、依赖和任务记录都留在这台独享机器里，不占用你自己电脑的资源。</p><p>同一台 Mac 也预装了 Claude Code，可以在不同项目或不同终端里分别使用两种工具，再按真实结果决定团队的主力工具。</p>'],
+      ['账号和费用怎样分开？', '<p>租金只含机器。Codex 用这台 Mac 上客户自己的登录：可以是客户的 ChatGPT 订阅账号，也可以是客户的 OpenAI API Key，按 OpenAI 的计费规则结算。wodeMac 不转售、代持或共享 OpenAI 账号，也不因租用机器增加任何模型额度。</p>{{PRICE_TABLE}}<p>机器所在地或网络出口不能替代 OpenAI 对地区、年龄和付款方式的要求；使用前请自行核对 OpenAI 当前支持的国家和地区。</p>'],
+      ['第一次使用的准备步骤', '<ol><li>按交付说明远程登录，确认 macOS、Codex 和 Git 版本。</li><li>把有授权的代码仓库克隆到这台 Mac，安装项目依赖。</li><li>由客户本人通过官方流程登录 Codex，或在环境变量里配置自己的 API Key。</li><li>先运行项目原有的构建和测试，保存起点状态。</li><li>给 Codex 一个边界清楚的小任务，并说明不能修改的目录和密钥。</li></ol><p>Codex 的安装方式、权限模式和配置项会更新，执行前阅读 OpenAI 官方文档。</p>'],
+      ['适合交给 Codex 的任务', '<p>适合第一轮验证的任务有：修复一个能复现的问题、补一组测试、重构一个模块、把原型推进到可演示状态，或者在 macOS 上跑 iOS 与 Mac 应用的构建。记录任务描述、改动、检查命令和人工审查结论，用可复核的结果判断是否扩展到团队。</p><p>长时间任务仍会受账号额度、网络和进程状态影响。重要任务要保留日志和版本提交，设好停止条件。</p>'],
+    ],
+    faqs: [
+      ['wodeMac 的 Mac mini 预装了 Codex 吗？', '预装了。交付时 Claude Code 和 Codex 都已装好，管理员权限归客户，其他 Agent 可以自己安装。'],
+      ['租机器包含 ChatGPT 或 OpenAI API 费用吗？', '不包含。价格只含机器；Codex 用客户自己的 ChatGPT 账号或 OpenAI API Key，按 OpenAI 的规则计费，wodeMac 不另收费。'],
+      ['可以同时用 Codex 和 Claude Code 吗？', '可以。两种工具都已预装，可以在同一台 Mac 的不同终端或不同项目里使用，各自用客户自己的账号登录。'],
+    ],
+  },
+  {
+    slug: 'claude-code-vs-codex',
+    title: 'Claude Code 和 Codex 怎么选：在同一台 Mac 上实测对比',
+    description: 'Claude Code 与 OpenAI Codex 都能在终端里写代码、跑测试。与其看评测，不如在同一台预装两种工具的独享 Mac 上，用自己的项目对比结果、成本和协作方式。',
+    answer: 'Claude Code 来自 Anthropic，Codex 来自 OpenAI，两者都是能在终端里读写代码、执行命令的编程 Agent。哪个更适合，取决于你的项目、语言栈、账号条件和预算；最可靠的办法是在同一台机器、同一个项目上，用相同任务分别跑一遍再比较。wodeMac 的独享 Mac mini 两种工具都已预装。',
+    sources: 'both',
+    sections: [
+      ['两者有什么相同和不同？', '<p>相同点：都在本地终端运行，能读懂代码仓库、修改文件、运行构建和测试，并按你的确认推进任务；都需要使用者自己的官方账号。</p><p>不同点主要在模型、账号与计费方式、权限与审批设计、配置文件和生态集成。Claude Code 使用 Anthropic 的 Claude 订阅或 API；Codex 使用 OpenAI 的 ChatGPT 订阅或 API。两边功能更新都很快，具体以各自官方文档为准，本页不给出固定排名。</p>'],
+      ['用同一台 Mac 做公平对比', '<ol><li>选一个有授权的真实项目，先跑原有测试，记下起点提交。</li><li>准备 2–3 个边界清楚的任务，例如修一个 bug、加一项小功能、补测试。</li><li>为每个工具新建分支，给出完全相同的任务描述。</li><li>记录完成时间、需要人工介入的次数、测试结果和代码审查意见。</li><li>按实际账单核算两边的订阅或 API 费用。</li></ol><p>在同一台机器上比较，可以排除硬件、网络和依赖版本带来的差异。</p>'],
+      ['团队怎样落地？', '<p>很多团队不会只押一种工具：例如一人一台 Mac，各自用习惯的 Agent，再用统一的代码审查和测试流程把关。机器、账号和项目权限分开管理，人员变动时也更容易交接。</p><p>年付一单 5 台及以上，第一年整单再减 2.5%。批量配置、合同或单独报价请联系 wodeMac。</p>{{PRICE_TABLE}}'],
+    ],
+    faqs: [
+      ['Claude Code 和 Codex 哪个更好？', '没有对所有项目都成立的答案。建议在同一台机器、同一项目上用相同任务各跑一遍，比较结果质量、人工介入次数和实际费用。'],
+      ['一台 Mac 上能同时装 Claude Code 和 Codex 吗？', '能。wodeMac 的独享 Mac mini 交付时两种工具都已预装，各自使用客户自己的账号登录。'],
+      ['对比时需要两个账号吗？', '需要。Claude Code 用 Anthropic 的账号或 API，Codex 用 OpenAI 的账号或 API，都应由客户本人或企业持有，并符合各自的地区与使用规则。'],
+    ],
+  },
+  {
+    slug: 'ai-coding-agent-always-on-mac',
+    title: '让 Claude Code、Codex 持续工作：为什么用一台 7×24 在线的独享 Mac',
+    description: '把 Claude Code 或 Codex 放在一台 7×24 在线的美国加州独享 Mac mini 上：笔记本合盖、断网或下班后任务照常运行，代码和环境长期保留。了解适用场景、边界和成本。',
+    answer: '编程 Agent 跑长任务时，最常见的中断原因是本机合盖、休眠、断网或被其他工作占满资源。把 Claude Code 或 Codex 放在一台 7×24 在线的独享 Mac mini 上，可以让任务在你离开电脑后继续运行，项目和依赖长期保留。它不能保证每个任务都不中断，账号额度和工具状态仍需你管理。',
+    sources: 'both',
+    sections: [
+      ['什么情况下值得用一台常开的 Mac？', '<ul><li>任务要跑很久：大规模重构、补测试、批量修复、跑完整构建。</li><li>你的电脑经常合盖或出差移动，网络不稳定。</li><li>需要 macOS 环境，例如构建 iOS 或 Mac 应用，而手头只有 Windows 或 Linux 电脑。</li><li>团队想一人一台，各自的项目、依赖和权限互不干扰。</li></ul><p>如果只是偶尔问几个问题、改几行代码，本机运行就够了，不必额外租机器。</p>'],
+      ['wodeMac 提供的是什么？', '<p>一台位于美国加州、只租给你一位客户的实体 M6 Mac mini（16GB 内存、256GB 存储），7×24 小时在线，预装 Claude Code 和 Codex，管理员权限归你。你可以用预装的远程屏幕工具打开整个桌面，或只把一个应用窗口拉到自己的电脑上并排使用。</p><p>通常 24 小时内交付，最迟 3 个工作日，计费从付款当天开始。</p>{{PRICE_TABLE}}'],
+      ['持续运行的边界', '<p>机器常开不等于任务永不中断：账号额度用完、工具升级、网络波动、进程崩溃或任务本身出错，都会让 Agent 停下来。重要任务请使用 Git 分支、日志和明确的停止条件，回来后先看差异再合并。</p><p>为了维护和排障，wodeMac 与托管服务商保留管理权限。涉及生产密钥或客户数据时，先确认访问范围和备份方式。</p>'],
+    ],
+    faqs: [
+      ['笔记本合上后，Claude Code 的任务还会继续吗？', '在本机运行时通常会随休眠中断。放在一台 7×24 在线的远程 Mac 上运行，关闭本机后任务仍会继续，但仍受账号额度、网络和工具状态影响。'],
+      ['这台 Mac 是共享的虚拟机吗？', '不是。每台实体 Mac mini 只租给一位客户；为维护与排障，wodeMac 和托管服务商保留管理权限。'],
+      ['一个月多少钱？', '月付 $169，季付 $481.65，半年付 $912.60，年付 $1,723.80（折合每月 $143.65），价格只含机器，不含第三方模型费用。'],
+    ],
+  },
+  {
+    slug: 'ios-app-claude-code-codex',
+    title: '用 Claude Code 或 Codex 开发 iOS 和 Mac 应用：没有 Mac 怎么办',
+    description: '构建和签名 iOS、macOS 应用需要 macOS 和 Xcode。没有 Mac 或不想占用自己的电脑时，可以租一台预装 Claude Code 和 Codex 的美国加州独享 Mac mini，让 Agent 在上面写代码、跑构建和测试。',
+    answer: 'iOS 和 macOS 应用的构建、模拟器测试和签名都需要运行 macOS 的 Mac 与 Xcode。用 Windows 或 Linux 的开发者，可以远程使用一台独享 Mac mini：在上面安装 Xcode，让 Claude Code 或 Codex 修改代码、执行 xcodebuild 和测试，再由你审查和提交。按照 Apple 的 macOS 许可，租用的 Mac 用于软件开发与测试。',
+    sources: 'apple',
+    sections: [
+      ['为什么一定要 Mac？', '<p>Xcode 只能在 macOS 上运行，iOS 模拟器、应用签名和上传 App Store Connect 也都依赖它。跨平台框架（如 React Native、Flutter）同样需要在 Mac 上完成 iOS 构建。没有 Mac 的团队，常见做法是买一台、借一台，或者远程租一台。</p>'],
+      ['在独享 Mac 上的工作流', '<ol><li>远程登录这台 Mac mini，用 Apple ID 从 App Store 安装 Xcode。</li><li>克隆项目，安装 CocoaPods、Swift Package 或其他依赖。</li><li>用客户自己的账号登录预装的 Claude Code 或 Codex。</li><li>让 Agent 修改代码，并用 xcodebuild 跑构建和单元测试，在模拟器里检查界面。</li><li>你审查差异后提交；证书和签名由客户自己的 Apple 开发者账号管理。</li></ol>'],
+      ['配置和费用', '<p>机器是 M6 Mac mini，16GB 内存、256GB 存储。Xcode 和模拟器占用空间较大，建议只保留需要的模拟器运行时。租金只含机器；Apple 开发者计划、Claude 或 OpenAI 的账号费用都另行由客户承担。</p>{{PRICE_TABLE}}'],
+    ],
+    faqs: [
+      ['没有 Mac 能用 Claude Code 开发 iOS 应用吗？', '编辑代码可以在任何电脑上进行，但构建、模拟器测试和签名需要 macOS 与 Xcode。可以远程使用一台独享 Mac mini 完成这些步骤。'],
+      ['租来的 Mac 能上架 App Store 吗？', '可以用于开发、构建和测试。上架使用客户自己的 Apple 开发者账号和证书，账号归客户所有。'],
+      ['Xcode 是预装的吗？', '预装的是 Claude Code、Codex 和 wodeMac 的工具。Xcode 体积较大且版本随项目而定，建议客户按需从 App Store 安装。'],
+    ],
+  },
+  {
+    slug: 'claude-code-mac-mini',
+    lang: 'en',
+    title: 'Run Claude Code on a dedicated Mac mini in California',
+    description: 'A dedicated M6 Mac mini in California, online 24/7, with Claude Code and Codex preinstalled and admin rights for you. From $169 a month. See setup, account rules, pricing and limits.',
+    answer: 'wodeMac rents physical Mac minis hosted in California, each to one customer only. Claude Code and OpenAI Codex come preinstalled and you get admin rights. You sign in to Claude Code with your own Anthropic account; wodeMac charges only for the machine and does not resell or share AI accounts.',
+    sources: 'both',
+    sections: [
+      ['Why run Claude Code on a remote Mac?', '<p>Long agent runs stop when your laptop sleeps, loses Wi-Fi or is busy with other work. A Mac that stays online 24/7 keeps the repository, dependencies and running tasks in one place, so Claude Code can keep working after you close your own computer. It also gives Windows and Linux developers a real macOS machine for Xcode builds and tests.</p>'],
+      ['What you get', '<ul><li>A physical M6 Mac mini (16GB memory, 256GB storage), not a shared VM.</li><li>Claude Code and Codex preinstalled, with admin rights.</li><li>Remote desktop through the preinstalled wodeMac Remote Screen app.</li><li>Delivery usually within 24 hours and no later than 3 business days.</li></ul>{{PRICE_TABLE}}<p>Annual orders of 5 or more Macs get a further 2.5% off the first year.</p>'],
+      ['Accounts and limits', '<p>The price covers the machine only. Claude Code runs on your own Claude subscription or API key, under Anthropic\'s usage policies and supported regions. Hosting the Mac in California does not change those rules. For maintenance, wodeMac and its hosting provider keep administrative access.</p>'],
+    ],
+    faqs: [
+      ['Is Claude Code preinstalled?', 'Yes. Claude Code and Codex are installed when the Mac is delivered. You sign in with your own account.'],
+      ['How much does it cost?', '$169 monthly, $481.65 quarterly, $912.60 half-yearly or $1,723.80 yearly (about $143.65 a month), paid upfront for the machine only.'],
+      ['Is the Mac shared with other customers?', 'No. Each physical Mac mini is rented to one customer. wodeMac and the hosting provider keep admin access for maintenance.'],
+    ],
+  },
+  {
+    slug: 'codex-mac-mini',
+    lang: 'en',
+    title: 'Run OpenAI Codex on a dedicated remote Mac mini',
+    description: 'Use the Codex CLI or app on a dedicated M6 Mac mini in California that stays online 24/7. Codex and Claude Code are preinstalled; you sign in with your own ChatGPT or OpenAI API account.',
+    answer: 'A wodeMac Mac mini ships with OpenAI Codex and Claude Code preinstalled. You sign in to Codex with your own ChatGPT plan or OpenAI API key, and wodeMac charges only for the machine. The Mac stays online 24/7 in California, so Codex tasks keep running after you close your laptop.',
+    sources: 'openai',
+    sections: [
+      ['How it works', '<ol><li>Open the Mac through the preinstalled remote desktop app.</li><li>Clone an authorized repository and install its dependencies.</li><li>Sign in to Codex with your own ChatGPT account or set your own OpenAI API key.</li><li>Run the existing build and tests first, then give Codex a clearly scoped task.</li><li>Review the diff and test results before merging.</li></ol>'],
+      ['Pricing', '{{PRICE_TABLE}}<p>The price is for the machine only. OpenAI usage is billed by OpenAI under your own account and its supported-country rules.</p>'],
+      ['Compare Codex and Claude Code on one machine', '<p>Both agents are preinstalled, so you can give each the same task on separate branches of the same project and compare results, human intervention and cost without hardware or dependency differences.</p>'],
+    ],
+    faqs: [
+      ['Is Codex preinstalled on the Mac?', 'Yes. Codex and Claude Code are installed at delivery, and you have admin rights to add other tools.'],
+      ['Does the rental include ChatGPT or API credits?', 'No. You use your own ChatGPT plan or OpenAI API key; wodeMac does not add model fees or share accounts.'],
+      ['Where is the Mac hosted?', 'In California, USA, operated by wodeMac Inc.'],
+    ],
+  },
+  {
+    slug: 'ios-development-without-mac',
+    lang: 'en',
+    title: 'Build iOS apps with Claude Code or Codex without owning a Mac',
+    description: 'iOS builds, simulators and signing need macOS and Xcode. Rent a dedicated Mac mini in California with Claude Code and Codex preinstalled and let the agent build and test your app.',
+    answer: 'Xcode only runs on macOS, so building and testing iOS apps needs a Mac. Developers on Windows or Linux can rent a dedicated Mac mini from wodeMac, install Xcode, and let Claude Code or Codex edit code, run xcodebuild and tests, and leave the diff for review. The Mac is used for software development and testing under Apple\'s macOS license.',
+    sources: 'apple',
+    sections: [
+      ['Workflow', '<ol><li>Log in remotely and install Xcode from the App Store with your Apple ID.</li><li>Clone the project and install CocoaPods or Swift packages.</li><li>Sign in to the preinstalled Claude Code or Codex with your own account.</li><li>Have the agent change code and run xcodebuild, unit tests and the simulator.</li><li>Review and commit; certificates stay in your own Apple Developer account.</li></ol>'],
+      ['Machine and pricing', '<p>M6 Mac mini, 16GB memory, 256GB storage, online 24/7 in California. Keep only the simulator runtimes you need.</p>{{PRICE_TABLE}}'],
+    ],
+    faqs: [
+      ['Can I build iOS apps with Claude Code on Windows?', 'You can edit code anywhere, but builds, simulators and signing need macOS and Xcode. A remote dedicated Mac mini covers those steps.'],
+      ['Is Xcode preinstalled?', 'Claude Code and Codex are preinstalled. Install the Xcode version your project needs from the App Store.'],
+      ['Can I publish to the App Store from it?', 'Yes, using your own Apple Developer account and certificates for development, builds and uploads.'],
+    ],
+  },
 ];
 
 export const sourceLinks = [
@@ -78,3 +200,31 @@ export const sourceLinks = [
   ['Claude Code 官方安装与使用准备', 'https://code.claude.com/docs/en/setup'],
   ['Anthropic 当前支持地区与规则', 'https://www.anthropic.com/supported-countries'],
 ];
+
+export const sourceSets = {
+  claude: sourceLinks,
+  openai: [
+    sourceLinks[0], sourceLinks[1],
+    ['OpenAI Codex 官方文档', 'https://developers.openai.com/codex'],
+    ['Codex CLI 官方说明', 'https://developers.openai.com/codex/cli'],
+    ['OpenAI 支持的国家和地区', 'https://platform.openai.com/docs/supported-countries'],
+  ],
+  both: [
+    sourceLinks[0], sourceLinks[1],
+    ['Claude Code 官方概览', 'https://code.claude.com/docs/en/overview'],
+    ['OpenAI Codex 官方文档', 'https://developers.openai.com/codex'],
+    ['Anthropic 当前支持地区与规则', 'https://www.anthropic.com/supported-countries'],
+    ['OpenAI 支持的国家和地区', 'https://platform.openai.com/docs/supported-countries'],
+  ],
+  apple: [
+    sourceLinks[0], sourceLinks[1],
+    ['Apple Xcode 官方页面', 'https://developer.apple.com/xcode/'],
+    ['Claude Code 官方概览', 'https://code.claude.com/docs/en/overview'],
+    ['OpenAI Codex 官方文档', 'https://developers.openai.com/codex'],
+  ],
+};
+
+export const facts = {
+  zh: '美国加州独享实体 M6 Mac mini（12 核 CPU，16GB 内存，256GB 存储），7×24 小时在线；预装 Claude Code、Codex 与 wodeMac 远程屏幕，管理员权限归客户；通常 24 小时内交付，最迟 3 个工作日；价格只含机器，Claude 与 OpenAI 账号由客户自己持有。',
+  en: 'Dedicated physical M6 Mac mini in California (12-core CPU, 16GB memory, 256GB storage), online 24/7; Claude Code, Codex and wodeMac Remote Screen preinstalled with admin rights for the customer; delivery usually within 24 hours, no later than 3 business days; price covers the machine only, and Claude and OpenAI accounts stay with the customer.',
+};
