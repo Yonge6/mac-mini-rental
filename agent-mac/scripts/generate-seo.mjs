@@ -35,7 +35,9 @@ const L = {
 };
 const sourceLabelsEn = { 'wodeMac 官网与当前配置、付款方案': 'wodeMac homepage, configuration and plans', 'wodeMac 服务条款': 'wodeMac terms', 'wodeMac 隐私政策': 'wodeMac privacy policy', 'Claude Code 官方安装与使用准备': 'Claude Code setup (official)', 'Anthropic 当前支持地区与规则': 'Anthropic supported countries', 'OpenAI Codex 官方文档': 'OpenAI Codex docs', 'Codex CLI 官方说明': 'Codex CLI docs', 'OpenAI 支持的国家和地区': 'OpenAI supported countries', 'Claude Code 官方概览': 'Claude Code overview (official)', 'Apple Xcode 官方页面': 'Apple Xcode' };
 const priceTable = lang => { const t = L[lang]; return `<div class="table-wrap"><table><caption>${t.caption}</caption><thead><tr><th scope="col">${t.period}</th><th scope="col">${t.charge}</th><th scope="col">${t.term}</th></tr></thead><tbody>${SALE_INTERVALS.map(key => `<tr><th scope="row">${billingLabel(key, lang === 'en')}</th><td>${money(BILLING_PLANS[key].amountCents)}</td><td>${t.months(BILLING_PLANS[key].months)}</td></tr>`).join('')}</tbody></table></div>`; };
-const organization = { '@type':'Organization', '@id':`${siteUrl}/#organization`, name:'wodeMac', legalName:'wodeMac Inc', url:siteUrl+'/' };
+const organization = { '@type':'Organization', '@id':`${siteUrl}/#organization`, name:'wodeMac', legalName:'wodeMac Inc', url:siteUrl+'/', email:'hustyy986@gmail.com', sameAs:['https://wodemac.vilesaint.com/'] };
+const aboutOf = guide => (guide.about ?? []).map(name => ({ '@type':'SoftwareApplication', name, applicationCategory:'DeveloperApplication' }));
+const relatedTo = guide => guides.filter(item => item.slug !== guide.slug && langOf(item) === langOf(guide)).map(item => [item, (item.about ?? []).filter(name => (guide.about ?? []).includes(name)).length + (item.slug === guide.pair ? 0 : 0)]).sort((a, b) => b[1] - a[1]).slice(0, 4).map(([item]) => item);
 const product = lang => ({ '@type':'Product', '@id':`${siteUrl}/#mac-mini-rental`, name: lang === 'en' ? 'Dedicated M6 Mac mini rental in California' : '美国加州独享 M6 Mac mini 租赁', description: facts[lang], brand:{'@id':organization['@id']}, offers: SALE_INTERVALS.map(key => ({ '@type':'Offer', name: billingLabel(key, lang === 'en'), price: (BILLING_PLANS[key].amountCents / 100).toFixed(2), priceCurrency:'USD', url: siteUrl + '/', seller:{'@id':organization['@id']} })) });
 
 function document({ lang, title, description, canonical, body, schema, alternate }) {
@@ -53,14 +55,16 @@ for (const guide of guides) {
   const faq = guide.faqs.map(([question, answer]) => `<details open><summary>${esc(question)}</summary><p>${esc(answer)}</p></details>`).join('');
   const schema = { '@context':'https://schema.org', '@graph':[
     organization,
-    { '@type':'Article', '@id':canonical+'#article', headline:guide.title, description:guide.description, inLanguage:t.html, datePublished:guide.published ?? verifiedDate, dateModified:verifiedDate, author:{'@id':organization['@id']}, publisher:{'@id':organization['@id']}, mainEntityOfPage:canonical, image:`${siteUrl}/assets/wodemac-og.jpg`, about: guide.about ?? undefined },
+    { '@type':'Article', '@id':canonical+'#article', headline:guide.title, description:guide.description, inLanguage:t.html, datePublished:guide.published ?? verifiedDate, dateModified:verifiedDate, author:{'@id':organization['@id']}, publisher:{'@id':organization['@id']}, mainEntityOfPage:canonical, image:`${siteUrl}/assets/wodemac-og.jpg`, ...(guide.about ? { about: aboutOf(guide) } : {}) },
     { '@type':'BreadcrumbList', itemListElement:[ {'@type':'ListItem',position:1,name:'wodeMac',item:siteUrl+'/'}, {'@type':'ListItem',position:2,name:t.indexName,item:t.indexUrl}, {'@type':'ListItem',position:3,name:guide.title,item:canonical} ] },
     { '@type':'FAQPage', '@id':canonical+'#faq', mainEntity:guide.faqs.map(([name,text]) => ({'@type':'Question', name, acceptedAnswer:{'@type':'Answer',text}})) },
     ...(guide.sections.some(([, html]) => html.includes('{{PRICE_TABLE}}')) ? [product(lang)] : []),
   ] };
-  const siblings = guides.filter(item => item.slug !== guide.slug && langOf(item) === lang);
+  const siblings = relatedTo(guide);
+  const paired = guide.pair ? guides.find(item => item.slug === guide.pair) : null;
+  const alternate = paired ? { lang: L[langOf(paired)].html, href: urlFor(paired) } : undefined;
   const body = `<article><nav class="breadcrumb" aria-label="${t.crumbLabel}"><a href="${t.home}">${t.crumbHome}</a><span>/</span><a href="${t.index}">${t.indexName}</a></nav><header class="article-head"><p class="eyebrow">${t.eyebrow}</p><h1>${esc(guide.title)}</h1><p class="updated">${t.updated}: <time datetime="${verifiedDate}">${verifiedDate}</time> · wodeMac</p><p class="answer">${esc(guide.answer)}</p></header><div class="article-body">${guide.sections.map(([heading, html], index) => `<section id="section-${index+1}"><h2>${esc(heading)}</h2>${html.replace('{{PRICE_TABLE}}', priceTable(lang))}</section>`).join('')}<section id="faq"><h2>${t.faq}</h2>${faq}</section><section class="sources"><h2>${t.sourcesHead}</h2><p>${t.sourcesNote}</p><ul>${sources.map(([label,href]) => `<li><a href="${href}">${esc(label)}</a></li>`).join('')}</ul></section><section class="next-step"><p class="eyebrow">${t.nextEyebrow}</p><h2>${t.nextHead}</h2><p>${t.nextText}</p><a class="action" href="${t.contact}">${t.nextCta}</a><a href="${t.pricing}">${t.nextPlans}</a></section></div></article><aside class="related"><h2>${t.related}</h2><div class="guide-cards">${siblings.map(item=>`<a class="guide-card" href="./${item.slug}.html"><h3>${esc(item.title)}</h3><p>${esc(item.description)}</p></a>`).join('')}</div></aside>`;
-  writeFileSync(path.join(guideRoot, guide.slug+'.html'), document({lang,title:guide.title,description:guide.description,canonical,body,schema}));
+  writeFileSync(path.join(guideRoot, guide.slug+'.html'), document({lang,title:guide.title,description:guide.description,canonical,body,schema,alternate}));
 }
 
 const zhGuides = guides.filter(g => langOf(g) === 'zh');
