@@ -32,7 +32,7 @@ wodeMac（原 CalDock，美国加州独享 M6 Mac mini 租用）已在 **https:/
 | Render | **OneLaser** workspace → “My project” → 服务 **`onelaser-workos-migration`**（Docker），数据库 `onelaser-workos-db` | 公司正式环境，Work OS 和 CalDock 共用。另有个人空 workspace “Elian's workspace”，与正式站无关。 |
 | Stripe | 账号 **Kraft Engineering Corp**（老板 KC / Kris Chen 提供，由 Mercury 管理），用户登录邮箱 elian.yuan@1laser.com | 正式模式已激活。 |
 | Google Cloud | 账号 **hwu900566@gmail.com**，项目 **CalDock**（ID `caldock-513602`） | 只用于 Google 登录（OAuth），未绑定付款方式。 |
-| 运营主体 / 对外联系 | Kraft Engineering Corp，20472 Crescent Bay Dr, STE 104, Lake Forest, CA 92630；联系邮箱 hustyy986@gmail.com | 写在隐私政策和服务条款里。 |
+| 运营主体 / 对外联系 | wodeMac Inc（加州，沿用原地址），20472 Crescent Bay Dr, STE 104, Lake Forest, CA 92630；联系邮箱 hustyy986@gmail.com | 写在隐私政策和服务条款里。 |
 
 ## 3. 代码在哪里
 
