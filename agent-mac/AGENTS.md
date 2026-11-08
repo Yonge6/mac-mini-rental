@@ -31,5 +31,5 @@ These instructions apply to `agent-mac/`; also follow the repository-root `AGENT
 - GitHub marketing routes real accounts/checkout to same-origin `https://wodemac.com/`; keep repository-subpath assets and query-based route refresh working.
 
 ## Operator trust content
-- Do not mention OneLaser on the site. Contact email: hustyy986@gmail.com. Legal pages name the contracting entity, Kraft Engineering Corp, and its address.
+- Do not mention OneLaser on the site. Contact email: hustyy986@gmail.com. Legal pages name the contracting entity, wodeMac Inc, and its address.
 - Editing `public/decision-studio/` also requires that directory's own instructions. Preserve public viewing, local calculations and permissioned shared writes; don't overwrite saved drafts with new defaults.
