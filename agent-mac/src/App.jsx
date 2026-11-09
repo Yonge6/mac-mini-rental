@@ -122,7 +122,7 @@ function orderNote(interval, quantity) {
   if (saved > 0) parts.push(t('比连续月付省 ','Save ') + money(saved) + t('',' versus paying monthly'));
   if (bulkOff) parts.push(t('含首年再减 2.5%，续费每期 ','Includes 2.5% off the first year; renews at ') + money(subtotal));
   else if (interval === 'year' && quantity < BULK_MIN_QUANTITY) parts.push(t('买满 ' + BULK_MIN_QUANTITY + ' 台，首年再减 2.5%','Buy ' + BULK_MIN_QUANTITY + ' or more for a further 2.5% off the first year'));
-  return parts.length ? parts.join(t('；',' · ')) : t('按月续订，每连续续订一次再降 2.5%，最高降 15%','Month to month. Each consecutive renewal is 2.5% lower, up to 15% off.');
+  return parts.length ? parts.join(t('；',' · ')) : t('按月续订，随时可停','Month to month. Cancel renewal anytime.');
 }
 
 function PlanPicker({ value, onChange, id }) {
@@ -138,7 +138,7 @@ function PlanPicker({ value, onChange, id }) {
         <span className="rental-card-top"><span className="rental-radio" aria-hidden="true">{value === key && <img src="./assets/check.svg" alt="" />}</span><span className="rental-card-heading">{p.title}</span><em className={'rental-card-off' + (PLAN_DISCOUNTS[key] ? '' : ' is-plain')}>{PLAN_DISCOUNTS[key] ? PLAN_DISCOUNTS[key] + '% OFF' : t('标准价','Standard')}</em></span>
         <span className="rental-card-price"><strong><Amount cents={dailyCents(BILLING_PLANS[key].amountCents,key)}/></strong><span>{t('/天','/day')}</span>{PLAN_DISCOUNTS[key] && <s><Amount cents={dailyCents(BILLING_PLANS.month.amountCents,'month')}/></s>}</span>
         <span className="rental-card-charge"><b>{money(BILLING_PLANS[key].amountCents)}</b><small>{BILLING_PLANS[key].months===1?t('/ 月','/ month'):t('/ '+BILLING_PLANS[key].months+' 个月','/ '+BILLING_PLANS[key].months+' months')}</small></span>
-        <span className="rental-card-save">{PLAN_DISCOUNTS[key]?<>{t('比月付省 ','Save ')}<b>{money(monthlyEquivalentCents(key)-BILLING_PLANS[key].amountCents)}</b>{t('',' vs monthly')}</>:t('连续续订每次再降 2.5%，最高 15%','2.5% lower each renewal, up to 15% off')}</span>
+        <span className="rental-card-save">{PLAN_DISCOUNTS[key]?<>{t('比月付省 ','Save ')}<b>{money(monthlyEquivalentCents(key)-BILLING_PLANS[key].amountCents)}</b>{t('',' vs monthly')}</>:t('按月续订，随时可停','Cancel renewal anytime')}</span>
       </label>)}
     </fieldset>
     <div className="rental-action-bar"><p className="rental-selection" aria-live="polite"><span className="rental-selection-label">{t("已选方案","YOUR SELECTION")}</span><span className="rental-selection-main"><span>{plan.name}{PLAN_DISCOUNTS[value]?' · '+PLAN_DISCOUNTS[value]+'% OFF':''}</span><b>{money(amounts.total)}</b><small>{plan.months===1?t('/ 月','/ month'):t('/ '+plan.months+' 个月','/ '+plan.months+' months')}</small></span><span className="rental-selection-sub">{orderNote(value, quantity)}</span></p>
