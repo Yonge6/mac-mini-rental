@@ -46,7 +46,7 @@ test('both built homepages contain the real landing content before JavaScript',(
 });
 
 function englishDescription(file){
-  return file==='en.html'?'Dedicated Mac mini rentals in California for software development':'wodeMac 提供美国加州独享 Mac mini 租赁';
+  return file==='en.html'?'Dedicated Mac mini rentals in California for software development':'WodeMac 提供美国加州独享 Mac mini 租赁';
 }
 
 test('pre-rendered payment links preserve period and language and show real upfront charges',()=>{
@@ -73,7 +73,7 @@ test('guides are static, internally reachable, and their FAQ data matches visibl
     assert.ok(!html.includes('fonts.googleapis.com'));
     const visible=text(html);
     const graph=graphs(html);
-    assert.ok(graph.some(item=>item['@type']==='Organization'&&item.name==='wodeMac'));
+    assert.ok(graph.some(item=>item['@type']==='Organization'&&item.name==='WodeMac'));
     const faq=graph.find(item=>item['@type']==='FAQPage');
     if(file!=='index.html'&&file!=='en.html')assert.ok(faq?.mainEntity.length>=3);
     for(const item of faq?.mainEntity??[]){

@@ -8,18 +8,18 @@ Applies to Claude, Codex and human contributors. Read the nearest nested instruc
 - `agent-mac/src/source.html`, `source.en.html`: paired Chinese/English landing markup, imported as raw HTML.
 - `agent-mac/src/App.jsx`: mounts the landing, plan selection and checkout.
 - `agent-mac/src/commerce/`: account/order/referral/admin UI, routing, demo data and billing definitions.
-- `agent-mac/public/decision-studio/`: independent buildless planning UI; read its own `AGENTS.md`.
+- `agent-mac/decision-studio/`: independent buildless planning UI, not public and not part of any site build; read its own `AGENTS.md`.
 - Backend lives in `Yonge6/onelaser-workos-api`, not in this repository. See `docs/DEVELOPMENT.md`.
 
 ## Current product decisions
 
-- Brand is wodeMac (renamed from CalDock on 2026-11-03 by owner decision, domain `wodemac.com`). The site is at `https://wodemac.com/`; `craftos.app/caldock/` redirects there. Technical names stay `caldock`: the `/api/caldock` paths, CSS classes, error codes, storage keys and window globals, so sign-in, sessions and saved drafts keep working. Do not rename them without a new decision. The GRIDRUN and PACE proposals are dropped.
+- Brand is WodeMac (renamed from CalDock on 2026-11-03 by owner decision, domain `wodemac.com`). The site is at `https://wodemac.com/`; `craftos.app/caldock/` redirects there. Technical names stay `caldock`: the `/api/caldock` paths, CSS classes, error codes, storage keys and window globals, so sign-in, sessions and saved drafts keep working. Do not rename them without a new decision. The GRIDRUN and PACE proposals are dropped.
 - Preserve the existing California Afterglow page, premium warm-black/gold pricing, responsive layout and motion. Respect reduced-motion preferences.
 - Current page product copy uses California-only M6 Mac mini positioning. Changes to hardware specifications need an explicit product decision and verified source; do not invent availability or specifications.
 - Prices: USD 169 monthly, 481.65 quarterly, 912.60 half-yearly, 1723.80 yearly. Weekly is off sale. Hero states the annual-equivalent starting price and the annual upfront charge clearly.
 - Preserve both languages, interval selection across checkout/login, existing URLs and customer state. No credits, wallet or top-up terminology.
 - Never equate a pending order or demo with a real payment. Paid status and commissions require verified server-side payment events.
-- Studio scenarios, acquisition targets and simulated inventory are assumptions, not measured sales. Public viewing/local calculations do not grant shared-document write access. Preserve stored user edits.
+- Studio scenarios, acquisition targets and simulated inventory are assumptions, not measured sales. Local calculations do not grant shared-document write access. Preserve stored user edits.
 
 ## Working together
 

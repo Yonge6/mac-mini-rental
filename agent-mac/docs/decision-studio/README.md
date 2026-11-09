@@ -1,8 +1,6 @@
 # CalDock Decision Studio V4
 
-- Public local calculator: https://yonge6.github.io/mac-mini-rental/decision-studio/
-- Public shared document: https://craftos.app/decision-studio/
-- Growth playbook: https://yonge6.github.io/mac-mini-rental/decision-studio/?tab=marketing
+- Not public since 2026-11-08: the page and its API return 404 on every site.
 
 The supplied V4 HTML is separated into an entry, CSS, deterministic financial engine and UI. It is independent from the landing page and commerce prices. All example financial values are assumptions, not actual sales, inventory, costs or returns.
 

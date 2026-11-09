@@ -8,8 +8,8 @@ These instructions apply to `agent-mac/`; also follow the repository-root `AGENT
 - Start the local preview yourself for UI work. Check rendered desktop/phone views, primary interactions and console errors; a build alone is not visual acceptance.
 
 ## Current brand and design
-- Brand is wodeMac (renamed from CalDock on 2026-11-03). The site is at `https://wodemac.com/`; `craftos.app/caldock/` redirects there. Keep technical `caldock` identifiers (`/api/caldock`, CSS classes, error codes, storage keys) unchanged.
-- Preserve California Afterglow: espresso surfaces, ivory type, amber actions, warm sunset photos and the premium champagne/gold pricing cards. Keep existing wodeMac logo, layout, genuine assets and responsive behavior unless the task targets them.
+- Brand is WodeMac (renamed from CalDock on 2026-11-03). The site is at `https://wodemac.com/`; `craftos.app/caldock/` redirects there. Keep technical `caldock` identifiers (`/api/caldock`, CSS classes, error codes, storage keys) unchanged.
+- Preserve California Afterglow: espresso surfaces, ivory type, amber actions, warm sunset photos and the premium champagne/gold pricing cards. Keep existing WodeMac logo, layout, genuine assets and responsive behavior unless the task targets them.
 - Keep original motion: moving network dashes (horizontal desktop / vertical phone), staggered entrances, remote-window glow, stock count/sweep/glints and scroll hint. Respect reduced-motion preferences; never disable motion globally for screenshots.
 - Keep all headings, FAQ question titles and hero stock number bold. Header remains logo, in-page anchors, login and `中 / En`; no old platform directory/footer, download row or boss-presentation section.
 
@@ -31,5 +31,5 @@ These instructions apply to `agent-mac/`; also follow the repository-root `AGENT
 - GitHub marketing routes real accounts/checkout to same-origin `https://wodemac.com/`; keep repository-subpath assets and query-based route refresh working.
 
 ## Operator trust content
-- Do not mention OneLaser on the site. Contact email: hustyy986@gmail.com. Legal pages name the contracting entity, wodeMac Inc, and its address.
-- Editing `public/decision-studio/` also requires that directory's own instructions. Preserve public viewing, local calculations and permissioned shared writes; don't overwrite saved drafts with new defaults.
+- Do not mention OneLaser on the site. Contact email: hustyy986@gmail.com. Legal pages name the contracting entity, WodeMac Inc, with only "California, USA" as its location. Nowhere on the site show another company name, a personal name, a full street address, a phone number, or contact details other than the owner's WeChat QR and hustyy986@gmail.com.
+- Editing `decision-studio/` also requires that directory's own instructions. It is not public and must stay outside `public/`. Preserve local calculations and permissioned shared writes; don't overwrite saved drafts with new defaults.
