@@ -11,6 +11,13 @@ export function billingEndsAt(start,interval){
   const day=date.getUTCDate();date.setUTCDate(1);date.setUTCMonth(date.getUTCMonth()+plan.months);
   const last=new Date(Date.UTC(date.getUTCFullYear(),date.getUTCMonth()+1,0)).getUTCDate();date.setUTCDate(Math.min(day,last));return date.toISOString();
 }
+// From first payment to the current end date. Before delivery the end is worked out the same way the backend will set it; orders billed from delivery have no end yet.
+export function servicePeriod(order){
+  if(!order?.paid_at||!['paid','provisioning','active'].includes(order.status))return null;
+  return {start:order.paid_at,end:order.billing_ends_at||(order.billed_from_payment?billingEndsAt(order.paid_at,order.interval):null)};
+}
+// Whole days until the end date, counting a part day as a day: 0 means it ended within the last day, negative means longer ago.
+export const daysLeft = (end,now=Date.now()) => end?Math.ceil((new Date(end).getTime()-now)/86400000)+0:null;
 // Display only, on a 365-day year and rounded up so the shown daily rate never understates the charge.
 export const periodDays = interval => { const plan=BILLING_PLANS[knownInterval(interval)]; return plan.days ?? plan.months*365/12; };
 export const dailyCents = (cents,interval) => Math.ceil(cents/periodDays(interval)-1e-9);

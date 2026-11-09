@@ -1,9 +1,25 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {accountBase,makeAccountUrl,rememberReferral,displayMoney,findPendingOrder} from '../src/commerce/core.mjs';
-import {BILLING_PLANS,billingEndsAt,billingLabel,dailyCents,orderAmounts,monthlyEquivalentCents,readQuantity} from '../src/commerce/plans.mjs';
+import {daysLeft,servicePeriod,BILLING_PLANS,billingEndsAt,billingLabel,dailyCents,orderAmounts,monthlyEquivalentCents,readQuantity} from '../src/commerce/plans.mjs';
 const loc=value=>{const url=new URL(value);return {href:url.href,hostname:url.hostname,search:url.search};};
 function storage(){const values=new Map();return {getItem:k=>values.get(k)||null,setItem:(k,v)=>values.set(k,v),removeItem:k=>values.delete(k)};}
+test('service period runs from payment to the current end date',()=>{
+ const paid_at='2026-11-08T10:00:00.000Z';
+ assert.deepEqual(servicePeriod({status:'active',paid_at,interval:'month',billing_ends_at:'2027-01-08T10:00:00.000Z'}),{start:paid_at,end:'2027-01-08T10:00:00.000Z'});
+ assert.deepEqual(servicePeriod({status:'paid',paid_at,interval:'quarter',billed_from_payment:true}),{start:paid_at,end:'2027-02-08T10:00:00.000Z'});
+ assert.deepEqual(servicePeriod({status:'provisioning',paid_at,interval:'month',billed_from_payment:false}),{start:paid_at,end:null});
+ assert.equal(servicePeriod({status:'pending_payment',paid_at:null,interval:'month'}),null);
+ assert.equal(servicePeriod({status:'refunded',paid_at,interval:'month',billing_ends_at:'2026-12-08T10:00:00.000Z'}),null);
+});
+test('countdown counts part days and reports ended periods',()=>{
+ const now=Date.parse('2026-11-08T10:00:00.000Z'),hour=3600000,day=24*hour;
+ assert.equal(daysLeft(null,now),null);
+ assert.equal(daysLeft(new Date(now+30*day).toISOString(),now),30);
+ assert.equal(daysLeft(new Date(now+hour).toISOString(),now),1);
+ assert.equal(daysLeft(new Date(now-hour).toISOString(),now),0);
+ assert.equal(daysLeft(new Date(now-3*day-hour).toISOString(),now),-3);
+});
 test('GitHub account routes move to the same-origin backend app; explicit demos remain isolated',()=>{
  const location=loc('https://yonge6.github.io/mac-mini-rental/?lang=en&interval=year');
  assert.equal(accountBase(location),'https://wodemac.com/');
