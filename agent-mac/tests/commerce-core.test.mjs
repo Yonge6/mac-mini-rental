@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {accountBase,makeAccountUrl,rememberReferral,displayMoney} from '../src/commerce/core.mjs';
+import {accountBase,makeAccountUrl,rememberReferral,displayMoney,findPendingOrder} from '../src/commerce/core.mjs';
 import {BILLING_PLANS,billingEndsAt,billingLabel,dailyCents,orderAmounts,monthlyEquivalentCents,readQuantity} from '../src/commerce/plans.mjs';
 const loc=value=>{const url=new URL(value);return {href:url.href,hostname:url.hostname,search:url.search};};
 function storage(){const values=new Map();return {getItem:k=>values.get(k)||null,setItem:(k,v)=>values.set(k,v),removeItem:k=>values.delete(k)};}
@@ -42,3 +42,13 @@ test('billing terms clamp month ends like the server instead of spilling into th
  assert.equal(billingEndsAt('2028-02-29T12:30:00.000Z','year'),'2029-02-28T12:30:00.000Z');
 });
 test('USD rendering retains cents and historical amounts while new yearly price is updated',()=>{assert.equal(displayMoney(19900),'$199');assert.equal(displayMoney(50700),'$507');assert.equal(displayMoney(154800),'$1,548');assert.equal(displayMoney(179900),'$1,799');assert.equal(displayMoney(1990),'$19.90');});
+
+test('finds the unpaid order and whether it matches the current choice',()=>{
+  const rows=[{id:'a',status:'cancelled',interval:'month',quantity:1},{id:'b',status:'pending_payment',interval:'year',quantity:2}];
+  assert.deepEqual(findPendingOrder(rows,'year',2),{order:rows[1],sameChoice:true});
+  assert.deepEqual(findPendingOrder(rows,'month',2),{order:rows[1],sameChoice:false});
+  assert.deepEqual(findPendingOrder(rows,'year',1),{order:rows[1],sameChoice:false});
+  assert.equal(findPendingOrder([{status:'pending_payment',interval:'month'}],'month',1).sameChoice,true);
+  assert.deepEqual(findPendingOrder([rows[0]],'month',1),{order:null,sameChoice:false});
+  assert.deepEqual(findPendingOrder(undefined,'month',1),{order:null,sameChoice:false});
+});

@@ -506,3 +506,7 @@ html { scroll-padding-top: 96px; }
 /* Availability is unknown until the existing stock API has answered. */
 .afterglow-stock[data-stock-pending] .afterglow-stock-count::before{content:none}
 .afterglow-stock[data-stock-pending] .afterglow-stock-marks,.hm-closing-stock[data-stock-pending] .hm-stock-bar{visibility:hidden}
+.checkout-pending-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.checkout-pending-actions button{min-height:40px;padding:8px 14px;border:1px solid #d5ad7866;border-radius:10px;background:transparent;color:#f4d4a5;font:inherit}
+.checkout-pending-actions button:first-child{background:#ffad47;border-color:#ffad47;color:#24170c;font-weight:600}
+.checkout-pending-actions button:disabled{opacity:.55;cursor:default}
