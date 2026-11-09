@@ -29,3 +29,8 @@ export function makeAccountUrl(locationLike,view,extra={}) {
   return url.toString();
 }
 export function displayMoney(cents) {return new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',minimumFractionDigits:Number(cents)%100?2:0,maximumFractionDigits:2}).format(Number(cents)/100);}
+// The customer's one unpaid order, and whether it is the plan and quantity they are trying to buy now.
+export function findPendingOrder(orders,interval,quantity) {
+  const order=(orders||[]).find(row=>row.status==='pending_payment')||null;
+  return {order,sameChoice:!!order&&order.interval===interval&&(order.quantity??1)===quantity};
+}
