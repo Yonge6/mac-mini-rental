@@ -1,13 +1,13 @@
-# wodeMac
+# WodeMac
 
-> wodeMac (wodemac.com) rents dedicated Mac minis hosted in California for software development and testing, with Claude Code and OpenAI Codex preinstalled. Third-party AI accounts and model subscriptions are separate and must meet their providers' eligibility rules.
+> WodeMac (wodemac.com) rents dedicated Mac minis hosted in California for software development and testing, with Claude Code and OpenAI Codex preinstalled. Third-party AI accounts and model subscriptions are separate and must meet their providers' eligibility rules.
 
 This file is a maintained document directory, not a promise of search indexing or AI citations.
 
 ## Key facts
-- Dedicated physical M6 Mac mini in California (12-core CPU, 16GB memory, 256GB storage), online 24/7; Claude Code, Codex and wodeMac Remote Screen preinstalled with admin rights for the customer; delivery usually within 24 hours, no later than 3 business days; price covers the machine only, and Claude and OpenAI accounts stay with the customer.
+- Dedicated physical M6 Mac mini in California (12-core CPU, 16GB memory, 256GB storage), online 24/7; Claude Code, Codex and WodeMac Remote Screen preinstalled with admin rights for the customer; delivery usually within 24 hours, no later than 3 business days; price covers the machine only, and Claude and OpenAI accounts stay with the customer.
 - Plans (USD, paid upfront, machine only): Monthly $169, Quarterly $481.65, Half-yearly $912.60, Yearly $1,723.80. Annual orders of 5 or more Macs get 2.5% off the first year.
-- Operator: wodeMac Inc, California, USA.
+- Operator: WodeMac Inc, California, USA.
 - Full text of the guides: https://wodemac.com/llms-full.txt
 
 ## Official information
@@ -24,16 +24,16 @@ This file is a maintained document directory, not a promise of search indexing o
 - [Mac mini or Linux VPS for Claude Code and Codex?](https://wodemac.com/guides/mac-mini-vs-vps-for-claude-code.html): Both can host a coding agent around the clock. Compare cost, macOS and Xcode, desktop access, remote workflow and team management to decide between a Linux VPS and a dedicated remote Mac mini.
 
 ## 中文指南
-- [美国加州 Mac mini 租赁：费用、用途与选型](https://wodemac.com/guides/mac-mini-rental.html): 了解 wodeMac 美国加州独享 Mac mini 的租赁范围、四种付款周期、模型费用边界、远程开发与测试用途，以及下单前要确认的配置和交付事项。
+- [美国加州 Mac mini 租赁：费用、用途与选型](https://wodemac.com/guides/mac-mini-rental.html): 了解 WodeMac 美国加州独享 Mac mini 的租赁范围、四种付款周期、模型费用边界、远程开发与测试用途，以及下单前要确认的配置和交付事项。
 - [用远程 Mac 运行 Claude Code：准备与验收指南](https://wodemac.com/guides/claude-code-remote-mac.html): 在租用远程 Mac 前，确认 Claude Code 账号与地区资格、项目权限、开发依赖、远程连接、构建测试及验收方式。机器与模型订阅分别核算。
 - [出海开发团队与 AI 编程老师怎样选择远程 Mac](https://wodemac.com/guides/teams-and-educators.html): 按出海开发团队、成年 AI 编程老师和实施服务商的真实项目，确认独享远程 Mac 的任务、权限、交付物、验收及支持边界。
-- [Mac mini 租赁渠道合作：推广、经销与常见问题](https://wodemac.com/guides/partners.html): 了解 wodeMac 推广伙伴与经销商的区别、客户首单佣金、归属与结算核对、交付分工、合作内容披露和联系入口。
+- [Mac mini 租赁渠道合作：推广、经销与常见问题](https://wodemac.com/guides/partners.html): 了解 WodeMac 推广伙伴与经销商的区别、客户首单佣金、归属与结算核对、交付分工、合作内容披露和联系入口。
 - [用远程 Mac 运行 OpenAI Codex：预装环境、账号与验收](https://wodemac.com/guides/codex-remote-mac.html): 在美国加州独享 Mac mini 上使用 OpenAI Codex CLI 或 Codex 应用：机器已预装 Codex，客户用自己的 ChatGPT 或 API 账号登录。了解账号条件、项目准备、持续运行和验收方法。
 - [Claude Code 和 Codex 怎么选：在同一台 Mac 上实测对比](https://wodemac.com/guides/claude-code-vs-codex.html): Claude Code 与 OpenAI Codex 都能在终端里写代码、跑测试。与其看评测，不如在同一台预装两种工具的独享 Mac 上，用自己的项目对比结果、成本和协作方式。
 - [让 Claude Code、Codex 持续工作：为什么用一台 7×24 在线的独享 Mac](https://wodemac.com/guides/ai-coding-agent-always-on-mac.html): 把 Claude Code 或 Codex 放在一台 7×24 在线的美国加州独享 Mac mini 上：笔记本合盖、断网或下班后任务照常运行，代码和环境长期保留。了解适用场景、边界和成本。
 - [用 Claude Code 或 Codex 开发 iOS 和 Mac 应用：没有 Mac 怎么办](https://wodemac.com/guides/ios-app-claude-code-codex.html): 构建和签名 iOS、macOS 应用需要 macOS 和 Xcode。没有 Mac 或不想占用自己的电脑时，可以租一台预装 Claude Code 和 Codex 的美国加州独享 Mac mini，让 Agent 在上面写代码、跑构建和测试。
-- [在 Mac 上安装和登录 Claude Code：官方三种方式、系统要求与首次使用](https://wodemac.com/guides/claude-code-install-mac.html): Claude Code 在 macOS 上的三种官方安装方式（原生安装脚本、Homebrew、npm）、系统要求、支持的账号类型和首次登录步骤。wodeMac 的独享 Mac mini 已预装 Claude Code，用自己的账号登录即可。
-- [在 Mac 上安装和登录 OpenAI Codex CLI：安装命令、ChatGPT 登录与 API Key](https://wodemac.com/guides/codex-install-mac.html): Codex CLI 在 macOS 上的官方安装方式（安装脚本、Homebrew、npm），用 ChatGPT 账号或 API Key 登录的步骤，以及在远程机器上用设备码登录的方法。wodeMac 的独享 Mac mini 已预装 Codex。
+- [在 Mac 上安装和登录 Claude Code：官方三种方式、系统要求与首次使用](https://wodemac.com/guides/claude-code-install-mac.html): Claude Code 在 macOS 上的三种官方安装方式（原生安装脚本、Homebrew、npm）、系统要求、支持的账号类型和首次登录步骤。WodeMac 的独享 Mac mini 已预装 Claude Code，用自己的账号登录即可。
+- [在 Mac 上安装和登录 OpenAI Codex CLI：安装命令、ChatGPT 登录与 API Key](https://wodemac.com/guides/codex-install-mac.html): Codex CLI 在 macOS 上的官方安装方式（安装脚本、Homebrew、npm），用 ChatGPT 账号或 API Key 登录的步骤，以及在远程机器上用设备码登录的方法。WodeMac 的独享 Mac mini 已预装 Codex。
 - [用手机继续 Claude Code 的任务：Remote Control 怎么用，为什么需要一台常开的 Mac](https://wodemac.com/guides/claude-code-remote-control-mac.html): Claude Code 的 Remote Control 能把本机运行的会话接到手机、平板或浏览器上继续。这里说明启动命令、支持的套餐、主机必须在线的要求，以及一台 7×24 在线的独享 Mac mini 怎样作为主机。
 - [一台 Mac 同时跑多个 Claude Code 或 Codex 任务：git worktree、多终端与资源边界](https://wodemac.com/guides/claude-code-parallel-projects.html): 怎样在同一台 Mac 上并行运行几个 Claude Code 或 Codex 会话而不互相覆盖：用 git worktree 隔离分支、用多个终端或 tmux 保持会话，并看清内存和账号用量的边界。
 - [跑 Claude Code 和 Codex：远程 Mac mini 还是 Linux 云服务器？](https://wodemac.com/guides/mac-mini-vs-linux-vps-claude-code.html): 把 Claude Code 或 Codex 放到一台远程机器上常开运行，选 Mac mini 还是 Linux VPS？按费用、macOS 与 Xcode、图形界面、连接方式和团队管理逐项比较，说明各自适合的场景。

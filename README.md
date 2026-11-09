@@ -1,4 +1,4 @@
-# wodeMac · 美国加州独享 Mac
+# WodeMac · 美国加州独享 Mac
 
 展示页、付款流程、客户/订单/分销界面，以及团队使用的 Decision Studio。正式收款和真实登录供应商是否可用，以服务器配置为准。
 
@@ -9,7 +9,7 @@
 - **页面与功能说明**：[agent-mac/README.md](agent-mac/README.md)
 - **决策工作台**：[Decision Studio](agent-mac/docs/decision-studio/README.md)
 
-品牌为 **wodeMac**（2026-11-03 由 CalDock 改名）。域名 `wodemac.com`，旧地址 `craftos.app/caldock/` 自动跳转；接口 `/api/caldock` 和代码里的 `caldock` 标识不变。
+品牌为 **WodeMac**（2026-11-03 由 CalDock 改名）。域名 `wodemac.com`，旧地址 `craftos.app/caldock/` 自动跳转；接口 `/api/caldock` 和代码里的 `caldock` 标识不变。
 
 ## 在线入口与仓库
 
@@ -17,7 +17,6 @@
 | --- | --- |
 | 展示页 | https://yonge6.github.io/mac-mini-rental/ |
 | 正式站与客户界面 | https://wodemac.com/ |
-| 团队工作台 | https://craftos.app/decision-studio/ |
 | 本仓库：页面、客户 UI、工作台前端 | https://github.com/Yonge6/mac-mini-rental |
 | 共享后端：登录、订单、分销、工作台存储 | https://github.com/Yonge6/onelaser-workos-api |
 

@@ -15,7 +15,7 @@
 | API 会话、请求、登录跳转 | `agent-mac/src/commerce/context.jsx`、`core.mjs` |
 | 明确标识的本地虚构演示 | `agent-mac/src/commerce/demo.mjs` |
 | Logo、照片、字体等静态素材 | `agent-mac/public/assets/` |
-| 工作台 UI/财务模型/增长手册 | `agent-mac/public/decision-studio/`；先读该目录规则 |
+| 工作台 UI/财务模型/增长手册 | `agent-mac/decision-studio/`（不公开，不进任何网站构建）；先读该目录规则 |
 | CI 和 GitHub Pages | `.github/workflows/pages.yml` |
 
 `source*.html` 是真实参与构建的原始页面片段，不是废弃导出物。`App.jsx` 在其上安装交互与 React 界面；不要为了改一段文案重建整站。`src/main.jsx` 中的样式导入顺序影响覆盖结果。

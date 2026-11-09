@@ -1,4 +1,4 @@
-# wodeMac（原 CalDock）交接说明（2026-11-03）
+# WodeMac（原 CalDock）交接说明（2026-11-03）
 
 写给接手开发的 Claude Code（项目所有者 Mac 上的本地会话）和人工开发者。开始任何任务前先读本文，再读根目录 `AGENTS.md`、`docs/DEVELOPMENT.md` 和要修改目录里的规则文件。
 
@@ -8,7 +8,7 @@
 
 ## 1. 一句话现状
 
-wodeMac（原 CalDock，美国加州独享 M6 Mac mini 租用）已在 **https://wodemac.com/** 正式上线，`craftos.app/caldock/` 跳转过去：
+WodeMac（原 CalDock，美国加州独享 M6 Mac mini 租用）已在 **https://wodemac.com/** 正式上线，`craftos.app/caldock/` 跳转过去：
 
 - 客户可以用 **Google 登录**，用 **Stripe 正式收款**（`paymentMode: live`），月付、季付、年付都按订阅自动续费。
 - 宣传页同时发布在 GitHub Pages：https://yonge6.github.io/mac-mini-rental/ 。
@@ -32,7 +32,7 @@ wodeMac（原 CalDock，美国加州独享 M6 Mac mini 租用）已在 **https:/
 | Render | **OneLaser** workspace → “My project” → 服务 **`onelaser-workos-migration`**（Docker），数据库 `onelaser-workos-db` | 公司正式环境，Work OS 和 CalDock 共用。另有个人空 workspace “Elian's workspace”，与正式站无关。 |
 | Stripe | 账号 **Kraft Engineering Corp**（老板 KC / Kris Chen 提供，由 Mercury 管理），用户登录邮箱 elian.yuan@1laser.com | 正式模式已激活。 |
 | Google Cloud | 账号 **hwu900566@gmail.com**，项目 **CalDock**（ID `caldock-513602`） | 只用于 Google 登录（OAuth），未绑定付款方式。 |
-| 运营主体 / 对外联系 | wodeMac Inc（加州，沿用原地址），20472 Crescent Bay Dr, STE 104, Lake Forest, CA 92630；联系邮箱 hustyy986@gmail.com | 写在隐私政策和服务条款里。 |
+| 运营主体 / 对外联系 | WodeMac Inc（美国加州）；联系邮箱 hustyy986@gmail.com | 网站只写到“美国加州”，完整地址不写进网站和本仓库。 |
 
 ## 3. 代码在哪里
 
@@ -45,7 +45,7 @@ wodeMac（原 CalDock，美国加州独享 M6 Mac mini 租用）已在 **https:/
   - 只有通过签名校验的 Stripe 事件才会调用 `recordVerifiedCaldockPayment`（`src/caldock-domain.ts`），把订单标为已付款。
   - 数据库新增（只增不改）：`caldock_orders` 加了 3 个 Stripe ID 列，新表 `caldock_stripe_events`（`src/caldock-schema.ts`）。
   - 测试：`test/caldock-stripe.test.ts`（6 项）。完整说明见后端 `docs/caldock/SETUP.md` 的 Stripe 一节。
-  - 前端打包白名单：`tools/fetch-caldock.mjs` 只下载 `agent-mac/` 下列出的路径（`src/`、`public/assets/`、`public/decision-studio/`、`public/legal/` 和根配置文件）。**前端在 `public/` 下新加目录时，必须同步改这个白名单**，否则正式站上会 404。
+  - 前端打包白名单：`tools/fetch-caldock.mjs` 只下载 `agent-mac/` 下列出的路径（`src/`、`public/assets/`、`public/legal/` 和根配置文件）。**前端在 `public/` 下新加目录时，必须同步改这个白名单**，否则正式站上会 404。
 
 ## 4. 发布流程（重要，和旧文档不同）
 
@@ -95,7 +95,7 @@ Render 的环境变量页面里是 Work OS 的全部生产配置。**编辑时�
 
 ## 6. 产品规则（未经用户确认不要改）
 
-- 品牌 **wodeMac**（2026-11-03 由 CalDock 改名，由负责人决定）。计划域名 `wodemac.com`，切换前网站仍在 `craftos.app/caldock/`；接口和代码里的 `caldock` 标识不变。
+- 品牌 **WodeMac**（2026-11-03 由 CalDock 改名，由负责人决定）。计划域名 `wodemac.com`，切换前网站仍在 `craftos.app/caldock/`；接口和代码里的 `caldock` 标识不变。
 - 价格：周付 $69；月付 $199；季付 $537（折合 $179/月）；半年付 $954（折合 $159/月）；年付 $1,668（折合 $139/月）。首屏写“$139/月起”并注明年付总额。
 - 新订单计费从**付款当天**开始，标记“已交付”不再推迟 Stripe 的下一次扣款。此前的订单仍按交付当天计费。
 - 3 个工作日内没交付，全额退款。月付和季付可随时关闭续订；年付一年内不能取消或退款。续费失败保留 7 天。服务结束 3 天后抹除数据。

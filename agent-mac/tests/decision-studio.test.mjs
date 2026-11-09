@@ -2,7 +2,7 @@ import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import vm from 'node:vm';
-const root=new URL('../public/decision-studio/',import.meta.url);
+const root=new URL('../decision-studio/',import.meta.url);
 const context=vm.createContext({});vm.runInContext(readFileSync(new URL('model.js',root),'utf8'),context);
 const M=context.CalDockModel;
 test('eight annual customers pay 12384 upfront but earn 1032 per month',()=>{

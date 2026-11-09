@@ -1,8 +1,10 @@
-# wodeMac
+# WodeMac
+
+The only spelling is **WodeMac**, capital W and capital M, everywhere people can read it. Domains, asset file names and technical identifiers stay lowercase.
 
 Renamed from CalDock on 2026-11-03 by owner decision. The short-lived MacUSA name was replaced the same day.
 
-Wordmark: `public/assets/wodemac-logo.png`, supplied by the owner: ivory lowercase-first "wodeMac" with an amber square. It carries the name, so headers show it without separate text. Small square uses (favicon, software row) use `public/assets/wodemac-icon.svg`.
+Wordmark: `public/assets/wodemac-logo.png`, supplied by the owner: ivory "WodeMac" with an amber square. It carries the name, so headers show it without separate text. Small square uses (favicon, software row) use `public/assets/wodemac-icon.svg`.
 
 Third-party agent marks (Claude, Codex, OpenCode) remain their own product marks.
 
