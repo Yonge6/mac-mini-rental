@@ -218,8 +218,8 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline-color: #ffa
   .hm-hero.afterglow-hero { height: auto; min-height: 0; padding: 52px 24px 38px; display: flex; flex-direction: column; justify-content: flex-start; align-items: stretch; }
   .afterglow-hero .hm-hero-copy { position: relative; width: 100%; top: auto; left: auto; order: 1; }
   .afterglow-eyebrow { font-size: 10px; letter-spacing: .16em; }
-  .afterglow-hero h1 { font-size: clamp(56px,15.3vw,80px); margin-top: 16px; letter-spacing: -.055em; }
-  .afterglow-hero:lang(en) h1 { font-size: clamp(46px,13vw,64px); }
+  .afterglow-hero h1 { font-size: clamp(44px,calc((100vw - 48px) / 5.75),80px); margin-top: 16px; letter-spacing: -.055em; }
+  .afterglow-hero:lang(en) h1 { font-size: clamp(36px,calc((100vw - 48px) / 7.75),64px); }
   .afterglow-hero:lang(en) .hm-hero-subtitle { font-size: 16px; }
   .afterglow-hero .hm-hero-subtitle { font-size: 16px; line-height: 1.8; margin-top: 20px; }
   .afterglow-hero-art { position: relative; order: 2; width: calc(100% + 48px); max-width: none; flex-shrink: 0; height: 470px; inset: auto; margin: 28px -24px 0; object-fit: cover; object-position: 92% 48%; z-index: 0; }
@@ -298,7 +298,7 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline-color: #ffa
 
 
 /* Copy polish (2026-11): balanced headings, readable fine print, scannable FAQ terms. */
-.hm-chapter h2, .hm-closing h2, .afterglow-hero h1 { text-wrap: balance; }
+.hm-chapter h2, .hm-closing h2 { text-wrap: balance; }
 .afterglow-hero:lang(en) h1 { text-wrap: nowrap; }
 .hm-chapter p, .hm-closing p, [data-slot="collapsible-content"] { text-wrap: pretty; }
 [data-slot="collapsible-content"] b { color: #f4eee1; font-weight: 600; }
