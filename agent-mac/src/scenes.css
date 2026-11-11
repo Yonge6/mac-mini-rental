@@ -121,11 +121,16 @@
 /* Tab labels: full names on wide screens; numbered short names in a compact bar on phones. */
 .wm-tab-no, .wm-tab-short { display: none; }
 @media (max-width: 760px) {
-  .wm-scene-tabs { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 4px; margin-inline: -8px; padding: 5px; border-radius: 16px; }
+  .wm-scene-tabs { display: grid; grid-template-columns: repeat(5,minmax(0,1fr)); gap: 4px; margin-inline: -8px; padding: 5px; border-radius: 16px; }
   .wm-scene-tab { display: grid; place-items: center; align-content: center; gap: 1px; height: 48px; padding: 0 4px; border-radius: 12px; font-size: 13px; line-height: 1.2; }
   .wm-tab-full { display: none; }
   .wm-tab-no, .wm-tab-short { display: block; }
   .wm-tab-no { color: #a69683; font-family: var(--font-mono); font-size: 10px; letter-spacing: .08em; }
   .wm-tab-short { white-space: nowrap; }
   .wm-scene-tab[aria-selected="true"] .wm-tab-no { color: #24170c99; }
+}
+@media (max-width: 370px) {
+  .wm-scene-tabs { gap: 3px; padding: 4px; }
+  .wm-scene-tab { padding: 0 1px; }
+  .wm-tab-short { font-size: 11.5px; letter-spacing: -.01em; }
 }
