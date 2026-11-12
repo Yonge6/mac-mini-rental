@@ -90,4 +90,7 @@ writeFileSync(path.join(publicRoot,'llms.txt'),`# WodeMac\n\n> WodeMac (wodemac.
 
 const plain = html => html.replace('{{PRICE_TABLE}}', `\n${SALE_INTERVALS.map(key => `- ${billingLabel(key, true)}: ${money(BILLING_PLANS[key].amountCents)} for ${BILLING_PLANS[key].months} month(s)`).join('\n')}\n`).replace(/<li>/g, '\n- ').replace(/<\/p>/g, '\n\n').replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/\n{3,}/g, '\n\n').trim();
 writeFileSync(path.join(publicRoot,'llms-full.txt'),`# WodeMac — full guide text\n\n> ${facts.en}\n\nSource: ${siteUrl}/ · Verified ${verifiedDate}. Current configuration, prices and terms on wodemac.com take precedence.\n\n${guides.map(g => `---\n\n## ${g.title}\n\nURL: ${urlFor(g)}\n\n${g.answer}\n\n${g.sections.map(([h, html]) => `### ${h}\n\n${plain(html)}`).join('\n\n')}\n\n### ${langOf(g) === 'en' ? 'FAQ' : '常见问题'}\n\n${g.faqs.map(([q, a]) => `**${q}**\n${a}`).join('\n\n')}\n`).join('\n')}`);
+// Search engine ownership files. The production build copies only an allowlist of root files,
+// so they are written here, where the build runs. Removing one drops that verification.
+for (const name of ['google56101fb62f40fa0c.html']) writeFileSync(path.join(publicRoot, name), `google-site-verification: ${name}`);
 console.log(`Generated ${guides.length} guides (${zhGuides.length} zh, ${enGuides.length} en), two directories, sitemap, llms.txt and llms-full.txt.`);
