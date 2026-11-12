@@ -1,0 +1,40 @@
+/* Finish and motion layered over California Afterglow. Decorative only. */
+
+/* Scene tabs: sliding pill */
+.wm-scene-tabs.has-pill { position: sticky; }
+.wm-tab-pill { position: absolute; left: 0; top: 0; z-index: 0; border-radius: 999px; background: linear-gradient(180deg,#ffc06a,#ffa63d); box-shadow: inset 0 1px #fff3d699, 0 6px 18px -6px #ffad4799; pointer-events: none; }
+.wm-tab-pill.is-ready { transition: transform .45s cubic-bezier(.3,1.25,.4,1), width .35s cubic-bezier(.2,.7,.2,1), height .35s; }
+.wm-scene-tabs.has-pill .wm-scene-tab { position: relative; z-index: 1; }
+.wm-scene-tabs.has-pill .wm-scene-tab[aria-selected="true"] { background: transparent; }
+@media (max-width: 760px) { .wm-tab-pill { border-radius: 16px; } }
+
+/* Chapter headlines wipe up from their baseline */
+.site-reveal-animated .hm-chapter-head h2 { clip-path: inset(0 0 100% 0); translate: 0 .35em; }
+.site-reveal-animated.in-view .hm-chapter-head h2 { clip-path: inset(-.2em -1em -.25em -1em); translate: 0 0; transition: clip-path 1s cubic-bezier(.2,.7,.2,1) .1s, translate 1s cubic-bezier(.2,.7,.2,1) .1s; }
+
+/* The Mac in the any-device diagram floats */
+.wm-anyd-mini { animation: wm-float 5.5s ease-in-out infinite; }
+@keyframes wm-float { 50% { translate: 0 -7px; } }
+
+/* Pointer light on cards */
+.wm-spot { position: absolute; inset: 0; z-index: 0; border-radius: inherit; pointer-events: none; opacity: 0; transition: opacity .35s; background: radial-gradient(260px circle at var(--mx,50%) var(--my,50%), #ffb3471f, transparent 70%); }
+.wm-spot::before { content: ""; position: absolute; inset: 0; padding: 1px; border-radius: inherit; background: radial-gradient(200px circle at var(--mx,50%) var(--my,50%), #ffd08acc, transparent 70%); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask: linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0); }
+.is-spot > .wm-spot { opacity: 1; }
+
+@media (hover: hover) and (pointer: fine) and (min-width: 901px) {
+  /* Scene picture: photo and card at different depths */
+  .wm-scene-art { translate: calc(var(--tx,0) * -7px) calc(var(--ty,0) * -6px); transition: translate .6s cubic-bezier(.2,.7,.2,1); }
+  .wm-scene-card { translate: calc(var(--tx,0) * 12px) calc(var(--ty,0) * 9px); transition: translate .6s cubic-bezier(.2,.7,.2,1); }
+  /* Hero: the Mac drifts against the pointer, the button leans in */
+  .afterglow-hero-art { scale: 1.03; translate: calc(var(--px,0) * -12px) calc(var(--py,0) * -8px); transition: translate .9s cubic-bezier(.2,.7,.2,1); }
+  .afterglow-hero .hm-cta { translate: var(--gx,0px) var(--gy,0px); transition: translate .35s cubic-bezier(.2,.7,.2,1); }
+  /* Film grain: a faint texture so large dark areas read as material, not flat colour */
+  .site-home::after { content: ""; position: fixed; inset: 0; z-index: 30; pointer-events: none; opacity: .055; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 .9 0 0 0 0 .75 0 0 0 .9 0'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)'/%3E%3C/svg%3E"); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wm-tab-pill.is-ready { transition: none; }
+  .site-reveal-animated .hm-chapter-head h2, .site-reveal-animated.in-view .hm-chapter-head h2 { clip-path: none; translate: none; transition: none; }
+  .wm-anyd-mini { animation: none; }
+  .wm-scene-art, .wm-scene-card, .afterglow-hero-art, .afterglow-hero .hm-cta { translate: none; scale: none; transition: none; }
+}
