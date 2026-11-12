@@ -1,5 +1,6 @@
 import { forwardRef, memo, useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { initMotion } from './motion.js';
 import sourceZh from './source.html?raw';
 import sourceEn from './source.en.html?raw';
 import {CommerceProvider, appHref, isDemo, onMarketingHost} from './commerce/context.jsx';
@@ -339,6 +340,7 @@ function RentalApp() {
   useTaglineReveal(root, !checkout);
   useLiveStock(root, !checkout);
   useSourceInteractions(root);
+  useEffect(() => (!checkout && root.current ? initMotion(root.current) : undefined), [checkout]);
   useEffect(() => {
     sessionStorage.setItem('rental-interval',value);
     if (!checkout) { const url = new URL(location.href); url.searchParams.set('interval', value); history.replaceState(null, '', url); }
