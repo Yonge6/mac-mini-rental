@@ -1,5 +1,7 @@
 export const siteUrl = 'https://wodemac.com';
 export const verifiedDate = '2026-11-08';
+// Date of the latest homepage content change; drives the homepage lastmod and dateModified.
+export const homeUpdated = '2026-11-12';
 export const guides = [
   {
     slug: 'mac-mini-rental',
@@ -437,6 +439,94 @@ export const guides = [
       ['Can I install macOS on a cloud VPS to run Xcode?', 'No. Apple\'s license allows macOS only on Apple-branded hardware, so generic Linux or Windows cloud hosts cannot legitimately run it. For Xcode you need a real Mac.'],
       ['Is Claude Code the same on Linux and macOS?', 'The core features are the same. Officially supported systems include macOS 13+, Ubuntu 20.04+ and Debian 10+. The difference comes from which toolchain your project needs.'],
       ['What does a remote Mac mini cost?', 'WodeMac charges $169 monthly, $481.65 quarterly, $912.60 half-yearly or $1,723.80 yearly for the machine only; Claude or OpenAI usage is billed separately by those providers.'],
+    ],
+  },
+  {
+    slug: 'ai-short-drama-game-studio-mac',
+    published: '2026-11-12',
+    pair: 'ai-video-game-studio-always-on-mac',
+    about: ['Claude Code', 'Codex'],
+    title: '游戏、AI 短剧与漫剧团队：用一台加州 Mac mini 夜里持续跑生产任务',
+    description: '做游戏、AI 短剧、漫剧和影视内容出海的团队，怎样用一台美国加州独享 Mac mini 白天定创意、夜里跑脚本和构建：适合的任务、工作流搭法、费用边界与验收方式。',
+    answer: '一台 7×24 在线的独享 Mac mini 适合承担不需要人盯着的生产环节：用 Claude Code 拆剧本和写工具，用脚本按顺序调用团队自己选用的生成服务批量出素材，夜里跑游戏构建和测试。机器只提供稳定的运行环境，生成模型的账号、额度和内容规则仍由各服务方决定。',
+    sections: [
+      ['哪些环节适合交给一台不关机的 Mac', '<p>内容团队的产能常常卡在“要有人开着电脑等”：批量任务跑到一半电脑休眠、网络切换、或者同事要用这台机器。把这些环节搬到一台独享的远程 Mac 上，本地电脑关机也不影响任务继续。</p><ul><li><strong>剧本与分镜</strong>：用 Claude Code 把大纲拆成分集剧本、台词和分镜表，多个版本并排比较。</li><li><strong>批量素材</strong>：用脚本按分镜表逐条调用团队已开通的图像、视频、配音服务，夜里排队生成，第二天挑选。</li><li><strong>游戏开发</strong>：用 Claude Code、Codex 写玩法原型、关卡脚本和内部工具，自动跑构建与测试。</li><li><strong>iOS 与 Mac 版本</strong>：需要 Xcode 的构建、签名和真机前测试只能在 macOS 上完成。</li></ul>'],
+      ['工作流怎么搭', '<ol><li>白天由导演、主策或制作人确定本轮要出的内容和验收标准。</li><li>把任务写成一份清单或分镜表，放进代码仓库，由脚本读取。</li><li>在远程 Mac 上用 tmux 或后台进程启动任务，并把日志写到文件。</li><li>夜里任务持续运行；用手机或 iPad 打开远程桌面或 Claude Code Remote Control 查看进度。</li><li>第二天按清单验收：哪些镜头、台词或构建可以直接用，哪些需要重跑。</li></ol><p>这台 Mac mini 是 M6 芯片、16GB 内存，适合做调度、脚本、编码和构建。大型视频模型通常运行在各服务方的云端，本机负责发起任务、下载结果和整理素材；需要在本机运行大模型时，应先用真实任务确认内存是否够用。</p>'],
+      ['费用与边界', '<p>租金只包含机器，按所选周期一次支付。Claude、OpenAI 以及各类图像、视频、配音服务的账号、订阅和用量由团队自己持有并单独付费。</p>{{PRICE_TABLE}}<p>机器位于美国加州，不代表获得任何第三方服务的使用资格。各生成服务的地区、内容和商用规则仍然适用；面向海外发行的内容还应符合目标市场的分级与平台要求。WodeMac 不代办第三方账号，也不代付。</p>'],
+      ['怎样判断值不值', '<p>拿一集短剧或一个游戏版本做对比：原来从剧本到可用素材要几天，现在要几天；可以直接采用的镜头、台词和代码占几成；人工返工花了多少时间。把这些数字和租金、模型用量放在一起算，再决定是否增加到多台。</p><p>本指南描述的是使用方法，不是已完成项目的客户案例，也不承诺具体提效倍数。</p>'],
+    ],
+    faqs: [
+      ['Mac mini 能直接在本机生成视频吗？', '多数团队使用的视频生成模型运行在服务方的云端，这台 Mac 负责调度脚本、发起任务和整理结果。16GB 内存可以运行部分轻量本地模型，但应先用真实任务测试，不要预设所有模型都能在本机运行。'],
+      ['电脑关机后任务还会继续吗？', '任务运行在加州的远程 Mac 上，与你本地电脑是否开机无关。任务能否持续还取决于进程、网络、账号额度和所用服务的状态，重要任务应保留日志并设置停止条件。'],
+      ['租了美国的机器，就能使用所有海外 AI 服务吗？', '不能。每项服务都有自己的账号、地区、付款和内容规则，机器所在地不能替代这些条件。团队应使用自己合规持有的账号。'],
+      ['一个团队需要几台？', '建议先用一台和一个真实任务跑通流程，确认产能和成本后再按人或按项目增加。年付一次买 5 台及以上，首年再减 2.5%。'],
+    ],
+  },
+  {
+    slug: 'ai-video-game-studio-always-on-mac',
+    lang: 'en',
+    published: '2026-11-12',
+    pair: 'ai-short-drama-game-studio-mac',
+    about: ['Claude Code', 'Codex'],
+    title: 'An always-on Mac mini for game, short-drama and AI video studios',
+    description: 'How game, short-drama, comic-drama and film teams use a dedicated Mac mini in California to set ideas by day and run scripts, generation queues and builds overnight: suitable tasks, workflow, costs and limits.',
+    answer: 'A dedicated Mac mini that stays online 24/7 is a good home for the production steps nobody needs to watch: breaking down scripts and writing tools with Claude Code, running scripts that call the generation services your team already uses, and building and testing games overnight. The machine provides a stable place to run; accounts, quotas and content rules for the generation models remain with each provider.',
+    sections: [
+      ['What to hand to a Mac that never sleeps', '<p>Content teams often lose capacity to "someone has to keep a laptop open": batch jobs stop when the lid closes, the Wi-Fi changes, or a colleague needs the machine. Moving those steps to a dedicated remote Mac means your own computer can be off while the job continues.</p><ul><li><strong>Scripts and storyboards</strong>: use Claude Code to turn an outline into episode scripts, dialogue and shot lists, and compare versions side by side.</li><li><strong>Batch assets</strong>: a script walks the shot list and calls the image, video and voice services your team has accounts with, queued overnight for review the next day.</li><li><strong>Game development</strong>: use Claude Code and Codex for gameplay prototypes, level scripts and internal tools, with builds and tests run automatically.</li><li><strong>iOS and Mac builds</strong>: anything that needs Xcode has to run on macOS.</li></ul>'],
+      ['Setting up the workflow', '<ol><li>By day, the director, lead designer or producer decides what this round should produce and how it will be judged.</li><li>Write the work as a task list or shot list in a repository that a script can read.</li><li>Start the job on the remote Mac in tmux or as a background process, logging to a file.</li><li>Overnight the job keeps running; check progress from a phone or iPad through the remote desktop or Claude Code Remote Control.</li><li>Next morning, review against the list: which shots, lines or builds are usable and which need another pass.</li></ol><p>The machine is an M6 Mac mini with 16GB of memory, well suited to orchestration, scripting, coding and builds. Large video models usually run in the provider\'s cloud while the Mac starts jobs, downloads results and organises assets; if you plan to run a model locally, test memory with a real task first.</p>'],
+      ['Costs and limits', '<p>The rent covers the machine only, paid upfront for the period you choose. Accounts, subscriptions and usage for Claude, OpenAI and any image, video or voice service belong to your team and are billed by those providers.</p>{{PRICE_TABLE}}<p>A machine in California does not make anyone eligible for a third-party service. Each provider\'s region, content and commercial-use rules still apply, and content for release abroad should meet the ratings and platform rules of its target market. WodeMac does not open or pay for third-party accounts on your behalf.</p>'],
+      ['Deciding whether it pays', '<p>Compare one episode or one game build: how many days from script to usable assets before and after, what share of shots, lines and code you can use as is, and how much rework it took. Put those numbers next to the rent and model usage, then decide whether to add machines.</p><p>This guide describes a way of working. It is not a customer case study and does not promise a specific speed-up.</p>'],
+    ],
+    faqs: [
+      ['Can the Mac mini generate video locally?', 'Most video models teams use run in the provider\'s cloud; the Mac orchestrates scripts, starts jobs and organises results. 16GB of memory can run some lightweight local models, but test with a real task instead of assuming any model will fit.'],
+      ['Does the job keep running when my laptop is off?', 'Yes, the job runs on the remote Mac in California, independent of your own computer. Whether it keeps going also depends on the process, network, account quotas and the services it calls, so keep logs and set stop conditions for important jobs.'],
+      ['Does a machine in the US give access to every AI service?', 'No. Each service has its own account, region, payment and content rules, and the location of the machine does not replace them. Use accounts your team holds legitimately.'],
+      ['How many machines does a team need?', 'Start with one machine and one real task, confirm output and cost, then add by person or by project. Yearly orders of five or more Macs get a further 2.5% off the first year.'],
+    ],
+  },
+  {
+    slug: 'control-mac-from-phone-ipad',
+    published: '2026-11-12',
+    pair: 'control-remote-mac-from-phone-ipad',
+    about: ['Claude Code', 'Codex'],
+    sources: 'remote-control',
+    title: '用手机、iPad 和电脑远程控制加州的 Mac mini',
+    description: '手机、iPad 和电脑怎样连到同一台美国加州独享 Mac mini：浏览器远程桌面、Mac App、Claude Code Remote Control 各自适合什么场景，换设备时任务为什么不会中断。',
+    answer: '同一台远程 Mac 可以从手机、iPad 和电脑连接。手机和 iPad 通过浏览器打开远程桌面，电脑可以用 WodeMac Mac App 或浏览器；只想跟进编码任务时，可以用 Claude Code Remote Control 在手机上继续同一个会话。任务运行在远程 Mac 上，换设备或断开连接都不会让它停下。',
+    sections: [
+      ['三种设备各自适合做什么', '<div class="table-wrap"><table><caption>从不同设备连接同一台远程 Mac</caption><thead><tr><th scope="col">设备</th><th scope="col">连接方式</th><th scope="col">适合的事</th></tr></thead><tbody><tr><th scope="row">手机</th><td>浏览器远程桌面；Claude Code Remote Control</td><td>路上看进度、回复 Agent 的确认、下一条指令</td></tr><tr><th scope="row">iPad</th><td>浏览器远程桌面</td><td>看设计稿和结果、做轻量修改、开会时演示</td></tr><tr><th scope="row">电脑</th><td>WodeMac Mac App 或浏览器</td><td>全屏操作整个桌面，长时间开发与调试</td></tr></tbody></table></div><p>单个 App 模式（只把远端的一个应用窗口拉到本机）目前仅支持 Mac。</p>'],
+      ['为什么换设备不会打断任务', '<p>构建、测试和 Agent 会话都运行在加州的那台 Mac 上，你手里的设备只是显示画面和传递键鼠输入。关掉手机浏览器、合上笔记本或切换 Wi-Fi，断开的只是这条显示连接；重新连上后看到的是同一个桌面和同一批窗口。</p><p>长时间任务建议放在 tmux 或后台进程里运行并写日志，这样即使远程桌面会话被关闭，也能从任何设备重新查看输出。</p>'],
+      ['在手机上继续 Claude Code 会话', '<p>Claude Code 提供 Remote Control：在远程 Mac 上开启会话后，可以在手机的 Claude App 或浏览器里看到同一个会话，查看输出并继续发指令。这比在小屏幕上操作整个桌面更顺手，适合只想确认进度和批准下一步的时候。</p><p>该功能由 Anthropic 提供，可用范围和要求以官方文档为准，并需要你本人符合条件的 Claude 账号。</p>'],
+      ['安全与使用建议', '<ul><li>每台设备都用自己的方式登录，不在公共设备上保存连接凭据。</li><li>WodeMac 远程屏幕的画面和键鼠全程端到端加密。</li><li>手机网络不稳定时优先用 Remote Control 或终端类方式，数据量比整屏画面小。</li><li>连接体验取决于你所在网络到加州的线路，下单前可以先说明所在地区，确认连接方式。</li></ul>'],
+    ],
+    faqs: [
+      ['iPad 可以当主力设备来操作远程 Mac 吗？', '可以通过浏览器打开完整的远程桌面，配合键盘做轻量开发和审阅没有问题。长时间编码仍建议用电脑；单个 App 模式目前只支持 Mac。'],
+      ['手机断网后任务会停吗？', '不会。任务运行在远程 Mac 上，手机只是查看和输入的窗口。重新连上后会回到同一个桌面或同一个会话。'],
+      ['需要在手机上安装专用 App 吗？', '查看远程桌面用浏览器即可。使用 Claude Code Remote Control 时，可以用 Claude 的手机 App 或浏览器，具体以 Anthropic 官方说明为准。'],
+      ['可以几个人同时连同一台 Mac 吗？', '每台 Mac 只租给一位客户，团队内部如何共享由你们自己安排。多人长期并行工作时，建议每人一台，避免互相抢占桌面。'],
+    ],
+  },
+  {
+    slug: 'control-remote-mac-from-phone-ipad',
+    lang: 'en',
+    published: '2026-11-12',
+    pair: 'control-mac-from-phone-ipad',
+    about: ['Claude Code', 'Codex'],
+    sources: 'remote-control',
+    title: 'Control a remote Mac mini from your phone, iPad or computer',
+    description: 'How a phone, an iPad and a computer all reach the same dedicated Mac mini in California: browser remote desktop, the Mac app and Claude Code Remote Control, what each is good for, and why switching devices never interrupts a task.',
+    answer: 'One remote Mac can be reached from a phone, an iPad and a computer. Phones and iPads open the remote desktop in a browser; computers use the WodeMac Mac App or a browser. When you only want to follow a coding task, Claude Code Remote Control continues the same session on your phone. The task runs on the remote Mac, so changing devices or dropping the connection does not stop it.',
+    sections: [
+      ['What each device is good for', '<div class="table-wrap"><table><caption>Reaching the same remote Mac from different devices</caption><thead><tr><th scope="col">Device</th><th scope="col">How it connects</th><th scope="col">Good for</th></tr></thead><tbody><tr><th scope="row">Phone</th><td>Browser remote desktop; Claude Code Remote Control</td><td>Checking progress on the go, answering an agent\'s question, sending the next instruction</td></tr><tr><th scope="row">iPad</th><td>Browser remote desktop</td><td>Reviewing designs and results, light edits, demos in a meeting</td></tr><tr><th scope="row">Computer</th><td>WodeMac Mac App or a browser</td><td>The full desktop, long development and debugging sessions</td></tr></tbody></table></div><p>Single-app mode, which brings one remote app window onto your own desktop, is currently Mac only.</p>'],
+      ['Why switching devices does not interrupt work', '<p>Builds, tests and agent sessions run on the Mac in California; the device in your hand only shows the picture and passes along input. Closing the phone browser, shutting a laptop or changing Wi-Fi drops that display link and nothing else. Reconnect and you are back at the same desktop with the same windows.</p><p>For long jobs, run them in tmux or as a background process with a log file, so the output is there to read from any device even if a remote desktop session was closed.</p>'],
+      ['Continuing a Claude Code session on your phone', '<p>Claude Code has Remote Control: start a session on the remote Mac and the same session appears in the Claude mobile app or a browser, where you can read output and keep giving instructions. On a small screen this is easier than driving a whole desktop, and suits the moments when you only need to check progress and approve the next step.</p><p>The feature is provided by Anthropic; availability and requirements follow the official documentation, and you need your own eligible Claude account.</p>'],
+      ['Security and practical tips', '<ul><li>Sign in separately on each device and do not save credentials on shared ones.</li><li>WodeMac Remote Screen encrypts the picture and input end to end.</li><li>On a weak mobile connection, prefer Remote Control or a terminal, which use far less data than a full screen.</li><li>Responsiveness depends on your network path to California; tell us where you are before ordering to confirm the connection method.</li></ul>'],
+    ],
+    faqs: [
+      ['Can an iPad be my main device for a remote Mac?', 'You can open the full remote desktop in the browser and, with a keyboard, do light development and reviews comfortably. For long coding sessions a computer is still better; single-app mode is currently Mac only.'],
+      ['Does the task stop if my phone loses signal?', 'No. The task runs on the remote Mac and the phone is only a window for viewing and input. Reconnecting returns you to the same desktop or session.'],
+      ['Do I need a dedicated app on my phone?', 'A browser is enough for the remote desktop. For Claude Code Remote Control you can use the Claude mobile app or a browser, as described in Anthropic\'s documentation.'],
+      ['Can several people connect to one Mac at once?', 'Each Mac is rented to one customer, and how a team shares it is up to you. For people working in parallel over a long period, one Mac each avoids competing for the desktop.'],
     ],
   },
 ];
