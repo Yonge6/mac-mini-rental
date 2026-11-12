@@ -40,8 +40,48 @@ function MobileMenu() {
     {createPortal(<nav id="wm-menu-panel" className={'wm-menu-panel' + (open ? ' is-open' : '')} aria-label={t('页面导航','Page navigation')} inert={!open}>
       <button type="button" className="wm-menu-toggle wm-menu-close is-open" aria-label={t('关闭菜单','Close menu')} onClick={() => setOpen(false)}><i /><i /></button>
       {links.map((link, index) => <a key={link.href} href={link.href} style={{ '--i': index }} onClick={() => setOpen(false)}>{link.label}</a>)}
+      <a className="wm-menu-cta" href="#pricing" style={{ '--i': links.length }} onClick={() => setOpen(false)}>{t('预订一台','Reserve a Mac')}</a>
     </nav>, document.body)}
   </>;
+}
+
+// Reading progress line, plus a phone-only reserve bar that shows between the hero and the plan picker.
+function PageChrome() {
+  const bar = useRef(null);
+  const [show, setShow] = useState(false);
+  useEffect(() => {
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const max = document.documentElement.scrollHeight - innerHeight;
+      bar.current?.style.setProperty('--wm-progress', max > 0 ? Math.min(1, scrollY / max).toFixed(4) : '0');
+    };
+    const onScroll = () => { if (!frame) frame = requestAnimationFrame(update); };
+    update();
+    addEventListener('scroll', onScroll, { passive: true });
+    addEventListener('resize', onScroll);
+    return () => { removeEventListener('scroll', onScroll); removeEventListener('resize', onScroll); cancelAnimationFrame(frame); };
+  }, []);
+  useEffect(() => {
+    // Hide wherever a reserve or pay button is already on screen: hero, plan picker, closing.
+    const targets = [...document.querySelectorAll('#choose-plan, #pricing, #rental-plan, .hm-closing')];
+    if (!targets.length || !('IntersectionObserver' in window)) return;
+    const visible = new Set();
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => { entry.isIntersecting ? visible.add(entry.target) : visible.delete(entry.target); });
+      setShow(visible.size === 0);
+    }, { rootMargin: '-80px 0px -40px 0px' });
+    targets.forEach(target => observer.observe(target));
+    return () => observer.disconnect();
+  }, []);
+  const total = BILLING_PLANS.year.amountCents;
+  return createPortal(<>
+    <div className="wm-progress" ref={bar} aria-hidden="true"><i /></div>
+    <div className={'wm-reserve-bar' + (show ? ' is-shown' : '')} inert={!show}>
+      <p><strong><Amount cents={dailyCents(total, 'year')}/></strong>{t('/天起','/day')}<small>{t('整台独享 · 美国加州','A whole Mac · California')}</small></p>
+      <a className="wm-reserve-bar-cta" href="#pricing">{t('预订一台','Reserve a Mac')}</a>
+    </div>
+  </>, document.body);
 }
 
 // Reveals the tagline one word at a time as it crosses a line in the viewport.
@@ -209,6 +249,22 @@ function useSourceInteractions(root) {
     const dismiss = e => { if (!e.target.closest('.site-language-picker')) picker?.removeAttribute('open'); };
     node.addEventListener('click', click);
     node.addEventListener('keydown', sceneKeys);
+    // Any-device diagram: pointing at (or tapping) a device hands control to it and pauses the cycle.
+    const diagram = node.querySelector('.wm-anyd');
+    const devices = diagram ? [...diagram.querySelectorAll('.wm-anyd-device')] : [];
+    const paths = diagram ? [...diagram.querySelectorAll('.wm-anyd-links path')] : [];
+    const hold = index => {
+      diagram.classList.toggle('has-held', index >= 0);
+      devices.forEach((device, i) => device.classList.toggle('is-held', i === index));
+      paths.forEach((path, i) => path.classList.toggle('is-held', i === index));
+    };
+    const deviceHandlers = devices.map((device, index) => {
+      const enter = event => { if (event.pointerType === 'mouse') hold(index); };
+      const leave = event => { if (event.pointerType === 'mouse') hold(-1); };
+      const tap = () => hold(device.classList.contains('is-held') && matchMedia('(hover: none)').matches ? -1 : index);
+      device.addEventListener('pointerenter', enter); device.addEventListener('pointerleave', leave); device.addEventListener('click', tap);
+      return () => { device.removeEventListener('pointerenter', enter); device.removeEventListener('pointerleave', leave); device.removeEventListener('click', tap); };
+    });
     document.addEventListener('keydown', escape);
     document.addEventListener('click', dismiss);
     const observer = new IntersectionObserver(entries => {
@@ -236,7 +292,7 @@ function useSourceInteractions(root) {
     }, { rootMargin:'-15% 0px -65% 0px', threshold:0 });
     anchors.forEach(anchor => { const section = node.querySelector(anchor.getAttribute('href')); if (section) activeSections.observe(section); });
     return () => {
-      node.removeEventListener('click',click);node.removeEventListener('keydown',sceneKeys);document.removeEventListener('keydown',escape);document.removeEventListener('click',dismiss);
+      node.removeEventListener('click',click);deviceHandlers.forEach(off=>off());node.removeEventListener('keydown',sceneKeys);document.removeEventListener('keydown',escape);document.removeEventListener('click',dismiss);
       disposed = true;observer.disconnect();activeSections.disconnect();
     };
   }, [root]);
@@ -247,7 +303,7 @@ function Checkout({ value }) {
   const [quantity, setQuantity] = useState(readQuantity);
   const amounts = orderAmounts(value, quantity);
   return <div className="checkout-page">
-    <header className="checkout-nav"><a className="checkout-brand" href={appHref()}><img className="brand-wordmark" src="./assets/wodemac-logo.png" alt="WodeMac" /></a><a href={appHref(undefined,{interval:value})+'#pricing'}>{t("返回选择方案","Back to plans")}</a></header>
+    <header className="checkout-nav"><a className="checkout-brand" href={appHref()}><img className="brand-wordmark" src="./assets/wodemac-logo-480.png" alt="WodeMac" /></a><a href={appHref(undefined,{interval:value})+'#pricing'}>{t("返回选择方案","Back to plans")}</a></header>
     <main className="checkout-main">
       <section className="checkout-details"><p className="checkout-eyebrow">{t("独享 MAC · 美国加州","DEDICATED MAC · CALIFORNIA")}</p><h1>{t("完成付款，","Your own Mac,")}<br />{t("开启你的独享 Mac。","one payment away.")}</h1>
         <p className="checkout-lead">{t("M6 Mac mini，24 小时为你和 Agent 在线。","M6 Mac mini. Always on for you and your agents.")}</p>
@@ -304,6 +360,7 @@ function RentalApp() {
     {accountSlots.map(slot=>createPortal(<AccountEntry/>,slot))}
     {priceSlots.map((slot,index)=>createPortal(<HeroPrice/>,slot,'price-'+index))}
     {menuSlots.map((slot,index)=>createPortal(<MobileMenu/>,slot,'menu-'+index))}
+    <PageChrome/>
   </>;
 }
 
