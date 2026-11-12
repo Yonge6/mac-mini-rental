@@ -1,0 +1,53 @@
+/* 03 / Any device: phone, iPad and computer take turns controlling the same California Mac */
+.wm-anyd { --u: 1px; --cycle: 6s; display: grid; justify-items: center; padding: clamp(28px,4vw,52px) clamp(14px,4vw,48px) clamp(26px,3.6vw,44px); overflow: hidden; background: radial-gradient(120% 90% at 50% 100%, #3a250f66, transparent 62%), #1b1510; }
+.wm-anyd-devices { display: flex; align-items: flex-end; width: 100%; max-width: 660px; margin: 0; padding: 0; list-style: none; }
+.wm-anyd-device { flex: 1 1 0; min-width: 0; display: flex; flex-direction: column; align-items: center; text-align: center; }
+.wm-anyd-device strong { margin-top: calc(14 * var(--u)); color: #f4eee1; font-size: 15px; font-weight: 700; transition: color .3s; }
+.wm-anyd-device small { margin-top: 2px; color: #ac9b87; font-size: 13px; line-height: 1.4; }
+.wm-anyd-frame { position: relative; display: block; padding: calc(5 * var(--u)); background: linear-gradient(160deg,#3a2e22,#221a12); border: 1px solid #b2936e40; border-radius: calc(14 * var(--u)); box-shadow: 0 10px 30px -14px #000; animation: wm-anyd-device var(--cycle) ease-in-out calc(var(--d) * var(--cycle) / 3) infinite; }
+.wm-anyd-device--phone .wm-anyd-frame { width: calc(66 * var(--u)); height: calc(122 * var(--u)); border-radius: calc(16 * var(--u)); }
+.wm-anyd-device--ipad .wm-anyd-frame { width: calc(158 * var(--u)); height: calc(116 * var(--u)); padding: calc(7 * var(--u)); }
+.wm-anyd-device--laptop .wm-anyd-frame { width: calc(196 * var(--u)); height: calc(124 * var(--u)); border-radius: calc(9 * var(--u)) calc(9 * var(--u)) calc(2 * var(--u)) calc(2 * var(--u)); }
+.wm-anyd-base { display: block; width: calc(236 * var(--u)); height: calc(9 * var(--u)); margin-top: -1px; border-radius: 0 0 calc(10 * var(--u)) calc(10 * var(--u)); background: linear-gradient(#5a4836,#2b2118); box-shadow: inset 0 1px #b2936e55; }
+.wm-anyd-screen { position: relative; display: flex; flex-direction: column; gap: calc(6 * var(--u)); height: 100%; padding: calc(7 * var(--u)); overflow: hidden; border-radius: calc(9 * var(--u)); background: #120d09; }
+.wm-anyd-device--laptop .wm-anyd-screen { border-radius: calc(4 * var(--u)); }
+.wm-anyd-bar { display: flex; gap: calc(3 * var(--u)); }
+.wm-anyd-bar i { width: calc(4 * var(--u)); height: calc(4 * var(--u)); border-radius: 50%; background: #5a4a3a; }
+.wm-anyd-row { display: flex; align-items: center; gap: calc(5 * var(--u)); }
+.wm-anyd-dot { width: calc(6 * var(--u)); height: calc(6 * var(--u)); flex: none; border-radius: 50%; background: #ffb347; box-shadow: 0 0 8px #ffb347; animation: wm-anyd-blink 1.4s ease-in-out infinite; }
+.wm-anyd-text { height: calc(5 * var(--u)); width: 70%; border-radius: 3px; background: #e9a553cc; }
+.wm-anyd-line { height: calc(4 * var(--u)); width: 88%; border-radius: 3px; background: #4a3b2c; }
+.wm-anyd-line--short { width: 56%; }
+.wm-anyd-progress { margin-top: auto; height: calc(5 * var(--u)); border-radius: 4px; background: #33281d; overflow: hidden; }
+.wm-anyd-progress b { display: block; height: 100%; width: 100%; border-radius: inherit; background: linear-gradient(90deg,#d98a2b,#ffd08a); transform-origin: left; animation: wm-anyd-progress 9s linear infinite; }
+.wm-anyd-tap { position: absolute; left: 58%; top: 46%; width: calc(26 * var(--u)); height: calc(26 * var(--u)); margin: calc(-13 * var(--u)) 0 0 calc(-13 * var(--u)); border-radius: 50%; border: 2px solid #ffd08a; opacity: 0; animation: wm-anyd-tap var(--cycle) ease-out calc(var(--d) * var(--cycle) / 3) infinite; }
+.wm-anyd-links { display: block; width: 100%; max-width: 660px; height: clamp(46px, 7vw, 84px); overflow: visible; }
+.wm-anyd-links path { fill: none; stroke: #bba58c; stroke-width: 1.6; stroke-dasharray: 2 9; stroke-linecap: round; vector-effect: non-scaling-stroke; opacity: .35; animation: wm-anyd-flow .9s linear infinite, wm-anyd-link var(--cycle) ease-in-out calc(var(--d) * var(--cycle) / 3) infinite; }
+.wm-anyd-mac { display: flex; flex-direction: column; align-items: center; text-align: center; }
+.wm-anyd-mini { width: calc(176 * var(--u)); height: auto; overflow: visible; filter: drop-shadow(0 0 22px #ffb34733); }
+.wm-anyd-led { fill: #ffb347; animation: wm-anyd-blink 1.4s ease-in-out infinite; }
+.wm-anyd-mac strong { margin-top: 8px; color: #f4eee1; font-size: 16px; font-weight: 700; }
+.wm-anyd-mac small { color: #ac9b87; font-size: 13px; }
+.wm-anyd-status { display: inline-flex; align-items: center; gap: 7px; margin-top: 12px; padding: 5px 12px; border-radius: 999px; background: #ffb3471f; box-shadow: inset 0 0 0 1px #ffb34755; color: #ffd08a; font-size: 13px; }
+.wm-anyd-status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #ffb347; box-shadow: 0 0 8px #ffb347; animation: wm-anyd-blink 1.4s ease-in-out infinite; }
+/* Start the hand-off cycle when the section scrolls into view, so the phone goes first */
+.wm-anyd :is(.wm-anyd-frame,.wm-anyd-tap,.wm-anyd-progress b), .wm-anyd-links path { animation-play-state: paused; }
+.in-view .wm-anyd :is(.wm-anyd-frame,.wm-anyd-tap,.wm-anyd-progress b), .in-view .wm-anyd-links path { animation-play-state: running; }
+@keyframes wm-anyd-device { 0%, 30% { border-color: #ffb347; box-shadow: 0 0 0 1px #ffb34766, 0 0 34px -4px #ffb34788, 0 10px 30px -14px #000; transform: translateY(-4px); } 38%, 100% { border-color: #b2936e40; box-shadow: 0 10px 30px -14px #000; transform: none; } }
+@keyframes wm-anyd-link { 0%, 30% { stroke: #ffb347; opacity: 1; stroke-dasharray: 10 7; } 38%, 100% { stroke: #bba58c; opacity: .35; stroke-dasharray: 2 9; } }
+@keyframes wm-anyd-flow { to { stroke-dashoffset: -17; } }
+@keyframes wm-anyd-tap { 0%, 4% { opacity: 0; transform: scale(.4); } 8% { opacity: 1; transform: scale(.6); } 22% { opacity: 0; transform: scale(1.5); } 100% { opacity: 0; } }
+@keyframes wm-anyd-progress { from { transform: scaleX(.08); } to { transform: scaleX(1); } }
+@keyframes wm-anyd-blink { 50% { opacity: .35; } }
+@media (max-width: 760px) {
+  .wm-anyd { --u: .6px; }
+  .wm-anyd-device strong { font-size: 13px; }
+  .wm-anyd-device small { font-size: 11px; }
+  .wm-anyd-mini { width: 132px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .wm-anyd *, .wm-anyd-links path { animation: none !important; }
+  .wm-anyd-frame { border-color: #ffb34788; }
+  .wm-anyd-links path { opacity: .7; stroke: #e9a553; }
+  .wm-anyd-progress b { transform: scaleX(.62); }
+}

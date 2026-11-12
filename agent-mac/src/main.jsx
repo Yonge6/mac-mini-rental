@@ -5,6 +5,7 @@ import "./styles.css";
 import "./afterglow.css";
 import "./pricing.css";
 import "./scenes.css";
+import "./devices.css";
 import "./commerce/commerce.css";
 
 function MountedApp() {
