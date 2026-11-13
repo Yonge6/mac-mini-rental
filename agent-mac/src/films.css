@@ -1,19 +1,20 @@
-/* Brand films: three vertical 24s shorts after the belief section. */
+/* Brand films: four vertical 24s shorts after the belief section. */
 .wm-films { position: relative; padding: clamp(72px,9vw,130px) 4.4% clamp(80px,10vw,140px); }
 .wm-films-inner { max-width: 1120px; margin: 0 auto; text-align: center; }
 .wm-films h2 { margin-top: 16px; font-size: clamp(32px,4.4vw,56px); font-weight: 800; line-height: 1.15; letter-spacing: -.03em; color: #f4eee1; text-wrap: balance; }
 .wm-films-lead { max-width: 680px; margin: 20px auto 0; color: #c6b8a6; font-size: clamp(15px,1.4vw,18px); line-height: 1.8; text-wrap: balance; }
-.wm-films-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: clamp(16px,2.4vw,32px); margin-top: clamp(40px,5vw,64px); text-align: left; }
+.wm-films-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: clamp(14px,1.8vw,24px); margin-top: clamp(40px,5vw,64px); text-align: left; }
 .wm-film { margin: 0; }
 .wm-film-frame { position: relative; aspect-ratio: 9 / 16; overflow: hidden; border-radius: 22px; background: #0d0a08; border: 1px solid #ffffff14; box-shadow: 0 30px 80px -40px #000, 0 0 0 1px #ffb3470f inset; transition: transform .5s cubic-bezier(.2,.7,.2,1), box-shadow .5s, border-color .5s; }
 .wm-film-video { display: block; width: 100%; height: 100%; object-fit: cover; background: #0d0a08; }
 .wm-film figcaption { display: grid; gap: 6px; padding: 18px 4px 0; }
-.wm-film figcaption b { color: #f4eee1; font-size: 18px; font-weight: 700; letter-spacing: .01em; }
+.wm-film figcaption b { color: #f4eee1; font-size: 17px; font-weight: 700; letter-spacing: .01em; }
 .wm-film figcaption b span { margin-left: 6px; color: #ffc277; font-size: 12px; font-weight: 600; letter-spacing: .18em; }
 .wm-film figcaption > span { color: #a99a87; font-size: 14px; line-height: 1.7; }
 @media (hover: hover) and (pointer: fine) {
   .wm-film:hover .wm-film-frame { transform: translateY(-6px); border-color: #ffb34755; box-shadow: 0 40px 90px -40px #000, 0 0 60px -20px #ff9a3a55; }
 }
+@media (min-width: 761px) and (max-width: 1000px) { .wm-films-grid { grid-template-columns: repeat(2,minmax(0,1fr)); max-width: 640px; margin-left: auto; margin-right: auto; } }
 @media (max-width: 760px) {
   .wm-films { padding: 64px 0 72px; }
   .wm-films-inner > :not(.wm-films-grid) { padding: 0 24px; }
