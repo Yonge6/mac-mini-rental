@@ -93,4 +93,6 @@ writeFileSync(path.join(publicRoot,'llms-full.txt'),`# WodeMac — full guide te
 // Search engine ownership files. The production build copies only an allowlist of root files,
 // so they are written here, where the build runs. Removing one drops that verification.
 for (const name of ['google56101fb62f40fa0c.html']) writeFileSync(path.join(publicRoot, name), `google-site-verification: ${name}`);
+// Baidu site verification: keep this file or the Baidu webmaster account loses ownership.
+writeFileSync(path.join(publicRoot, 'baidu_verify_codeva-ljSG6HyjjY.html'), 'f641403df88a6252e226e6cb0159f5d4');
 console.log(`Generated ${guides.length} guides (${zhGuides.length} zh, ${enGuides.length} en), two directories, sitemap, llms.txt and llms-full.txt.`);
