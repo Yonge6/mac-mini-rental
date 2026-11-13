@@ -7,6 +7,7 @@ import "./pricing.css";
 import "./scenes.css";
 import "./devices.css";
 import "./motion.css";
+import "./films.css";
 import "./commerce/commerce.css";
 
 function MountedApp() {

@@ -342,6 +342,13 @@ function RentalApp() {
   useSourceInteractions(root);
   useEffect(() => (!checkout && root.current ? initMotion(root.current) : undefined), [checkout]);
   useEffect(() => {
+    // Brand films: starting one pauses the others.
+    const node = root.current; if (checkout || !node) return undefined;
+    const onPlay = event => { if (event.target.matches?.('.wm-film-video')) node.querySelectorAll('.wm-film-video').forEach(video => { if (video !== event.target) video.pause(); }); };
+    node.addEventListener('play', onPlay, true);
+    return () => node.removeEventListener('play', onPlay, true);
+  }, [checkout]);
+  useEffect(() => {
     sessionStorage.setItem('rental-interval',value);
     if (!checkout) { const url = new URL(location.href); url.searchParams.set('interval', value); history.replaceState(null, '', url); }
     if (!checkout) {
