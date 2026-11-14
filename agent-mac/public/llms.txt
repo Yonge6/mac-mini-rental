@@ -10,6 +10,7 @@ This file is a maintained document directory, not a promise of search indexing o
 - Typical users: teams shipping products overseas; game, short-drama and AI video studios running scripts and builds overnight; students and parents; AI teachers and their classes.
 - Access: the same Mac can be controlled from a phone or iPad (browser) and a computer (WodeMac Mac App or browser); tasks keep running when devices change or disconnect.
 - Operator: WodeMac Inc, California, USA.
+- Brand films: 15 short vertical films (Mandarin, with English lines on screen) play on the homepage at https://wodemac.com/#films; they are creative illustrations, not customer footage.
 - Full text of the guides: https://wodemac.com/llms-full.txt
 
 ## Official information
