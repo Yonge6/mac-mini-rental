@@ -1,12 +1,13 @@
 /* Brand films: a horizontal row of vertical shorts after the belief section, newest first. */
-.wm-films { position: relative; padding: clamp(72px,9vw,130px) 4.4% clamp(80px,10vw,140px); }
-.wm-films-inner { max-width: 1120px; margin: 0 auto; text-align: center; }
+.wm-films { position: relative; padding: clamp(72px,9vw,130px) 0 clamp(80px,10vw,140px); }
+.wm-films-inner { text-align: center; }
+.wm-films-inner > :not(.wm-films-grid) { max-width: 1120px; margin-left: auto; margin-right: auto; padding: 0 4.4%; box-sizing: content-box; }
 .wm-films h2 { margin-top: 16px; font-size: clamp(32px,4.4vw,56px); font-weight: 800; line-height: 1.15; letter-spacing: -.03em; color: #f4eee1; text-wrap: balance; }
-.wm-films-lead { max-width: 680px; margin: 20px auto 0; color: #c6b8a6; font-size: clamp(15px,1.4vw,18px); line-height: 1.8; text-wrap: balance; }
-.wm-films-grid { display: flex; gap: clamp(16px,2vw,26px); margin-top: clamp(32px,4vw,56px); padding: 8px 2px 14px; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: thin; scrollbar-color: #ffb34755 transparent; text-align: left; }
+.wm-films-inner > .wm-films-lead { max-width: 680px; margin: 20px auto 0; color: #c6b8a6; font-size: clamp(15px,1.4vw,18px); line-height: 1.8; text-wrap: balance; }
+.wm-films-grid { display: flex; gap: clamp(16px,2vw,26px); margin-top: clamp(32px,4vw,56px); padding: 8px 4.4% 14px; scroll-padding: 0 4.4%; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: thin; scrollbar-color: #ffb34755 transparent; text-align: left; }
 .wm-films-grid::-webkit-scrollbar { height: 6px; }
 .wm-films-grid::-webkit-scrollbar-thumb { background: #ffb34755; border-radius: 3px; }
-.wm-film { flex: 0 0 calc((100% - 3 * clamp(16px,2vw,26px)) / 4); min-width: 220px; scroll-snap-align: start; }
+.wm-film { flex: 0 0 clamp(220px,17vw,340px); scroll-snap-align: start; }
 .wm-films-nav { display: flex; justify-content: center; gap: 14px; margin-top: 22px; }
 .wm-films-arrow { width: 46px; height: 46px; border-radius: 50%; border: 1px solid #ffb34755; background: #1a130e; color: #ffc277; font-size: 26px; line-height: 1; cursor: pointer; transition: background .3s, border-color .3s; }
 .wm-films-arrow:hover { background: #2a1d13; border-color: #ffb347aa; }
@@ -21,7 +22,7 @@
 @media (hover: hover) and (pointer: fine) {
   .wm-film:hover .wm-film-frame { transform: translateY(-6px); border-color: #ffb34755; box-shadow: 0 40px 90px -40px #000, 0 0 60px -20px #ff9a3a55; }
 }
-@media (min-width: 761px) and (max-width: 1000px) { .wm-film { flex-basis: calc((100% - 2 * clamp(16px,2vw,26px)) / 3); } }
+@media (min-width: 761px) and (max-width: 1000px) { .wm-film { flex-basis: 27vw; } }
 @media (max-width: 760px) {
   .wm-films { padding: 64px 0 72px; }
   .wm-films-inner > :not(.wm-films-grid) { padding: 0 24px; }
