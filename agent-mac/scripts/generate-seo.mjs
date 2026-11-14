@@ -2,8 +2,7 @@ import { mkdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { BILLING_PLANS, SALE_INTERVALS, billingLabel } from '../src/commerce/plans.mjs';
-import { guides, siteUrl, verifiedDate, homeUpdated, sourceLinks, sourceSets, facts } from './seo-content.mjs';
-import { readFilms } from './films.mjs';
+import { guides, siteUrl, verifiedDate, homeUpdated, sourceLinks, sourceSets, facts, readFilms } from './seo-content.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const publicRoot = path.join(root, 'public');
