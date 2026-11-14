@@ -602,6 +602,7 @@ const filmRoot = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..'
 
 // Length in seconds and the date each film went on the site. Add an entry when a film is added.
 const filmMeta = {
+  factory: [22, '2026-11-14'],
   baton: [15, '2026-11-13'], rings: [15, '2026-11-13'], shovel: [15, '2026-11-13'], light: [15, '2026-11-13'],
   bet: [15, '2026-11-13'], knife: [15, '2026-11-13'], first: [15, '2026-11-13'], bolt: [24, '2026-11-13'],
   pillar: [24, '2026-11-13'], pier: [24, '2026-11-13'], camp: [24, '2026-11-13'], pad: [24, '2026-11-13'],
