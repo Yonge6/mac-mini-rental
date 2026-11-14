@@ -2,8 +2,7 @@ import { readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { BILLING_PLANS, SALE_INTERVALS, PLAN_DISCOUNTS, billingLabel, dailyCents } from '../src/commerce/plans.mjs';
-import { siteUrl, homeUpdated, facts } from './seo-content.mjs';
-import { readFilms, isoDuration } from './films.mjs';
+import { siteUrl, homeUpdated, facts, readFilms, isoDuration } from './seo-content.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const output = path.join(root, 'dist/client');
