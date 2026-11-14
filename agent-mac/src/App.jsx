@@ -345,8 +345,16 @@ function RentalApp() {
     // Brand films: starting one pauses the others.
     const node = root.current; if (checkout || !node) return undefined;
     const onPlay = event => { if (event.target.matches?.('.wm-film-video')) node.querySelectorAll('.wm-film-video').forEach(video => { if (video !== event.target) video.pause(); }); };
+    // Arrow buttons scroll the film row by most of its visible width.
+    const onClick = event => {
+      const button = event.target.closest?.('[data-film-scroll]'); if (!button) return;
+      const grid = node.querySelector('.wm-films-grid'); if (!grid) return;
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      grid.scrollBy({ left: Number(button.dataset.filmScroll) * grid.clientWidth * .85, behavior: reduce ? 'auto' : 'smooth' });
+    };
     node.addEventListener('play', onPlay, true);
-    return () => node.removeEventListener('play', onPlay, true);
+    node.addEventListener('click', onClick);
+    return () => { node.removeEventListener('play', onPlay, true); node.removeEventListener('click', onClick); };
   }, [checkout]);
   useEffect(() => {
     sessionStorage.setItem('rental-interval',value);
