@@ -1,7 +1,7 @@
 export const siteUrl = 'https://wodemac.com';
 export const verifiedDate = '2026-11-08';
 // Date of the latest homepage content change; drives the homepage lastmod and dateModified.
-export const homeUpdated = '2026-11-12';
+export const homeUpdated = '2026-11-14';
 export const guides = [
   {
     slug: 'mac-mini-rental',
