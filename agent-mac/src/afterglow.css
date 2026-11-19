@@ -379,6 +379,8 @@ a:focus-visible, button:focus-visible, input:focus-visible { outline-color: #ffa
 :root { --font-ui-sans: "Geist Variable", -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; --font-ui-heading: var(--font-ui-sans); --font-ui-mono: "Geist Mono Variable", ui-monospace, monospace; --wm-ease: cubic-bezier(.22,1,.36,1); }
 body, .site-home { font-family: var(--font-ui-sans); }
 .afterglow-hero h1 { width: fit-content; background: linear-gradient(90deg, #fff8ec, #bfb09a); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.afterglow-hero h1 .wm-h1-fit { display: block; font-size: .76em; }
+.afterglow-hero:lang(en) h1 .wm-h1-fit { font-size: .8em; }
 .site-subpage-main { padding-top: 0; }
 .afterglow-hero-art { top: 0; }
 html { scroll-padding-top: 96px; }
