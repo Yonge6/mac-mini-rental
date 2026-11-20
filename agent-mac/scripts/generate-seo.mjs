@@ -12,7 +12,7 @@ const esc = value => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&
 const langOf = guide => guide.lang === 'en' ? 'en' : 'zh';
 const urlFor = guide => `${siteUrl}/guides/${guide.slug}.html`;
 // A guide written after the last full review carries its own date.
-const dateOf = guide => [verifiedDate, guide.published].filter(Boolean).sort().pop();
+const dateOf = guide => [verifiedDate, guide.published, guide.updated].filter(Boolean).sort().pop();
 const latest = [homeUpdated, ...guides.map(dateOf)].sort().pop();
 const money = cents => '$' + (cents / 100).toLocaleString('en-US', { minimumFractionDigits: cents % 100 ? 2 : 0 });
 
