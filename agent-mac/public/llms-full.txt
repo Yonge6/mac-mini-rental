@@ -56,6 +56,60 @@ WodeMac 提供位于美国加州、由一位客户独享的实体 Mac mini，用
 
 ---
 
+## Mac mini rental in California: a dedicated hosted Mac for Claude Code, Codex and Xcode
+
+URL: https://wodemac.com/guides/mac-mini-rental-california.html
+
+WodeMac rents physical M6 Mac minis hosted in California. Each machine goes to one customer, stays online 24/7, ships with Claude Code, Codex and a remote desktop app preinstalled, and gives you admin rights. Plans run from $169 a month to $1,723.80 a year, paid upfront for the machine only. Your Claude and OpenAI accounts, subscriptions and usage stay separate and stay yours. Delivery is usually within 24 hours and no later than 3 business days.
+
+### A whole machine, not a shared VM
+
+Each Mac mini is rented to a single customer and is not split between customers. You reach it through the preinstalled WodeMac Remote Screen app, install whatever your project needs with admin rights, and can order several for a team. The current machine is an M6 Mac mini with a 12-core CPU, 16GB memory and 256GB storage.
+
+Dedicated does not mean nobody else can ever reach it: WodeMac and the hosting provider keep administrative access for maintenance and troubleshooting. Before putting customer code, secrets or business data on it, agree on access, backups and what happens to the data when the rental ends.
+
+### What people use it for
+
+- A hosted Mac for Claude Code or Codex that keeps working after you close your laptop.
+- Building and testing iOS and Mac apps with Xcode when your own computer runs Windows or Linux.
+- Long builds, test suites, automation scripts and scheduled jobs that need a machine which never sleeps.
+- One machine per developer for a team, so tasks, accounts and permissions stay apart.The service covers software development and testing. A Mac in California is not a substitute for eligibility: Claude Code and Codex run on your own or your company's accounts, under each provider's rules on regions, age, payment and use.
+
+### Pricing
+
+Prices are per Mac, in US dollars, paid once for the chosen period. They cover the machine only, not an AI subscription or model credits.
+
+- Monthly: $169 for 1 month(s)
+- Quarterly: $481.65 for 3 month(s)
+- Half-yearly: $912.60 for 6 month(s)
+- Yearly: $1,723.80 for 12 month(s)
+Compared with paying monthly, the quarterly plan saves $25.35, half-yearly $101.40 and yearly $304.20. Yearly orders of 5 or more Macs get a further 2.5% off the first year; renewals are at the yearly price.
+
+### Checklist before you order
+
+- Pick one real development task and decide who signs it off.
+- Check that the CPU, memory, disk, macOS version and dependencies fit that project.
+- Try the remote connection from your own network; latency to California depends on where you are.
+- Confirm your Claude, OpenAI or other tool accounts, subscriptions and eligibility.
+- Check the charge, billing start, delivery time, renewal and refund terms.
+- Decide how code, permissions, backups and end-of-rental data are handled.Delivery is usually within 24 hours and no later than 3 business days, and billing starts on the day of payment. A submitted order is not a payment or a delivery; the current order page and terms take precedence.
+
+### FAQ
+
+**Does the rental include a Claude or ChatGPT subscription?**
+No. The price covers the machine only. You sign in to Claude Code and Codex with your own accounts and pay the providers directly.
+
+**Is the Mac shared with other customers?**
+No. Each physical Mac mini is rented to one customer. WodeMac and the hosting provider keep admin access for maintenance.
+
+**How fast is delivery?**
+Usually within 24 hours, and no later than 3 business days after payment.
+
+**Can I start with one Mac?**
+Yes. Start with one machine and one real task, check the setup and connection, then add more for the team if it works.
+
+---
+
 ## 用远程 Mac 运行 Claude Code：准备与验收指南
 
 URL: https://wodemac.com/guides/claude-code-remote-mac.html
@@ -495,11 +549,11 @@ Claude Code 官方提供三种 macOS 安装方式：原生安装脚本 curl -fsS
 
 原生安装脚本是官方推荐的方式，装好后会在后台自动更新：
 
-curl -fsSL https://claude.ai/install.sh | bash用 Homebrew 安装，之后需要手动 brew upgrade claude-code 更新：
+curl -fsSL https://claude.ai/install.sh | bash用 Homebrew 安装。claude-code 跟随稳定通道，通常比最新版晚一周左右；想第一时间拿到新版本可以装 claude-code@latest。Homebrew 安装不会自动更新，需要手动 brew upgrade claude-code：
 
-brew install --cask claude-code用 npm 安装需要 Node.js 22 以上，不要加 sudo：
+brew install --cask claude-code用 npm 安装需要 Node.js 22 以上，不要加 sudo。npm 包装的是同一个原生程序，升级时同样运行这条命令：
 
-npm install -g @anthropic-ai/claude-code安装完成后新开一个终端，运行 claude --version 看到版本号即成功；claude doctor 可以检查安装和配置状态。安装方式和要求会更新，执行前以 Claude Code 官方文档为准。
+npm install -g @anthropic-ai/claude-code@latest安装完成后新开一个终端，运行 claude --version 看到版本号即成功；claude doctor 可以检查安装和配置状态。安装方式和要求会更新，执行前以 Claude Code 官方文档为准。
 
 ### 首次登录和第一个任务
 
@@ -530,6 +584,63 @@ WodeMac 交付的独享 Mac mini 已经装好 Claude Code 和 Codex，管理员�
 
 **WodeMac 的 Mac mini 还需要自己装 Claude Code 吗？**
 不需要。交付时已预装，用你自己的账号登录即可；需要更新时运行 claude update。
+
+---
+
+## How to install Claude Code on a Mac: native installer, Homebrew or npm
+
+URL: https://wodemac.com/guides/install-claude-code-on-mac.html
+
+Claude Code installs on macOS 13 or later in three official ways: the native installer (curl -fsSL https://claude.ai/install.sh | bash, recommended and self-updating), Homebrew (brew install --cask claude-code) or npm (npm install -g @anthropic-ai/claude-code@latest, Node.js 22+). It needs 4GB of RAM and an internet connection. To sign in you need a Claude Pro, Max, Ultra, Team or Enterprise plan or a Claude Console account; the free plan does not include Claude Code. A WodeMac Mac mini arrives with Claude Code preinstalled, so you only sign in.
+
+### Requirements and accounts
+
+According to the official setup docs, Claude Code runs on macOS 13.0 or later with 4GB+ RAM on an x64 or ARM64 processor, and it needs an internet connection. The agent itself is light because the model runs on Anthropic's servers; what uses your Mac's resources is your own project's builds and tests.
+
+To sign in you need a Claude Pro, Max, Ultra, Team or Enterprise subscription, or a Claude Console account with API credits. The free claude.ai plan does not include Claude Code. Your account must be your own or your company's and follow Anthropic's supported-country rules; where the Mac is located does not change that. WodeMac does not provide, hold or share Claude accounts.
+
+### Three official install methods
+
+The native installer is the recommended method and updates itself in the background:
+
+curl -fsSL https://claude.ai/install.sh | bashHomebrew has two casks: claude-code follows the stable channel, usually about a week behind, and claude-code@latest gets each release as it ships. Homebrew installs do not update themselves; run brew upgrade claude-code.
+
+brew install --cask claude-codenpm needs Node.js 22 or later and installs the same native binary. Do not use sudo; run the same command again to upgrade:
+
+npm install -g @anthropic-ai/claude-code@latestOpen a new terminal and run claude --version. If the shell cannot find claude, the install directory is not on your PATH yet. claude doctor prints install health, settings errors and update status without starting a session.
+
+### First sign-in and first task
+
+- Open a terminal in your project directory and run claude.
+- Sign in through the browser with your Claude account. If ANTHROPIC_API_KEY is set and you approve it, Claude Code uses the key instead.
+- Confirm that you trust the directory to start the session.
+- Ask it to run the project's existing build or tests first, then give it one small, clearly scoped task.
+- Review the diff before committing, and say which directories and secrets it must not touch.Type /login inside a session to switch accounts, and claude update to update by hand.
+
+### On a WodeMac Mac mini
+
+A WodeMac dedicated Mac mini comes with Claude Code and Codex installed and admin rights for you, so you can skip the install. Open the Mac through the preinstalled remote desktop app, open a terminal in your project and run claude, then sign in with your own account.
+
+The Mac stays online 24/7 in California, which suits long tasks: keep sessions in tmux or continue them from your phone with Remote Control. The price covers the machine only; Claude usage is billed by Anthropic to your account.
+
+- Monthly: $169 for 1 month(s)
+- Quarterly: $481.65 for 3 month(s)
+- Half-yearly: $912.60 for 6 month(s)
+- Yearly: $1,723.80 for 12 month(s)
+
+### FAQ
+
+**Can I use Claude Code with a free Claude account?**
+No. The official docs say Claude Code needs a Pro, Max, Ultra, Team, Enterprise or Console account; the free claude.ai plan does not include it.
+
+**Which install method should I use on a Mac?**
+The native installer, unless you manage tools with Homebrew or npm. It is the recommended method and the only one that updates itself in the background.
+
+**How do I check that Claude Code installed correctly?**
+Open a new terminal and run claude --version. For a fuller check of install health and settings, run claude doctor.
+
+**Do I need to install Claude Code on a WodeMac Mac mini?**
+No. It is preinstalled at delivery; sign in with your own account and run claude update when you want the latest version.
 
 ---
 
@@ -671,7 +782,9 @@ git worktree add ../myapp-feature-a -b feature-a
 git worktree add ../myapp-fix-login -b fix-login
 git worktree list任务完成、分支合并后删除目录：
 
-git worktree remove ../myapp-feature-aClaude Code 和 Codex 都能在 worktree 目录里正常工作；各自的项目配置文件（如 CLAUDE.md、AGENTS.md）随分支一起存在。
+git worktree remove ../myapp-feature-aClaude Code 还内置了这一步：claude --worktree feature-a（简写 -w）会在仓库根目录的 .claude/worktrees/feature-a 下新建 worktree 和名为 worktree-feature-a 的分支，并直接在里面开会话；换个名字在另一个终端再运行一次，就是第二个互不干扰的会话。仓库至少要有一次提交，第一次在这个目录用 Claude 时要先确认信任。退出时如果 worktree 里有改动，Claude 会问你保留还是删除。.env 这类被 git 忽略的文件不会自动带过去，可以写进 .worktreeinclude。建议把 .claude/worktrees/ 加进 .gitignore。
+
+Codex 用上面的 git worktree 命令手动建目录即可；各自的项目配置文件（如 CLAUDE.md、AGENTS.md）随分支一起存在。
 
 ### 每个任务一个终端，用 tmux 保持
 
@@ -710,6 +823,66 @@ tmux ls                    # 列出所有会话Claude Code 的会话还可以用
 
 **远程桌面断开后，终端里的任务会停吗？**
 放在 tmux 里的会话不会随远程桌面断开而停止，重新连接后 tmux attach 即可接着看。
+
+---
+
+## Run several Claude Code or Codex sessions on one Mac with git worktrees
+
+URL: https://wodemac.com/guides/parallel-claude-code-sessions-mac.html
+
+Give every parallel agent its own git worktree: a separate directory on its own branch that shares the repository history. Claude Code does this for you with claude --worktree name (or -w), which creates .claude/worktrees/name on a branch called worktree-name; run it again with another name in a second terminal for a second isolated session. For Codex, create worktrees with git worktree add. Keep each session in tmux so it survives disconnects. The agents are light; the real limits are the memory your builds, tests and simulators use at the same time, and your account's usage limits.
+
+### Why two agents in one directory collide
+
+Two agents editing the same files and the same Git index overwrite each other and mix their commits. A git worktree gives each task its own checkout and branch while sharing history and remotes, so each agent only touches its own directory.
+
+Claude Code has this built in:
+
+claude --worktree feature-auth
+claude -w fix-login      # in a second terminalThe repository needs at least one commit. The first time you use Claude in a directory, run claude there once to accept the trust prompt, or --worktree exits with an error. A new worktree is a fresh checkout, so install dependencies in it; list gitignored files such as .env in a .worktreeinclude file to copy them in automatically. Add .claude/worktrees/ to .gitignore.
+
+### Codex and other tools: plain git worktree
+
+git worktree add ../myapp-feature-a -b feature-a
+git worktree add ../myapp-fix-login -b fix-login
+git worktree list
+git worktree remove ../myapp-feature-aStart Codex inside each directory. Project instruction files such as CLAUDE.md and AGENTS.md travel with the branch, so every worktree gets the same rules.
+
+### Keep sessions alive with tmux
+
+When a remote desktop or SSH connection drops, processes in a plain terminal can stop with it. Put each agent in its own tmux session and it keeps running:
+
+tmux new -s feature-a      # run claude or codex inside
+# press Ctrl-b, then d, to detach
+tmux attach -t feature-a   # come back later
+tmux ls                    # list sessionsFor Claude Code, Remote Control server mode can also host several sessions from one process, each in its own worktree with claude remote-control --spawn worktree, and you can follow them from your phone.
+
+### Limits and clean-up
+
+- The agents are light: Claude Code needs 4GB+ RAM and the model runs in the cloud.
+- Your project is heavy: several npm installs, xcodebuild runs, Docker containers or simulators at once strain memory and disk. Start with two sessions and check Activity Monitor before adding more.
+- Usage: Claude and ChatGPT plans have usage limits, and parallel sessions use them up faster; API keys are billed per use.When you exit a worktree session, Claude Code removes a clean worktree (it asks first for a named session) and asks whether to keep or remove one that has changes. Merge each branch through a reviewed pull request after the full test suite passes; do not let agents push to the main branch.
+
+Many teams give each developer a dedicated Mac so tasks, accounts and permissions stay apart. A WodeMac M6 Mac mini comes with Claude Code and Codex installed, admin rights and 24/7 uptime.
+
+- Monthly: $169 for 1 month(s)
+- Quarterly: $481.65 for 3 month(s)
+- Half-yearly: $912.60 for 6 month(s)
+- Yearly: $1,723.80 for 12 month(s)
+
+### FAQ
+
+**Can two Claude Code sessions work on the same repository at once?**
+Yes, if each runs in its own git worktree. claude --worktree name creates one and starts the session in it; two sessions in the same directory overwrite each other.
+
+**How many agents can one Mac mini run?**
+There is no fixed number. The agents are light; the limits are the memory used by builds, tests and simulators running together, and your account's usage limits. Start with two and watch Activity Monitor.
+
+**Does --worktree work with Codex?**
+No, it is a Claude Code flag. For Codex, create the worktrees yourself with git worktree add and start Codex in each directory.
+
+**Do tasks stop when the remote desktop disconnects?**
+Not if they run inside tmux. Reconnect and run tmux attach to pick them up.
 
 ---
 
