@@ -1,4 +1,4 @@
-name: Deploy GitHub Pages
+name: Frontend checks
 
 on:
   push:
@@ -7,10 +7,6 @@ on:
 
 permissions:
   contents: read
-
-concurrency:
-  group: github-pages
-  cancel-in-progress: false
 
 jobs:
   build:
@@ -22,32 +18,12 @@ jobs:
           node-version: '22'
           cache: npm
           cache-dependency-path: agent-mac/package-lock.json
-      - name: Configure Pages
-        uses: actions/configure-pages@v5
       - name: Install dependencies
         working-directory: agent-mac
         run: npm ci --no-audit --no-fund
-      - name: Build preview
+      - name: Build
         working-directory: agent-mac
         run: npm run build
       - name: Verify hosting output
         working-directory: agent-mac
         run: npm run test:sites && npm run test:commerce && npm run test:studio && npm run test:seo
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v4
-        with:
-          path: agent-mac/dist/client
-
-  deploy:
-    needs: build
-    permissions:
-      pages: write
-      id-token: write
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
-      - name: Publish GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
