@@ -102,7 +102,7 @@
 /* M6 vs M4 */
 @property --wm-n{syntax:"<integer>";inherits:false;initial-value:0}
 @property --wm-spin{syntax:"<angle>";inherits:false;initial-value:0deg}
-.wm-compare-stats{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:14px;margin:0;padding:0;list-style:none}
+.wm-compare-stats{display:grid;grid-template-columns:1.25fr 1fr;gap:14px;margin:0;padding:0;list-style:none}
 .wm-compare-stats>li{position:relative;overflow:hidden;padding:26px;border:1px solid #bca17a38;border-radius:18px;background:linear-gradient(155deg,#231d15,#14100b 75%);transition:transform .5s var(--wm-ease,ease),border-color .3s ease,box-shadow .3s ease}
 .wm-compare-stats>li:hover{transform:translateY(-4px);border-color:#ffb34780;box-shadow:0 24px 50px -24px #ffb34766}
 .wm-compare-stats>li>div{position:relative;z-index:1}
