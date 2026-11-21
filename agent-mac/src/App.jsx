@@ -5,12 +5,20 @@ import sourceZh from './source.html?raw';
 import sourceEn from './source.en.html?raw';
 import {CommerceProvider, appHref, isDemo, onMarketingHost} from './commerce/context.jsx';
 import {VIEWS} from './commerce/core.mjs';
-import {BILLING_PLANS,BULK_MIN_QUANTITY,MAX_QUANTITY,PLAN_DISCOUNTS,normalizeInterval,dailyCents,monthlyEquivalentCents,orderAmounts,readQuantity,saveQuantity} from './commerce/plans.mjs';
+import {BILLING_PLANS,BULK_MIN_QUANTITY,MAX_QUANTITY,PLAN_DISCOUNTS,normalizeInterval,dailyCents,monthlyEquivalentCents,orderAmounts,rentalPriceSummary,readQuantity,saveQuantity} from './commerce/plans.mjs';
 import {AccountEntry, CommercePages, CheckoutAction} from './commerce/pages.jsx';
 const english = new URLSearchParams(location.search).get('lang') === 'en';
 const language = english ? 'en' : 'zh';
 const t = (zh, en) => english ? en : zh;
-const source = english ? sourceEn : sourceZh;
+const source = (english ? sourceEn : sourceZh).replace('{{RENTAL_PRICE_SUMMARY}}', rentalPriceSummary(english));
+
+function landingHref(lang, interval) {
+  const url = new URL(appHref(undefined, { interval }));
+  const landing = new URL(lang === 'en' ? 'en.html' : './', url);
+  landing.search = url.search;
+  landing.searchParams.delete('lang');
+  return landing.href;
+}
 
 const SourceMarkup = memo(forwardRef(function SourceMarkup(_, ref) { return <div ref={ref} dangerouslySetInnerHTML={{__html:source}} />; }));
 
@@ -365,11 +373,11 @@ function RentalApp() {
       setPriceSlots([...root.current.querySelectorAll('[data-hero-price-slot]')]);
       setMenuSlots([...root.current.querySelectorAll('[data-menu-slot]')]);
       root.current.querySelectorAll('[data-affiliate-link]').forEach(a => { a.href=appHref('affiliate'); });
-      root.current.querySelectorAll('[data-language]').forEach(a => { a.href=appHref(undefined,{lang:a.dataset.language,interval:value}); });
-      root.current.querySelector('.caldock-brand').href=appHref();
+      root.current.querySelectorAll('[data-language]').forEach(a => { a.href=landingHref(a.dataset.language, value); });
+      root.current.querySelector('.caldock-brand').href=landingHref(language, value);
     }
   }, [value,checkout]);
-  useEffect(() => { document.title = checkout ? t('付款 · WodeMac','Checkout · WodeMac') : t('美国加州 Mac mini 租赁与远程开发环境 | WodeMac','California Mac mini Rental for Remote Development | WodeMac'); document.documentElement.lang = english ? 'en' : 'zh-CN'; }, [checkout]);
+  useEffect(() => { document.title = checkout ? t('付款 · WodeMac','Checkout · WodeMac') : t('美国加州 Mac mini 租赁：预装 Claude Code 与 Codex | WodeMac','Mac mini Rental for Claude Code & Codex, in California | WodeMac'); document.documentElement.lang = english ? 'en' : 'zh-CN'; }, [checkout]);
   if (checkout) return <Checkout value={value} />;
   return <>
     <SourceMarkup ref={root} />
