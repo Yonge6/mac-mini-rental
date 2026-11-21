@@ -12,8 +12,8 @@ export function rentalPriceSummary(english = false) {
     return english ? `${price} ${billingLabel(key, true).toLowerCase()}` : `${billingLabel(key)} ${price}`;
   });
   return english
-    ? `Per Mac, paid upfront in USD: ${amounts.join(', ')}. Rental covers the machine. Claude and OpenAI accounts, subscriptions and usage charges are separate.`
-    : `每台按所选周期一次支付（美元）：${amounts.join('、')}。租金包含整台 Mac，Claude 和 OpenAI 账号、订阅及用量费用另计。`;
+    ? `Per Mac, paid upfront in USD: ${amounts.join(', ')}. Rental covers the machine. Third-party accounts, subscriptions and usage charges are separate.`
+    : `每台按所选周期一次支付（美元）：${amounts.join('、')}。租金包含整台 Mac，第三方账号、订阅及用量费用另计。`;
 }
 export function billingEndsAt(start,interval){
   const date=new Date(start),plan=BILLING_PLANS[knownInterval(interval)];

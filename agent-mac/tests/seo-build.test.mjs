@@ -16,8 +16,8 @@ const guideFiles=['index.html','en.html',...guides.map(guide=>guide.slug+'.html'
 
 test('both built homepages contain the real landing content before JavaScript',()=>{
   for(const [file,lang,heading,canonical] of [
-    ['index.html','zh-CN','美国 Mac，','https://wodemac.com/'],
-    ['en.html','en','A US Mac,','https://wodemac.com/en.html'],
+    ['index.html','zh-CN','美国云端 Mac，','https://wodemac.com/'],
+    ['en.html','en','A US cloud Mac,','https://wodemac.com/en.html'],
   ]){
     const html=read(file);
     assert.ok(html.length>30000);
@@ -49,7 +49,7 @@ test('both built homepages contain the real landing content before JavaScript',(
 });
 
 function englishDescription(file){
-  return file==='en.html'?'Dedicated Mac mini rentals in California for software development':'WodeMac 提供美国加州独享 Mac mini 租赁';
+  return file==='en.html'?'Rent a dedicated physical Mac mini hosted in California for iOS and macOS development':'WodeMac 提供美国加州独享的云端 Mac mini 实体机';
 }
 
 test('pre-rendered payment links preserve period and language and show real upfront charges',()=>{
@@ -71,7 +71,6 @@ test('guides are static, internally reachable, and their FAQ data matches visibl
     assert.ok(html.includes(english?'<html lang="en">':'<html lang="zh-CN">'));
     assert.ok(html.includes('name="description"'));
     assert.ok(html.includes('https://wodemac.com/guides/'+(file==='index.html'?'':file)));
-    if(/claude|codex|ios/.test(file))assert.ok(/Claude Code|Codex/.test(html));
     assert.ok(!html.includes('{{PRICE_TABLE}}'));
     assert.ok(!html.includes('fonts.googleapis.com'));
     const visible=text(html);
@@ -132,10 +131,7 @@ test('sitemap describes only published content paths and robots exposes it',()=>
     assert.ok(existsSync(path.join(build,url.pathname.endsWith('/')?url.pathname+'index.html':url.pathname)),url.pathname);
   }
   assert.ok(read('robots.txt').includes('Sitemap: https://wodemac.com/sitemap.xml'));
-  for(const file of guideFiles.filter(file=>file!=='index.html'&&file!=='en.html'))assert.ok(read('llms.txt').includes('/guides/'+file));
-  const full=read('llms-full.txt');
-  for(const guide of guides)assert.ok(full.includes(guide.answer),guide.slug);
-  assert.ok(!full.includes('{{PRICE_TABLE}}'));
+  for(const file of guideFiles)assert.ok(sitemap.includes('https://wodemac.com/guides/'+(file==='index.html'?'':file)),file);
 });
 
 test('public language links point to matching static pages, including bilingual legal pages', () => {
@@ -172,11 +168,15 @@ test('rental offers include the charge and term without inventing stock', () => 
   }
 });
 
-test('full guide text keeps table cells, commands and review dates readable', () => {
-  const full = read('llms-full.txt');
-  assert.match(full, /\| 月付 \| \$169 \| 1 个月 \|/);
-  assert.match(full, /\| Half-yearly \| \$912\.60 \| 6 months \|/);
-  assert.match(full, /\| Item \| Linux VPS \| Dedicated Mac mini \|/);
-  assert.match(full, /\`\`\`\ngit worktree add[^\n]+\ngit worktree add/);
-  assert.match(full, /mac-mini-rental-california\.html\nReviewed: 2026-11-20/);
+// Owner decision (2026-11-21): the public site is positioned as a cloud Mac and carries no AI references.
+const AI_TERMS=/\bAI\b|人工智能|智能体|大模型|\bLLMs?\b|(?<!User-)\bagents?\b|claude|anthropic|codex|openai|chatgpt|\bGPT|deepseek|gemini|opencode|copilot|llms(?:-full)?\.txt|GPTBot|wodemac-film/i;
+test('public pages, guides, legal text, sitemap and robots carry no AI references', () => {
+  const files = ['index.html', 'en.html', '404.html', 'robots.txt', 'sitemap.xml', ...guideFiles.map(file => 'guides/' + file),
+    ...['privacy', 'terms'].flatMap(name => [`legal/${name}.html`, `legal/${name}.en.html`])];
+  for (const file of files) {
+    const body = read(file).replace(/<script type="module"[^>]*><\/script>/g, '');
+    assert.doesNotMatch(body, AI_TERMS, file);
+  }
+  assert.ok(!existsSync(path.join(build, 'llms.txt')));
+  assert.ok(!existsSync(path.join(build, 'llms-full.txt')));
 });

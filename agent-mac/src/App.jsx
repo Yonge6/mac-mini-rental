@@ -315,7 +315,7 @@ function Checkout({ value }) {
     <header className="checkout-nav"><a className="checkout-brand" href={appHref()}><img className="brand-wordmark" src="./assets/wodemac-logo-480.png" alt="WodeMac" /></a><a href={appHref(undefined,{interval:value})+'#pricing'}>{t("返回选择方案","Back to plans")}</a></header>
     <main className="checkout-main">
       <section className="checkout-details"><p className="checkout-eyebrow">{t("独享 MAC · 美国加州","DEDICATED MAC · CALIFORNIA")}</p><h1>{t("完成付款，","Your own Mac,")}<br />{t("开启你的独享 Mac。","one payment away.")}</h1>
-        <p className="checkout-lead">{t("M6 Mac mini，24 小时为你和 Agent 在线。","M6 Mac mini. Always on for you and your agents.")}</p>
+        <p className="checkout-lead">{t("M6 Mac mini，7×24 小时在线，开发、构建、测试都在云端。","M6 Mac mini. Online 24/7 for your development, builds and tests.")}</p>
         <div className="checkout-product"><img src="./assets/mac-portrait.svg" alt="M6 Mac mini" /><div><strong>{t("独享 Mac mini","Dedicated Mac mini")}</strong><span>{t("Apple M6 · 12 核 CPU · 12 核 GPU","Apple M6 · 12-core CPU · 12-core GPU")}</span><span>{t("16GB 统一内存 · 256GB SSD","16GB unified memory · 256GB SSD")}</span><span>{t("美国加州 · 整台独占","California, USA · Exclusively yours")}</span></div></div>
         <div className="checkout-service"><h2>{t("付款后会发生什么","What happens after payment")}</h2><p>{t("通常 24 小时内交付，最迟 3 个工作日，否则全额退款。计费从付款当天开始。","Usually delivered within 24 hours, and within 3 business days at the latest or you get a full refund. Billing starts on payment.")}</p><p>{t("你可以在账单页查看交付进度与登录信息。","Track delivery and sign-in details on your billing page.")}</p></div>
       </section>
@@ -350,21 +350,6 @@ function RentalApp() {
   useSourceInteractions(root);
   useEffect(() => (!checkout && root.current ? initMotion(root.current) : undefined), [checkout]);
   useEffect(() => {
-    // Brand films: starting one pauses the others.
-    const node = root.current; if (checkout || !node) return undefined;
-    const onPlay = event => { if (event.target.matches?.('.wm-film-video')) node.querySelectorAll('.wm-film-video').forEach(video => { if (video !== event.target) video.pause(); }); };
-    // Arrow buttons scroll the film row by most of its visible width.
-    const onClick = event => {
-      const button = event.target.closest?.('[data-film-scroll]'); if (!button) return;
-      const grid = node.querySelector('.wm-films-grid'); if (!grid) return;
-      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      grid.scrollBy({ left: Number(button.dataset.filmScroll) * grid.clientWidth * .85, behavior: reduce ? 'auto' : 'smooth' });
-    };
-    node.addEventListener('play', onPlay, true);
-    node.addEventListener('click', onClick);
-    return () => { node.removeEventListener('play', onPlay, true); node.removeEventListener('click', onClick); };
-  }, [checkout]);
-  useEffect(() => {
     sessionStorage.setItem('rental-interval',value);
     if (!checkout) { const url = new URL(location.href); url.searchParams.set('interval', value); history.replaceState(null, '', url); }
     if (!checkout) {
@@ -377,7 +362,7 @@ function RentalApp() {
       root.current.querySelector('.caldock-brand').href=landingHref(language, value);
     }
   }, [value,checkout]);
-  useEffect(() => { document.title = checkout ? t('付款 · WodeMac','Checkout · WodeMac') : t('美国加州 Mac mini 租赁：预装 Claude Code 与 Codex | WodeMac','Mac mini Rental for Claude Code & Codex, in California | WodeMac'); document.documentElement.lang = english ? 'en' : 'zh-CN'; }, [checkout]);
+  useEffect(() => { document.title = checkout ? t('付款 · WodeMac','Checkout · WodeMac') : t('美国加州云端 Mac mini 租用：整台独享，7×24 在线 | WodeMac','Dedicated Cloud Mac mini in California, Online 24/7 | WodeMac'); document.documentElement.lang = english ? 'en' : 'zh-CN'; }, [checkout]);
   if (checkout) return <Checkout value={value} />;
   return <>
     <SourceMarkup ref={root} />

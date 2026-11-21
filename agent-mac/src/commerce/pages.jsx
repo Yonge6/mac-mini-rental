@@ -31,7 +31,7 @@ export function LoginPage(){
   {!loading&&!capabilities?.providers.google&&!capabilities?.providers.apple&&<Notice>{unavailable?ct('登录服务暂时不可用，请稍后再试。','Sign-in is temporarily unavailable. Please try again later.'):ct('登录入口准备中，请稍后再试。','Sign-in is being prepared. Please try again later.')}</Notice>}
   {/^(localhost|127\.0\.0\.1)$/.test(location.hostname)&&<div className="cd-demo-entry"><span>{ct('先看看如何使用','TAKE A LOOK AROUND')}</span><div><button onClick={()=>beginDemo('customer')}>{ct('客户中心演示','Customer demo')}<ArrowRight size={16}/></button><button onClick={()=>beginDemo('admin')}>{ct('管理后台演示','Admin demo')}<ArrowRight size={16}/></button></div></div>}
   <a className="cd-back" href={appHref()}><ArrowLeft size={16}/>{ct('返回 WodeMac','Back to WodeMac')}</a>
- </section><section className="cd-login-art" aria-label={ct('美国加州的独享 Mac','Your dedicated Mac in California')}><img src="./assets/afterglow-hero.webp" alt=""/><div><p className="cd-eyebrow">CALIFORNIA / ALWAYS ON</p><h2>{ct('让灵感继续，','Keep the ideas coming.')}<br/>{ct('让 Agent 接着干。','Your agents keep working.')}</h2><span>M6 Mac mini · {ct('整台独占','Exclusively yours')}</span></div></section></main></div>;
+ </section><section className="cd-login-art" aria-label={ct('美国加州的独享 Mac','Your dedicated Mac in California')}><img src="./assets/afterglow-hero.webp" alt=""/><div><p className="cd-eyebrow">CALIFORNIA / ALWAYS ON</p><h2>{ct('让灵感继续，','Keep the ideas coming.')}<br/>{ct('让 Mac 接着干。','Your Mac keeps working.')}</h2><span>M6 Mac mini · {ct('整台独占','Exclusively yours')}</span></div></section></main></div>;
 }
 function useData(path){
  const {request}=useCommerce(),[data,setData]=useState(null),[loading,setLoading]=useState(true),[error,setError]=useState(null),[version,setVersion]=useState(0);
@@ -63,7 +63,7 @@ function ProfileAnswers(){
    {READINESS.map(([k,q])=><fieldset key={k} className="cd-setup-row" disabled={working}><legend>{ct(...q)}</legend><Chips options={[['yes',['有','Yes']],['no',['还没有','Not yet']]]} value={v[k]} onPick={val=>toggle(k,val)}/></fieldset>)}
    <h3 className="cd-q-group">{ct('你是怎么知道 WodeMac 的？','How did you find WodeMac?')}</h3>
    <Chips options={SOURCES} value={v.source} disabled={working} onPick={k=>set(v.source===k?{source:null,sourceDetail:null}:{source:k,sourceDetail:null})}/>
-   {details&&<div className="cd-q-sub"><span>{v.source==='ai'?ct('哪个 AI？','Which AI?'):ct('哪个平台？','Which platform?')}</span><Chips options={details} value={v.sourceDetail} disabled={working} onPick={k=>set({sourceDetail:v.sourceDetail===k?null:k})}/></div>}
+   {details&&<div className="cd-q-sub"><span>{ct('哪个平台？','Which platform?')}</span><Chips options={details} value={v.sourceDetail} disabled={working} onPick={k=>set({sourceDetail:v.sourceDetail===k?null:k})}/></div>}
    {v.source&&<label className="cd-q-note"><input maxLength={200} value={v.sourceNote} placeholder={ct(...NOTE_HINTS[v.source])} onChange={e=>set({sourceNote:e.target.value})}/></label>}
    <h3 className="cd-q-group">{ct('主要打算用来做什么？（可多选）','What will you mainly use it for? (choose any)')}</h3>
    <Chips multi options={USES} value={v.uses} disabled={working} onPick={k=>set({uses:v.uses.includes(k)?v.uses.filter(x=>x!==k):[...v.uses,k]})}/>
