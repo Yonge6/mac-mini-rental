@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 export const siteUrl = 'https://wodemac.com';
 export const verifiedDate = '2026-11-08';
 // Date of the latest homepage content change; drives the homepage lastmod and dateModified.
-export const homeUpdated = '2026-11-19';
+export const homeUpdated = '2026-11-21';
 export const guides = [
   {
     slug: 'mac-mini-rental',
@@ -676,6 +676,40 @@ export const sourceSets = {
     ['OpenAI Codex 官方文档', 'https://developers.openai.com/codex'],
   ],
 };
+
+// Describes standard per-machine rental terms. Live availability is managed by the stock API.
+export function rentalProduct(language, plans, intervals, label) {
+  const english = language === 'en';
+  const home = siteUrl + (english ? '/en.html' : '/');
+  return {
+    '@type': 'Product',
+    '@id': siteUrl + '/#mac-mini-rental',
+    name: english ? 'Dedicated M6 Mac mini rental in California' : '美国加州独享 M6 Mac mini 租赁',
+    description: facts[language],
+    image: siteUrl + '/assets/wodemac-og.jpg',
+    brand: { '@type': 'Brand', name: 'WodeMac' },
+    category: english ? 'Remote Mac rental' : '远程 Mac 租赁',
+    offers: intervals.map(interval => {
+      const { amountCents, months } = plans[interval];
+      const price = (amountCents / 100).toFixed(2);
+      return {
+        '@type': 'Offer',
+        name: label(interval, english),
+        businessFunction: 'http://purl.org/goodrelations/v1#LeaseOut',
+        price,
+        priceCurrency: 'USD',
+        priceSpecification: {
+          '@type': 'UnitPriceSpecification',
+          price,
+          priceCurrency: 'USD',
+          billingDuration: `P${months}M`,
+        },
+        url: home + '#pricing',
+        seller: { '@id': siteUrl + '/#organization' },
+      };
+    }),
+  };
+}
 
 export const facts = {
   zh: '美国加州独享实体 M6 Mac mini（12 核 CPU，16GB 内存，256GB 存储），7×24 小时在线；预装 Claude Code、Codex 与 WodeMac 远程屏幕，管理员权限归客户；通常 24 小时内交付，最迟 3 个工作日；价格只含机器，Claude 与 OpenAI 账号由客户自己持有。',

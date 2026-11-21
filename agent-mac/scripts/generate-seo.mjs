@@ -1,8 +1,8 @@
 import { mkdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { BILLING_PLANS, SALE_INTERVALS, billingLabel } from '../src/commerce/plans.mjs';
-import { guides, siteUrl, verifiedDate, homeUpdated, sourceLinks, sourceSets, facts, readFilms } from './seo-content.mjs';
+import { BILLING_PLANS, SALE_INTERVALS, billingLabel, rentalPriceSummary } from '../src/commerce/plans.mjs';
+import { guides, siteUrl, verifiedDate, homeUpdated, sourceLinks, sourceSets, facts, rentalProduct, readFilms } from './seo-content.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const publicRoot = path.join(root, 'public');
@@ -18,7 +18,7 @@ const money = cents => '$' + (cents / 100).toLocaleString('en-US', { minimumFrac
 
 const L = {
   zh: {
-    html: 'zh-CN', home: '../?lang=zh', pricing: '../?lang=zh#pricing', contact: '../?lang=zh#partners', index: './', indexUrl: siteUrl + '/guides/',
+    html: 'zh-CN', home: '../', pricing: '../#pricing', contact: '../#partners', index: './', indexUrl: siteUrl + '/guides/',
     indexName: '中文指南', skip: '跳到正文', back: '返回 WodeMac 官网', navLabel: '页面导航', navPricing: '配置与价格', navContact: '联系与合作',
     crumbLabel: '面包屑', crumbHome: '官网', eyebrow: 'WodeMac · 开发环境与合作指南', updated: '资料整理与核验', faq: '常见问题',
     sourcesHead: '信息来源与核对入口', sourcesNote: '本页根据核验日可读取的官网资料整理。配置、库存、价格及规则可能更新，实际以当前订单、确认报价和服务条款为准。它是选型与准备指南，不是已完成项目的客户案例。',
@@ -41,7 +41,6 @@ const priceTable = lang => { const t = L[lang]; return `<div class="table-wrap">
 const organization = { '@type':'Organization', '@id':`${siteUrl}/#organization`, name:'WodeMac', legalName:'WodeMac Inc', url:siteUrl+'/', email:'hustyy986@gmail.com', sameAs:['https://wodemac.vilesaint.com/'] };
 const aboutOf = guide => (guide.about ?? []).map(name => ({ '@type':'SoftwareApplication', name, applicationCategory:'DeveloperApplication' }));
 const relatedTo = guide => guides.filter(item => item.slug !== guide.slug && langOf(item) === langOf(guide)).map(item => [item, (item.about ?? []).filter(name => (guide.about ?? []).includes(name)).length + (item.slug === guide.pair ? 0 : 0)]).sort((a, b) => b[1] - a[1]).slice(0, 4).map(([item]) => item);
-const product = lang => ({ '@type':'Product', '@id':`${siteUrl}/#mac-mini-rental`, name: lang === 'en' ? 'Dedicated M6 Mac mini rental in California' : '美国加州独享 M6 Mac mini 租赁', description: facts[lang], image: siteUrl + '/assets/wodemac-og.jpg', brand:{'@type':'Brand', name:'WodeMac'}, category: lang === 'en' ? 'Remote Mac rental' : '远程 Mac 租赁', offers: SALE_INTERVALS.map(key => ({ '@type':'Offer', name: billingLabel(key, lang === 'en'), price: (BILLING_PLANS[key].amountCents / 100).toFixed(2), priceCurrency:'USD', availability:'https://schema.org/InStock', url: siteUrl + '/', seller:{'@id':organization['@id']} })) });
 
 function document({ lang, title, description, canonical, body, schema, alternate }) {
   const t = L[lang];
@@ -61,7 +60,7 @@ for (const guide of guides) {
     { '@type':'Article', '@id':canonical+'#article', headline:guide.title, description:guide.description, inLanguage:t.html, datePublished:guide.published ?? verifiedDate, dateModified:dateOf(guide), author:{'@id':organization['@id']}, publisher:{'@id':organization['@id']}, mainEntityOfPage:canonical, image:`${siteUrl}/assets/wodemac-og.jpg`, ...(guide.about ? { about: aboutOf(guide) } : {}) },
     { '@type':'BreadcrumbList', itemListElement:[ {'@type':'ListItem',position:1,name:'WodeMac',item:siteUrl+'/'}, {'@type':'ListItem',position:2,name:t.indexName,item:t.indexUrl}, {'@type':'ListItem',position:3,name:guide.title,item:canonical} ] },
     { '@type':'FAQPage', '@id':canonical+'#faq', mainEntity:guide.faqs.map(([name,text]) => ({'@type':'Question', name, acceptedAnswer:{'@type':'Answer',text}})) },
-    ...(guide.sections.some(([, html]) => html.includes('{{PRICE_TABLE}}')) ? [product(lang)] : []),
+    ...(guide.sections.some(([, html]) => html.includes('{{PRICE_TABLE}}')) ? [rentalProduct(lang, BILLING_PLANS, SALE_INTERVALS, billingLabel)] : []),
   ] };
   const siblings = relatedTo(guide);
   const paired = guide.pair ? guides.find(item => item.slug === guide.pair) : null;
@@ -76,7 +75,7 @@ const cards = (list, lang) => list.map(guide => `<a class="guide-card" href="./$
 const collection = (name, url, lang, list) => ({'@context':'https://schema.org','@graph':[organization,{'@type':'CollectionPage',url,name,inLanguage:L[lang].html,dateModified:verifiedDate,hasPart:list.map(g=>({'@type':'Article',name:g.title,url:urlFor(g)}))}]});
 
 const indexTitle = '美国 Mac mini 租赁、Claude Code 与 Codex 中文指南';
-writeFileSync(path.join(guideRoot,'index.html'), document({lang:'zh', title:indexTitle, description:'在美国加州独享 Mac mini 上使用 Claude Code 和 OpenAI Codex：选型、账号准备、两者对比、7×24 持续运行、iOS 开发，以及团队、老师和推广伙伴合作的中文指南。', canonical:siteUrl+'/guides/', alternate:{lang:'en',href:siteUrl+'/guides/en.html'}, body:`<header class="article-head"><p class="eyebrow">我的 Mac，在美国加州。</p><h1>${indexTitle}</h1><p class="answer">WodeMac 为软件开发与测试提供美国加州独享 Mac mini，预装 Claude Code 和 Codex。先确认实际项目、第三方账号资格与交付要求，再选择环境和合作方式。</p><p class="updated">资料核验：<time datetime="${verifiedDate}">${verifiedDate}</time> · 配置与规则以当前官网为准</p></header><div class="guide-cards directory">${cards(zhGuides,'zh')}</div><section class="directory-note"><h2>English guides</h2><p><a href="./en.html">Run Claude Code or Codex on a dedicated Mac mini in California ↗</a></p></section><section class="directory-note"><h2>这些指南回答什么？</h2><p>机器租金是否包含模型订阅、Claude Code 和 Codex 怎样准备与对比、远程连接要验证什么、老师怎样先跑通作品，以及推广佣金如何核对。各篇直接列出适用条件、具体准备和来源，不用示意内容冒充真实客户成果。</p><a href="../?lang=zh#partners">带着你的开发任务联系 WodeMac ↗</a></section>`, schema:collection(indexTitle, siteUrl+'/guides/', 'zh', zhGuides)}));
+writeFileSync(path.join(guideRoot,'index.html'), document({lang:'zh', title:indexTitle, description:'在美国加州独享 Mac mini 上使用 Claude Code 和 OpenAI Codex：选型、账号准备、两者对比、7×24 持续运行、iOS 开发，以及团队、老师和推广伙伴合作的中文指南。', canonical:siteUrl+'/guides/', alternate:{lang:'en',href:siteUrl+'/guides/en.html'}, body:`<header class="article-head"><p class="eyebrow">我的 Mac，在美国加州。</p><h1>${indexTitle}</h1><p class="answer">WodeMac 为软件开发与测试提供美国加州独享 Mac mini，预装 Claude Code 和 Codex。先确认实际项目、第三方账号资格与交付要求，再选择环境和合作方式。</p><p class="updated">资料核验：<time datetime="${verifiedDate}">${verifiedDate}</time> · 配置与规则以当前官网为准</p></header><div class="guide-cards directory">${cards(zhGuides,'zh')}</div><section class="directory-note"><h2>English guides</h2><p><a href="./en.html">Run Claude Code or Codex on a dedicated Mac mini in California ↗</a></p></section><section class="directory-note"><h2>这些指南回答什么？</h2><p>机器租金是否包含模型订阅、Claude Code 和 Codex 怎样准备与对比、远程连接要验证什么、老师怎样先跑通作品，以及推广佣金如何核对。各篇直接列出适用条件、具体准备和来源，不用示意内容冒充真实客户成果。</p><a href="../#partners">带着你的开发任务联系 WodeMac ↗</a></section>`, schema:collection(indexTitle, siteUrl+'/guides/', 'zh', zhGuides)}));
 
 const enIndexTitle = 'Guides: Claude Code and Codex on a dedicated Mac mini';
 writeFileSync(path.join(guideRoot,'en.html'), document({lang:'en', title:enIndexTitle, description:'How to run Claude Code and OpenAI Codex on a dedicated M6 Mac mini in California: setup, accounts, pricing, 24/7 agent runs and iOS builds without owning a Mac.', canonical:siteUrl+'/guides/en.html', alternate:{lang:'zh-CN',href:siteUrl+'/guides/'}, body:`<header class="article-head"><p class="eyebrow">Your own Mac, in California, USA.</p><h1>${enIndexTitle}</h1><p class="answer">WodeMac rents dedicated Mac minis in California for software development and testing, with Claude Code and Codex preinstalled. Your AI accounts stay your own.</p><p class="updated">Reviewed: <time datetime="${verifiedDate}">${verifiedDate}</time></p></header><div class="guide-cards directory">${cards(enGuides,'en')}</div><section class="directory-note"><h2>中文指南</h2><p><a href="./">查看全部中文指南 ↗</a></p></section>`, schema:collection(enIndexTitle, siteUrl+'/guides/en.html', 'en', enGuides)}));
@@ -91,8 +90,36 @@ const plans = SALE_INTERVALS.map(key => `${billingLabel(key, true)} ${money(BILL
 const line = g => `- [${g.title}](${urlFor(g)}): ${g.description}`;
 writeFileSync(path.join(publicRoot,'llms.txt'),`# WodeMac\n\n> WodeMac (wodemac.com) rents dedicated Mac minis hosted in California for software development and testing, with Claude Code and OpenAI Codex preinstalled. Third-party AI accounts and model subscriptions are separate and must meet their providers' eligibility rules.\n\nThis file is a maintained document directory, not a promise of search indexing or AI citations.\n\n## Key facts\n- ${facts.en}\n- Plans (USD, paid upfront, machine only): ${plans}. Annual orders of 5 or more Macs get 2.5% off the first year.\n- Typical users: teams shipping products overseas; game, short-drama and AI video studios running scripts and builds overnight; students and parents; AI teachers and their classes.\n- Access: the same Mac can be controlled from a phone or iPad (browser) and a computer (WodeMac Mac App or browser); tasks keep running when devices change or disconnect.\n- Operator: WodeMac Inc, California, USA.\n- Brand films: ${filmsByPage[siteUrl+'/'].length} short vertical films (Mandarin, with English lines on screen) play on the homepage at ${siteUrl}/#films; they are creative illustrations, not customer footage.\n- Full text of the guides: ${siteUrl}/llms-full.txt\n\n## Official information\n- [Chinese homepage](${siteUrl}/): Configuration, current plans, delivery and support.\n- [English homepage](${siteUrl}/en.html): English product information.\n\n## Guides (English)\n${enGuides.map(line).join('\n')}\n\n## 中文指南\n${zhGuides.map(line).join('\n')}\n\n## Legal\n- [Terms](${siteUrl}/legal/terms.html): Contract, billing, use and referral rules.\n- [Privacy](${siteUrl}/legal/privacy.html): Data and privacy information.\n\nVerified: ${verifiedDate}. Current configuration, stock and terms take precedence over this directory.\n`);
 
-const plain = html => html.replace('{{PRICE_TABLE}}', `\n${SALE_INTERVALS.map(key => `- ${billingLabel(key, true)}: ${money(BILLING_PLANS[key].amountCents)} for ${BILLING_PLANS[key].months} month(s)`).join('\n')}\n`).replace(/<li>/g, '\n- ').replace(/<\/p>/g, '\n\n').replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/\n{3,}/g, '\n\n').trim();
-writeFileSync(path.join(publicRoot,'llms-full.txt'),`# WodeMac — full guide text\n\n> ${facts.en}\n\nSource: ${siteUrl}/ · Verified ${verifiedDate}. Current configuration, prices and terms on wodemac.com take precedence.\n\n${guides.map(g => `---\n\n## ${g.title}\n\nURL: ${urlFor(g)}\n\n${g.answer}\n\n${g.sections.map(([h, html]) => `### ${h}\n\n${plain(html)}`).join('\n\n')}\n\n### ${langOf(g) === 'en' ? 'FAQ' : '常见问题'}\n\n${g.faqs.map(([q, a]) => `**${q}**\n${a}`).join('\n\n')}\n`).join('\n')}`);
+const decode = value => value.replace(/&(amp|lt|gt|quot|apos|nbsp|#39);/g, (_, entity) => ({
+  amp: '&', lt: '<', gt: '>', quot: '"', apos: "'", nbsp: ' ', '#39': "'",
+}[entity]));
+const plain = (html, lang) => {
+  const codeBlocks = [];
+  const body = html
+    .replace('{{PRICE_TABLE}}', priceTable(lang))
+    .replace(/<pre\b[^>]*>\s*<code\b[^>]*>([\s\S]*?)<\/code>\s*<\/pre>/gi, (_, code) => {
+      const index = codeBlocks.push('\n\n```\n' + decode(code) + '\n```\n\n') - 1;
+      return `\n@@CODE_BLOCK_${index}@@\n`;
+    })
+    .replace(/<table\b[^>]*>([\s\S]*?)<\/table>/gi, (_, table) => {
+      const caption = table.match(/<caption\b[^>]*>([\s\S]*?)<\/caption>/i)?.[1];
+      const rows = [...table.matchAll(/<tr\b[^>]*>([\s\S]*?)<\/tr>/gi)].map(([, row]) =>
+        [...row.matchAll(/<t[hd]\b[^>]*>([\s\S]*?)<\/t[hd]>/gi)].map(([, cell]) => plain(cell, lang).replace(/\|/g, '\\|')));
+      if (rows.length === 0) return '';
+      rows.splice(1, 0, rows[0].map(() => '---'));
+      return '\n\n' + (caption ? plain(caption, lang) + '\n\n' : '') +
+        rows.map(row => '| ' + row.join(' | ') + ' |').join('\n') + '\n\n';
+    })
+    .replace(/<li\b[^>]*>/gi, '\n- ')
+    .replace(/<br\b[^>]*>/gi, '\n')
+    .replace(/<\/(?:p|div|section|h[1-6]|ul|ol|blockquote)\s*>/gi, '\n\n')
+    .replace(/<[^>]+>/g, '');
+  return decode(body)
+    .replace(/[ \t]+\n/g, '\n')
+    .replace(/@@CODE_BLOCK_(\d+)@@/g, (_, index) => codeBlocks[Number(index)])
+    .replace(/\n{3,}/g, '\n\n').trim();
+};
+writeFileSync(path.join(publicRoot,'llms-full.txt'),`# WodeMac — full guide text\n\n> ${facts.en}\n\nOfficial product and pricing: ${siteUrl}/#pricing · ${siteUrl}/en.html#pricing\n\n${rentalPriceSummary(true)}\n\n${rentalPriceSummary()}\n\n${guides.map(g => `---\n\n## ${g.title}\n\nURL: ${urlFor(g)}\nReviewed: ${dateOf(g)}\n\n${g.answer}\n\n${g.sections.map(([h, html]) => `### ${h}\n\n${plain(html, langOf(g))}`).join('\n\n')}\n\n### ${langOf(g) === 'en' ? 'FAQ' : '常见问题'}\n\n${g.faqs.map(([q, a]) => `**${q}**\n${a}`).join('\n\n')}\n`).join('\n')}`);
 // Search engine ownership files. The production build copies only an allowlist of root files,
 // so they are written here, where the build runs. Removing one drops that verification.
 for (const name of ['google56101fb62f40fa0c.html']) writeFileSync(path.join(publicRoot, name), `google-site-verification: ${name}`);

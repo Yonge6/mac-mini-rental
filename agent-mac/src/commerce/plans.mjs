@@ -5,6 +5,16 @@ export const SALE_INTERVALS = Object.freeze(['month','quarter','half','year']);
 export const normalizeInterval = (value,fallback='year') => SALE_INTERVALS.includes(value)?value:fallback;
 const knownInterval = value => Object.hasOwn(BILLING_PLANS,value)?value:'year';
 export function billingLabel(interval,english=false){const labels={week:['周付','Weekly'],month:['月付','Monthly'],quarter:['季付','Quarterly'],half:['半年付','Half-yearly'],year:['年付','Yearly']};return labels[knownInterval(interval)][english?1:0];}
+export function rentalPriceSummary(english = false) {
+  const amounts = SALE_INTERVALS.map(key => {
+    const cents = BILLING_PLANS[key].amountCents;
+    const price = '$' + (cents / 100).toLocaleString('en-US', { minimumFractionDigits: cents % 100 ? 2 : 0 });
+    return english ? `${price} ${billingLabel(key, true).toLowerCase()}` : `${billingLabel(key)} ${price}`;
+  });
+  return english
+    ? `Per Mac, paid upfront in USD: ${amounts.join(', ')}. Rental covers the machine. Claude and OpenAI accounts, subscriptions and usage charges are separate.`
+    : `每台按所选周期一次支付（美元）：${amounts.join('、')}。租金包含整台 Mac，Claude 和 OpenAI 账号、订阅及用量费用另计。`;
+}
 export function billingEndsAt(start,interval){
   const date=new Date(start),plan=BILLING_PLANS[knownInterval(interval)];
   if(plan.days){date.setUTCDate(date.getUTCDate()+plan.days);return date.toISOString();}

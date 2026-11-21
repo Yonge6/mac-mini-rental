@@ -1,8 +1,8 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { BILLING_PLANS, SALE_INTERVALS, PLAN_DISCOUNTS, billingLabel, dailyCents } from '../src/commerce/plans.mjs';
-import { siteUrl, homeUpdated, facts, readFilms, isoDuration } from './seo-content.mjs';
+import { BILLING_PLANS, SALE_INTERVALS, PLAN_DISCOUNTS, billingLabel, dailyCents, rentalPriceSummary } from '../src/commerce/plans.mjs';
+import { siteUrl, homeUpdated, rentalProduct, readFilms, isoDuration } from './seo-content.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const output = path.join(root, 'dist/client');
@@ -18,6 +18,7 @@ const meta = {
 for (const language of ['zh','en']) {
   const english = language==='en', t=(zh,en)=>english?en:zh, m=meta[language];
   let source=readFileSync(path.join(root,'src',english?'source.en.html':'source.html'),'utf8');
+  source = source.replace('{{RENTAL_PRICE_SUMMARY}}', rentalPriceSummary(english));
   if (!source.includes('data-stock-pending')) throw new Error('Homepage must not publish placeholder inventory.');
   const yearly = BILLING_PLANS.year.amountCents;
   const hero = `<span>${t('','From ')}<strong>${amount(dailyCents(yearly,'year'))}</strong>${t('/天起','/day')}<em class="coffee-note coffee-note-hero">${t('每天一杯咖啡钱','About a coffee a day')}</em></span><small>${t('年付 '+PLAN_DISCOUNTS.year+'% off，一次 '+money(yearly),PLAN_DISCOUNTS.year+'% off yearly: '+money(yearly)+' billed annually')}</small>`;
@@ -27,7 +28,7 @@ for (const language of ['zh','en']) {
   const faqs=[...source.matchAll(/<button[^>]*data-slot="collapsible-trigger"[^>]*>([\s\S]*?)<\/button><div[^>]*data-slot="collapsible-content"[^>]*>([\s\S]*?)<\/div>/g)].map(match=>({'@type':'Question',name:strip(match[1]),acceptedAnswer:{'@type':'Answer',text:strip(match[2])}}));
   if(faqs.length<5)throw new Error('Homepage FAQ extraction failed.');
   const org={'@type':'Organization','@id':siteUrl+'/#organization',name:'WodeMac',legalName:'WodeMac Inc',url:siteUrl+'/',logo:siteUrl+'/assets/wodemac-logo.png',email:'hustyy986@gmail.com',address:{'@type':'PostalAddress',addressRegion:'CA',addressCountry:'US'},sameAs:['https://wodemac.vilesaint.com/']};
-  const product={'@type':'Product','@id':siteUrl+'/#mac-mini-rental',name:t('美国加州独享 M6 Mac mini 租赁','Dedicated M6 Mac mini rental in California'),description:facts[language],image:siteUrl+'/assets/wodemac-og.jpg',brand:{'@type':'Brand',name:'WodeMac'},category:t('远程 Mac 租赁','Remote Mac rental'),offers:{'@type':'AggregateOffer',priceCurrency:'USD',lowPrice:(Math.min(...SALE_INTERVALS.map(key=>BILLING_PLANS[key].amountCents))/100).toFixed(2),highPrice:(Math.max(...SALE_INTERVALS.map(key=>BILLING_PLANS[key].amountCents))/100).toFixed(2),offerCount:SALE_INTERVALS.length,offers:SALE_INTERVALS.map(key=>({'@type':'Offer',name:billingLabel(key,english),price:(BILLING_PLANS[key].amountCents/100).toFixed(2),priceCurrency:'USD',availability:'https://schema.org/InStock',url:m.url+'#pricing',seller:{'@id':org['@id']}}))}};
+  const product = rentalProduct(language, BILLING_PLANS, SALE_INTERVALS, billingLabel);
   // Brand films as VideoObjects so search engines can show them; the audio is Mandarin for both pages.
   const videos=readFilms(language,siteUrl).map(film=>({'@type':'VideoObject','@id':m.url+'#film-'+film.key,name:t('WodeMac 品牌短片：','WodeMac brand film: ')+film.name,description:film.description,thumbnailUrl:film.thumbnailUrl,contentUrl:film.contentUrl,uploadDate:film.uploadDate,duration:isoDuration(film.seconds),inLanguage:'zh-CN',publisher:{'@id':org['@id']},isPartOf:{'@id':m.url+'#page'}}));
   const schema={'@context':'https://schema.org','@graph':[org,{'@type':'WebSite','@id':siteUrl+'/#website',url:siteUrl+'/',name:'WodeMac',inLanguage:['zh-CN','en'],publisher:{'@id':org['@id']}},{'@type':'WebPage','@id':m.url+'#page',url:m.url,name:m.title,description:m.description,inLanguage:m.lang,dateModified:homeUpdated,isPartOf:{'@id':siteUrl+'/#website'},about:{'@id':product['@id']}},product,{'@type':'FAQPage','@id':m.url+'#faq',mainEntity:faqs},...videos]};

@@ -5,6 +5,7 @@ import { fileURLToPath } from 'node:url';
 import vm from 'node:vm';
 import test from 'node:test';
 import { guides } from '../scripts/seo-content.mjs';
+import { BILLING_PLANS, SALE_INTERVALS, rentalPriceSummary } from '../src/commerce/plans.mjs';
 
 const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'..');
 const build=path.join(root,'dist/client');
@@ -15,8 +16,8 @@ const guideFiles=['index.html','en.html',...guides.map(guide=>guide.slug+'.html'
 
 test('both built homepages contain the real landing content before JavaScript',()=>{
   for(const [file,lang,heading,canonical] of [
-    ['index.html','zh-CN','我的 Mac，','https://wodemac.com/'],
-    ['en.html','en','Your own Mac,','https://wodemac.com/en.html'],
+    ['index.html','zh-CN','美国 Mac，','https://wodemac.com/'],
+    ['en.html','en','A US Mac,','https://wodemac.com/en.html'],
   ]){
     const html=read(file);
     assert.ok(html.length>30000);
@@ -38,6 +39,8 @@ test('both built homepages contain the real landing content before JavaScript',(
     const faq=graphs(html).find(item=>item['@type']==='FAQPage');
     assert.ok(faq.mainEntity.length>=5);
     const visible=text(html);
+    assert.ok(visible.includes(rentalPriceSummary(file === 'en.html')));
+    assert.ok(!html.includes('{{RENTAL_PRICE_SUMMARY}}'));
     for(const item of faq.mainEntity){
       assert.ok(visible.includes(item.name),item.name);
       assert.ok(visible.includes(item.acceptedAnswer.text),item.name);
@@ -133,4 +136,47 @@ test('sitemap describes only published content paths and robots exposes it',()=>
   const full=read('llms-full.txt');
   for(const guide of guides)assert.ok(full.includes(guide.answer),guide.slug);
   assert.ok(!full.includes('{{PRICE_TABLE}}'));
+});
+
+test('public language links point to matching static pages, including bilingual legal pages', () => {
+  const files = ['index.html', 'en.html', ...guideFiles.map(file => 'guides/' + file)];
+  for (const name of ['privacy', 'terms']) {
+    const zh = `legal/${name}.html`;
+    const en = `legal/${name}.en.html`;
+    files.push(zh, en);
+    for (const file of [zh, en]) {
+      const html = read(file);
+      assert.ok(html.includes(`rel="canonical" href="https://wodemac.com/${file}"`));
+      assert.ok(html.includes(`hreflang="zh-CN" href="https://wodemac.com/${zh}"`));
+      assert.ok(html.includes(`hreflang="en" href="https://wodemac.com/${en}"`));
+    }
+  }
+  for (const file of files) {
+    assert.doesNotMatch(read(file), /href="[^"]*\?lang=(?:zh|en)(?:#|")/, file);
+  }
+});
+
+test('rental offers include the charge and term without inventing stock', () => {
+  for (const file of ['index.html', 'en.html', 'guides/mac-mini-rental.html', 'guides/mac-mini-rental-california.html']) {
+    const product = graphs(read(file)).find(item => item['@type'] === 'Product');
+    assert.equal(product.offers.length, SALE_INTERVALS.length);
+    for (const [index, interval] of SALE_INTERVALS.entries()) {
+      const offer = product.offers[index];
+      const plan = BILLING_PLANS[interval];
+      assert.equal(offer.price, (plan.amountCents / 100).toFixed(2));
+      assert.equal(offer.priceCurrency, 'USD');
+      assert.equal(offer.priceSpecification.billingDuration, `P${plan.months}M`);
+      assert.equal(offer.businessFunction, 'http://purl.org/goodrelations/v1#LeaseOut');
+      assert.equal(offer.availability, undefined);
+    }
+  }
+});
+
+test('full guide text keeps table cells, commands and review dates readable', () => {
+  const full = read('llms-full.txt');
+  assert.match(full, /\| 月付 \| \$169 \| 1 个月 \|/);
+  assert.match(full, /\| Half-yearly \| \$912\.60 \| 6 months \|/);
+  assert.match(full, /\| Item \| Linux VPS \| Dedicated Mac mini \|/);
+  assert.match(full, /\`\`\`\ngit worktree add[^\n]+\ngit worktree add/);
+  assert.match(full, /mac-mini-rental-california\.html\nReviewed: 2026-11-20/);
 });
